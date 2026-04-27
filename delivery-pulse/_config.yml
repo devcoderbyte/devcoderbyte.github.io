@@ -1,0 +1,32 @@
+title: Delivery Pulse
+description: "Enterprise delivery, minus the toil — AI-native frameworks from the frontlines"
+author: Rajendra Birudaraju
+email: birudarajurajendra@gmail.com
+url: "https://rajendrab.github.io"
+baseurl: "/delivery-pulse"
+
+theme: minima
+
+markdown: kramdown
+highlighter: rouge
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+minima:
+  skin: dark
+
+nav_pages:
+  - title: Home
+    url: /
+  - title: AI in Delivery
+    url: /ai-in-delivery/
+  - title: Presales Practice
+    url: /presales-practice/
+  - title: SRE & Observability
+    url: /sre-observability/
+  - title: Delivery Governance
+    url: /delivery-governance/
+  - title: Case Studies
+    url: /case-studies/
