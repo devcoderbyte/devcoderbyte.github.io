@@ -3,54 +3,65 @@ layout: home
 title: Rajendra Birudaraju — TPM Portfolio
 ---
 
-# Enterprise Delivery, Minus the Toil
+<div class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">Technical Program Manager · Hyderabad, India</div>
+    <h1>Enterprise delivery,<br><em>minus the toil.</em></h1>
+    <p class="hero-sub">10+ years leading programs for Maruti Suzuki and T-Mobile. AI-native by practice — not by title. This site is my proof-of-work.</p>
+    <div class="hero-links">
+      <a href="#work" class="btn btn-primary">Explore my work</a>
+      <a href="/now/" class="btn btn-ghost">What I'm doing now →</a>
+    </div>
 
-I'm **Rajendra Birudaraju** — a Technical Program Manager and Presales Lead with 10+ years of enterprise delivery experience across automotive and telecom domains.
+    <div class="stats-row">
+      <div class="stat"><div class="stat-val">$2.1M+</div><div class="stat-lbl">Annual portfolio</div></div>
+      <div class="stat"><div class="stat-val">9+</div><div class="stat-lbl">CSAT · 18 months</div></div>
+      <div class="stat"><div class="stat-val">25%</div><div class="stat-lbl">Bid conversion lift</div></div>
+      <div class="stat"><div class="stat-val">20%</div><div class="stat-lbl">SLA breach reduction</div></div>
+    </div>
 
-This site is my **proof-of-work** — the frameworks I've designed, the AI workflows I've built, and the delivery systems I've run in production. Not descriptions of what I do. Evidence of how I think.
+    <div class="section-intro" id="work">
+      <h2>What's here</h2>
+      <p>Frameworks designed, AI workflows built, delivery systems run in production — all sanitised, all real.</p>
+    </div>
 
-📍 Hyderabad, India &nbsp;|&nbsp; [LinkedIn](https://linkedin.com/in/rajendrabirudaraju) &nbsp;|&nbsp; [Email](mailto:birudarajurajendra@gmail.com)
-
----
-
-## What's Here
-
-### ⚡ [AI in Delivery](/delivery-pulse/ai-in-delivery/)
-LLM workflow library, AI adoption framework, and the toil elimination playbook I use across enterprise engagements. Real prompts, real outcomes.
-
-### 🎯 [Presales Practice](/delivery-pulse/presales-practice/)
-The SOW design framework, bid strategy methodology, and AI-assisted RFQ workflow behind a 25% improvement in global bid conversion.
-
-### 📊 [SRE & Observability](/delivery-pulse/sre-observability/)
-SLO/SLI integration framework, dashboard design principles, and the defect containment model I've run across T-Mobile and Maruti Suzuki engagements.
-
-### 📋 [Delivery Governance](/delivery-pulse/delivery-governance/)
-CMMI L5 workflow design, governance cadence model, and escalation framework that sustained CSAT 9+ for 18+ consecutive months.
-
-### 🏆 [Case Studies](/delivery-pulse/case-studies/)
-Three sanitised case studies — SLA breach reduction, bid conversion lift, and DevOps upskilling — with context, approach, and measurable outcomes.
-
----
-
-## By the Numbers
-
-| Metric | Result |
-|---|---|
-| Annual portfolio managed | $2.1M+ |
-| CSAT score sustained | 9+ / 18 months |
-| Bid conversion improvement | +25% |
-| SLA breach reduction | -20% |
-| Team productivity improvement | +18% |
-| Debugging time reduction | -35% |
-
----
-
-## How I Work
-
-I operate at the intersection of **delivery leadership**, **presales strategy**, and **AI-augmented practice**. I use LLMs across four domains daily — presales, delivery, client communications, and engineering — not as a tool I've adopted, but as a practice I've systematised.
-
-Every framework on this site has been run in production. Every outcome is real.
-
----
-
-*Last updated: {{ site.time | date: "%B %Y" }}*
+    <div class="domain-grid">
+      <a class="domain-card" href="/ai-in-delivery/">
+        <div class="domain-icon">⚡</div>
+        <div class="domain-title">AI in Delivery</div>
+        <div class="domain-desc">LLM workflow library, AI adoption framework, and toil elimination playbook. Real prompts, real outcomes.</div>
+        <div class="domain-arrow">Explore →</div>
+      </a>
+      <a class="domain-card" href="/presales-practice/">
+        <div class="domain-icon">🎯</div>
+        <div class="domain-title">Presales Practice</div>
+        <div class="domain-desc">SOW design framework, bid strategy methodology, and the AI-assisted RFQ workflow behind a 25% conversion lift.</div>
+        <div class="domain-arrow">Explore →</div>
+      </a>
+      <a class="domain-card" href="/sre-observability/">
+        <div class="domain-icon">📊</div>
+        <div class="domain-title">SRE & Observability</div>
+        <div class="domain-desc">SLO/SLI integration framework, dashboard design principles, and defect containment model.</div>
+        <div class="domain-arrow">Explore →</div>
+      </a>
+      <a class="domain-card" href="/delivery-governance/">
+        <div class="domain-icon">📋</div>
+        <div class="domain-title">Delivery Governance</div>
+        <div class="domain-desc">CMMI L5 workflow design, governance cadence model, and escalation framework that sustained CSAT 9+.</div>
+        <div class="domain-arrow">Explore →</div>
+      </a>
+      <a class="domain-card" href="/case-studies/">
+        <div class="domain-icon">🏆</div>
+        <div class="domain-title">Case Studies</div>
+        <div class="domain-desc">Three sanitised case studies — SLA breach reduction, bid conversion lift, and DevOps upskilling platform.</div>
+        <div class="domain-arrow">Explore →</div>
+      </a>
+      <a class="domain-card" href="/tool-proficiency/">
+        <div class="domain-icon">🛠️</div>
+        <div class="domain-title">Tool Proficiency</div>
+        <div class="domain-desc">An honest matrix of every tool I use — Daily Use, Regular Use, Working Knowledge — plus the gaps.</div>
+        <div class="domain-arrow">Explore →</div>
+      </a>
+    </div>
+  </div>
+</div>
