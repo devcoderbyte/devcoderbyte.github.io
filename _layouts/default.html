@@ -4,54 +4,159 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
-  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <meta name="description" content="{{ site.description }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+<style>
+:root{--bg:#080b12;--surface:#0f1420;--surface2:#161d2e;--border:#1e2a3d;--border2:#2a3a54;--accent:#4f8ef7;--accent2:#38d9a9;--accent3:#f5c842;--text:#e2e8f4;--muted:#8896b3;--light:#b8c4d8;--font-sans:'Inter',system-ui,sans-serif;--font-head:'Syne',sans-serif;--font-mono:'JetBrains Mono',monospace;--radius:8px;--radius-lg:14px;--max-w:860px;--nav-h:64px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-weight:400;line-height:1.75;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+.container{max-width:var(--max-w);margin:0 auto;padding:0 1.5rem}
+
+/* NAV */
+.site-header{position:sticky;top:0;z-index:100;height:var(--nav-h);background:rgba(8,11,18,0.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.site-header .container{height:100%;display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
+.site-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.logo-mark{width:34px;height:34px;background:var(--accent);color:#fff;font-family:var(--font-head);font-size:13px;font-weight:800;border-radius:8px;display:flex;align-items:center;justify-content:center;letter-spacing:-.02em}
+.logo-text{font-family:var(--font-head);font-size:15px;font-weight:700;color:var(--text);letter-spacing:-.02em}
+.site-nav{display:flex;align-items:center;gap:.15rem;flex-wrap:nowrap;overflow-x:auto}
+.site-nav a{color:var(--muted);text-decoration:none;font-size:12.5px;font-weight:500;padding:.35rem .6rem;border-radius:var(--radius);white-space:nowrap;transition:color .15s,background .15s}
+.site-nav a:hover{color:var(--text);background:var(--surface2)}
+.site-nav a.active{color:var(--accent);background:rgba(79,142,247,.1)}
+.nav-toggle{display:none}
+.nav-hamburger{display:none}
+
+/* MAIN */
+.site-main{flex:1}
+
+/* HERO */
+.hero{padding:5rem 0 4rem;border-bottom:1px solid var(--border);background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(79,142,247,.12) 0%,transparent 70%)}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:12px;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem}
+.hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--accent)}
+.hero h1{font-family:var(--font-head);font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;line-height:1.1;letter-spacing:-.03em;margin-bottom:1.25rem;color:var(--text)}
+.hero h1 em{color:var(--accent);font-style:normal}
+.hero-sub{font-size:17px;color:var(--light);max-width:540px;margin-bottom:2rem;line-height:1.8}
+.hero-links{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:.6rem 1.4rem;border-radius:var(--radius);font-size:14px;font-weight:500;text-decoration:none;transition:all .15s;border:none;cursor:pointer;font-family:var(--font-sans)}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#3d7be8}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border2)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:3rem}
+.stat{background:var(--surface);padding:1.25rem 1rem;text-align:center}
+.stat-val{font-family:var(--font-head);font-size:1.8rem;font-weight:800;color:var(--accent);line-height:1;margin-bottom:4px}
+.stat-lbl{font-size:11px;color:var(--muted);letter-spacing:.04em}
+
+/* DOMAIN GRID */
+.section-intro{margin-bottom:1.25rem}
+.section-intro h2{font-family:var(--font-head);font-size:1.25rem;font-weight:700;margin-bottom:.25rem;color:var(--text)}
+.section-intro p{color:var(--muted);font-size:14px}
+.domain-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:2rem}
+.domain-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s,background .2s;display:block}
+.domain-card:hover{border-color:var(--accent);background:var(--surface2);transform:translateY(-2px)}
+.domain-icon{font-size:24px;margin-bottom:.75rem}
+.domain-title{font-family:var(--font-head);font-size:15px;font-weight:700;margin-bottom:.4rem;color:var(--text)}
+.domain-desc{font-size:13px;color:var(--muted);line-height:1.6}
+.domain-arrow{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--accent);margin-top:.75rem;font-weight:500}
+
+/* PAGE LAYOUT */
+.page-wrap{padding-bottom:5rem}
+.page-header{padding:3rem 0 2rem;border-bottom:1px solid var(--border);background:linear-gradient(180deg,var(--surface) 0%,var(--bg) 100%);margin-bottom:3rem}
+.breadcrumb{font-size:12px;color:var(--muted);margin-bottom:.75rem;font-family:var(--font-mono)}
+.breadcrumb a{color:var(--accent);text-decoration:none}
+.breadcrumb span{margin:0 .4rem}
+.page-title{font-family:var(--font-head);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-.03em;color:var(--text);line-height:1.15}
+
+/* PROSE */
+.prose{max-width:720px}
+.prose h1{font-family:var(--font-head);font-size:2rem;font-weight:800;letter-spacing:-.03em;color:var(--text);margin:2.5rem 0 1rem;line-height:1.2}
+.prose h2{font-family:var(--font-head);font-size:1.35rem;font-weight:700;color:var(--text);margin:2.5rem 0 .75rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.prose h3{font-size:1.05rem;font-weight:600;color:var(--light);margin:1.75rem 0 .5rem}
+.prose p{margin-bottom:1.1rem;color:var(--light);font-size:15px;line-height:1.8}
+.prose strong{color:var(--text);font-weight:600}
+.prose em{color:var(--accent2);font-style:italic}
+.prose a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(79,142,247,.3)}
+.prose a:hover{border-bottom-color:var(--accent)}
+.prose ul,.prose ol{padding-left:1.5rem;margin-bottom:1.1rem}
+.prose li{color:var(--light);font-size:15px;margin-bottom:.4rem;line-height:1.7}
+.prose li strong{color:var(--text)}
+.prose code{font-family:var(--font-mono);font-size:13px;background:var(--surface2);color:var(--accent3);padding:2px 7px;border-radius:4px;border:1px solid var(--border)}
+.prose pre{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);padding:1.25rem;overflow-x:auto;margin:1.25rem 0}
+.prose pre code{background:none;border:none;padding:0;color:var(--accent2);font-size:13px;line-height:1.7}
+.prose blockquote{border-left:3px solid var(--accent);padding:.75rem 1.25rem;margin:1.5rem 0;background:rgba(79,142,247,.05);border-radius:0 var(--radius) var(--radius) 0}
+.prose blockquote p{color:var(--text);font-size:15px;font-style:italic;margin:0}
+.prose table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:14px}
+.prose thead tr{background:var(--surface2);border-bottom:2px solid var(--border2)}
+.prose th{text-align:left;padding:.65rem 1rem;color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;font-family:var(--font-mono)}
+.prose td{padding:.65rem 1rem;color:var(--light);border-bottom:1px solid var(--border)}
+.prose tr:last-child td{border-bottom:none}
+.prose tbody tr:hover{background:var(--surface)}
+.prose hr{border:none;border-top:1px solid var(--border);margin:2.5rem 0}
+
+/* FOOTER */
+.site-footer{border-top:1px solid var(--border);padding:1.75rem 0;background:var(--surface)}
+.site-footer .container{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.footer-left{display:flex;flex-direction:column;gap:2px}
+.footer-name{font-family:var(--font-head);font-size:14px;font-weight:700;color:var(--text)}
+.footer-role{font-size:12px;color:var(--muted)}
+.footer-right{display:flex;gap:1.25rem}
+.footer-right a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .15s}
+.footer-right a:hover{color:var(--accent)}
+
+/* RESPONSIVE */
+@media(max-width:680px){
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .domain-grid{grid-template-columns:1fr}
+  .site-nav{display:none}
+  .nav-hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+  .nav-hamburger span{display:block;width:22px;height:2px;background:var(--muted);border-radius:2px}
+  .nav-toggle:checked~.site-nav{display:flex;flex-direction:column;position:absolute;top:var(--nav-h);left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);padding:1rem 1.5rem;gap:.25rem}
+  .site-footer .container{flex-direction:column;align-items:flex-start}
+}
+</style>
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="container">
-      <a class="site-logo" href="{{ '/' | relative_url }}">
-        <span class="logo-mark">DP</span>
-        <span class="logo-text">Delivery Pulse</span>
-      </a>
-      <input type="checkbox" id="nav-toggle" class="nav-toggle">
-      <label for="nav-toggle" class="nav-hamburger">
-        <span></span><span></span><span></span>
-      </label>
-      <nav class="site-nav">
-        <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
-        <a href="{{ '/now/' | relative_url }}" {% if page.url contains 'now' %}class="active"{% endif %}>Now</a>
-        <a href="{{ '/ai-in-delivery/' | relative_url }}" {% if page.url contains 'ai-in-delivery' %}class="active"{% endif %}>AI in Delivery</a>
-        <a href="{{ '/presales-practice/' | relative_url }}" {% if page.url contains 'presales' %}class="active"{% endif %}>Presales</a>
-        <a href="{{ '/sre-observability/' | relative_url }}" {% if page.url contains 'sre' %}class="active"{% endif %}>SRE & Ops</a>
-        <a href="{{ '/delivery-governance/' | relative_url }}" {% if page.url contains 'governance' %}class="active"{% endif %}>Governance</a>
-        <a href="{{ '/case-studies/' | relative_url }}" {% if page.url contains 'case-studies' %}class="active"{% endif %}>Case Studies</a>
-        <a href="{{ '/tool-proficiency/' | relative_url }}" {% if page.url contains 'tool' %}class="active"{% endif %}>Tools</a>
-      </nav>
-    </div>
-  </header>
+<header class="site-header">
+  <div class="container">
+    <a class="site-logo" href="{{ '/' | relative_url }}">
+      <div class="logo-mark">DP</div>
+      <span class="logo-text">Delivery Pulse</span>
+    </a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-hamburger"><span></span><span></span><span></span></label>
+    <nav class="site-nav">
+      <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
+      <a href="{{ '/now/' | relative_url }}" {% if page.url contains 'now' %}class="active"{% endif %}>Now</a>
+      <a href="{{ '/ai-in-delivery/' | relative_url }}" {% if page.url contains 'ai-in-delivery' %}class="active"{% endif %}>AI in Delivery</a>
+      <a href="{{ '/presales-practice/' | relative_url }}" {% if page.url contains 'presales' %}class="active"{% endif %}>Presales</a>
+      <a href="{{ '/sre-observability/' | relative_url }}" {% if page.url contains 'sre' %}class="active"{% endif %}>SRE & Ops</a>
+      <a href="{{ '/delivery-governance/' | relative_url }}" {% if page.url contains 'governance' %}class="active"{% endif %}>Governance</a>
+      <a href="{{ '/case-studies/' | relative_url }}" {% if page.url contains 'case-studies' %}class="active"{% endif %}>Case Studies</a>
+      <a href="{{ '/tool-proficiency/' | relative_url }}" {% if page.url contains 'tool' %}class="active"{% endif %}>Tools</a>
+    </nav>
+  </div>
+</header>
 
-  <main class="site-main">
-    {{ content }}
-  </main>
+<main class="site-main">{{ content }}</main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-left">
-        <span class="footer-name">Rajendra Birudaraju</span>
-        <span class="footer-role">Technical Program Manager & Presales Lead</span>
-      </div>
-      <div class="footer-right">
-        <a href="https://linkedin.com/in/rajendrabirudaraju" target="_blank">LinkedIn</a>
-        <a href="mailto:birudarajurajendra@gmail.com">Email</a>
-        <a href="https://github.com/devcoderbyte" target="_blank">GitHub</a>
-      </div>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-left">
+      <span class="footer-name">Rajendra Birudaraju</span>
+      <span class="footer-role">Technical Program Manager & Presales Lead · Hyderabad</span>
     </div>
-  </footer>
+    <div class="footer-right">
+      <a href="https://linkedin.com/in/rajendrabirudaraju" target="_blank">LinkedIn</a>
+      <a href="mailto:birudarajurajendra@gmail.com">Email</a>
+      <a href="https://github.com/devcoderbyte" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
