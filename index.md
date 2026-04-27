@@ -13,19 +13,19 @@ title: Rajendra Birudaraju — TPM Portfolio
       <a href="/now/" class="btn btn-ghost">What I'm doing now →</a>
     </div>
 
-    <div class="stats-row">
+   <div class="stats-row">
       <div class="stat"><div class="stat-val">$2.1M+</div><div class="stat-lbl">Annual portfolio</div></div>
       <div class="stat"><div class="stat-val">9+</div><div class="stat-lbl">CSAT · 18 months</div></div>
       <div class="stat"><div class="stat-val">25%</div><div class="stat-lbl">Bid conversion lift</div></div>
       <div class="stat"><div class="stat-val">20%</div><div class="stat-lbl">SLA breach reduction</div></div>
     </div>
 
-    <div class="section-intro" id="work">
+   <div class="section-intro" id="work">
       <h2>What's here</h2>
       <p>Frameworks designed, AI workflows built, delivery systems run in production — all sanitised, all real.</p>
     </div>
 
-    <div class="domain-grid">
+   <div class="domain-grid">
       <a class="domain-card" href="/ai-in-delivery/">
         <div class="domain-icon">⚡</div>
         <div class="domain-title">AI in Delivery</div>
