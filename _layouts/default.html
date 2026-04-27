@@ -200,14 +200,13 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-we
     <div class="footer-left">
       <span class="footer-name">Rajendra Birudaraju</span>
       <span class="footer-role">Technical Program Manager & Presales Lead · Hyderabad</span>
-<a href="https://rajendrabirudaraju.goatcounter.com" 
-   target="_blank" 
-   rel="noopener"
-   class="visitor-badge" 
-   style="text-decoration:none">
+
+      <div class="visitor-badge">
   <span class="visitor-dot"></span>
-  <span>Analytics by GoatCounter</span>
-</a>
+  <span>Visits: </span>
+  <img src="https://hits.sh/devcoderbyte.github.io.svg?style=flat&color=38d9a9&labelColor=0f1420&label=" 
+       style="height:14px;vertical-align:middle" alt="visits">
+</div>
       
     <div class="footer-right">
       <a href="https://linkedin.com/in/rajendrabirudaraju" target="_blank" rel="noopener">LinkedIn</a>
@@ -217,19 +216,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-we
     </div>
   </div>
 </footer>
-
-<!-- GoatCounter — privacy-friendly visitor tracking -->
-<script data-goatcounter="https://rajendrabirudaraju.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-<script>
-fetch('https://rajendrabirudaraju.goatcounter.com/counter/TOTAL.json')
-  .then(r => r.json())
-  .then(d => {
-    var el = document.getElementById('gc-total');
-    if (el && d.count) el.textContent = d.count + ' total visits';
-  })
-  .catch(() => {});
-</script>
   
 </body>
 </html>
