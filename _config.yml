@@ -4,6 +4,7 @@ author: Rajendra Birudaraju
 email: birudarajurajendra@gmail.com
 url: "https://devcoderbyte.github.io"
 baseurl: ""
+
 remote_theme: jekyll/minima
 
 markdown: kramdown
@@ -16,16 +17,13 @@ plugins:
 minima:
   skin: dark
 
-nav_pages:
-  - title: Home
-    url: /
-  - title: AI in Delivery
-    url: /ai-in-delivery/
-  - title: Presales Practice
-    url: /presales-practice/
-  - title: SRE & Observability
-    url: /sre-observability/
-  - title: Delivery Governance
-    url: /delivery-governance/
-  - title: Case Studies
-    url: /case-studies/
+# Only these pages appear in the top nav — order matters
+header_pages:
+  - index.md
+  - now.md
+  - ai-in-delivery/index.md
+  - presales-practice/index.md
+  - sre-observability/index.md
+  - delivery-governance/index.md
+  - case-studies/index.md
+  - tool-proficiency.md
