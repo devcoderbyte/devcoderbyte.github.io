@@ -4,31 +4,27 @@ title: Case Studies
 permalink: /case-studies/
 ---
 
-# Case Studies
+<p style="color:#8896b3;font-size:15px;margin-bottom:2rem">Three sanitised case studies from enterprise engagements. Client names removed, commercially sensitive data generalised. The context, approach, and outcomes are real.</p>
 
-Three sanitised case studies from enterprise engagements. Client names removed, commercially sensitive numbers generalised. The context, approach, and outcomes are real.
+<div class="domain-grid">
+  <a class="domain-card" href="/delivery-pulse/case-studies/sla-breach-reduction/">
+    <div class="domain-icon">📉</div>
+    <div class="domain-title">20% SLA Breach Reduction</div>
+    <div class="domain-desc">How AI-assisted observability and workflow redesign turned a reactive ops team into a proactive delivery engine — in 90 days.</div>
+    <div class="domain-arrow" style="color:#38d9a9">Telecom · SRE · Automation →</div>
+  </a>
+  <a class="domain-card" href="/delivery-pulse/case-studies/bid-conversion-lift/">
+    <div class="domain-icon">📈</div>
+    <div class="domain-title">25% Bid Conversion Lift</div>
+    <div class="domain-desc">How a structured bid strategy framework and AI-assisted RFQ workflow drove a 25% improvement in global proposal conversion over 12 months.</div>
+    <div class="domain-arrow" style="color:#38d9a9">Presales · AI workflows →</div>
+  </a>
+  <a class="domain-card" href="/delivery-pulse/case-studies/devops-upskilling/">
+    <div class="domain-icon">🚀</div>
+    <div class="domain-title">DevOps Upskilling Platform</div>
+    <div class="domain-desc">How I converted AppOps engineers into full DevOps contributors — without external hiring, without a training budget, in one quarter.</div>
+    <div class="domain-arrow" style="color:#38d9a9">Leadership · DevOps →</div>
+  </a>
+</div>
 
----
-
-## [Case Study 01 — 20% SLA Breach Reduction](/delivery-pulse/case-studies/sla-breach-reduction/)
-How AI-assisted observability and workflow redesign turned a reactive ops team into a proactive delivery engine — cutting SLA breaches by 20% within 90 days.
-
-**Domain:** Telecom · SRE · Automation
-
----
-
-## [Case Study 02 — 25% Bid Conversion Lift](/delivery-pulse/case-studies/bid-conversion-lift/)
-How a structured bid strategy framework and AI-assisted RFQ workflow drove a 25% improvement in global proposal conversion rate over 12 months.
-
-**Domain:** Presales · AI workflows · Solution design
-
----
-
-## [Case Study 03 — DevOps Upskilling Platform](/delivery-pulse/case-studies/devops-upskilling/)
-How I designed and delivered an internal upskilling platform that converted AppOps engineers into full DevOps contributors — without external hiring, without a training budget.
-
-**Domain:** Team capability · DevOps transformation · Leadership
-
----
-
-*All client data has been sanitised. Outcomes are real. Approaches are fully replicable.*
+<p style="font-size:13px;color:#8896b3;margin-top:1rem"><em>All client data sanitised. Outcomes are real. Approaches are fully replicable.</em></p>
