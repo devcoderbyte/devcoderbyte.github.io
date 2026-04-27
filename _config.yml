@@ -4,7 +4,7 @@ author: Rajendra Birudaraju
 email: birudarajurajendra@gmail.com
 url: "https://devcoderbyte.github.io"
 baseurl: ""
-theme: minima
+remote_theme: jekyll/minima
 
 markdown: kramdown
 highlighter: rouge
