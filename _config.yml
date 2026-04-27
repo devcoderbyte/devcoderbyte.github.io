@@ -5,8 +5,6 @@ email: birudarajurajendra@gmail.com
 url: "https://devcoderbyte.github.io"
 baseurl: ""
 
-remote_theme: jekyll/minima
-
 markdown: kramdown
 highlighter: rouge
 
@@ -14,16 +12,7 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
 
-minima:
-  skin: dark
-
-# Only these pages appear in the top nav — order matters
-header_pages:
-  - index.md
-  - now.md
-  - ai-in-delivery/index.md
-  - presales-practice/index.md
-  - sre-observability/index.md
-  - delivery-governance/index.md
-  - case-studies/index.md
-  - tool-proficiency.md
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
