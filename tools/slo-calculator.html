@@ -1,0 +1,211 @@
+---
+layout: default
+title: SLO & Error Budget Calculator
+description: "Interactive SLO and error budget calculator for enterprise delivery teams. Set your SLO target and time window to calculate allowable downtime, burn rate thresholds, and budget consumption in real time."
+permalink: /tools/slo-calculator/
+---
+<div class="page-wrap">
+  <div class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="/">Home</a> <span>→</span> <a href="/tools/">Tools</a> <span>→</span> SLO & Error Budget Calculator</div>
+      <h1 class="page-title">SLO & Error Budget Calculator</h1>
+      <p style="color:var(--muted);font-size:15px;margin-top:.75rem;max-width:600px">Set your SLO target and time window — get allowable downtime, burn rate thresholds, and budget consumption status in real time. Built on the framework I use across enterprise SRE engagements.</p>
+    </div>
+  </div>
+
+  <div class="page-content">
+    <div class="container">
+
+      <div class="tool-wrap">
+
+        <div class="tool-controls">
+          <div class="control-group">
+            <label class="control-label">SLO target</label>
+            <div class="slider-row">
+              <input type="range" id="slo" min="90" max="99.99" step="0.01" value="99.5">
+              <span id="slo-val" class="slider-val">99.50%</span>
+            </div>
+            <div class="slider-ticks"><span>90%</span><span>95%</span><span>99%</span><span>99.9%</span><span>99.99%</span></div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Time window</label>
+            <div class="btn-group">
+              <button id="w7" onclick="setWindow(7,this)">7 days</button>
+              <button id="w30" onclick="setWindow(30,this)" class="active">30 days</button>
+              <button id="w90" onclick="setWindow(90,this)">90 days</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-label">Error budget</div>
+            <div id="budget-pct" class="metric-val accent">0.50%</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Allowable downtime</div>
+            <div id="downtime" class="metric-val">3h 36m</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Max incidents (30m avg)</div>
+            <div id="incidents" class="metric-val">7</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Budget per day</div>
+            <div id="per-day" class="metric-val">7m 12s</div>
+          </div>
+        </div>
+
+        <div class="tool-section">
+          <div class="tool-section-title">Burn rate thresholds</div>
+          <div class="burn-grid">
+            <div class="burn-card burn-safe">
+              <div class="burn-status">Healthy — monitor</div>
+              <div class="burn-rate">Below 1x</div>
+              <div class="burn-note">Budget consuming normally. Feature work proceeds.</div>
+            </div>
+            <div class="burn-card burn-warn">
+              <div class="burn-status">Alert — investigate</div>
+              <div class="burn-rate">2x rate</div>
+              <div id="warn-time" class="burn-note">Budget gone in 15 days</div>
+            </div>
+            <div class="burn-card burn-crit">
+              <div class="burn-status">Critical — page on-call</div>
+              <div class="burn-rate">5x rate</div>
+              <div id="crit-time" class="burn-note">Budget gone in 6 days</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-section">
+          <div class="tool-section-title">Current budget consumption</div>
+          <div class="slider-row" style="margin-bottom:.75rem">
+            <input type="range" id="consumed" min="0" max="100" step="1" value="30">
+            <span id="consumed-val" class="slider-val">30%</span>
+          </div>
+          <div class="gauge-bg">
+            <div id="gauge-bar" class="gauge-fill" style="width:30%"></div>
+          </div>
+          <div id="status-msg" class="status-msg status-ok">
+            Budget in good shape — 70% remaining. Feature work can proceed at full velocity.
+          </div>
+        </div>
+
+        <div class="tool-section">
+          <div class="tool-section-title">SLO tier comparison</div>
+          <div class="tier-table">
+            <div class="tier-head">
+              <span>Tier</span><span>SLO</span><span>Budget / window</span><span>Typical use</span>
+            </div>
+            <div id="tier-rows"></div>
+          </div>
+        </div>
+
+        <div class="tool-section">
+          <div class="tool-section-title">About this framework</div>
+          <p style="font-size:14px;color:var(--light);line-height:1.8;margin-bottom:.75rem">This calculator is built on the <a href="/sre-observability/slo-sli-framework/">SLO/SLI Integration Framework</a> I use across enterprise SRE engagements. The core principle: SLOs are a client trust tool, not a DevOps metric. Error budgets make reliability a shared business conversation.</p>
+          <p style="font-size:14px;color:var(--light);line-height:1.8">See the <a href="/case-studies/sla-breach-reduction/">SLA Breach Reduction case study</a> for how this framework reduced breaches by 20% in 90 days.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.tool-wrap{max-width:720px}
+.tool-controls{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem}
+.control-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-family:var(--font-mono);display:block;margin-bottom:.5rem}
+.slider-row{display:flex;align-items:center;gap:10px}
+.slider-row input[type=range]{flex:1;accent-color:var(--accent)}
+.slider-val{font-size:15px;font-weight:500;color:var(--text);min-width:52px;text-align:right;font-family:var(--font-mono)}
+.slider-ticks{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);font-family:var(--font-mono);margin-top:4px}
+.btn-group{display:flex;gap:6px}
+.btn-group button{background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:.4rem .85rem;border-radius:var(--radius);font-size:13px;cursor:pointer;font-family:var(--font-sans);transition:all .15s}
+.btn-group button.active{background:rgba(79,142,247,.12);border-color:var(--accent);color:var(--accent)}
+.btn-group button:hover{border-color:var(--accent);color:var(--text)}
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.5rem}
+.metric-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem}
+.metric-label{font-size:11px;color:var(--muted);margin-bottom:4px;font-family:var(--font-mono);letter-spacing:.03em}
+.metric-val{font-size:1.4rem;font-weight:700;font-family:var(--font-head);color:var(--text)}
+.metric-val.accent{color:var(--accent)}
+.tool-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;margin-bottom:1rem}
+.tool-section-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:1rem;font-family:var(--font-head)}
+.burn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.burn-card{padding:.85rem 1rem;border-radius:var(--radius);border-left:3px solid;border-radius:0}
+.burn-safe{border-color:#38d9a9;background:rgba(56,217,169,.06)}
+.burn-warn{border-color:#f5c842;background:rgba(245,200,66,.06)}
+.burn-crit{border-color:#ff6b6b;background:rgba(255,107,107,.06)}
+.burn-status{font-size:11px;font-weight:500;margin-bottom:4px}
+.burn-safe .burn-status{color:#38d9a9}
+.burn-warn .burn-status{color:#f5c842}
+.burn-crit .burn-status{color:#ff6b6b}
+.burn-rate{font-size:15px;font-weight:700;color:var(--text);font-family:var(--font-head);margin-bottom:4px}
+.burn-note{font-size:11px;color:var(--muted);line-height:1.5}
+.gauge-bg{height:10px;background:var(--surface2);border-radius:5px;overflow:hidden;margin-bottom:.75rem}
+.gauge-fill{height:100%;border-radius:5px;transition:width .3s,background .3s}
+.status-msg{font-size:13px;padding:.65rem 1rem;border-radius:var(--radius);line-height:1.6}
+.status-ok{background:rgba(56,217,169,.1);color:#38d9a9}
+.status-warn{background:rgba(245,200,66,.1);color:#f5c842}
+.status-crit{background:rgba(255,107,107,.1);color:#ff6b6b}
+.tier-table{font-size:13px}
+.tier-head{display:grid;grid-template-columns:1.5fr .7fr 1fr 1.5fr;gap:8px;padding:.5rem .75rem;background:var(--surface2);border-radius:var(--radius) var(--radius) 0 0;font-size:11px;color:var(--muted);font-family:var(--font-mono);letter-spacing:.04em;text-transform:uppercase}
+.tier-row{display:grid;grid-template-columns:1.5fr .7fr 1fr 1.5fr;gap:8px;padding:.6rem .75rem;border-bottom:1px solid var(--border);color:var(--light);align-items:center;transition:background .15s}
+.tier-row:last-child{border-bottom:none}
+.tier-row.current{background:rgba(79,142,247,.08);color:var(--accent)}
+.tier-row.current .tier-slo{font-weight:700;color:var(--accent)}
+@media(max-width:640px){
+  .tool-controls{grid-template-columns:1fr}
+  .metrics-grid{grid-template-columns:repeat(2,1fr)}
+  .burn-grid{grid-template-columns:1fr}
+  .tier-head,.tier-row{grid-template-columns:1fr 1fr}
+}
+</style>
+
+<script>
+var days=30;
+function fmtTime(m){if(m<1)return Math.round(m*60)+'s';if(m<60){var s=Math.round((m%1)*60);return Math.round(m)+'m'+(s>0?' '+s+'s':'')}var h=Math.floor(m/60),mn=Math.round(m%60);if(h>=24){var d=Math.floor(h/24),rh=h%24;return d+'d '+(rh>0?rh+'h':'')}return h+'h'+(mn>0?' '+mn+'m':'')}
+function setWindow(d,btn){days=d;document.querySelectorAll('.btn-group button').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');calc()}
+function calc(){
+  var slo=parseFloat(document.getElementById('slo').value);
+  document.getElementById('slo-val').textContent=slo.toFixed(2)+'%';
+  var e=100-slo,tm=days*24*60,bm=tm*e/100;
+  document.getElementById('budget-pct').textContent=e.toFixed(2)+'%';
+  document.getElementById('downtime').textContent=fmtTime(bm);
+  document.getElementById('incidents').textContent=Math.floor(bm/30);
+  document.getElementById('per-day').textContent=fmtTime(bm/days);
+  document.getElementById('warn-time').textContent='Budget gone in '+Math.round(days/2)+' days';
+  document.getElementById('crit-time').textContent='Budget gone in '+Math.round(days/5)+' days';
+  updateGauge();renderTiers(slo);
+}
+function updateGauge(){
+  var slo=parseFloat(document.getElementById('slo').value);
+  var c=parseInt(document.getElementById('consumed').value);
+  document.getElementById('consumed-val').textContent=c+'%';
+  var bar=document.getElementById('gauge-bar'),msg=document.getElementById('status-msg');
+  var r=100-c,e=100-slo,rm=days*24*60*e/100*r/100;
+  bar.style.width=c+'%';
+  if(c<50){bar.style.background='#38d9a9';msg.className='status-msg status-ok';msg.textContent='Budget in good shape — '+r+'% remaining ('+fmtTime(rm)+'). Feature work can proceed at full velocity.'}
+  else if(c<80){bar.style.background='#f5c842';msg.className='status-msg status-warn';msg.textContent='Budget under pressure — '+r+'% remaining ('+fmtTime(rm)+'). Review open incidents. Consider pausing high-risk deployments.'}
+  else if(c<100){bar.style.background='#ff6b6b';msg.className='status-msg status-crit';msg.textContent='Critical — only '+r+'% remaining ('+fmtTime(rm)+'). Freeze non-critical changes. Engineering sprint on reliability required.'}
+  else{bar.style.background='#ff6b6b';msg.className='status-msg status-crit';msg.textContent='Budget exhausted. SLO breached. All feature work paused — reliability engineering only until window resets.'}
+}
+function renderTiers(cur){
+  var tiers=[
+    {name:'Mission critical',slo:99.99,note:'Payments, core auth, login'},
+    {name:'High availability',slo:99.9,note:'Primary APIs, customer-facing'},
+    {name:'Standard SRE',slo:99.5,note:'Internal APIs, secondary services'},
+    {name:'Best effort',slo:95,note:'Reporting, dashboards, batch jobs'}
+  ];
+  var tm=days*24*60;
+  document.getElementById('tier-rows').innerHTML=tiers.map(function(t){
+    var bm=tm*(100-t.slo)/100;
+    var active=Math.abs(t.slo-cur)<0.3;
+    return '<div class="tier-row'+(active?' current':'')+'"><span>'+t.name+'</span><span class="tier-slo">'+t.slo+'%</span><span>'+fmtTime(bm)+'</span><span style="font-size:12px;color:var(--muted)">'+t.note+'</span></div>';
+  }).join('');
+}
+document.getElementById('slo').addEventListener('input',calc);
+document.getElementById('consumed').addEventListener('input',updateGauge);
+calc();
+</script>

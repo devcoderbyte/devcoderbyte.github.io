@@ -63,5 +63,13 @@ title: Rajendra Birudaraju — TPM Portfolio
         <div class="domain-arrow">Explore →</div>
       </a>
     </div>
+  <div style="margin-top:1.5rem;background:linear-gradient(90deg,rgba(79,142,247,.08) 0%,rgba(56,217,169,.06) 100%);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:.75rem">
+      <span style="font-size:20px">🎯</span>
+      <div style="font-size:13px;color:var(--light);line-height:1.5"><strong style="color:var(--text);font-weight:500">New: SLO & Error Budget Calculator</strong> — interactive tool built on the framework behind a 20% SLA breach reduction. Try it with your own targets.</div>
+    </div>
+    <a href="/tools/slo-calculator/" style="background:var(--accent);color:#fff;padding:.45rem 1.1rem;border-radius:var(--radius);font-size:13px;font-weight:500;text-decoration:none;white-space:nowrap;flex-shrink:0">Open calculator →</a>
+  </div>
+
   </div>
 </div>

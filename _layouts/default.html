@@ -151,6 +151,13 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-we
 .visitor-badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:3px 10px;margin-top:.5rem}
 .visitor-dot{width:6px;height:6px;background:var(--accent2);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.tool-banner{background:linear-gradient(90deg,rgba(79,142,247,.08) 0%,rgba(56,217,169,.06) 100%);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:1rem 1.25rem;margin:2rem 0;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.tool-banner-left{display:flex;align-items:center;gap:.75rem}
+.tool-banner-icon{font-size:20px;flex-shrink:0}
+.tool-banner-text{font-size:13px;color:var(--light);line-height:1.5}
+.tool-banner-text strong{color:var(--text);font-weight:500}
+.tool-banner-cta{background:var(--accent);color:#fff;padding:.45rem 1.1rem;border-radius:var(--radius);font-size:13px;font-weight:500;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:opacity .15s}
+.tool-banner-cta:hover{opacity:.85}
 .site-footer{border-top:1px solid var(--border);padding:1.75rem 0;background:var(--surface)}
 .site-footer .container{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
 .footer-left{display:flex;flex-direction:column;gap:2px}
@@ -188,34 +195,70 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-we
       <a href="{{ '/sre-observability/' | relative_url }}" {% if page.url contains 'sre' %}class="active"{% endif %}>SRE & Ops</a>
       <a href="{{ '/delivery-governance/' | relative_url }}" {% if page.url contains 'governance' %}class="active"{% endif %}>Governance</a>
       <a href="{{ '/case-studies/' | relative_url }}" {% if page.url contains 'case-studies' %}class="active"{% endif %}>Case Studies</a>
-      <a href="{{ '/tool-proficiency/' | relative_url }}" {% if page.url contains 'tool' %}class="active"{% endif %}>Tools</a>
+      <a href="{{ '/tools/' | relative_url }}" {% if page.url contains 'tools' %}class="active"{% endif %}>Tools</a>
+      <a href="{{ '/tool-proficiency/' | relative_url }}" {% if page.url contains 'tool-proficiency' %}class="active"{% endif %}>Skills</a>
     </nav>
   </div>
 </header>
 
-<main class="site-main">{{ content }}</main>
+<main class="site-main">
+{{ content }}
+{% unless page.url contains 'tools' %}
+{% if page.url contains 'sre' or page.url contains 'governance' or page.url contains 'case-studies' or page.url contains 'ai-in-delivery' %}
+<div class="container" style="padding-bottom:1rem">
+  <div class="tool-banner">
+    <div class="tool-banner-left">
+      <span class="tool-banner-icon">🎯</span>
+      <div class="tool-banner-text"><strong>Try the SLO & Error Budget Calculator</strong> — set your own SLO target and get downtime allowances, burn rate thresholds, and budget status in real time.</div>
+    </div>
+    <a href="{{ '/tools/slo-calculator/' | relative_url }}" class="tool-banner-cta">Open calculator →</a>
+  </div>
+</div>
+{% endif %}
+{% endunless %}
+</main>
 
 <footer class="site-footer">
   <div class="container">
     <div class="footer-left">
       <span class="footer-name">Rajendra Birudaraju</span>
       <span class="footer-role">Technical Program Manager & Presales Lead · Hyderabad</span>
-
       <div class="visitor-badge">
-  <span class="visitor-dot"></span>
-  <span>Visits: </span>
-  <img src="https://hits.sh/devcoderbyte.github.io.svg?style=flat&color=38d9a9&labelColor=0f1420&label=" 
-       style="height:14px;vertical-align:middle" alt="visits">
-</div>
-      
+        <span class="visitor-dot"></span>
+        <span id="visitor-count">Loading visitors...</span>
+      </div>
+    </div>
     <div class="footer-right">
       <a href="https://linkedin.com/in/rajendrabirudaraju" target="_blank" rel="noopener">LinkedIn</a>
       <a href="mailto:birudarajurajendra@gmail.com">Email</a>
       <a href="https://github.com/devcoderbyte" target="_blank" rel="noopener">GitHub</a>
     </div>
-    </div>
   </div>
 </footer>
-  
+
+<!-- GoatCounter — privacy-friendly visitor tracking -->
+<script data-goatcounter="https://rajendrabirudaraju.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+<!-- Fetch visitor count and display in footer -->
+<script>
+(function() {
+  fetch('https://rajendrabirudaraju.goatcounter.com/counter/' + encodeURIComponent(location.pathname) + '.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var el = document.getElementById('visitor-count');
+      if (el && data && data.count) {
+        el.textContent = data.count + ' visits to this page';
+      } else if (el) {
+        el.textContent = 'Visit tracking active';
+      }
+    })
+    .catch(function() {
+      var el = document.getElementById('visitor-count');
+      if (el) el.textContent = 'Visit tracking active';
+    });
+})();
+</script>
+
 </body>
 </html>
