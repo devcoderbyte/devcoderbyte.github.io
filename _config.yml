@@ -3,7 +3,7 @@ description: "Enterprise delivery, minus the toil — AI-native frameworks from 
 author: Rajendra Birudaraju
 email: birudarajurajendra@gmail.com
 url: "https://devcoderbyte.github.io"
-baseurl: "/delivery-pulse"
+baseurl: ""
 
 markdown: kramdown
 highlighter: rouge
