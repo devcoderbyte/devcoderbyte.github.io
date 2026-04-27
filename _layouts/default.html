@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="site-logo" href="{{ '/' | relative_url }}">
+        <span class="logo-mark">DP</span>
+        <span class="logo-text">Delivery Pulse</span>
+      </a>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-hamburger">
+        <span></span><span></span><span></span>
+      </label>
+      <nav class="site-nav">
+        <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
+        <a href="{{ '/now/' | relative_url }}" {% if page.url contains 'now' %}class="active"{% endif %}>Now</a>
+        <a href="{{ '/ai-in-delivery/' | relative_url }}" {% if page.url contains 'ai-in-delivery' %}class="active"{% endif %}>AI in Delivery</a>
+        <a href="{{ '/presales-practice/' | relative_url }}" {% if page.url contains 'presales' %}class="active"{% endif %}>Presales</a>
+        <a href="{{ '/sre-observability/' | relative_url }}" {% if page.url contains 'sre' %}class="active"{% endif %}>SRE & Ops</a>
+        <a href="{{ '/delivery-governance/' | relative_url }}" {% if page.url contains 'governance' %}class="active"{% endif %}>Governance</a>
+        <a href="{{ '/case-studies/' | relative_url }}" {% if page.url contains 'case-studies' %}class="active"{% endif %}>Case Studies</a>
+        <a href="{{ '/tool-proficiency/' | relative_url }}" {% if page.url contains 'tool' %}class="active"{% endif %}>Tools</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-left">
+        <span class="footer-name">Rajendra Birudaraju</span>
+        <span class="footer-role">Technical Program Manager & Presales Lead</span>
+      </div>
+      <div class="footer-right">
+        <a href="https://linkedin.com/in/rajendrabirudaraju" target="_blank">LinkedIn</a>
+        <a href="mailto:birudarajurajendra@gmail.com">Email</a>
+        <a href="https://github.com/devcoderbyte" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
