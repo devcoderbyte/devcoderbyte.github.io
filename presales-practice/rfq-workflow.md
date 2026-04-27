@@ -1,4 +1,5 @@
 ---
+description: "AI-assisted RFQ workflow from receipt to submission-ready draft in 4-6 hours. Step-by-step with LLM role at each stage."
 layout: page
 title: AI-Assisted RFQ Workflow
 permalink: /presales-practice/rfq-workflow/

@@ -1,4 +1,5 @@
 ---
+description: "Case study: How an internal DevOps upskilling platform converted AppOps engineers into full DevOps contributors with zero hiring budget."
 layout: page
 title: "Case Study 03 — DevOps Upskilling Platform"
 permalink: /case-studies/devops-upskilling/

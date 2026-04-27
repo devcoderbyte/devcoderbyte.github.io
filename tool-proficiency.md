@@ -1,4 +1,5 @@
 ---
+description: "An honest proficiency matrix of every tool Rajendra Birudaraju uses — AI/LLMs, observability, DevOps, ITSM, presales — with real usage context and honest gaps."
 layout: page
 title: Tool Proficiency
 permalink: /tool-proficiency/

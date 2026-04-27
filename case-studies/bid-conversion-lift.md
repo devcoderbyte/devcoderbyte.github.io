@@ -1,4 +1,5 @@
 ---
+description: "Case study: How a structured bid strategy framework and AI-assisted RFQ workflow drove a 25% improvement in global bid conversion over 12 months."
 layout: page
 title: "Case Study 02 — 25% Bid Conversion Lift"
 permalink: /case-studies/bid-conversion-lift/
@@ -32,9 +33,9 @@ After reviewing 12 months of won and lost bids, three patterns emerged:
 
 ## The Approach
 
-**Framework change:** Introduced the [Bid Strategy Methodology](/delivery-pulse/presales-practice/bid-strategy-methodology/) — five questions answered before writing begins. Strategy first, writing second.
+**Framework change:** Introduced the [Bid Strategy Methodology](/presales-practice/bid-strategy-methodology/) — five questions answered before writing begins. Strategy first, writing second.
 
-**Process change:** Introduced the [AI-Assisted RFQ Workflow](/delivery-pulse/presales-practice/rfq-workflow/) — LLM for first draft, human for judgment and proof points. Cut drafting time from 3 days to 4–6 hours.
+**Process change:** Introduced the [AI-Assisted RFQ Workflow](/presales-practice/rfq-workflow/) — LLM for first draft, human for judgment and proof points. Cut drafting time from 3 days to 4–6 hours.
 
 **Review standard:** Every proposal reviewed against a checklist — client-centricity, specificity, risk transparency, hook clarity. No proposal submitted without passing the review.
 

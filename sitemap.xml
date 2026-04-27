@@ -1,0 +1,29 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>{{ site.url }}/</loc><priority>1.0</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/now/</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
+  <url><loc>{{ site.url }}/ai-in-delivery/</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/ai-in-delivery/llm-workflow-library/</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/ai-in-delivery/ai-adoption-framework/</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/ai-in-delivery/toil-elimination-playbook/</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/presales-practice/</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/presales-practice/sow-design-framework/</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/presales-practice/bid-strategy-methodology/</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/presales-practice/rfq-workflow/</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/sre-observability/</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/sre-observability/slo-sli-framework/</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/sre-observability/dashboard-design/</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/sre-observability/defect-containment/</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/delivery-governance/</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/delivery-governance/cadence-model/</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/delivery-governance/cmmi-workflow/</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/delivery-governance/escalation-framework/</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/case-studies/</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/case-studies/sla-breach-reduction/</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/case-studies/bid-conversion-lift/</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/case-studies/devops-upskilling/</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/tool-proficiency/</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+</urlset>

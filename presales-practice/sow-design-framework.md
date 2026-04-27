@@ -1,4 +1,5 @@
 ---
+description: "Seven-section SOW framework for enterprise AMS and SRE engagements. Outcome-first language, explicit exclusions, governance model."
 layout: page
 title: SOW Design Framework
 permalink: /presales-practice/sow-design-framework/

@@ -1,4 +1,5 @@
 ---
+description: "Five-question bid strategy framework that drove a 25% improvement in global RFQ conversion rate. Problem-led, not capability-led proposals."
 layout: page
 title: Bid Strategy Methodology
 permalink: /presales-practice/bid-strategy-methodology/

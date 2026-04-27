@@ -1,4 +1,5 @@
 ---
+description: "Audit-first methodology for identifying and eliminating operational toil in enterprise delivery teams using AI, automation, and Splunk."
 layout: page
 title: Toil Elimination Playbook
 permalink: /ai-in-delivery/toil-elimination-playbook/
@@ -73,7 +74,7 @@ Before automating, document. A runbook converts tribal knowledge into repeatable
 Ticket auto-classification, SLA breach alerts, assignment rules, escalation triggers. These are low-risk, high-return. Implement in one sprint.
 
 ### Step 3 — LLM-assisted workflows for high-cognitive toil
-Status reports, RCA write-ups, retro analysis, stakeholder communications. Use the [LLM Workflow Library](/delivery-pulse/ai-in-delivery/llm-workflow-library/) as the starting point.
+Status reports, RCA write-ups, retro analysis, stakeholder communications. Use the [LLM Workflow Library](/ai-in-delivery/llm-workflow-library/) as the starting point.
 
 ### Step 4 — Splunk AI for proactive observability
 Configure anomaly detection rules that alert before humans notice. Move from reactive monitoring to predictive operations.

@@ -1,4 +1,5 @@
 ---
+description: "Four production LLM workflows for enterprise delivery — RFQ drafting, executive status reporting, incident RCA, and sprint retrospective analysis. Real prompts, real outcomes."
 layout: page
 title: LLM Workflow Library
 permalink: /ai-in-delivery/llm-workflow-library/

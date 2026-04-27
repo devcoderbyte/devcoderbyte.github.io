@@ -1,4 +1,5 @@
 ---
+description: "A structured framework for enabling delivery teams to adopt AI — Explorer, Practitioner, Champion pathway with governance and measurement built in."
 layout: page
 title: AI Adoption Framework
 permalink: /ai-in-delivery/ai-adoption-framework/

@@ -1,4 +1,5 @@
 ---
+description: "What Rajendra Birudaraju is working on, learning, and thinking about right now. TPM, AI delivery, presales."
 layout: page
 title: Now
 permalink: /now/

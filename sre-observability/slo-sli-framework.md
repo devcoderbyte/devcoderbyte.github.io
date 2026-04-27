@@ -1,4 +1,5 @@
 ---
+description: "SLO/SLI framework designed as a client trust tool — collaborative definition, error budget model, and monthly review cadence for enterprise engagements."
 layout: page
 title: SLO/SLI Integration Framework
 permalink: /sre-observability/slo-sli-framework/
