@@ -200,13 +200,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-we
     <div class="footer-left">
       <span class="footer-name">Rajendra Birudaraju</span>
       <span class="footer-role">Technical Program Manager & Presales Lead · Hyderabad</span>
-     <div class="visitor-badge">
+<div class="visitor-badge">
   <span class="visitor-dot"></span>
-  <span>Total visits: </span>
-  <img src="https://rajendrabirudaraju.goatcounter.com/counter/TOTAL.svg?style=flat-round" 
-       alt="visitor count"
-       style="height:16px;vertical-align:middle;opacity:0.7">
-    </div>
+  <span id="gc-total">Tracking visits...</span>
+</div>
       
     <div class="footer-right">
       <a href="https://linkedin.com/in/rajendrabirudaraju" target="_blank" rel="noopener">LinkedIn</a>
@@ -220,6 +217,15 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-we
 <!-- GoatCounter — privacy-friendly visitor tracking -->
 <script data-goatcounter="https://rajendrabirudaraju.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
-
+<script>
+fetch('https://rajendrabirudaraju.goatcounter.com/counter/TOTAL.json')
+  .then(r => r.json())
+  .then(d => {
+    var el = document.getElementById('gc-total');
+    if (el && d.count) el.textContent = d.count + ' total visits';
+  })
+  .catch(() => {});
+</script>
+  
 </body>
 </html>
