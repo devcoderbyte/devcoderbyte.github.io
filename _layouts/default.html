@@ -207,10 +207,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-we
        alt="visitor count"
        style="height:16px;vertical-align:middle;filter:invert(1) brightness(0.7)">
     </div>
+      
     <div class="footer-right">
       <a href="https://linkedin.com/in/rajendrabirudaraju" target="_blank" rel="noopener">LinkedIn</a>
       <a href="mailto:birudarajurajendra@gmail.com">Email</a>
       <a href="https://github.com/devcoderbyte" target="_blank" rel="noopener">GitHub</a>
+    </div>
     </div>
   </div>
 </footer>
@@ -218,26 +220,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-we
 <!-- GoatCounter — privacy-friendly visitor tracking -->
 <script data-goatcounter="https://rajendrabirudaraju.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
-
-<!-- Fetch visitor count and display in footer -->
-<script>
-(function() {
-  fetch('https://rajendrabirudaraju.goatcounter.com/counter/' + encodeURIComponent(location.pathname) + '.json')
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      var el = document.getElementById('visitor-count');
-      if (el && data && data.count) {
-        el.textContent = data.count + ' visits to this page';
-      } else if (el) {
-        el.textContent = 'Visit tracking active';
-      }
-    })
-    .catch(function() {
-      var el = document.getElementById('visitor-count');
-      if (el) el.textContent = 'Visit tracking active';
-    });
-})();
-</script>
 
 </body>
 </html>
