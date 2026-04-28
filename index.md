@@ -5,7 +5,7 @@ title: Rajendra Birudaraju — TPM Portfolio
 
 <div class="hero">
   <div class="container">
-    <div class="hero-eyebrow">Technical Program Manager · Hyderabad, India</div>
+    <div class="hero-eyebrow">Rajendra Birudaraju · TPM & Presales Lead · Hyderabad</div>
     <h1>Enterprise delivery,<br><em>minus the toil.</em></h1>
     <p class="hero-sub">10+ years leading programs for Maruti Suzuki and T-Mobile. AI-native by practice — not by title. This site is my proof-of-work.</p>
     <div class="hero-links">
