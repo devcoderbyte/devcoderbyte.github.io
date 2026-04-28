@@ -147,10 +147,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-we
 .prose tr:last-child td{border-bottom:none}
 .prose tbody tr:hover{background:var(--surface)}
 .prose hr{border:none;border-top:1px solid var(--border);margin:2.5rem 0}
-/* Visitor counter badge */
-.visitor-badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:3px 10px;margin-top:.5rem}
-.visitor-dot{width:6px;height:6px;background:var(--accent2);border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .tool-banner{background:linear-gradient(90deg,rgba(79,142,247,.08) 0%,rgba(56,217,169,.06) 100%);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:1rem 1.25rem;margin:2rem 0;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 .tool-banner-left{display:flex;align-items:center;gap:.75rem}
 .tool-banner-icon{font-size:20px;flex-shrink:0}
@@ -223,10 +219,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-we
     <div class="footer-left">
       <span class="footer-name">Rajendra Birudaraju</span>
       <span class="footer-role">Technical Program Manager & Presales Lead · Hyderabad</span>
-      <div class="visitor-badge">
-        <span class="visitor-dot"></span>
-        <span id="visitor-count">Loading visitors...</span>
-      </div>
     </div>
     <div class="footer-right">
       <a href="https://linkedin.com/in/rajendrabirudaraju" target="_blank" rel="noopener">LinkedIn</a>
@@ -235,30 +227,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-we
     </div>
   </div>
 </footer>
-
-<!-- GoatCounter — privacy-friendly visitor tracking -->
-<script data-goatcounter="https://rajendrabirudaraju.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-
-<!-- Fetch visitor count and display in footer -->
-<script>
-(function() {
-  fetch('https://rajendrabirudaraju.goatcounter.com/counter/' + encodeURIComponent(location.pathname) + '.json')
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      var el = document.getElementById('visitor-count');
-      if (el && data && data.count) {
-        el.textContent = data.count + ' visits to this page';
-      } else if (el) {
-        el.textContent = 'Visit tracking active';
-      }
-    })
-    .catch(function() {
-      var el = document.getElementById('visitor-count');
-      if (el) el.textContent = 'Visit tracking active';
-    });
-})();
-</script>
 
 </body>
 </html>
