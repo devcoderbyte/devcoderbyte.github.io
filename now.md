@@ -1,70 +1,68 @@
 ---
-description: "What Rajendra Birudaraju is working on, learning, and thinking about right now. TPM, AI delivery, presales."
 layout: page
 title: Now
 permalink: /now/
+description: "What Rajendra Birudaraju is working on, learning, and thinking about right now — April 2026."
 ---
 
 # What I'm Doing Now
 
-*A snapshot of what's occupying my time and thinking — updated regularly. Inspired by [nownownow.com](https://nownownow.com).*
+*A snapshot of what's occupying my time and thinking — updated regularly. Inspired by [nownownow.com](https://nownownow.com)*
 
-*Last updated: May 2025 · Hyderabad, India*
+*Last updated: April 2026 · Hyderabad, India*
 
 ---
 
 ## Work
 
-Leading delivery and presales for enterprise clients across automotive and telecom domains at Concentrix Catalyst. Current focus areas:
+Still at Concentrix Catalyst, leading delivery and presales for enterprise clients across automotive and telecom. Current focus areas:
 
-- Maturing our AI-assisted delivery workflows — moving from ad-hoc LLM usage to documented, team-wide practice
-- Running a presales pipeline for two active RFQs — applying the [bid strategy framework](/presales-practice/bid-strategy-methodology/) I've documented here
-- Building out SLO/SLI governance for a high-volume platform engagement — making reliability a client trust tool, not a DevOps internal metric
-
----
-
-## Learning
-
-**AI in enterprise delivery** — specifically how to move from individual AI usage to team-level capability. Reading and experimenting with:
-
-- Prompt chaining and structured output patterns for delivery workflows
-- How other organisations are building AI Champions programs (what works, what doesn't)
-- Salesforce Administrator certification — in prep, aiming to add this credential in Q3 2025
-
-**Currently reading:**
-- *The Lean Startup* — revisiting it through the lens of presales solution design
-- AI in enterprise operations case studies — collecting real implementations, not vendor marketing
+- Running active presales on two significant RFQs — applying the bid strategy framework documented on this site in real time
+- Deepening the AI enablement practice across the delivery team — moving from individual LLM usage to documented, team-wide workflows that stick
+- Managing SLO governance for a high-volume platform — the error budget framework on this site is running live on this engagement
+- Exploring senior delivery leadership opportunities — Delivery Manager, Implementation Manager, and Technical Program Manager roles at product-led and enterprise orgs
 
 ---
 
 ## Building
 
-This site — `devcoderbyte.github.io` — is a live project. Currently adding:
+This portfolio — `devcoderbyte.github.io` — is a live project, not a static resume. Recent additions:
 
-- Delivery Governance section (cadence model, CMMI workflow, escalation framework)
-- Case Study 02 and 03 full write-ups
-- A tool proficiency matrix that's honest rather than impressive
+- Built and shipped the [SLO & Error Budget Calculator](/tools/slo-calculator/) — an interactive tool built from the framework I run in production
+- Completed the full case study library — SLA breach reduction, bid conversion lift, DevOps upskilling
+- Added light/dark mode toggle — because professional and technical aren't mutually exclusive
+- Working through the tools section — Toil Audit Scorecard and RFQ Complexity Scorer are next
 
-The goal: make this the kind of portfolio a hiring panel opens before an interview and arrives already convinced.
+The goal remains the same: when a hiring panel opens this before an interview, they arrive already convinced.
+
+---
+
+## Learning
+
+**Salesforce Administrator certification** — actively prepping, targeting Q2 2026. Complements the presales and delivery profile well given how embedded Salesforce is in enterprise client stacks.
+
+**AI in enterprise operations** — specifically how organisations are moving from individual AI usage to team-level capability programs. Collecting real implementation patterns, not vendor marketing.
+
+**Delivery Manager interview preparation** — working through STAR-format answers mapped to my actual experience. The portfolio exists partly because I believe showing beats telling in an interview.
 
 ---
 
 ## Thinking About
 
-**The gap between AI fluency and AI practice.** Most people who say they use AI in their work use it occasionally and inconsistently. The interesting question is how you make it structural — part of how a team works, not just how an individual works.
+**The confidence gap in career transitions.** The capability for the next role is usually already there. What's missing is the evidence stack — which is exactly what this site is building. You don't get confidence by waiting for it. You get it by accumulating proof.
 
-**Delivery Manager vs. Technical Program Manager.** The title gap is smaller than it feels. The capability is already there. The confidence is the work.
+**AI-native vs. AI-assisted.** Most people who say they use AI use it occasionally. The interesting question is how you make it structural — woven into how a team operates, not just how an individual works on a good day.
 
-**Two-up adventure touring** — planning routes, researching bikes. The BMW F900 GSA remains the target. The Swiss Alps remain the dream.
+**Two-up adventure touring.** The BMW F900 GSA remains the target. Sudha is on board. The Swiss Alps route is still the dream. One milestone at a time.
 
 ---
 
 ## Not Doing
 
-- Scrolling job boards without a thesis — every application has a tailored resume and a specific reason
-- Accepting that manual reporting is just "how it's done"
-- Waiting until the portfolio is perfect to share it
+- Applying to roles without a tailored resume and a specific reason
+- Treating "I rely on my manager for decisions" as a permanent condition rather than a chapter
+- Waiting until the portfolio is perfect to share it — done is better than perfect, always
 
 ---
 
-*This is a [Now page](https://nownownow.com/about). If you have one too, I'd like to see it.*
+*This is a [Now page](https://nownownow.com/about). If you have one, I'd like to read it.*
