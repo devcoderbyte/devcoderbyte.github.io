@@ -53,7 +53,7 @@ The goal remains the same: when a hiring panel opens this before an interview, t
 
 **AI-native vs. AI-assisted.** Most people who say they use AI use it occasionally. The interesting question is how you make it structural — woven into how a team operates, not just how an individual works on a good day.
 
-**Two-up adventure touring.** The BMW F900 GSA remains the target. Sudha is on board. The Swiss Alps route is still the dream. One milestone at a time.
+**Two-up adventure touring.** The BMW F900 GSA remains the target. The Swiss Alps route is still the dream. One milestone at a time.
 
 ---
 
