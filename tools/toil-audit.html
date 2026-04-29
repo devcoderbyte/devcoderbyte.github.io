@@ -1,0 +1,205 @@
+---
+layout: default
+title: Toil Audit Scorecard
+description: "Score your team's operational toil across six dimensions and get a prioritised automation roadmap. Built on the toil elimination framework used in enterprise SRE engagements."
+permalink: /tools/toil-audit/
+---
+<div class="page-wrap">
+  <div class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="/">Home</a> <span>→</span> <a href="/tools/">Tools</a> <span>→</span> Toil Audit Scorecard</div>
+      <h1 class="page-title">Toil Audit Scorecard</h1>
+      <p style="color:var(--muted);font-size:15px;margin-top:.75rem;max-width:600px">Answer 12 questions about your team's manual work. Get a toil score, dimension breakdown, and prioritised automation roadmap. Built on the <a href="/ai-in-delivery/toil-elimination-playbook/">Toil Elimination Playbook</a>.</p>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="container">
+      <div class="tool-wrap" id="audit-tool">
+
+        <div id="progress-wrap" style="margin-bottom:1.5rem">
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px">
+            <span id="q-counter">Question 1 of 12</span>
+            <span id="q-pct">0% complete</span>
+          </div>
+          <div class="gauge-bg"><div id="q-bar" class="gauge-fill" style="width:0%;background:var(--accent)"></div></div>
+        </div>
+
+        <div id="question-area"></div>
+        <div id="results-area" style="display:none"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.q-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1rem}
+.q-label{font-size:11px;color:var(--accent);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
+.q-text{font-size:16px;font-weight:500;color:var(--text);margin-bottom:1.25rem;line-height:1.5}
+.q-options{display:flex;flex-direction:column;gap:.5rem}
+.q-option{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;cursor:pointer;font-size:14px;color:var(--light);transition:all .15s;text-align:left;font-family:'Inter',sans-serif}
+.q-option:hover{border-color:var(--accent);color:var(--text)}
+.q-option.selected{border-color:var(--accent);background:rgba(37,99,235,.08);color:var(--accent);font-weight:500}
+[data-theme="dark"] .q-option.selected{background:rgba(79,142,247,.1)}
+.q-nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.25rem}
+.dim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem}
+.dim-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem}
+.dim-name{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.dim-score{font-size:1.5rem;font-weight:700;font-family:'Syne',sans-serif;margin-bottom:4px}
+.dim-bar-bg{height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;margin-top:6px}
+.dim-bar-fill{height:6px;border-radius:3px;transition:width .6s ease}
+.score-hero{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:2rem;text-align:center;margin-bottom:1.5rem}
+.score-big{font-family:'Syne',sans-serif;font-size:4rem;font-weight:800;line-height:1;margin-bottom:.5rem}
+.score-label{font-size:14px;color:var(--muted);margin-bottom:1rem}
+.score-verdict{font-size:16px;font-weight:500;max-width:480px;margin:0 auto;line-height:1.6}
+.action-card{background:var(--surface);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin-bottom:.75rem;font-size:14px;color:var(--light);line-height:1.7}
+.action-card strong{color:var(--text);display:block;margin-bottom:3px}
+@media(max-width:640px){.dim-grid{grid-template-columns:1fr 1fr}}
+</style>
+
+<script>
+var questions = [
+  {dim:"Reporting",text:"How is your weekly status report produced?",opts:["Fully automated — dashboard or script generates it","+1","Manual pull from 3+ tools, takes 30–90 min","+3","Written from memory each week, takes 2+ hours","+5"]},
+  {dim:"Reporting",text:"How do you track SLA compliance across your team?",opts:["Automated dashboard with real-time alerts","+1","Semi-automated — some manual checks needed","+3","Fully manual — someone checks tickets periodically","+5"]},
+  {dim:"Incidents",text:"When a P1 incident is resolved, how is the RCA produced?",opts:["Template + AI-assisted, done within 2 hours","+1","Template exists but still takes half a day","+3","Written from scratch each time, takes 1–2 days","+5"]},
+  {dim:"Incidents",text:"How are incoming support tickets triaged?",opts:["Auto-classified with routing rules and runbooks","+1","Some automation but engineer still manually triages","+3","All manual — engineer reads and decides everything","+5"]},
+  {dim:"Deployments",text:"How are releases and deployments coordinated?",opts:["CI/CD pipeline — automated gates and deployment","+1","Semi-automated with manual sign-off steps","+3","Fully manual coordination across teams","+5"]},
+  {dim:"Deployments",text:"How is post-deployment health verified?",opts:["Automated monitoring — alerts fire if anomaly detected","+1","Engineer manually checks dashboards post-deploy","+3","No structured check — issues found when reported","+5"]},
+  {dim:"Onboarding",text:"How long does it take to onboard a new engineer to full productivity?",opts:["Under 2 weeks — runbooks and docs cover everything","+1","3–4 weeks — some tribal knowledge transfer needed","+3","Over a month — heavily dependent on senior engineers","+5"]},
+  {dim:"Onboarding",text:"How are standard operating procedures maintained?",opts:["Living docs, version-controlled, updated after every incident","+1","Exist but often outdated by 3–6 months","+3","Tribal knowledge — in people's heads not documents","+5"]},
+  {dim:"Communications",text:"How are client stakeholder updates produced?",opts:["AI-assisted draft reviewed by PM — under 15 minutes","+1","Template exists, still takes 45–60 min to complete","+3","Written fresh each time — 1–2 hours per update","+5"]},
+  {dim:"Communications",text:"How are escalations communicated to leadership?",opts:["Standard format, clear owner, same day","+1","Mostly structured but format varies by person","+3","Ad-hoc — format and timing inconsistent","+5"]},
+  {dim:"Meetings",text:"How many recurring meetings does your team have weekly?",opts:["1–3, all with clear agenda and defined output","+1","4–6, some without clear purpose","+3","7+, many feel like status updates that could be async","+5"]},
+  {dim:"Meetings",text:"How is sprint retrospective output captured and actioned?",opts:["Structured output, action items tracked in Jira","+1","Notes taken but follow-through is inconsistent","+3","Retros happen but output rarely tracked or actioned","+5"]}
+];
+
+var answers = {};
+var current = 0;
+
+function getScore(idx){return answers[idx]||0}
+
+function renderQuestion(){
+  var q = questions[current];
+  var pct = Math.round((current/12)*100);
+  document.getElementById('q-counter').textContent = 'Question '+(current+1)+' of 12';
+  document.getElementById('q-pct').textContent = pct+'% complete';
+  document.getElementById('q-bar').style.width = pct+'%';
+
+  var opts = '';
+  for(var i=0;i<q.opts.length;i+=2){
+    var score = parseInt(q.opts[i+1].replace('+',''));
+    var sel = answers[current]===score?' selected':'';
+    opts += '<button class="q-option'+sel+'" onclick="selectAnswer('+score+',this)">'+q.opts[i]+'</button>';
+  }
+
+  document.getElementById('question-area').innerHTML =
+    '<div class="q-card">'+
+    '<div class="q-label">'+q.dim+'</div>'+
+    '<div class="q-text">'+q.text+'</div>'+
+    '<div class="q-options">'+opts+'</div>'+
+    '</div>'+
+    '<div class="q-nav">'+
+    '<button class="btn btn-ghost" onclick="prevQ()" '+(current===0?'style="visibility:hidden"':'')+'>← Back</button>'+
+    '<button class="btn btn-primary" id="next-btn" onclick="nextQ()" '+(answers[current]===undefined?'disabled style="opacity:.4;cursor:not-allowed"':'')+'>'+
+    (current===11?'See results →':'Next →')+'</button>'+
+    '</div>';
+}
+
+function selectAnswer(score, btn){
+  answers[current] = score;
+  document.querySelectorAll('.q-option').forEach(function(b){b.classList.remove('selected')});
+  btn.classList.add('selected');
+  var nb = document.getElementById('next-btn');
+  nb.disabled = false;
+  nb.style.opacity = '1';
+  nb.style.cursor = 'pointer';
+}
+
+function nextQ(){
+  if(answers[current]===undefined) return;
+  if(current===11){showResults();return;}
+  current++;
+  renderQuestion();
+}
+
+function prevQ(){
+  if(current>0){current--;renderQuestion();}
+}
+
+function showResults(){
+  var dims = {Reporting:0,Incidents:0,Deployments:0,Onboarding:0,Communications:0,Meetings:0};
+  var total = 0;
+  questions.forEach(function(q,i){
+    var s = answers[i]||1;
+    dims[q.dim] += s;
+    total += s;
+  });
+
+  var maxTotal = 60;
+  var toil = Math.round((total/maxTotal)*100);
+  var color = toil<30?'var(--accent2)':toil<60?'var(--accent3)':'#ef4444';
+
+  var verdict, verdict2;
+  if(toil<25){verdict='Low toil';verdict2='Your team operates efficiently. Focus on maintaining what works and identifying the remaining 25% of manual work worth automating.'}
+  else if(toil<50){verdict='Moderate toil';verdict2='Significant toil is consuming team capacity. A structured 90-day reduction program would recover 5–8 hours per person per week.'}
+  else if(toil<75){verdict='High toil';verdict2='Toil is a serious drag on delivery velocity and morale. Immediate attention needed — start with reporting and incident workflows.'}
+  else{verdict='Critical toil';verdict2='Your team is in reactive firefighting mode. Toil is crowding out delivery work. This requires a dedicated sprint to address.'}
+
+  var dimHTML = '';
+  var actions = [];
+  Object.keys(dims).forEach(function(d){
+    var s = dims[d];
+    var pct = Math.round((s/10)*100);
+    var c = pct<40?'var(--accent2)':pct<70?'var(--accent3)':'#ef4444';
+    dimHTML += '<div class="dim-card"><div class="dim-name">'+d+'</div>'+
+      '<div class="dim-score" style="color:'+c+'">'+pct+'%</div>'+
+      '<div style="font-size:11px;color:var(--muted)">'+(pct<40?'Low toil':pct<70?'Moderate':'High toil')+'</div>'+
+      '<div class="dim-bar-bg"><div class="dim-bar-fill" style="width:'+pct+'%;background:'+c+'"></div></div></div>';
+    if(pct>=70) actions.unshift({d:d,pct:pct,priority:'Immediate'});
+    else if(pct>=40) actions.push({d:d,pct:pct,priority:'Next 30 days'});
+  });
+
+  var actionHTML = '';
+  var recs = {
+    Reporting:'Automate weekly status report using LLM-assisted drafting. Target: under 15 minutes from data to sent.',
+    Incidents:'Implement AI-assisted triage with Jira automation and runbook matching. Target: 60% of P3/P4 auto-resolved.',
+    Deployments:'Audit CI/CD pipeline for manual gates. Each manual approval step is a candidate for automated quality checks.',
+    Onboarding:'Build a living runbook library. Every incident resolution should produce or update a runbook.',
+    Communications:'Create LLM-assisted stakeholder update templates. Consistent format, 80% faster production.',
+    Meetings:'Audit all recurring meetings. Any meeting without a documented output should be async-first.'
+  };
+
+  actions.forEach(function(a){
+    actionHTML += '<div class="action-card"><strong>'+a.priority+' — '+a.d+' ('+a.pct+'% toil)</strong>'+recs[a.d]+'</div>';
+  });
+  if(!actionHTML) actionHTML = '<div class="action-card"><strong>Maintain and monitor</strong>Your toil levels are healthy. Focus on documentation and knowledge transfer to keep it that way.</div>';
+
+  document.getElementById('question-area').style.display='none';
+  document.getElementById('progress-wrap').style.display='none';
+  document.getElementById('results-area').style.display='block';
+  document.getElementById('results-area').innerHTML =
+    '<div class="score-hero">'+
+    '<div class="score-big" style="color:'+color+'">'+toil+'%</div>'+
+    '<div class="score-label">Toil index — '+verdict+'</div>'+
+    '<div class="score-verdict">'+verdict2+'</div>'+
+    '</div>'+
+    '<div style="font-size:13px;font-weight:500;margin-bottom:.75rem;font-family:\'Syne\',sans-serif">Score by dimension</div>'+
+    '<div class="dim-grid">'+dimHTML+'</div>'+
+    '<div style="font-size:13px;font-weight:500;margin:.5rem 0 .75rem;font-family:\'Syne\',sans-serif">Prioritised actions</div>'+
+    actionHTML+
+    '<div style="margin-top:1.5rem;display:flex;gap:.75rem;flex-wrap:wrap">'+
+    '<button class="btn btn-ghost" onclick="restartAudit()">Start over</button>'+
+    '<a href="/ai-in-delivery/toil-elimination-playbook/" class="btn btn-primary">Read the full playbook →</a>'+
+    '</div>';
+}
+
+function restartAudit(){
+  answers={};current=0;
+  document.getElementById('question-area').style.display='block';
+  document.getElementById('progress-wrap').style.display='block';
+  document.getElementById('results-area').style.display='none';
+  renderQuestion();
+}
+
+renderQuestion();
+</script>
