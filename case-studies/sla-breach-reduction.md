@@ -5,6 +5,12 @@ title: "Case Study 01 — 20% SLA Breach Reduction"
 permalink: /case-studies/sla-breach-reduction/
 ---
 
+<div style="background:linear-gradient(135deg,rgba(13,148,136,.08) 0%,rgba(37,99,235,.06) 100%);border:1px solid var(--border2);border-radius:12px;padding:1.5rem;margin-bottom:2rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;text-align:center">
+  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent2)">-20%</div><div style="font-size:12px;color:var(--muted);margin-top:4px">SLA breach reduction</div></div>
+  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent2)">90 days</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Time to stable outcome</div></div>
+  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent2)">9+</div><div style="font-size:12px;color:var(--muted);margin-top:4px">CSAT sustained</div></div>
+</div>
+
 # Case Study 01 — 20% SLA Breach Reduction
 
 **Domain:** Telecom · SRE · AI-assisted Observability  
@@ -75,6 +81,12 @@ title: "Case Study 02 — 25% Bid Conversion Lift"
 permalink: /case-studies/bid-conversion-lift/
 ---
 
+<div style="background:linear-gradient(135deg,rgba(13,148,136,.08) 0%,rgba(37,99,235,.06) 100%);border:1px solid var(--border2);border-radius:12px;padding:1.5rem;margin-bottom:2rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;text-align:center">
+  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent2)">-20%</div><div style="font-size:12px;color:var(--muted);margin-top:4px">SLA breach reduction</div></div>
+  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent2)">90 days</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Time to stable outcome</div></div>
+  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent2)">9+</div><div style="font-size:12px;color:var(--muted);margin-top:4px">CSAT sustained</div></div>
+</div>
+
 # Case Study 02 — 25% Bid Conversion Lift
 
 **Domain:** Presales · AI workflows · Solution design  
@@ -133,6 +145,12 @@ layout: page
 title: "Case Study 03 — DevOps Upskilling Platform"
 permalink: /case-studies/devops-upskilling/
 ---
+
+<div style="background:linear-gradient(135deg,rgba(13,148,136,.08) 0%,rgba(37,99,235,.06) 100%);border:1px solid var(--border2);border-radius:12px;padding:1.5rem;margin-bottom:2rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;text-align:center">
+  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent2)">-20%</div><div style="font-size:12px;color:var(--muted);margin-top:4px">SLA breach reduction</div></div>
+  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent2)">90 days</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Time to stable outcome</div></div>
+  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent2)">9+</div><div style="font-size:12px;color:var(--muted);margin-top:4px">CSAT sustained</div></div>
+</div>
 
 # Case Study 03 — DevOps Upskilling Platform
 

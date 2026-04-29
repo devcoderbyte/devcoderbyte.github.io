@@ -106,13 +106,13 @@ Things I'm actively building or consciously not claiming:
 
 | Area | Current state | What I'm doing about it |
 |---|---|---|
-| SQL / data querying | Working knowledge — Netxcell-era MySQL, not current | Refreshing via practice problems — targeting fluency by Q3 2025 |
-| Salesforce platform | Awareness level | Pursuing Admin certification — Q3 2025 target |
+| SQL / data querying | Working knowledge — Netxcell-era MySQL, not current | Refreshing via practice problems — targeting fluency by Q3 2026 |
+| Salesforce platform | Awareness level | Pursuing Admin certification — Q2 2026 target |
 | Python / scripting | Can read, can't write fluently | Not a priority — I work at the delivery layer, not the engineering layer |
 | AdTech platforms | Conceptual — no hands-on | Building through reading and domain research |
 
 ---
 
-*Last updated: May 2025*
+*Last updated: April 2026*
 
 *The "Honest Gaps" section is intentional. A tool matrix that has no gaps isn't honest — it's marketing.*

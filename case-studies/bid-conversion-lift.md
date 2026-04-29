@@ -5,6 +5,12 @@ title: "Case Study 02 — 25% Bid Conversion Lift"
 permalink: /case-studies/bid-conversion-lift/
 ---
 
+<div style="background:linear-gradient(135deg,rgba(37,99,235,.08) 0%,rgba(13,148,136,.06) 100%);border:1px solid var(--border2);border-radius:12px;padding:1.5rem;margin-bottom:2rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;text-align:center">
+  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent)">+25%</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Bid conversion lift</div></div>
+  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent)">4-6hrs</div><div style="font-size:12px;color:var(--muted);margin-top:4px">RFQ turnaround (was 3 days)</div></div>
+  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent)">$2.1M+</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Annual portfolio managed</div></div>
+</div>
+
 # Case Study 02 — 25% Bid Conversion Lift
 
 **Domain:** Presales · AI workflows · Solution design

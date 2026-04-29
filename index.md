@@ -42,7 +42,7 @@ description: "Technical Program Manager & Presales Lead with 10+ years of enterp
       <h2>About me</h2>
       <p>I sit at the intersection of delivery leadership, presales strategy, and AI-augmented practice. I've spent 10+ years turning complex enterprise chaos into measurable outcomes — for clients like Maruti Suzuki Smart Finance and T-Mobile, across SRE, DevOps, and AMS domains.</p>
       <p>I use LLMs daily — across presales, delivery, client communications, and engineering — not as a tool I've adopted but as a practice I've systematised. This site is my proof-of-work.</p>
-      <p>When I'm not running programs, I'm planning two-up motorcycle  chasing fitness goals, and building toward the BMW F900 GSA and the Swiss Alps.</p>
+      <p>When I'm not running programs, I'm planning two-up motorcycle adventure routes, chasing fitness goals, and building toward the BMW F900 GSA and the Swiss Alps.</p>
       <div class="about-links">
         <a href="https://linkedin.com/in/rajendrabirudaraju" target="_blank" rel="noopener" class="about-link">LinkedIn →</a>
         <a href="mailto:birudarajurajendra@gmail.com" class="about-link">Email →</a>

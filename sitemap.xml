@@ -28,4 +28,6 @@ layout: null
   <url><loc>{{ site.url }}/tool-proficiency/</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
   <url><loc>{{ site.url }}/tools/</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
   <url><loc>{{ site.url }}/tools/slo-calculator/</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/tools/toil-audit/</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>{{ site.url }}/tools/rfq-scorer/</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
 </urlset>

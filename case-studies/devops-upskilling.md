@@ -5,6 +5,12 @@ title: "Case Study 03 — DevOps Upskilling Platform"
 permalink: /case-studies/devops-upskilling/
 ---
 
+<div style="background:linear-gradient(135deg,rgba(217,119,6,.08) 0%,rgba(37,99,235,.06) 100%);border:1px solid var(--border2);border-radius:12px;padding:1.5rem;margin-bottom:2rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;text-align:center">
+  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent3)">-35%</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Debugging time reduction</div></div>
+  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent3)">Zero</div><div style="font-size:12px;color:var(--muted);margin-top:4px">External hires needed</div></div>
+  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent3)">1 tool</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Shipped to production during training</div></div>
+</div>
+
 # Case Study 03 — DevOps Upskilling Platform
 
 **Domain:** Team capability · DevOps transformation · Leadership  

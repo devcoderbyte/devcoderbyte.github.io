@@ -1,7 +1,7 @@
 ---
 layout: default
 title: RFQ Complexity Scorer
-description: "Input your RFQ parameters and get a bid complexity score, effort estimate, risk flags, and recommended team structure. Built on the presales framework behind a 25% bid conversion lift."
+description: "Input your RFQ parameters and get a complexity score, effort estimate, risk flags, and recommended team structure. Built on the presales framework behind a 25% bid conversion lift."
 permalink: /tools/rfq-scorer/
 ---
 <div class="page-wrap">
@@ -9,37 +9,38 @@ permalink: /tools/rfq-scorer/
     <div class="container">
       <div class="breadcrumb"><a href="/">Home</a> <span>→</span> <a href="/tools/">Tools</a> <span>→</span> RFQ Complexity Scorer</div>
       <h1 class="page-title">RFQ Complexity Scorer</h1>
-      <p style="color:var(--muted);font-size:15px;margin-top:.75rem;max-width:600px">Input your RFQ parameters and get a complexity score, effort estimate, top risk flags, and recommended team structure. Built on the <a href="/presales-practice/bid-strategy-methodology/">Bid Strategy Methodology</a> behind a 25% conversion lift.</p>
+      <p style="color:var(--muted);font-size:15px;margin-top:.75rem;max-width:600px">Input your RFQ parameters and get a complexity score, effort estimate, risk flags, and recommended team. Each engagement type reshapes the entire output — not just a single score.</p>
     </div>
   </div>
   <div class="page-content">
     <div class="container">
       <div class="tool-wrap">
 
-        <div class="tool-controls" style="grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
-
-          <div>
-            <label class="control-label">Domain</label>
-            <select id="domain" class="tool-select" onchange="calc()">
-              <option value="2">Telecom</option>
-              <option value="2">Automotive / Manufacturing</option>
-              <option value="3">Financial Services / FinTech</option>
-              <option value="3">Healthcare / Life Sciences</option>
-              <option value="1">Retail / eCommerce</option>
-              <option value="2">Technology / SaaS</option>
-              <option value="4">Government / Defence</option>
-            </select>
-          </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
 
           <div>
             <label class="control-label">Engagement type</label>
             <select id="eng-type" class="tool-select" onchange="calc()">
-              <option value="1">AMS / Support</option>
-              <option value="2">SRE / DevOps</option>
-              <option value="3">Digital Transformation</option>
-              <option value="4">System Integration</option>
-              <option value="3">Cloud Migration</option>
-              <option value="2">Product Development</option>
+              <option value="ams">AMS / Managed Support</option>
+              <option value="sre">SRE / DevOps</option>
+              <option value="transform">Digital Transformation</option>
+              <option value="integration">System Integration</option>
+              <option value="cloud">Cloud Migration</option>
+              <option value="product">Product Development</option>
+            </select>
+            <div id="eng-desc" style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5;font-style:italic"></div>
+          </div>
+
+          <div>
+            <label class="control-label">Domain</label>
+            <select id="domain" class="tool-select" onchange="calc()">
+              <option value="telecom">Telecom</option>
+              <option value="auto">Automotive / Manufacturing</option>
+              <option value="fin">Financial Services / FinTech</option>
+              <option value="health">Healthcare / Life Sciences</option>
+              <option value="retail">Retail / eCommerce</option>
+              <option value="tech">Technology / SaaS</option>
+              <option value="gov">Government / Defence</option>
             </select>
           </div>
 
@@ -69,74 +70,85 @@ permalink: /tools/rfq-scorer/
           </div>
 
           <div>
-            <label class="control-label">Incumbent vendor situation</label>
+            <label class="control-label">Incumbent situation</label>
             <select id="incumbent" class="tool-select" onchange="calc()">
-              <option value="1">Greenfield — no incumbent</option>
-              <option value="2">Incumbent staying — augmenting</option>
-              <option value="4">Displacing incumbent vendor</option>
-              <option value="3">Incumbent unknown</option>
+              <option value="green">Greenfield — no incumbent</option>
+              <option value="augment">Incumbent staying — we augment</option>
+              <option value="displace">Displacing incumbent vendor</option>
+              <option value="unknown">Incumbent unknown</option>
             </select>
           </div>
 
           <div>
             <label class="control-label">Client stakeholder clarity</label>
             <select id="clarity" class="tool-select" onchange="calc()">
-              <option value="1">Clear — single DM, defined requirements</option>
-              <option value="2">Moderate — committee decision, some ambiguity</option>
-              <option value="4">Low — requirements still forming</option>
-              <option value="3">Unknown — limited discovery done</option>
+              <option value="clear">Clear — single DM, defined requirements</option>
+              <option value="committee">Moderate — committee decision, some ambiguity</option>
+              <option value="forming">Low — requirements still forming</option>
+              <option value="unknown">Unknown — limited discovery done</option>
             </select>
           </div>
 
           <div>
             <label class="control-label">Deal size</label>
             <select id="deal-size" class="tool-select" onchange="calc()">
-              <option value="1">Under $500K</option>
-              <option value="2">$500K – $2M</option>
-              <option value="3">$2M – $10M</option>
-              <option value="4">Over $10M</option>
+              <option value="s">Under $500K</option>
+              <option value="m">$500K – $2M</option>
+              <option value="l">$2M – $10M</option>
+              <option value="xl">Over $10M</option>
             </select>
           </div>
 
         </div>
 
-        <div class="metrics-grid" style="grid-template-columns:repeat(4,1fr)">
+        <!-- KPI row -->
+        <div class="metrics-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:1rem">
           <div class="metric-card">
-            <div class="metric-label">Complexity score</div>
-            <div id="complexity-score" class="metric-val accent">—</div>
+            <div class="metric-label">Complexity</div>
+            <div id="m-complexity" class="metric-val accent">—</div>
           </div>
           <div class="metric-card">
             <div class="metric-label">Effort estimate</div>
-            <div id="effort-est" class="metric-val">—</div>
+            <div id="m-effort" class="metric-val">—</div>
           </div>
           <div class="metric-card">
             <div class="metric-label">Win probability</div>
-            <div id="win-prob" class="metric-val">—</div>
+            <div id="m-win" class="metric-val">—</div>
           </div>
           <div class="metric-card">
-            <div class="metric-label">Recommended team</div>
-            <div id="team-size" class="metric-val">—</div>
+            <div class="metric-label">Pricing model</div>
+            <div id="m-price" class="metric-val" style="font-size:1rem">—</div>
           </div>
         </div>
 
-        <div class="tool-section" style="margin-top:1rem">
-          <div class="tool-section-title">Complexity breakdown</div>
-          <div id="breakdown-bars"></div>
+        <!-- Team recommendation -->
+        <div class="tool-section" style="margin-bottom:1rem">
+          <div class="tool-section-title">Recommended team structure</div>
+          <div id="team-rec" style="display:flex;gap:8px;flex-wrap:wrap"></div>
         </div>
 
-        <div class="tool-section">
+        <!-- Dimension breakdown -->
+        <div class="tool-section" style="margin-bottom:1rem">
+          <div class="tool-section-title">Complexity drivers — what's moving the needle</div>
+          <div id="breakdown-bars"></div>
+          <div id="primary-driver" style="font-size:13px;color:var(--muted);margin-top:.75rem;padding:.6rem .85rem;background:var(--surface2);border-radius:7px;font-style:italic"></div>
+        </div>
+
+        <!-- Risk flags -->
+        <div class="tool-section" style="margin-bottom:1rem">
           <div class="tool-section-title">Risk flags</div>
           <div id="risk-flags"></div>
         </div>
 
-        <div class="tool-section">
+        <!-- Strategy -->
+        <div class="tool-section" style="margin-bottom:1.5rem">
           <div class="tool-section-title">Bid strategy recommendation</div>
-          <div id="strategy-rec" style="font-size:14px;color:var(--light);line-height:1.8"></div>
+          <div id="strategy-rec" style="font-size:14px;color:var(--light);line-height:1.85"></div>
         </div>
 
-        <div style="margin-top:1rem;display:flex;gap:.75rem;flex-wrap:wrap">
-          <a href="/presales-practice/bid-strategy-methodology/" class="btn btn-primary">Read the full bid strategy →</a>
-          <a href="/presales-practice/rfq-workflow/" class="btn btn-ghost">See the RFQ workflow →</a>
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+          <a href="/presales-practice/bid-strategy-methodology/" class="btn btn-primary">Full bid strategy →</a>
+          <a href="/presales-practice/rfq-workflow/" class="btn btn-ghost">AI-assisted RFQ workflow →</a>
         </div>
 
       </div>
@@ -146,40 +158,132 @@ permalink: /tools/rfq-scorer/
 
 <style>
 .tool-select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:.5rem .75rem;font-size:13px;color:var(--text);font-family:'Inter',sans-serif;cursor:pointer;outline:none;transition:border-color .15s}
-.tool-select:focus{border-color:var(--accent)}
-.breakdown-row{display:flex;align-items:center;gap:10px;margin-bottom:.6rem}
-.breakdown-label{font-size:12px;color:var(--muted);min-width:140px;font-family:'JetBrains Mono',monospace}
+.tool-select:focus,.tool-select:hover{border-color:var(--accent)}
+.breakdown-row{display:flex;align-items:center;gap:10px;margin-bottom:.55rem}
+.breakdown-label{font-size:12px;color:var(--muted);min-width:150px;font-family:'JetBrains Mono',monospace}
 .breakdown-bar-bg{flex:1;height:8px;background:var(--surface2);border-radius:4px;overflow:hidden}
-.breakdown-bar-fill{height:8px;border-radius:4px;transition:width .4s ease}
-.breakdown-val{font-size:12px;color:var(--text);font-weight:500;min-width:32px;text-align:right;font-family:'JetBrains Mono',monospace}
-.risk-flag{display:flex;align-items:flex-start;gap:10px;padding:.65rem .85rem;border-radius:7px;margin-bottom:.5rem;font-size:13px;line-height:1.6}
-.risk-high{background:rgba(239,68,68,.08);border-left:3px solid #ef4444;color:var(--light)}
-.risk-med{background:rgba(217,119,6,.08);border-left:3px solid var(--accent3);color:var(--light)}
-.risk-low{background:rgba(13,148,136,.08);border-left:3px solid var(--accent2);color:var(--light)}
+.breakdown-bar-fill{height:8px;border-radius:4px;transition:width .5s ease,background .3s}
+.breakdown-val{font-size:12px;font-weight:500;min-width:36px;text-align:right;font-family:'JetBrains Mono',monospace}
+.risk-flag{display:flex;align-items:flex-start;gap:10px;padding:.7rem .9rem;border-radius:7px;margin-bottom:.5rem;font-size:13px;line-height:1.65;border-left:3px solid}
+.risk-high{background:rgba(239,68,68,.07);border-color:#ef4444;color:var(--light)}
+.risk-med{background:rgba(217,119,6,.07);border-color:var(--accent3);color:var(--light)}
+.risk-low{background:rgba(13,148,136,.07);border-color:var(--accent2);color:var(--light)}
 [data-theme="dark"] .risk-high{background:rgba(255,107,107,.08)}
 [data-theme="dark"] .risk-med{background:rgba(245,200,66,.08)}
 [data-theme="dark"] .risk-low{background:rgba(56,217,169,.08)}
-.risk-flag strong{color:var(--text)}
+.risk-flag strong{color:var(--text);display:block;margin-bottom:2px}
+.team-pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:5px 12px;border-radius:20px;border:1px solid var(--border2);background:var(--surface2);color:var(--text)}
+.team-pill.core{border-color:var(--accent);background:rgba(37,99,235,.08);color:var(--accent)}
+[data-theme="dark"] .team-pill.core{background:rgba(79,142,247,.1)}
+.team-pill.support{border-color:var(--accent2);background:rgba(13,148,136,.08);color:var(--accent2)}
+[data-theme="dark"] .team-pill.support{background:rgba(56,217,169,.08)}
+.team-pill.optional{border-color:var(--border2);color:var(--muted)}
 </style>
 
 <script>
 var timeline = 'normal';
 
-function setTimeline(t, btn){
-  timeline = t;
-  document.querySelectorAll('#t-relaxed,#t-normal,#t-aggressive').forEach(function(b){b.classList.remove('active')});
+// Engagement type profiles — this is what reshapes everything
+var engProfiles = {
+  ams: {
+    label: 'AMS / Managed Support',
+    desc: 'Governance, SLA management, and multi-vendor coordination dominate. Incumbent risk and clarity are primary drivers — not technical complexity.',
+    // Weight multipliers per dimension (0=ignored, 1=normal, 2=amplified)
+    weights: {vendors:1.5, integrations:0.5, domain:1, timeline:0.8, incumbent:2, clarity:1.5, deal:0.8},
+    baseEffort: 3,
+    effortScale: 0.08,
+    teamCore: ['Delivery Manager','Account Lead'],
+    teamSupport: ['Governance Analyst'],
+    teamOptional: ['Legal (if displacing)','Commercial Lead (>$2M)'],
+    pricingModel: {clear:'T&M + SLA', committee:'T&M milestone', forming:'T&M only', unknown:'Discovery first'},
+    strategyBase: 'AMS bids are won on governance credibility and incumbent transition plans — not technical architecture. Lead with your CSAT proof and SLA track record. Show exactly how you will manage the handover, not just that you will.',
+  },
+  sre: {
+    label: 'SRE / DevOps',
+    desc: 'Tooling depth and automation philosophy matter more than vendor count. Team capability and observability approach are what differentiate bids.',
+    weights: {vendors:0.8, integrations:1.2, domain:1, timeline:1.5, incumbent:1, clarity:0.8, deal:1},
+    baseEffort: 4,
+    effortScale: 0.09,
+    teamCore: ['TPM','SRE Lead','DevOps Engineer'],
+    teamSupport: ['Observability SME'],
+    teamOptional: ['Security Architect (regulated domain)','FinOps (cloud cost angle)'],
+    pricingModel: {clear:'T&M + outcomes', committee:'T&M milestone', forming:'T&M only', unknown:'POC first'},
+    strategyBase: 'SRE bids are won on technical credibility and tooling specificity. Generic DevOps capability statements lose. Show the specific observability stack, the toil elimination approach, and quantified reliability improvements from comparable engagements. Avoid vague promises about "improving uptime" — lead with error budget frameworks and measurable SLOs.',
+  },
+  transform: {
+    label: 'Digital Transformation',
+    desc: 'Stakeholder clarity is the primary risk driver — not technical complexity. Requirements will change. Governance model and change management approach are what separate credible bids.',
+    weights: {vendors:1, integrations:1, domain:1.2, timeline:1.5, incumbent:1, clarity:2.5, deal:1.2},
+    baseEffort: 6,
+    effortScale: 0.12,
+    teamCore: ['Program Director','Change Management Lead','Solutions Architect'],
+    teamSupport: ['Business Analyst','Agile Coach'],
+    teamOptional: ['OCM Specialist','Data Architect','Legal (regulated domain)'],
+    pricingModel: {clear:'Milestone-based', committee:'T&M + governance gates', forming:'Discovery + T&M', unknown:'Discovery only'},
+    strategyBase: 'Digital transformation bids are the highest-ambiguity category. The client often doesn\'t know exactly what they want — they know what problem they have. Win by demonstrating you understand their business problem better than they do, and by showing a governance model that can absorb requirement changes without blowing the budget. Fixed-price is dangerous here unless scope is airtight.',
+  },
+  integration: {
+    label: 'System Integration',
+    desc: 'Integration point count is the primary complexity driver. Each API contract is a risk. Technical due diligence in the bid phase is not optional.',
+    weights: {vendors:1.2, integrations:2.5, domain:1, timeline:1.2, incumbent:0.8, clarity:1, deal:1},
+    baseEffort: 5,
+    effortScale: 0.11,
+    teamCore: ['TPM','Integration Architect','API Lead'],
+    teamSupport: ['QA Lead','Data Engineer'],
+    teamOptional: ['Security Architect','Performance Engineer (high volume)'],
+    pricingModel: {clear:'Fixed + change control', committee:'T&M milestone', forming:'T&M only', unknown:'Technical workshop first'},
+    strategyBase: 'Integration bids live or die on technical due diligence. Every integration point you claim without a supporting technical workshop is a scope risk that will bite you post-award. Request pre-bid technical sessions. Show your API governance framework and integration testing methodology. Clients have been burned by integration projects before — show them specifically how you prevent the failure modes they\'ve experienced.',
+  },
+  cloud: {
+    label: 'Cloud Migration',
+    desc: 'Timeline pressure is amplified — cloud migrations always take longer than estimated. Technical debt discovery risk and timeline credibility are the key differentiators.',
+    weights: {vendors:1, integrations:1.2, domain:1, timeline:2, incumbent:1.2, clarity:1, deal:1},
+    baseEffort: 5,
+    effortScale: 0.10,
+    teamCore: ['Cloud Architect','TPM','DevOps Lead'],
+    teamSupport: ['FinOps Analyst','Security Engineer'],
+    teamOptional: ['Data Migration Specialist','Training Lead','Change Manager'],
+    pricingModel: {clear:'Milestone + T&M tail', committee:'T&M milestone', forming:'Assessment + T&M', unknown:'Assessment first'},
+    strategyBase: 'Cloud migration bids are won by being honest about timeline risk — counterintuitively. Clients have been sold aggressive timelines before and been burned. A bid that openly addresses technical debt discovery risk, includes a phased approach with clear go/no-go gates, and shows FinOps discipline from day one will beat an optimistic proposal almost every time. Lead with your migration methodology and the cloud cost governance model.',
+  },
+  product: {
+    label: 'Product Development',
+    desc: 'Requirement clarity is the single biggest risk factor. Fixed-price is almost always wrong here. The bid must establish a product discovery phase before committing to delivery scope.',
+    weights: {vendors:0.6, integrations:0.8, domain:1, timeline:1.2, incumbent:0.5, clarity:2.8, deal:1},
+    baseEffort: 4,
+    effortScale: 0.09,
+    teamCore: ['Product Manager','Engineering Lead','UX Lead'],
+    teamSupport: ['QA Engineer','DevOps Engineer'],
+    teamOptional: ['Data Scientist','Security Architect','Agile Coach'],
+    pricingModel: {clear:'Sprint-based T&M', committee:'Discovery + sprint T&M', forming:'Discovery only first', unknown:'Product workshop first'},
+    strategyBase: 'Product development bids are the most dangerous to scope incorrectly. The client thinks they know what they want — they rarely do once build starts. Win by proposing a structured discovery sprint before committing to delivery scope. Show your agile governance model, your product backlog management approach, and how you handle scope change without derailing the relationship. Avoid fixed-price unless you\'ve done a full discovery already.',
+  }
+};
+
+var domainRisk = {telecom:2,auto:2,fin:3,health:4,retail:1,tech:2,gov:4};
+var incumbentScore = {green:1,augment:2,displace:4,unknown:3};
+var clarityScore = {clear:1,committee:2,forming:4,unknown:3};
+var dealScore = {s:1,m:2,l:3,xl:4};
+
+function setTimeline(t,btn){
+  timeline=t;
+  ['t-relaxed','t-normal','t-aggressive'].forEach(function(id){
+    var b=document.getElementById(id);
+    b.classList.remove('active');
+  });
   btn.classList.add('active');
   calc();
 }
 
 function gv(id){return parseInt(document.getElementById(id).value)||1}
-function gs(id){return parseInt(document.getElementById(id).options[document.getElementById(id).selectedIndex].value)||1}
+function gs(id){return document.getElementById(id).value}
 
 function calc(){
+  var eng = gs('eng-type');
+  var profile = engProfiles[eng];
+  var dom = gs('domain');
   var v = gv('vendors');
   var i = gv('integrations');
-  var d = gs('domain');
-  var e = gs('eng-type');
   var inc = gs('incumbent');
   var cl = gs('clarity');
   var ds = gs('deal-size');
@@ -187,88 +291,140 @@ function calc(){
 
   document.getElementById('vendors-val').textContent = v;
   document.getElementById('integrations-val').textContent = i;
+  document.getElementById('eng-desc').textContent = profile.desc;
 
-  // Score each dimension 1-10
-  var vendorScore = Math.min(10, Math.round(v * 1.2));
-  var integScore = Math.min(10, Math.round(i * 0.6));
-  var domainScore = d * 2;
-  var timelineScore = t * 2;
-  var incumbentScore = inc * 2;
-  var clarityScore = cl * 2;
-  var dealScore = ds * 2;
+  var w = profile.weights;
 
-  var raw = vendorScore + integScore + domainScore + timelineScore + incumbentScore + clarityScore + dealScore;
-  var maxRaw = 10+10+8+8+8+8+8;
-  var complexity = Math.round((raw/maxRaw)*100);
+  // Raw dimension scores (0-10 scale each)
+  var dims = {
+    'Vendors':       {raw: Math.min(10, v*1.2),        weight: w.vendors},
+    'Integrations':  {raw: Math.min(10, i*0.6),         weight: w.integrations},
+    'Domain risk':   {raw: domainRisk[dom]*2,            weight: w.domain},
+    'Timeline':      {raw: t*2.5,                        weight: w.timeline},
+    'Incumbent':     {raw: incumbentScore[inc]*2.2,      weight: w.incumbent},
+    'Clarity':       {raw: clarityScore[cl]*2.2,         weight: w.clarity},
+    'Deal scale':    {raw: dealScore[ds]*2,              weight: w.deal}
+  };
 
-  var color = complexity<35?'var(--accent2)':complexity<65?'var(--accent3)':'#ef4444';
-  var label = complexity<35?'Low':'complexity'<65?'Medium':'High';
+  // Weighted total
+  var weightedSum = 0, maxWeighted = 0;
+  Object.keys(dims).forEach(function(k){
+    weightedSum += dims[k].raw * dims[k].weight;
+    maxWeighted += 10 * dims[k].weight;
+  });
+  var complexity = Math.round((weightedSum/maxWeighted)*100);
 
-  // Effort
-  var baseDays = 2;
-  var effortDays = Math.round(baseDays + (complexity/100)*12);
+  // Effort — base varies by engagement type, scaled by complexity
+  var effortDays = Math.round(profile.baseEffort + complexity * profile.effortScale);
   var effortHours = effortDays * 6;
 
-  // Win probability (inversely related to complexity, adjusted for clarity)
-  var winBase = 70 - (complexity * 0.3) - (cl * 4);
-  var winPct = Math.max(15, Math.min(85, Math.round(winBase)));
+  // Win probability — complexity hurts, clarity helps
+  var clarityBoost = cl==='clear'?10:cl==='committee'?0:cl==='forming'?-15:-10;
+  var win = Math.max(10, Math.min(85, Math.round(68 - (complexity*0.32) + clarityBoost)));
 
-  // Team
-  var teamSize = complexity<35?'1 PM + 1 SA':complexity<65?'1 PM + 2 SA + 1 SME':'1 PM + 2 SA + 2 SME + Legal';
+  // Pricing model based on engagement type + clarity
+  var pricingModel = profile.pricingModel[cl] || 'T&M';
 
-  document.getElementById('complexity-score').textContent = complexity+'%';
-  document.getElementById('complexity-score').style.color = color;
-  document.getElementById('effort-est').textContent = effortDays+'d / '+effortHours+'h';
-  document.getElementById('win-prob').textContent = winPct+'%';
-  document.getElementById('win-prob').style.color = winPct>55?'var(--accent2)':winPct>35?'var(--accent3)':'#ef4444';
-  document.getElementById('team-size').textContent = complexity<35?'Small':'complexity'<65?'Medium':'Full';
-  document.getElementById('team-size').style.fontSize = '1rem';
+  // Color
+  var color = complexity<35?'var(--accent2)':complexity<65?'var(--accent3)':'#ef4444';
 
-  // Breakdown bars
-  var dims = [
-    {label:'Vendor complexity',score:vendorScore,max:10},
-    {label:'Integrations',score:integScore,max:10},
-    {label:'Domain risk',score:domainScore,max:8},
-    {label:'Timeline pressure',score:timelineScore,max:8},
-    {label:'Incumbent risk',score:incumbentScore,max:8},
-    {label:'Clarity risk',score:clarityScore,max:8},
-    {label:'Deal scale',score:dealScore,max:8}
-  ];
-  document.getElementById('breakdown-bars').innerHTML = dims.map(function(dim){
-    var pct = Math.round((dim.score/dim.max)*100);
-    var c = pct<40?'var(--accent2)':pct<70?'var(--accent3)':'#ef4444';
+  document.getElementById('m-complexity').textContent = complexity+'%';
+  document.getElementById('m-complexity').style.color = color;
+  document.getElementById('m-effort').textContent = effortDays+'d / '+effortHours+'h';
+  document.getElementById('m-win').textContent = win+'%';
+  document.getElementById('m-win').style.color = win>55?'var(--accent2)':win>35?'var(--accent3)':'#ef4444';
+  document.getElementById('m-price').textContent = pricingModel;
+
+  // Team pills
+  var teamHTML = '';
+  profile.teamCore.forEach(function(r){teamHTML+='<span class="team-pill core">'+r+'</span>';});
+  profile.teamSupport.forEach(function(r){teamHTML+='<span class="team-pill support">'+r+'</span>';});
+  profile.teamOptional.forEach(function(r){teamHTML+='<span class="team-pill optional">'+r+' (if needed)</span>';});
+  document.getElementById('team-rec').innerHTML = teamHTML;
+
+  // Breakdown bars — show weighted scores
+  var sortedDims = Object.keys(dims).sort(function(a,b){
+    return (dims[b].raw*dims[b].weight)-(dims[a].raw*dims[a].weight);
+  });
+  var primaryDriver = sortedDims[0];
+  var barsHTML = sortedDims.map(function(k){
+    var d = dims[k];
+    var weighted = Math.round((d.raw*d.weight/10)*100);
+    var pct = Math.min(100,weighted);
+    var c = pct<35?'var(--accent2)':pct<65?'var(--accent3)':'#ef4444';
+    var wLabel = d.weight>=2?'↑ amplified':d.weight<=0.6?'↓ reduced':'';
     return '<div class="breakdown-row">'+
-      '<span class="breakdown-label">'+dim.label+'</span>'+
+      '<span class="breakdown-label">'+k+(wLabel?' <span style="color:var(--accent);font-size:10px">'+wLabel+'</span>':'')+'</span>'+
       '<div class="breakdown-bar-bg"><div class="breakdown-bar-fill" style="width:'+pct+'%;background:'+c+'"></div></div>'+
-      '<span class="breakdown-val">'+pct+'%</span></div>';
+      '<span class="breakdown-val" style="color:'+c+'">'+pct+'%</span></div>';
   }).join('');
 
-  // Risk flags
+  document.getElementById('breakdown-bars').innerHTML = barsHTML;
+  document.getElementById('primary-driver').textContent =
+    '↑ Primary complexity driver for a '+profile.label+' engagement: '+primaryDriver+'. This dimension is weighted '+
+    (dims[primaryDriver].weight>=2?'2x':'1.5x')+' for this engagement type.';
+
+  // Risk flags — engagement-type aware
   var risks = [];
-  if(v>=5) risks.push({level:'high',text:'<strong>Multi-vendor coordination risk</strong> — '+v+' vendors creates significant dependency management overhead. Establish clear RACI and SLA pass-through clauses before bid.'});
-  if(i>=10) risks.push({level:'high',text:'<strong>Integration complexity</strong> — '+i+' integration points is high. Each is a potential delay. Request technical workshops pre-bid to validate assumptions.'});
-  if(inc===4) risks.push({level:'high',text:'<strong>Incumbent displacement</strong> — displacing an existing vendor means political risk alongside technical. Plan for a parallel run period and knowledge transfer costs.'});
-  if(t===4) risks.push({level:'high',text:'<strong>Aggressive timeline</strong> — compressed delivery windows increase defect risk and team burnout. Flag assumptions explicitly in the SOW.'});
-  if(cl===4) risks.push({level:'med',text:'<strong>Requirement ambiguity</strong> — low client clarity means scope is likely to grow. Use T&M pricing with milestone checkpoints rather than fixed price.'});
-  if(cl===3) risks.push({level:'med',text:'<strong>Unknown decision process</strong> — limited discovery done. Request a discovery call before final bid to validate requirements.'});
-  if(d>=3) risks.push({level:'med',text:'<strong>Regulated domain</strong> — compliance requirements add scope and timeline risk. Identify regulatory dependencies explicitly in the bid.'});
-  if(ds>=3) risks.push({level:'med',text:'<strong>Large deal scrutiny</strong> — deals over $2M typically require executive sign-off on both sides. Plan for longer sales cycles and more review rounds.'});
-  if(risks.length===0) risks.push({level:'low',text:'<strong>Low risk profile</strong> — this RFQ has manageable complexity. Focus on differentiating through domain proof and a sharp executive summary.'});
+
+  // Engagement-specific risks first
+  if(eng==='transform' && (cl==='forming'||cl==='unknown')){
+    risks.push({level:'high',title:'Transformation with unclear requirements',body:'This is the highest-risk combination. A digital transformation engagement where requirements are still forming should not be fixed-price under any circumstances. Propose a discovery phase first — 4–6 weeks — before committing to delivery scope.'});
+  }
+  if(eng==='integration' && i>=8){
+    risks.push({level:'high',title:i+' integration points — technical due diligence required',body:'At this integration count, request pre-bid technical workshops before submitting. Each undiscovered API constraint post-award becomes a change request. Time spent in discovery now saves 3x in delivery disputes later.'});
+  }
+  if(eng==='cloud' && t===4){
+    risks.push({level:'high',title:'Aggressive timeline on cloud migration',body:'Cloud migrations consistently take 30–40% longer than initial estimates due to technical debt discovery. An aggressive timeline bid that doesn\'t account for this will either lose on credibility or win and then fail. Build buffer in openly — clients respect honesty about this.'});
+  }
+  if(eng==='product' && cl==='forming'){
+    risks.push({level:'high',title:'Product development with forming requirements',body:'Fixed scope on a product engagement with forming requirements is almost guaranteed to result in scope disputes. Structure the bid as: discovery sprint (2–4 weeks) → backlog definition → sprint-based delivery. Don\'t commit to a feature list you don\'t have yet.'});
+  }
+  if(eng==='ams' && inc==='displace'){
+    risks.push({level:'high',title:'AMS displacement — political and transition risk',body:'Displacing an incumbent on a managed services contract means navigating both technical transition and political resistance. Budget explicitly for a parallel run period (minimum 4–8 weeks) and knowledge transfer. Clients often underestimate this cost — include it in your bid, not as a risk.'});
+  }
+  if(eng==='sre' && i>=10){
+    risks.push({level:'high',title:'High integration count for SRE engagement',body:'SRE engagements with '+i+' integration points require a dedicated observability design phase. Each integration needs its own alerting rules, runbooks, and SLO definition. Scope this explicitly or it becomes unmanaged toil.'});
+  }
+
+  // Universal risks
+  if(inc==='displace' && eng!=='ams'){
+    risks.push({level:'high',title:'Incumbent displacement risk',body:'Displacing an existing vendor means institutional knowledge walks out the door on transition day. Include explicit knowledge transfer milestones in the SOW with client sign-off gates.'});
+  }
+  if(v>=5){
+    risks.push({level:'med',title:v+' vendors — coordination overhead is significant',body:'Establish a formal vendor governance framework before bid submission. Who owns integration disputes? Who calls the bridge? Clients reward bids that show they\'ve thought through multi-vendor failure modes.'});
+  }
+  if(domainRisk[dom]>=3){
+    risks.push({level:'med',title:'Regulated domain — compliance scope risk',body:'Financial services, healthcare, and government domains carry compliance requirements that can significantly expand scope. Identify regulatory dependencies explicitly in the bid and qualify assumptions.'});
+  }
+  if(dealScore[ds]>=3){
+    risks.push({level:'med',title:'Large deal — extended evaluation cycle',body:'Deals over $2M typically involve legal review, security assessment, and executive sign-off on both sides. Plan for a 6–12 week evaluation cycle and multiple presentation rounds. Proposal quality and executive summary are disproportionately important at this scale.'});
+  }
+  if(cl==='unknown'){
+    risks.push({level:'med',title:'Limited discovery — assumption risk',body:'Submitting without adequate discovery means your scope assumptions may be wrong. Either request a paid discovery phase or qualify every major assumption explicitly in the bid. Unqualified assumptions become disputes.'});
+  }
+  if(t===4 && eng!=='cloud'){
+    risks.push({level:'med',title:'Aggressive timeline pressure',body:'Compressed timelines increase defect risk and reduce team sustainability. Flag the specific delivery risks that the timeline creates and propose milestone-based go/no-go gates rather than a single end-date commitment.'});
+  }
+  if(risks.length===0){
+    risks.push({level:'low',title:'Low risk profile',body:'This RFQ has manageable complexity for a '+profile.label+' engagement. Focus your bid energy on differentiating through domain proof, a sharp executive summary, and a governance model that inspires confidence.'});
+  }
 
   document.getElementById('risk-flags').innerHTML = risks.map(function(r){
-    return '<div class="risk-flag risk-'+r.level+'">'+r.text+'</div>';
+    return '<div class="risk-flag risk-'+r.level+'"><div><strong>'+r.title+'</strong>'+r.body+'</div></div>';
   }).join('');
 
-  // Strategy
-  var strat;
-  if(complexity<35){
-    strat='<strong>Lean and fast.</strong> This is a straightforward bid. Lead with your strongest domain proof point, keep the SOW tight, and submit quickly. Speed signals confidence. Allocate '+effortDays+' days maximum and use AI-assisted drafting to cut that in half.';
-  } else if(complexity<65){
-    strat='<strong>Differentiate on delivery model.</strong> Moderate complexity means competitors will look similar on paper. Your edge is in the governance and risk sections — show specifically how you manage the risks you\'ve flagged above. Use the 5-question bid strategy framework before writing a single word. Budget '+effortDays+' days for this bid.';
-  } else {
-    strat='<strong>Invest or walk away.</strong> High complexity bids are expensive to lose. Before committing to this bid, run a go/no-go assessment: do you have direct domain proof? Can you credibly staff it? Is the incumbent situation navigable? If yes to all three — commit fully with a cross-functional team. If not — a well-reasoned no-bid saves more than a weak bid loses. If you proceed, budget '+effortDays+' days minimum.';
-  }
-  document.getElementById('strategy-rec').innerHTML = strat;
+  // Strategy — engagement-type specific base + complexity overlay
+  var complexityOverlay = complexity<35
+    ? ' Allocate '+effortDays+' days maximum. Use AI-assisted drafting to compress that further — this bid should not consume senior resource disproportionately.'
+    : complexity<65
+    ? ' Budget '+effortDays+' days. The differentiation opportunity is in how you address the specific risks flagged above — not in the capability section.'
+    : ' This is a high-investment bid. Before committing, run a go/no-go: do you have direct domain proof? Can you credibly staff it? Is the win probability worth the '+effortDays+'-day effort? If yes to all three, commit fully. If not, a well-reasoned no-bid protects more than a weak submission.';
+
+  document.getElementById('strategy-rec').innerHTML =
+    '<p>'+profile.strategyBase+'</p>'+
+    '<p style="margin-top:.85rem;color:var(--muted)">'+complexityOverlay+'</p>'+
+    '<p style="margin-top:.85rem"><strong style="color:var(--text)">Recommended pricing:</strong> <span style="color:var(--accent)">'+pricingModel+'</span> — based on engagement type and current stakeholder clarity.</p>';
 }
 
 calc();
