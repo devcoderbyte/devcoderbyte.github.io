@@ -1,11 +1,11 @@
 ---
-description: "Real LLM workflows, AI adoption frameworks, and toil elimination playbooks built by Rajendra Birudaraju for enterprise delivery teams."
 layout: page
 title: AI in Delivery
 permalink: /ai-in-delivery/
+description: "Real LLM workflows, AI adoption frameworks, and toil elimination playbooks built by Rajendra Birudaraju for enterprise delivery teams."
 ---
 
-<p style="color:var(--muted);font-size:15px;margin-bottom:2rem">Real LLM workflows, adoption frameworks, and toil elimination playbooks — all production-tested across enterprise engagements. Real prompts, real outcomes.</p>
+<p style="color:var(--muted);font-size:15px;margin-bottom:2rem">Real LLM workflows, adoption frameworks, and toil elimination playbooks — all production-tested across enterprise engagements.</p>
 
 <div class="domain-grid">
   <a class="domain-card" href="/ai-in-delivery/llm-workflow-library/">
@@ -28,6 +28,4 @@ permalink: /ai-in-delivery/
   </a>
 </div>
 
-<blockquote>
-<p>Measuring success not by training completion — but by how many team members are actively solving business problems with AI.</p>
-</blockquote>
+> Measuring success not by training completion — but by how many team members are actively solving business problems with AI.

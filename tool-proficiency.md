@@ -1,19 +1,19 @@
 ---
-description: "An honest proficiency matrix of every tool Rajendra Birudaraju uses — AI/LLMs, observability, DevOps, ITSM, presales — with real usage context and honest gaps."
 layout: page
 title: Tool Proficiency
 permalink: /tool-proficiency/
+description: "An honest proficiency matrix of every tool Rajendra Birudaraju uses — AI/LLMs, observability, DevOps, ITSM, presales — with real usage context and honest gaps."
 ---
 
 # Tool Proficiency Matrix
 
-An honest assessment of where I actually am with each tool — not a skills checklist, not a stars-out-of-five rating. Three categories based on how I actually use each tool in practice.
+An honest assessment of where I actually am with each tool — not a skills checklist, not stars-out-of-five. Three categories based on how I actually use each tool in practice.
 
 | Category | Definition |
 |---|---|
 | **Daily Use** | Part of my regular workflow. I reach for this without thinking about it. |
 | **Regular Use** | Used frequently on active engagements. Comfortable but not automatic. |
-| **Working Knowledge** | Can work with it, read its outputs, hold technical conversations about it. Not my primary tool. |
+| **Working Knowledge** | Can work with it, read its outputs, hold technical conversations. Not my primary tool. |
 
 ---
 
@@ -37,7 +37,6 @@ An honest assessment of where I actually am with each tool — not a skills chec
 | Grafana | **Regular Use** | KPI dashboards, time-series visualisation, delivery health monitoring |
 | AppDynamics | **Regular Use** | Application performance monitoring, transaction tracing, baseline alerting |
 | Dynatrace | **Regular Use** | Infrastructure monitoring, synthetic monitoring, incident detection |
-| Netcool-style alerting | **Working Knowledge** | Alert correlation, event management, NOC integration patterns |
 
 ---
 
@@ -72,7 +71,7 @@ An honest assessment of where I actually am with each tool — not a skills chec
 | SAP | **Regular Use** | UAT coordination, workflow governance, supply chain platform delivery |
 | REST APIs / Microservices | **Regular Use** | Integration oversight, dependency mapping, API platform operations |
 | MySQL | **Working Knowledge** | Query review, ETL oversight, data validation — not active development |
-| Java / AngularJS | **Working Knowledge** | Code review, architecture discussions, integration troubleshooting — not active coding |
+| Java / AngularJS | **Working Knowledge** | Code review, architecture discussions, integration troubleshooting |
 
 ---
 
@@ -94,15 +93,13 @@ An honest assessment of where I actually am with each tool — not a skills chec
 | ITIL | **Daily Use** | Certified. Incident, Problem, Change Management — applied across every engagement |
 | Agile / Scrum | **Daily Use** | Sprint planning, retrospectives, backlog management — CSPO-trained |
 | CMMI Level 5 | **Regular Use** | Process optimisation, L3 workflow design, continuous improvement |
-| SRE / SLO-SLI | **Regular Use** | Designed and run SLO programs as client trust frameworks — see [SLO/SLI Framework](/sre-observability/slo-sli-framework/) |
+| SRE / SLO-SLI | **Regular Use** | Designed and run SLO programs as client trust frameworks |
 | SAFe | **Working Knowledge** | Program increment planning, PI ceremonies, ART coordination |
 | TM Forum eTOM | **Working Knowledge** | OSS/BSS process framework awareness — applied in telecom delivery context |
 
 ---
 
 ## Honest Gaps
-
-Things I'm actively building or consciously not claiming:
 
 | Area | Current state | What I'm doing about it |
 |---|---|---|
@@ -115,4 +112,4 @@ Things I'm actively building or consciously not claiming:
 
 *Last updated: April 2026*
 
-*The "Honest Gaps" section is intentional. A tool matrix that has no gaps isn't honest — it's marketing.*
+*The "Honest Gaps" section is intentional. A tool matrix with no gaps isn't honest — it's marketing.*

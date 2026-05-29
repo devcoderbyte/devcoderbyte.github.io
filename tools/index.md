@@ -17,15 +17,15 @@ description: "Interactive delivery tools built by Rajendra Birudaraju — SLO ca
   <a class="domain-card" href="/tools/toil-audit/">
     <div class="domain-icon">📊</div>
     <div class="domain-title">Toil Audit Scorecard</div>
-    <div class="domain-desc">12 questions. Get your team's toil index across six dimensions — Reporting, Incidents, Deployments, Onboarding, Communications, Meetings — plus a prioritised automation roadmap.</div>
+    <div class="domain-desc">12 questions across 6 dimensions. Get your team's toil index and a prioritised automation roadmap.</div>
     <div class="domain-arrow" style="color:var(--accent2)">Start audit →</div>
   </a>
   <a class="domain-card" href="/tools/rfq-scorer/">
-    <div class="domain-icon">🎯</div>
+    <div class="domain-icon">📋</div>
     <div class="domain-title">RFQ Complexity Scorer</div>
-    <div class="domain-desc">Input your RFQ parameters — vendors, integrations, timeline, incumbent situation. Get a complexity score, effort estimate, risk flags, and bid strategy recommendation.</div>
+    <div class="domain-desc">Input your RFQ parameters — vendors, integrations, timeline, incumbent. Get complexity score, effort estimate, risk flags, and bid strategy.</div>
     <div class="domain-arrow" style="color:var(--accent2)">Score your RFQ →</div>
   </a>
 </div>
 
-<p style="font-size:13px;color:var(--muted);margin-top:.5rem">All tools are built from frameworks I've run in production. No signup, no data collected, all logic runs in your browser.</p>
+<p style="font-size:13px;color:var(--muted);margin-top:.5rem">No signup, no data collected. All logic runs in your browser.</p>

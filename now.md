@@ -29,11 +29,11 @@ Still at Concentrix Catalyst, leading delivery and presales for enterprise clien
 This portfolio — `devcoderbyte.github.io` — is a live project, not a static resume. Recent additions:
 
 - Built and shipped the [SLO & Error Budget Calculator](/tools/slo-calculator/) — an interactive tool built from the framework I run in production
+- Added [Toil Audit Scorecard](/tools/toil-audit/) and [RFQ Complexity Scorer](/tools/rfq-scorer/) — both fully live
 - Completed the full case study library — SLA breach reduction, bid conversion lift, DevOps upskilling
 - Added light/dark mode toggle — because professional and technical aren't mutually exclusive
-- Working through the tools section — Toil Audit Scorecard and RFQ Complexity Scorer are next
 
-The goal remains the same: when a hiring panel opens this before an interview, they arrive already convinced.
+The goal: when a hiring panel opens this before an interview, they arrive already convinced.
 
 ---
 

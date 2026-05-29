@@ -2,31 +2,30 @@
 layout: page
 title: Delivery Governance
 permalink: /delivery-governance/
+description: "Delivery governance frameworks by Rajendra Birudaraju — cadence model, CMMI L5 workflow, escalation framework."
 ---
 
-<p style="color:#8896b3;font-size:15px;margin-bottom:2rem">The systems I use to keep enterprise programs on track — cadence model, CMMI L5 workflow design, and escalation framework that sustained CSAT 9+ for 18+ consecutive months.</p>
+<p style="color:var(--muted);font-size:15px;margin-bottom:2rem">The systems that keep enterprise programs on track — cadence model, CMMI L5 workflow design, and escalation framework that sustained CSAT 9+ for 18 consecutive months.</p>
 
 <div class="domain-grid">
   <a class="domain-card" href="/delivery-governance/cadence-model/">
     <div class="domain-icon">📅</div>
     <div class="domain-title">Governance Cadence Model</div>
-    <div class="domain-desc">Four-layer cadence I run across all enterprise engagements — daily automated digest through monthly retrospective, each with defined purpose and time limit.</div>
-    <div class="domain-arrow">View model →</div>
+    <div class="domain-desc">Four-layer meeting and reporting cadence — daily through monthly, each with a defined purpose, fixed time limit, and specific audience.</div>
+    <div class="domain-arrow">Explore →</div>
   </a>
   <a class="domain-card" href="/delivery-governance/cmmi-workflow/">
-    <div class="domain-icon">🏗️</div>
+    <div class="domain-icon">⚙️</div>
     <div class="domain-title">CMMI L5 Workflow Design</div>
-    <div class="domain-desc">How I applied CMMI Level 5 to redesign L3 ticket workflows — standardising triage, embedding AI-assisted QA checks, reducing SLA breaches 20% in 90 days.</div>
-    <div class="domain-arrow">View design →</div>
+    <div class="domain-desc">How I applied CMMI Level 5 to redesign L3 ticket workflows — standardising triage, embedding AI checks, reducing SLA breaches 20% in 90 days.</div>
+    <div class="domain-arrow">Explore →</div>
   </a>
   <a class="domain-card" href="/delivery-governance/escalation-framework/">
     <div class="domain-icon">🚨</div>
     <div class="domain-title">Escalation Framework</div>
-    <div class="domain-desc">Decision tree for when to escalate, what to escalate, and how to frame it for different audiences. Built from 10+ years of managing high-stakes client relationships.</div>
-    <div class="domain-arrow">View framework →</div>
+    <div class="domain-desc">When to escalate, what to escalate, and how to frame it. Decision tree built from 10+ years of managing high-stakes client relationships.</div>
+    <div class="domain-arrow">Explore →</div>
   </a>
 </div>
 
-<blockquote>
-<p>Escalation is not failure. Late escalation is.</p>
-</blockquote>
+> Governance is invisible when it's working. A client who asks "what's the status?" is a client whose trust is eroding.
