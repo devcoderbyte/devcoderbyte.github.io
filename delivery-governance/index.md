@@ -2,7 +2,7 @@
 layout: page
 title: Delivery Governance
 permalink: /delivery-governance/
-description: "Delivery governance frameworks by Rajendra Birudaraju — cadence model, CMMI L5 workflow, escalation framework."
+description: "Delivery governance frameworks — cadence model, CMMI L5 workflow, escalation framework that sustained CSAT 9+."
 ---
 
 <p style="color:var(--muted);font-size:15px;margin-bottom:2rem">The systems that keep enterprise programs on track — cadence model, CMMI L5 workflow design, and escalation framework that sustained CSAT 9+ for 18 consecutive months.</p>

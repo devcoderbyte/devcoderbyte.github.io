@@ -2,7 +2,7 @@
 layout: page
 title: Tools
 permalink: /tools/
-description: "Interactive delivery tools built by Rajendra Birudaraju — SLO calculator, toil audit scorecard, and RFQ complexity scorer."
+description: "Interactive delivery tools — SLO calculator, toil audit scorecard, and RFQ complexity scorer. Built from production frameworks."
 ---
 
 <p style="color:var(--muted);font-size:15px;margin-bottom:2rem">Interactive tools built from the frameworks I use in production. Not demos — actual calculators you can use on your own engagements right now.</p>
@@ -23,7 +23,7 @@ description: "Interactive delivery tools built by Rajendra Birudaraju — SLO ca
   <a class="domain-card" href="/tools/rfq-scorer/">
     <div class="domain-icon">📋</div>
     <div class="domain-title">RFQ Complexity Scorer</div>
-    <div class="domain-desc">Input your RFQ parameters — vendors, integrations, timeline, incumbent. Get complexity score, effort estimate, risk flags, and bid strategy.</div>
+    <div class="domain-desc">Input your RFQ parameters. Get complexity score, effort estimate, engagement-type-aware risk flags, and bid strategy recommendation.</div>
     <div class="domain-arrow" style="color:var(--accent2)">Score your RFQ →</div>
   </a>
 </div>

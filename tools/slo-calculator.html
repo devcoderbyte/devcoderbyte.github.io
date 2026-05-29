@@ -9,7 +9,7 @@ permalink: /tools/slo-calculator/
     <div class="container">
       <div class="breadcrumb"><a href="/">Home</a> <span>→</span> <a href="/tools/">Tools</a> <span>→</span> SLO Calculator</div>
       <h1 class="page-title">SLO & Error Budget Calculator</h1>
-      <p style="color:var(--muted);font-size:15px;margin-top:.75rem;max-width:600px">Set your SLO target and time window — get allowable downtime, burn rate thresholds, and budget consumption status in real time. Built on the <a href="/sre-observability/slo-sli-framework/">SLO/SLI Framework</a> behind a 20% SLA breach reduction.</p>
+      <p style="color:var(--muted);font-size:15px;margin-top:.75rem;max-width:600px">Set your SLO target and time window — get allowable downtime, burn rate thresholds, and budget consumption in real time. Built on the <a href="/sre-observability/slo-sli-framework/">SLO/SLI Framework</a> behind a 20% SLA breach reduction.</p>
     </div>
   </div>
   <div class="page-content"><div class="container"><div class="tool-wrap">
@@ -93,8 +93,7 @@ function renderTiers(cur){
   var tiers=[{name:'Mission critical',slo:99.99,note:'Payments, core auth'},{name:'High availability',slo:99.9,note:'Primary APIs, customer-facing'},{name:'Standard SRE',slo:99.5,note:'Internal APIs, secondary services'},{name:'Best effort',slo:95,note:'Reporting, dashboards, batch jobs'}];
   var tm=days*24*60;
   document.getElementById('tier-rows').innerHTML=tiers.map(function(t){
-    var bm=tm*(100-t.slo)/100;
-    var active=Math.abs(t.slo-cur)<0.3;
+    var bm=tm*(100-t.slo)/100,active=Math.abs(t.slo-cur)<0.3;
     return '<div class="tier-row'+(active?' current':'')+'"><span>'+t.name+'</span><span class="tier-slo">'+t.slo+'%</span><span>'+fmtTime(bm)+'</span><span style="font-size:12px;color:var(--muted)">'+t.note+'</span></div>';
   }).join('');
 }

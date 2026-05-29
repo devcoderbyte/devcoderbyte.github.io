@@ -2,7 +2,7 @@
 layout: page
 title: SRE & Observability
 permalink: /sre-observability/
-description: "SRE and observability frameworks by Rajendra Birudaraju — SLO/SLI integration, dashboard design, and defect containment."
+description: "SRE and observability frameworks — SLO/SLI integration, dashboard design, and defect containment from production use."
 ---
 
 <p style="color:var(--muted);font-size:15px;margin-bottom:2rem">Frameworks for designing and running observability systems, SLO/SLI programs, and defect containment models. Built on SRE principles, extended with AI-assisted tooling.</p>
@@ -11,7 +11,7 @@ description: "SRE and observability frameworks by Rajendra Birudaraju — SLO/SL
   <a class="domain-card" href="/sre-observability/slo-sli-framework/">
     <div class="domain-icon">🎯</div>
     <div class="domain-title">SLO/SLI Integration Framework</div>
-    <div class="domain-desc">How I design SLO programs as client trust tools — not DevOps metrics. Collaborative definition, error budget model, monthly review cadence.</div>
+    <div class="domain-desc">How I design SLO programs as client trust tools — with the real client conversations that shaped the approach.</div>
     <div class="domain-arrow">Explore →</div>
   </a>
   <a class="domain-card" href="/sre-observability/dashboard-design/">

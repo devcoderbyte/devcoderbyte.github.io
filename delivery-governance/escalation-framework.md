@@ -2,12 +2,10 @@
 layout: page
 title: Escalation Framework
 permalink: /delivery-governance/escalation-framework/
-description: "Escalation decision tree for enterprise delivery — when to escalate, what to escalate, how to frame it."
+description: "Escalation decision tree — when to escalate, what to escalate, how to frame it for different audiences."
 ---
 
 # Escalation Framework
-
-The decision tree I use to determine when to escalate, what to escalate, and how to frame it.
 
 > Never escalate a problem. Always escalate a situation with a recommended response.
 
@@ -20,27 +18,24 @@ The decision tree I use to determine when to escalate, what to escalate, and how
 - A client stakeholder raises a concern not in the current risk register
 - A delivery milestone will be missed and the client doesn't know yet
 - A vendor has failed a committed dependency that impacts the client
-- A team member flags a risk that changes the delivery picture
 
 **Do not escalate when:**
 - You have enough information and authority to resolve it yourself
 - The issue is on track to resolve within SLA without intervention
+- You're escalating to avoid ownership — escalation is not delegation
 
 ---
 
-## The One-Page Escalation Format
+## The One-Page Format
 
-**Situation:** What happened, when, current status. Two sentences maximum.
+Every escalation follows this structure. No exceptions:
 
-**Impact:** What is the client impact — SLA, revenue, relationship. Be specific.
-
-**Root cause (if known):** What caused it. If unknown, say when you'll know.
-
-**Options:** Two or three response paths with pros and cons.
-
-**Recommendation:** Which option you recommend and why.
-
-**What I need:** Specifically what decision or resource you need. One clear ask.
+- **Situation:** What happened, when, current status. Two sentences maximum.
+- **Impact:** Client impact — SLA, revenue, relationship. Be specific.
+- **Root cause:** What caused it. If unknown, say when you'll know.
+- **Options:** Two or three response paths with pros and cons.
+- **Recommendation:** Which option and why.
+- **What I need:** One clear ask.
 
 ---
 
@@ -55,7 +50,7 @@ The decision tree I use to determine when to escalate, what to escalate, and how
 
 ---
 
-## How to Frame Client Escalations
+## Client Escalation Rules
 
 1. **Never surprise** — call before the formal update
 2. **Lead with what you're doing**, not what went wrong

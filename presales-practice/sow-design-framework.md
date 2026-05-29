@@ -15,7 +15,6 @@ The structure I use for enterprise AMS, SRE, and DevOps engagements. Every secti
 Lead with the client's pain, not our capability. The first paragraph should make the client feel understood — not sold to.
 
 **Include:** Client's core challenge → what success looks like → why we're uniquely positioned.
-
 **Avoid:** Company backgrounds, award histories, generic "global leader" language.
 
 ---
@@ -30,7 +29,7 @@ Explicit exclusions are as important as inclusions. Every scope dispute post-sig
 ## 3. Delivery Model
 Clients buy confidence. Show what Monday morning looks like — who does what, how issues escalate, how communication flows.
 
-**Include:** Team structure, support tiers, tooling, onboarding timeline.
+**Include:** Team structure, support tiers, tooling requirements, onboarding timeline.
 
 ---
 
@@ -48,7 +47,6 @@ Clients buy confidence. Show what Monday morning looks like — who does what, h
 ---
 
 ## 5. Governance Model
-
 - **Daily:** Automated digest — no meeting
 - **Weekly:** 30-minute ops sync — RAG status, risks, one decision needed
 - **Fortnightly:** Executive dashboard review

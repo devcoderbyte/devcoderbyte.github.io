@@ -7,7 +7,7 @@ description: "Four-layer delivery governance cadence — daily through monthly, 
 
 # Governance Cadence Model
 
-Four layers, each with a defined purpose, a fixed time limit, and a specific audience. No layer bleeds into another.
+Four layers, each with a defined purpose, a fixed time limit, and a specific audience.
 
 > If the client has to ask "what's the status?" — governance has already failed.
 
@@ -19,16 +19,14 @@ Four layers, each with a defined purpose, a fixed time limit, and a specific aud
 
 **Contains:** Overnight anomalies, SLA clock status for open P1/P2 tickets, tickets approaching breach, build/deployment status.
 
-**Time cost:** Zero — fully automated.
-
-**Why no meeting:** A 15-minute standup to read out ticket counts is pure toil.
+**Time cost:** Zero — fully automated. **Why no meeting:** A 15-minute standup to read ticket counts is pure toil.
 
 ---
 
 ## Layer 2 — Weekly (30 Minutes, Client-Facing)
 
 **Format:**
-- RAG status per stream — one line each
+- RAG status per stream — one line each, no elaboration unless amber/red
 - Open risks — named, with mitigation status
 - One decision needed from the client — always exactly one
 - Actions from last week — closed or carried with reason
@@ -63,7 +61,7 @@ Four layers, each with a defined purpose, a fixed time limit, and a specific aud
 |---|---|---|---|
 | Daily | Delivery team | Automated digest | 0 min |
 | Weekly | Client ops | Structured sync | 30 min |
-| Fortnightly | Client leadership | KPI dashboard review | 45 min |
+| Fortnightly | Client leadership | KPI dashboard | 45 min |
 | Monthly | All stakeholders | Retro + roadmap | 60 min |
 
 Total client-facing meeting time per month: **~3.5 hours.**

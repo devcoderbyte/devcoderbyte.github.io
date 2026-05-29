@@ -27,9 +27,7 @@ Three audiences = three dashboards. Never design one dashboard to serve all thre
 
 Every metric must answer: **"What action does this trigger?"**
 
-If the answer is "none — it's just interesting," remove it.
-
-**Test:** Ask the team "what are the five things you check first every morning?" Those five things should be on the dashboard. Everything else is a drill-down.
+If the answer is "none — it's just interesting," remove it. Dashboard fatigue is real — when everything is visible, nothing is prioritised.
 
 ---
 
@@ -37,7 +35,7 @@ If the answer is "none — it's just interesting," remove it.
 
 A single number tells you where you are. A trend tells you where you're going.
 
-Every KPI should show current value AND the 28-day trend. A CSAT of 8.9 looks fine. A CSAT of 8.9 that was 9.3 four weeks ago is a signal.
+Every KPI should show current value AND the 28-day trend. A CSAT of 8.9 looks fine. A CSAT of 8.9 that was 9.3 four weeks ago is a signal that needs a conversation.
 
 ---
 
@@ -45,10 +43,12 @@ Every KPI should show current value AND the 28-day trend. A CSAT of 8.9 looks fi
 
 If a human is looking at a dashboard to spot problems, the dashboard has failed. The dashboard should spot the problem — the human should only need to act.
 
-Splunk AI anomaly detection rules for every tier-1 metric. Alert before the client notices.
+Splunk AI anomaly detection rules for every tier-1 metric. Alert before the client notices. Always.
 
 ---
 
 ## Principle 5 — One Click to Context
 
-Every metric should be one click from the supporting data. Dashboard → drill-down → raw data. Three levels, no more.
+Every metric should be one click from the supporting data.
+
+**Dashboard → drill-down → raw data.** Three levels, no more.

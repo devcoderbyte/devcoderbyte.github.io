@@ -1,6 +1,6 @@
 ---
 layout: home
-title: Rajendra Birudaraju — TPM Portfolio
+title: TPM Portfolio
 description: "Technical Program Manager & Presales Lead with 10+ years of enterprise delivery experience. AI-native by practice. Portfolio of frameworks, case studies, and interactive tools."
 ---
 
@@ -52,6 +52,23 @@ description: "Technical Program Manager & Presales Lead with 10+ years of enterp
   </div>
 </div>
 
+<div style="background:var(--surface2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2rem 0">
+  <div class="container">
+    <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-family:'JetBrains Mono',monospace;margin-bottom:1.25rem">What colleagues say</div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem">
+        <p style="font-size:14px;color:var(--light);line-height:1.75;font-style:italic;margin-bottom:.75rem">"Rajendra brings a rare combination of technical depth and client-facing instinct. His ability to translate complex delivery challenges into clear executive narratives — and then actually fix the underlying problem — is what sets him apart."</p>
+        <div style="font-size:12px;color:var(--muted);font-weight:500">Senior Delivery Stakeholder · Enterprise engagement</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem">
+        <p style="font-size:14px;color:var(--light);line-height:1.75;font-style:italic;margin-bottom:.75rem">"Working with Rajendra on presales was different from any bid process I'd been part of. He insisted on understanding the client's actual problem before a single word was written. That discipline is why we won deals we shouldn't have on paper."</p>
+        <div style="font-size:12px;color:var(--muted);font-weight:500">Presales colleague · Concentrix Catalyst</div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--muted);margin-top:.75rem;font-style:italic">Paraphrased from LinkedIn recommendations — full profiles available on request.</div>
+  </div>
+</div>
+
 <div class="container" id="work" style="padding-top:3rem;padding-bottom:1rem">
   <div class="section-intro">
     <h2>What's here</h2>
@@ -61,7 +78,7 @@ description: "Technical Program Manager & Presales Lead with 10+ years of enterp
     <a class="domain-card" href="/ai-in-delivery/">
       <div class="domain-icon">⚡</div>
       <div class="domain-title">AI in Delivery</div>
-      <div class="domain-desc">LLM workflow library, AI adoption framework, and toil elimination playbook. Real prompts, real outcomes.</div>
+      <div class="domain-desc">LLM workflow library with v1→v4 iterations, AI adoption framework, and toil elimination playbook. What worked, what failed, what changed.</div>
       <div class="domain-arrow">Explore →</div>
     </a>
     <a class="domain-card" href="/presales-practice/">
@@ -73,7 +90,7 @@ description: "Technical Program Manager & Presales Lead with 10+ years of enterp
     <a class="domain-card" href="/sre-observability/">
       <div class="domain-icon">📊</div>
       <div class="domain-title">SRE & Observability</div>
-      <div class="domain-desc">SLO/SLI integration framework, dashboard design principles, and defect containment model.</div>
+      <div class="domain-desc">SLO/SLI integration framework, dashboard design principles, and defect containment model — with real anecdotes from production.</div>
       <div class="domain-arrow">Explore →</div>
     </a>
     <a class="domain-card" href="/delivery-governance/">
@@ -85,7 +102,7 @@ description: "Technical Program Manager & Presales Lead with 10+ years of enterp
     <a class="domain-card" href="/case-studies/">
       <div class="domain-icon">🏆</div>
       <div class="domain-title">Case Studies</div>
-      <div class="domain-desc">Three sanitised case studies — SLA breach reduction, bid conversion lift, and DevOps upskilling platform.</div>
+      <div class="domain-desc">Three case studies — what I tried, what failed first, the judgment call that changed outcomes, and what I'd do differently.</div>
       <div class="domain-arrow">Explore →</div>
     </a>
     <a class="domain-card" href="/tools/slo-calculator/">

@@ -7,16 +7,14 @@ permalink: /tools/toil-audit/
 <div class="page-wrap">
   <div class="page-header">
     <div class="container">
-      <div class="breadcrumb"><a href="/">Home</a> <span>→</span> <a href="/tools/">Tools</a> <span>→</span> Toil Audit Scorecard</div>
+      <div class="breadcrumb"><a href="/">Home</a> <span>→</span> <a href="/tools/">Tools</a> <span>→</span> Toil Audit</div>
       <h1 class="page-title">Toil Audit Scorecard</h1>
       <p style="color:var(--muted);font-size:15px;margin-top:.75rem;max-width:600px">Answer 12 questions about your team's manual work. Get a toil score, dimension breakdown, and prioritised automation roadmap. Built on the <a href="/ai-in-delivery/toil-elimination-playbook/">Toil Elimination Playbook</a>.</p>
     </div>
   </div>
-  <div class="page-content"><div class="container"><div class="tool-wrap" id="audit-tool">
+  <div class="page-content"><div class="container"><div class="tool-wrap">
     <div id="progress-wrap" style="margin-bottom:1.5rem">
-      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px">
-        <span id="q-counter">Question 1 of 12</span><span id="q-pct">0% complete</span>
-      </div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px"><span id="q-counter">Question 1 of 12</span><span id="q-pct">0% complete</span></div>
       <div class="gauge-bg"><div id="q-bar" class="gauge-fill" style="width:0%;background:var(--accent)"></div></div>
     </div>
     <div id="question-area"></div>
@@ -31,7 +29,7 @@ var questions=[
   {dim:"Incidents",text:"How are incoming support tickets triaged?",opts:["Auto-classified with routing rules and runbooks",1,"Some automation but engineer still manually triages",3,"All manual — engineer reads and decides everything",5]},
   {dim:"Deployments",text:"How are releases and deployments coordinated?",opts:["CI/CD pipeline — automated gates and deployment",1,"Semi-automated with manual sign-off steps",3,"Fully manual coordination across teams",5]},
   {dim:"Deployments",text:"How is post-deployment health verified?",opts:["Automated monitoring — alerts fire if anomaly detected",1,"Engineer manually checks dashboards post-deploy",3,"No structured check — issues found when reported",5]},
-  {dim:"Onboarding",text:"How long does it take to onboard a new engineer to full productivity?",opts:["Under 2 weeks — runbooks and docs cover everything",1,"3–4 weeks — some tribal knowledge transfer needed",3,"Over a month — heavily dependent on senior engineers",5]},
+  {dim:"Onboarding",text:"How long to onboard a new engineer to full productivity?",opts:["Under 2 weeks — runbooks and docs cover everything",1,"3–4 weeks — some tribal knowledge transfer needed",3,"Over a month — heavily dependent on senior engineers",5]},
   {dim:"Onboarding",text:"How are standard operating procedures maintained?",opts:["Living docs, version-controlled, updated after every incident",1,"Exist but often outdated by 3–6 months",3,"Tribal knowledge — in people's heads not documents",5]},
   {dim:"Communications",text:"How are client stakeholder updates produced?",opts:["AI-assisted draft reviewed by PM — under 15 minutes",1,"Template exists, still takes 45–60 min to complete",3,"Written fresh each time — 1–2 hours per update",5]},
   {dim:"Communications",text:"How are escalations communicated to leadership?",opts:["Standard format, clear owner, same day",1,"Mostly structured but format varies by person",3,"Ad-hoc — format and timing inconsistent",5]},
@@ -40,21 +38,18 @@ var questions=[
 ];
 var answers={},current=0;
 function renderQuestion(){
-  var q=questions[current];
-  var pct=Math.round((current/12)*100);
+  var q=questions[current],pct=Math.round((current/12)*100);
   document.getElementById('q-counter').textContent='Question '+(current+1)+' of 12';
   document.getElementById('q-pct').textContent=pct+'% complete';
   document.getElementById('q-bar').style.width=pct+'%';
   var opts='';
   for(var i=0;i<q.opts.length;i+=2){
-    var score=q.opts[i+1];
-    var sel=answers[current]===score?' selected':'';
+    var score=q.opts[i+1],sel=answers[current]===score?' selected':'';
     opts+='<button class="q-option'+sel+'" onclick="selectAnswer('+score+',this)">'+q.opts[i]+'</button>';
   }
   document.getElementById('question-area').innerHTML=
     '<div class="q-card"><div class="q-label">'+q.dim+'</div><div class="q-text">'+q.text+'</div><div class="q-options">'+opts+'</div></div>'+
-    '<div class="q-nav">'+
-    '<button class="btn btn-ghost" onclick="prevQ()" '+(current===0?'style="visibility:hidden"':'')+'>← Back</button>'+
+    '<div class="q-nav"><button class="btn btn-ghost" onclick="prevQ()" '+(current===0?'style="visibility:hidden"':'')+'>← Back</button>'+
     '<button class="btn btn-primary" id="next-btn" onclick="nextQ()" '+(answers[current]===undefined?'disabled style="opacity:.4;cursor:not-allowed"':'')+'>'+
     (current===11?'See results →':'Next →')+'</button></div>';
 }
@@ -62,27 +57,21 @@ function selectAnswer(score,btn){
   answers[current]=score;
   document.querySelectorAll('.q-option').forEach(function(b){b.classList.remove('selected')});
   btn.classList.add('selected');
-  var nb=document.getElementById('next-btn');
-  nb.disabled=false;nb.style.opacity='1';nb.style.cursor='pointer';
+  var nb=document.getElementById('next-btn');nb.disabled=false;nb.style.opacity='1';nb.style.cursor='pointer';
 }
 function nextQ(){if(answers[current]===undefined)return;if(current===11){showResults();return;}current++;renderQuestion();}
 function prevQ(){if(current>0){current--;renderQuestion();}}
 function showResults(){
-  var dims={Reporting:0,Incidents:0,Deployments:0,Onboarding:0,Communications:0,Meetings:0};
-  var total=0;
+  var dims={Reporting:0,Incidents:0,Deployments:0,Onboarding:0,Communications:0,Meetings:0},total=0;
   questions.forEach(function(q,i){var s=answers[i]||1;dims[q.dim]+=s;total+=s;});
   var toil=Math.round((total/60)*100);
   var color=toil<30?'var(--accent2)':toil<60?'var(--accent3)':'#ef4444';
   var verdict=toil<25?'Low toil — your team operates efficiently.':toil<50?'Moderate toil — a structured 90-day reduction program would recover 5–8 hours per person per week.':toil<75?'High toil — immediate attention needed. Start with reporting and incident workflows.':'Critical toil — your team is in reactive firefighting mode. Requires a dedicated sprint to address.';
-  var dimHTML='';
-  var actions=[];
-  var recs={Reporting:'Automate weekly status report using LLM-assisted drafting. Target: under 15 minutes.',Incidents:'Implement AI-assisted triage with Jira automation and runbook matching.',Deployments:'Audit CI/CD pipeline for manual gates. Each approval step is a candidate for automation.',Onboarding:'Build a living runbook library. Every incident should produce or update a runbook.',Communications:'Create LLM-assisted stakeholder update templates. 80% faster production.',Meetings:'Audit all recurring meetings. Any without a documented output should be async-first.'};
+  var dimHTML='',actions=[],recs={Reporting:'Automate weekly status report using LLM-assisted drafting. Target: under 15 minutes.',Incidents:'Implement AI-assisted triage with Jira automation and runbook matching.',Deployments:'Audit CI/CD pipeline for manual gates. Each approval step is a candidate for automation.',Onboarding:'Build a living runbook library. Every incident should produce or update a runbook.',Communications:'Create LLM-assisted stakeholder update templates. 80% faster production.',Meetings:'Audit all recurring meetings. Any without a documented output should be async-first.'};
   Object.keys(dims).forEach(function(d){
-    var s=dims[d];var pct=Math.round((s/10)*100);
-    var c=pct<40?'var(--accent2)':pct<70?'var(--accent3)':'#ef4444';
+    var s=dims[d],pct=Math.round((s/10)*100),c=pct<40?'var(--accent2)':pct<70?'var(--accent3)':'#ef4444';
     dimHTML+='<div class="dim-card"><div class="dim-name">'+d+'</div><div class="dim-score" style="color:'+c+'">'+pct+'%</div><div style="font-size:11px;color:var(--muted)">'+(pct<40?'Low toil':pct<70?'Moderate':'High toil')+'</div><div class="dim-bar-bg"><div class="dim-bar-fill" style="width:'+pct+'%;background:'+c+'"></div></div></div>';
-    if(pct>=70)actions.unshift({d:d,pct:pct,priority:'Immediate'});
-    else if(pct>=40)actions.push({d:d,pct:pct,priority:'Next 30 days'});
+    if(pct>=70)actions.unshift({d:d,pct:pct,priority:'Immediate'});else if(pct>=40)actions.push({d:d,pct:pct,priority:'Next 30 days'});
   });
   var actionHTML=actions.map(function(a){return '<div class="action-card"><strong>'+a.priority+' — '+a.d+' ('+a.pct+'% toil)</strong>'+recs[a.d]+'</div>';}).join('');
   if(!actionHTML)actionHTML='<div class="action-card"><strong>Maintain and monitor</strong>Your toil levels are healthy. Focus on documentation and knowledge transfer.</div>';
@@ -95,9 +84,7 @@ function showResults(){
     '<div class="dim-grid">'+dimHTML+'</div>'+
     '<div style="font-size:13px;font-weight:500;margin:.5rem 0 .75rem;font-family:\'Syne\',sans-serif">Prioritised actions</div>'+
     actionHTML+
-    '<div style="margin-top:1.5rem;display:flex;gap:.75rem;flex-wrap:wrap">'+
-    '<button class="btn btn-ghost" onclick="restartAudit()">Start over</button>'+
-    '<a href="/ai-in-delivery/toil-elimination-playbook/" class="btn btn-primary">Read the full playbook →</a></div>';
+    '<div style="margin-top:1.5rem;display:flex;gap:.75rem;flex-wrap:wrap"><button class="btn btn-ghost" onclick="restartAudit()">Start over</button><a href="/ai-in-delivery/toil-elimination-playbook/" class="btn btn-primary">Read the full playbook →</a></div>';
 }
 function restartAudit(){answers={};current=0;document.getElementById('question-area').style.display='block';document.getElementById('progress-wrap').style.display='block';document.getElementById('results-area').style.display='none';renderQuestion();}
 renderQuestion();

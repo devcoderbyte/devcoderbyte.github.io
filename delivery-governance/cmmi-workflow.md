@@ -7,7 +7,7 @@ description: "CMMI Level 5 ticket workflow design that reduced SLA breaches 20% 
 
 # CMMI L5 Ticket Workflow Design
 
-How I applied CMMI Level 5 principles to redesign L3 ticket workflows across 10+ enterprise applications — reducing SLA breaches by 20% within 90 days.
+How I applied CMMI Level 5 to redesign L3 ticket workflows across 10+ enterprise applications — reducing SLA breaches by 20% within 90 days.
 
 ---
 
@@ -39,12 +39,9 @@ SLA clocks enforced via Jira automation — not manual tracking.
 
 ## Phase 3 — Continuous Improvement Loop
 
-**Weekly breach review:** Every SLA breach reviewed — outcome is one of:
-1. Runbook updated or created
-2. Jira automation rule added
-3. Engineering backlog item raised for systemic fix
+**Weekly breach review:** Every SLA breach produces one of: runbook update, Jira automation rule, or engineering backlog item.
 
-**Monthly pattern analysis:** Top 3 recurring issues become engineering priority items.
+**Monthly pattern analysis:** Top 3 recurring issues become engineering priority items — not ops workarounds.
 
 ---
 

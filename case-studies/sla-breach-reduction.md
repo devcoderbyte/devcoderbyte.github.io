@@ -23,39 +23,51 @@ description: "Case study: How AI-assisted observability and workflow redesign re
 
 A high-volume telecom platform was experiencing SLA breaches at an increasing rate. The team was reactive — finding out about issues when clients raised tickets, not before. Splunk was deployed but underutilised: dashboards existed, but nobody was acting on signals before they became incidents.
 
-The client's confidence was eroding. CSAT had dipped. The account was at risk.
+The client's confidence was eroding. CSAT had dipped from a consistent 9+ to below 8.5. The account was genuinely at risk.
 
 ---
 
-## The Problem Beneath the Problem
+## What I Tried First — and Why It Didn't Work
 
-The team wasn't missing data. They were missing **signal from noise.** Splunk was generating hundreds of alerts daily. Alert fatigue had set in — engineers were dismissing notifications without reading them because most were false positives.
+My instinct was to add more alerting rules. More coverage, more signals. I spent the first week doing exactly that — and it made things worse. Alert volume went up, true positive rate stayed flat, and the team started ignoring notifications even faster.
 
-The real problem: no one had designed the alerting system with the right thresholds, the right escalation paths, or the right anomaly detection logic. It was all manual and reactive.
+That was the diagnostic I needed. **The problem wasn't insufficient alerting — it was that nobody trusted the alerts.** Alert fatigue had made the entire system invisible. Adding more rules to a system nobody believed in was the wrong lever entirely.
+
+---
+
+## The Actual Problem
+
+Splunk was generating hundreds of alerts daily. Only three categories were consistently actionable — the rest were noise. But nobody had ever done the categorisation work, so engineers treated every alert with the same low-urgency response.
+
+The root cause: no one had designed the alerting system with the right thresholds, the right escalation paths, or the right anomaly detection logic. It had grown organically over two years with no intentional design behind it.
 
 ---
 
 ## The Approach
 
+**The judgment call that mattered most:** Rather than trying to fix all the alerts, I made the decision to suppress everything except the three proven signal categories — cold turkey. The team pushed back hard. "What if we miss something?" was the objection.
+
+My answer: "We're already missing everything. A team that ignores all alerts misses 100% of real incidents. A team that trusts three categories will catch 80% of them." We agreed to a two-week trial. The trial became permanent.
+
 **Week 1–2: Audit**
 - Mapped every SLA breach from the previous quarter: root cause, detection lag, resolution time
-- Categorised alerts by true positive rate: most were noise, three categories were signal
-- Identified the top five toil tasks the on-call team performed manually every day
+- Categorised all 200+ alert types by 90-day true positive rate
+- Found three categories with >70% true positive rate — everything else was below 20%
 
 **Week 3–4: Redesign**
-- Rebuilt Splunk alerting rules around the three signal categories — all others suppressed or routed to low-priority queue
-- Implemented Splunk AI anomaly detection on tier-1 metrics — system flags deviations before human threshold breaches
-- Documented runbooks for the top five toil tasks — eliminating manual triage for known issue patterns
+- Rebuilt Splunk alerting around the three signal categories — all others suppressed or routed to a low-priority digest reviewed weekly, not in real time
+- Implemented Splunk AI anomaly detection on tier-1 metrics — system flags statistical deviations before they cross human-defined thresholds
+- Documented runbooks for the top five toil tasks the on-call team performed manually every day
 
 **Month 2: Automation layer**
-- Jira automation for ticket classification and SLA clock management
-- AI-assisted triage for incoming P3/P4 tickets — auto-suggested runbook, auto-assigned owner
-- Weekly breach review cadence: every breach reviewed for pattern, runbook updated or new automation created
+- Jira automation for ticket classification and SLA clock management — no more manual start/stop
+- AI-assisted triage for incoming P3/P4 tickets — auto-suggested runbook, auto-assigned owner based on category
+- Weekly breach review cadence: every breach reviewed for pattern, runbook updated or Jira automation added
 
 **Month 3: Stabilisation and measurement**
-- Monitored breach rate weekly
-- Iterated alerting thresholds based on false positive data
-- Handed governance to the delivery team with documented process and dashboard ownership
+- Monitored breach rate weekly, iterated thresholds based on false positive data
+- Handed governance to the delivery team with documented process and clear dashboard ownership
+- Three engineers had become genuine owners of the alerting system — a cultural shift that mattered as much as the tooling
 
 ---
 
@@ -64,13 +76,23 @@ The real problem: no one had designed the alerting system with the right thresho
 | Metric | Before | After | Change |
 |---|---|---|---|
 | SLA breach rate | Baseline | -20% | ↓ 20% |
-| Alert true positive rate | Low | High | Significantly improved |
-| Mean time to detect | Reactive | Proactive | Client-reported → system-detected |
+| Alert true positive rate | ~15% average | ~72% average | ↑ significantly |
+| Mean time to detect | Reactive (client-reported) | Proactive (system-detected) | Structural shift |
 | On-call toil tasks | 5 manual daily | 2 remaining | ↓ 60% |
-| CSAT | Dipped | Recovered to 9+ | Sustained 18+ months |
+| CSAT | Below 8.5 | Recovered to 9+ | Sustained 18+ months |
 
 ---
 
 ## What Made the Difference
 
-The technical changes were necessary but not sufficient. The actual turning point was the **weekly breach review cadence** — making every breach a learning event rather than a blame event. Engineers started treating the alerting system as something they owned and improved, not something that happened to them.
+The technical changes were necessary but not sufficient. The actual turning point was the **weekly breach review cadence** — making every breach a learning event rather than a blame event.
+
+Before the cadence, a breach happened and everyone moved on. After it, every breach produced either a new runbook, a new automation rule, or an engineering backlog item. The system got smarter every week because we built the process that made it get smarter.
+
+Engineers started treating the alerting system as something they owned and improved — not something that happened to them. That ownership shift was worth more than any individual technical fix.
+
+---
+
+## What I'd Do Differently
+
+Start the alert suppression decision in week one, not week three. I lost two weeks trying to add signal to a system that needed subtraction. The counter-intuitive move — reducing alert coverage to increase alert trust — was available from day one. I needed the evidence of my failed first attempt to convince myself (and the team) to do it.

@@ -11,9 +11,9 @@ How I enable delivery teams to move from AI-curious to AI-capable — without ma
 
 ---
 
-## The Core Problem with Most AI Adoption Programs
+## The Core Problem
 
-Most organisations measure AI adoption by **training completion**. The bar I use: **how many team members built or automated something using AI this month?**
+Most organisations measure AI adoption by training completion. The bar I use: **how many team members built or automated something using AI this month?**
 
 ---
 
@@ -23,8 +23,8 @@ Most organisations measure AI adoption by **training completion**. The bar I use
 **Goal:** Remove fear, build familiarity.
 
 **Activities:**
-- Toil audit: list every manual task you do more than twice a week
-- One live demo using their actual work
+- Toil audit: list every manual task performed more than twice a week
+- One live demo using their actual work — not a generic use case
 - One assigned experiment: pick one task, try it with AI, report back
 
 **Success signal:** They try something unprompted within 2 weeks.
@@ -37,30 +37,30 @@ Most organisations measure AI adoption by **training completion**. The bar I use
 - Join the workflow library — contribute one prompt, use two others
 - Weekly office hours: bring a workflow problem, leave with a working solution
 
-**Success signal:** They have at least one AI workflow they run without thinking about it.
+**Success signal:** At least one AI workflow they run without thinking about it.
 
 ### Stage 3 — Champion
-**Goal:** Scale others, identify use cases for engineering.
+**Goal:** Scale others, identify engineering use cases.
 
 **Activities:**
 - Showcase their workflow in a team session
 - Identify one use case that needs engineering support to scale
-- Pair with a tech team to take a prototype to production
+- Pair with tech team to take a prototype to production
 
-**Success signal:** Someone else on the team adopted their workflow.
+**Success signal:** Someone else adopted their workflow.
 
 ---
 
 ## Governance Layer
 
-Every AI workflow goes through a quick check before use in client-facing contexts:
+Every AI workflow before client-facing use:
 
 | Check | Question |
 |---|---|
-| Data privacy | Does this workflow process any PII or confidential client data? |
-| Output review | Is there a human review step before the output is sent externally? |
+| Data privacy | Does this process any PII or confidential client data? |
+| Output review | Is there a human review step before external output? |
 | Accuracy risk | What's the blast radius if the LLM output is wrong? |
-| Dependency risk | If the tool is unavailable, can we revert to manual? |
+| Dependency risk | Can we revert to manual if the tool is unavailable? |
 
 ---
 
@@ -68,5 +68,5 @@ Every AI workflow goes through a quick check before use in client-facing context
 
 - **18% improvement** in team productivity over two quarters
 - Multiple team members progressed from Explorer to Champion without formal training
-- Three internal workflows scaled to production tooling with engineering partnership
+- Three internal workflows scaled to production with engineering partnership
 - AI adoption became pull-driven, not push-driven

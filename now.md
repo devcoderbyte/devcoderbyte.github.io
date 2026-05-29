@@ -30,8 +30,8 @@ This portfolio — `devcoderbyte.github.io` — is a live project, not a static 
 
 - Built and shipped the [SLO & Error Budget Calculator](/tools/slo-calculator/) — an interactive tool built from the framework I run in production
 - Added [Toil Audit Scorecard](/tools/toil-audit/) and [RFQ Complexity Scorer](/tools/rfq-scorer/) — both fully live
-- Completed the full case study library — SLA breach reduction, bid conversion lift, DevOps upskilling
-- Added light/dark mode toggle — because professional and technical aren't mutually exclusive
+- Rewrote the case studies to include what failed first, the judgment calls that mattered, and what I'd do differently
+- Added full v1→v4 iteration history to the LLM Workflow Library — because showing how thinking evolved is more useful than showing only what works
 
 The goal: when a hiring panel opens this before an interview, they arrive already convinced.
 
@@ -39,7 +39,7 @@ The goal: when a hiring panel opens this before an interview, they arrive alread
 
 ## Learning
 
-**Salesforce Administrator certification** — actively prepping, targeting Q2 2026. Complements the presales and delivery profile well given how embedded Salesforce is in enterprise client stacks.
+**Salesforce Administrator certification** — actively prepping, targeting Q2 2026. Complements the presales and delivery profile given how embedded Salesforce is in enterprise client stacks.
 
 **AI in enterprise operations** — specifically how organisations are moving from individual AI usage to team-level capability programs. Collecting real implementation patterns, not vendor marketing.
 

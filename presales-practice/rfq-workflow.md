@@ -2,7 +2,7 @@
 layout: page
 title: AI-Assisted RFQ Workflow
 permalink: /presales-practice/rfq-workflow/
-description: "AI-assisted RFQ workflow from receipt to submission-ready draft in 4-6 hours. Step-by-step with LLM role at each stage."
+description: "AI-assisted RFQ workflow from receipt to submission-ready draft in 4-6 hours."
 ---
 
 # AI-Assisted RFQ Workflow
@@ -24,7 +24,7 @@ End-to-end workflow from RFQ receipt to submission-ready draft. Current elapsed 
 
 ---
 
-## Stage 3 Prompt — Executive Summary Draft
+## Stage 3 Prompt
 
 ```
 You are a senior presales consultant. Given:
@@ -32,27 +32,12 @@ You are a senior presales consultant. Given:
 - Core pain (from discovery): [verbatim notes]
 - Their success metric: [defined in strategy session]
 - Our strongest proof point: [specific, quantified]
-- Top risk we're addressing: [named risk + mitigation]
+- Top risk we are addressing: [named risk + mitigation]
 
 Draft a 350-word executive summary.
 Structure: Pain → Understanding → Solution → Proof → Confidence.
-Outcome-first language throughout.
-Flag any claims that need supporting data as [VERIFY].
-```
-
----
-
-## Stage 5 Prompt — Review Pass
-
-```
-Review this RFQ response section for:
-1. Client-centricity: does every paragraph answer "so what?" from the client's view?
-2. Specificity: are there generic claims that should be proof points?
-3. Risk language: are risks named proactively with clear mitigations?
-4. Tone: confident without being arrogant
-5. Hook: is the single memorable point clear and echoed at the close?
-
-Return: specific line edits with rationale, not general feedback.
+First paragraph must be about the client's problem, not our company.
+Flag any claim needing supporting data as [VERIFY].
 ```
 
 ---

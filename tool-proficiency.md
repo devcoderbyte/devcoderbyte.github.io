@@ -7,7 +7,7 @@ description: "An honest proficiency matrix of every tool Rajendra Birudaraju use
 
 # Tool Proficiency Matrix
 
-An honest assessment of where I actually am with each tool — not a skills checklist, not stars-out-of-five. Three categories based on how I actually use each tool in practice.
+An honest assessment of where I actually am with each tool. Three categories based on how I actually use each tool in practice — not how I'd like to present it.
 
 | Category | Definition |
 |---|---|
@@ -22,10 +22,10 @@ An honest assessment of where I actually am with each tool — not a skills chec
 | Tool | Proficiency | How I use it |
 |---|---|---|
 | Large Language Models (LLMs) | **Daily Use** | RFQ drafting, exec reporting, RCA write-ups, retro analysis, documentation |
-| Prompt engineering | **Daily Use** | Structured prompts with context, constraints, and output format — not ad-hoc queries |
+| Prompt engineering | **Daily Use** | Structured prompts with context, constraints, output format, and explicit prohibitions |
 | Jira AI | **Daily Use** | Ticket triage, pattern detection, auto-classification, sprint summarisation |
 | Splunk AI | **Regular Use** | Anomaly detection rules, proactive alerting, log pattern analysis |
-| AI-assisted workflow design | **Daily Use** | Mapping toil → automation → LLM-assist opportunities across delivery teams |
+| AI-assisted workflow design | **Daily Use** | Mapping toil to automation to LLM-assist opportunities across delivery teams |
 
 ---
 
@@ -64,17 +64,6 @@ An honest assessment of where I actually am with each tool — not a skills chec
 
 ---
 
-## Enterprise & Integration
-
-| Tool | Proficiency | How I use it |
-|---|---|---|
-| SAP | **Regular Use** | UAT coordination, workflow governance, supply chain platform delivery |
-| REST APIs / Microservices | **Regular Use** | Integration oversight, dependency mapping, API platform operations |
-| MySQL | **Working Knowledge** | Query review, ETL oversight, data validation — not active development |
-| Java / AngularJS | **Working Knowledge** | Code review, architecture discussions, integration troubleshooting |
-
----
-
 ## Presales & Commercial
 
 | Tool | Proficiency | How I use it |
@@ -95,7 +84,6 @@ An honest assessment of where I actually am with each tool — not a skills chec
 | CMMI Level 5 | **Regular Use** | Process optimisation, L3 workflow design, continuous improvement |
 | SRE / SLO-SLI | **Regular Use** | Designed and run SLO programs as client trust frameworks |
 | SAFe | **Working Knowledge** | Program increment planning, PI ceremonies, ART coordination |
-| TM Forum eTOM | **Working Knowledge** | OSS/BSS process framework awareness — applied in telecom delivery context |
 
 ---
 
@@ -106,7 +94,6 @@ An honest assessment of where I actually am with each tool — not a skills chec
 | SQL / data querying | Working knowledge — Netxcell-era MySQL, not current | Refreshing via practice problems — targeting fluency by Q3 2026 |
 | Salesforce platform | Awareness level | Pursuing Admin certification — Q2 2026 target |
 | Python / scripting | Can read, can't write fluently | Not a priority — I work at the delivery layer, not the engineering layer |
-| AdTech platforms | Conceptual — no hands-on | Building through reading and domain research |
 
 ---
 

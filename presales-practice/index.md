@@ -23,7 +23,7 @@ description: "Presales frameworks for enterprise TPMs — SOW design, bid strate
   <a class="domain-card" href="/presales-practice/rfq-workflow/">
     <div class="domain-icon">⚡</div>
     <div class="domain-title">AI-Assisted RFQ Workflow</div>
-    <div class="domain-desc">End-to-end RFQ workflow from receipt to submission-ready draft. 4–6 hours vs. a previous 3-day cycle. Step-by-step with LLM role at each stage.</div>
+    <div class="domain-desc">End-to-end RFQ workflow from receipt to submission-ready draft. 4–6 hours vs. a previous 3-day cycle.</div>
     <div class="domain-arrow">Explore →</div>
   </a>
 </div>

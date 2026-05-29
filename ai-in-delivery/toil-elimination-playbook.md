@@ -2,7 +2,7 @@
 layout: page
 title: Toil Elimination Playbook
 permalink: /ai-in-delivery/toil-elimination-playbook/
-description: "Audit-first methodology for identifying and eliminating operational toil in enterprise delivery teams using AI, automation, and Splunk."
+description: "Audit-first methodology for identifying and eliminating operational toil in enterprise delivery teams."
 ---
 
 # Toil Elimination Playbook
@@ -19,7 +19,7 @@ Toil is manual, repetitive work that scales linearly with the size of the servic
 - Engineers doing the same thing every Monday morning
 - Status reports assembled by hand from multiple sources
 - Tickets that get resolved the same way every time, with no runbook
-- Alerts that fire, get acknowledged, and get resolved without any system change
+- Alerts that fire, get acknowledged, get resolved — without any system change
 
 ---
 
@@ -54,10 +54,10 @@ LOAD                  |                    LOAD
 
 ## Phase 3 — Implementation Sequence
 
-1. **Runbooks** for everything in the top-left quadrant
-2. **Jira and alerting automation** for top-right quadrant
-3. **LLM-assisted workflows** for high-cognitive toil
-4. **Splunk AI** for proactive observability
+1. **Runbooks** for high-frequency, low-cognitive toil — convert tribal knowledge to documented process
+2. **Jira and alerting automation** for repetitive routing and classification
+3. **LLM-assisted workflows** for high-cognitive, predictably structured tasks
+4. **Splunk AI** for proactive observability — alert before humans notice
 
 ---
 

@@ -21,29 +21,48 @@ description: "Case study: How a structured bid strategy framework and AI-assiste
 
 ## The Situation
 
-Our global bid conversion rate was inconsistent. Some proposals won comfortably. Others lost to competitors we knew we outperformed on delivery. The gap was in the proposal — not the capability.
+Our global bid conversion rate was inconsistent — some proposals won comfortably, others lost to competitors we knew we outperformed on actual delivery. The gap was in the proposal, not the capability.
 
-Proposals were taking 3 days to draft, were written differently by different authors, and led with our company background rather than the client's problem.
+I asked for 30 minutes with five recently lost bids and five recently won ones. That 30-minute read changed how I approached every proposal we submitted after it.
 
 ---
 
-## Root Cause Analysis
+## What the Lost Bids Had in Common
 
-After reviewing 12 months of won and lost bids, three patterns emerged:
+Every lost bid started the same way. Company overview. Year founded. Number of employees. Global offices. Awards.
 
-1. **Lost bids led with us.** First paragraphs described our company, our awards, our global presence. Clients had already read five proposals that started the same way.
-2. **Won bids led with the client's problem.** The first paragraph made the client feel understood — not sold to.
-3. **Lost bids had no hook.** Nothing memorable. The evaluator couldn't summarise why we were different in one sentence.
+I timed it once — the average lost bid didn't mention the client's actual business problem until paragraph four. By then, the evaluator had already mentally moved on.
+
+The won bids were structurally different. The first sentence of every winning proposal was about the client. Their pain, their context, their language. Our company background, if it appeared at all, was in an appendix.
+
+That was the insight. Not a methodology. Not a framework. Just: **we were writing about ourselves when we should have been writing about them.**
+
+---
+
+## What I Tried That Didn't Work
+
+My first attempt was a writing guide. Two pages of principles — "lead with the client", "avoid jargon", "use outcome-first language." I sent it to the team before the next RFQ.
+
+The next RFQ came back almost identical to what we'd submitted before. Nobody followed the guide under deadline pressure. A document you read once and then forget is not a process.
+
+**The judgment call:** Stop trying to improve the writing. Change the sequence. Make it structurally impossible to start writing before answering five specific questions about the client. The questions became the process — not guidance to apply, but gates to pass.
 
 ---
 
 ## The Approach
 
-**Framework change:** Introduced the [Bid Strategy Methodology](/presales-practice/bid-strategy-methodology/) — five questions answered before writing begins. Strategy first, writing second.
+**Framework change:** Five questions, mandatory, answered before any document is opened:
+1. What is the client's real problem — not the one in the RFQ, the one behind it?
+2. What does winning look like for them in 12 months?
+3. Where are we uniquely credible — two proof points maximum, specific and quantified?
+4. What are the top three risks — and what's our answer to each?
+5. What's the one thing they'll remember — the hook that appears first and echoes last?
 
-**Process change:** Introduced the [AI-Assisted RFQ Workflow](/presales-practice/rfq-workflow/) — LLM for first draft, human for judgment and proof points. Cut drafting time from 3 days to 4–6 hours.
+No proposal entered drafting without all five answered and reviewed.
 
-**Review standard:** Every proposal reviewed against a checklist — client-centricity, specificity, risk transparency, hook clarity. No proposal submitted without passing the review.
+**Process change:** LLM-assisted drafting using the five-question output as the prompt context. First draft in under an hour, one structured review pass, submit. This cut the 3-day iteration cycle to 4–6 hours — which freed capacity to submit more bids and spend more time on the ones that mattered.
+
+**Review standard:** Every proposal reviewed against a four-point checklist before submission: client-centricity score, specificity (no generic claims), risk transparency, hook clarity. One person on the team became the reviewer — consistency mattered more than who reviewed.
 
 ---
 
@@ -51,13 +70,21 @@ After reviewing 12 months of won and lost bids, three patterns emerged:
 
 | Metric | Before | After |
 |---|---|---|
-| Global bid conversion rate | Baseline | +25% improvement |
+| Global bid conversion rate | Baseline | +25% over 12 months |
 | Average RFQ turnaround | 3 days | 4–6 hours |
-| Proposal consistency | Variable | Standardised framework |
-| Win narrative clarity | Inconsistent | Hook-first, every proposal |
+| Proposal consistency | Variable by author | Standardised structure |
+| Hook clarity (internal rating) | 3/10 average | 8/10 average |
 
 ---
 
 ## Key Learning
 
-The AI tooling saved time. The strategy framework won bids. Both were necessary — speed unlocked capacity for more bids, the framework made each bid better. Neither alone would have moved the number.
+**The AI tooling saved time. The sequence change won bids.** If I'd introduced the LLM drafting without the five-question gate, we'd have produced bad proposals faster. Speed amplifies whatever process it's attached to — good or bad.
+
+The other learning: a writing guide doesn't change behaviour under pressure. A mandatory gate does. If you want a team to do something differently, don't tell them how — change what they have to produce before they can move to the next step.
+
+---
+
+## What I'd Do Differently
+
+Introduce the five-question gate three months earlier. I spent the first quarter trying to coach the writing. The gate took one meeting to introduce and stuck immediately because it was a process change, not a culture change. Process is faster than culture.
