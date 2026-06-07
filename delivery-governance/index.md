@@ -23,7 +23,7 @@ description: "Delivery governance frameworks — cadence model, CMMI L5 workflow
   <a class="domain-card" href="/delivery-governance/escalation-framework/">
     <div class="domain-icon">🚨</div>
     <div class="domain-title">Escalation Framework</div>
-    <div class="domain-desc">When to escalate, what to escalate, and how to frame it. Decision tree built from 10+ years of managing high-stakes client relationships.</div>
+    <div class="domain-desc">When to escalate, what to escalate, and how to frame it. Decision tree built from 12+ years of managing high-stakes client relationships.</div>
     <div class="domain-arrow">Explore →</div>
   </a>
 </div>

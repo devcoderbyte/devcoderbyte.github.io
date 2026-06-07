@@ -1,7 +1,7 @@
 ---
 layout: home
 title: TPM Portfolio
-description: "Technical Program Manager & Presales Lead with 10+ years of enterprise delivery experience. AI-native by practice. Portfolio of frameworks, case studies, and interactive tools."
+description: "Technical Program Manager & Presales Lead with 12+ years of enterprise delivery experience. AI-native by practice. Portfolio of frameworks, case studies, and interactive tools."
 ---
 
 <div class="hero-full">
@@ -15,7 +15,7 @@ description: "Technical Program Manager & Presales Lead with 10+ years of enterp
     <div class="hero-text">
       <div class="hero-eyebrow">Rajendra Birudaraju · TPM & Presales Lead · Hyderabad</div>
       <h1>Enterprise delivery,<br><em>minus the toil.</em></h1>
-      <p class="hero-sub">10+ years leading programs for Maruti Suzuki and T-Mobile. $2.1M+ portfolio. CSAT 9+ for 18 months. AI-native by practice — not by title.</p>
+      <p class="hero-sub">12+ years leading programs for Maruti Suzuki and T-Mobile. $2.1M+ portfolio. CSAT 9+ for 18 months. AI-native by practice — not by title.</p>
       <div class="hero-links">
         <a href="#work" class="btn btn-primary">Explore my work</a>
         <a href="/now/" class="btn-hero-ghost">What I'm doing now →</a>
@@ -37,7 +37,7 @@ description: "Technical Program Manager & Presales Lead with 10+ years of enterp
   <div class="container about-inner">
     <div class="about-text">
       <h2>About me</h2>
-      <p>I sit at the intersection of delivery leadership, presales strategy, and AI-augmented practice. I've spent 10+ years turning complex enterprise chaos into measurable outcomes — for clients like Maruti Suzuki Smart Finance and T-Mobile, across SRE, DevOps, and AMS domains.</p>
+      <p>I sit at the intersection of delivery leadership, presales strategy, and AI-augmented practice. I've spent 12+ years turning complex enterprise chaos into measurable outcomes — for clients like Maruti Suzuki Smart Finance and T-Mobile, across SRE, DevOps, and AMS domains.</p>
       <p>I use LLMs daily — across presales, delivery, client communications, and engineering — not as a tool I've adopted but as a practice I've systematised. This site is my proof-of-work.</p>
       <p>When I'm not running programs, I'm planning two-up motorcycle adventure routes, chasing fitness goals, and building toward the BMW F900 GSA and the Swiss Alps.</p>
       <div class="about-links">
