@@ -2,7 +2,7 @@
 
 > Enterprise delivery, minus the toil — AI-native frameworks from the frontlines
 
-This is my professional portfolio site, built on GitHub Pages with Jekyll. It documents the frameworks I've designed, the AI workflows I've built, and the delivery systems I've run in production across 10+ years of enterprise program management.
+This is my professional portfolio site, built on GitHub Pages with Jekyll. It documents the frameworks I've designed, the AI workflows I've built, and the delivery systems I've run in production across 12+ years of enterprise program management.
 
 **Live site:** [devcoderbyte.github.io](https://devcoderbyte.github.io)
 
@@ -67,7 +67,7 @@ Open [http://localhost:4000/delivery-pulse](http://localhost:4000/delivery-pulse
 ## Contact
 
 **Rajendra Birudaraju**  
-Technical Program Manager & Presales Lead  
+Senior Program Manager · SRE & AI-Augmented Delivery  
 Hyderabad, India  
 [linkedin.com/in/rajendrabirudaraju](https://linkedin.com/in/rajendrabirudaraju)  
 birudarajurajendra@gmail.com

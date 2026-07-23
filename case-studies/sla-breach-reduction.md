@@ -15,7 +15,7 @@ description: "Case study: How AI-assisted observability and workflow redesign re
 
 **Domain:** Telecom · SRE · AI-assisted Observability
 **Timeline:** 90 days from audit to stable outcome
-**Role:** Technical Program Manager — full delivery accountability
+**Role:** Program Manager — full delivery accountability
 
 ---
 

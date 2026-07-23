@@ -1,7 +1,7 @@
 ---
 layout: home
-title: TPM Portfolio
-description: "Technical Program Manager & Presales Lead with 12+ years of enterprise delivery experience. AI-native by practice. Portfolio of frameworks, case studies, and interactive tools."
+title: Senior Program Manager Portfolio
+description: "Senior Program Manager · SRE & AI-Augmented Delivery with 12+ years of enterprise delivery experience. AI-native by practice. Portfolio of frameworks, case studies, and interactive tools."
 ---
 
 <div class="hero-full">
@@ -13,9 +13,9 @@ description: "Technical Program Manager & Presales Lead with 12+ years of enterp
       <div class="hero-badge">Open to opportunities</div>
     </div>
     <div class="hero-text">
-      <div class="hero-eyebrow">Rajendra Birudaraju · TPM & Presales Lead · Hyderabad</div>
+      <div class="hero-eyebrow">Rajendra Birudaraju · Senior Program Manager · SRE & AI-Augmented Delivery · Hyderabad</div>
       <h1>Enterprise delivery,<br><em>minus the toil.</em></h1>
-      <p class="hero-sub">12+ years leading programs for Maruti Suzuki and T-Mobile. $2.1M+ portfolio. CSAT 9+ for 18 months. AI-native by practice — not by title.</p>
+      <p class="hero-sub">12+ years leading programs for Maruti Suzuki and T-Mobile. $2.1M+ portfolio. CSAT 9+ sustained, peaked at 10. AI-native by practice — not by title.</p>
       <div class="hero-links">
         <a href="#work" class="btn btn-primary">Explore my work</a>
         <a href="/now/" class="btn-hero-ghost">What I'm doing now →</a>
@@ -27,7 +27,7 @@ description: "Technical Program Manager & Presales Lead with 12+ years of enterp
 <div class="container">
   <div class="stats-row">
     <div class="stat"><div class="stat-val">$2.1M+</div><div class="stat-lbl">Annual portfolio</div></div>
-    <div class="stat"><div class="stat-val">9+</div><div class="stat-lbl">CSAT · 18 months</div></div>
+    <div class="stat"><div class="stat-val">10</div><div class="stat-lbl">CSAT · Recent peak</div></div>
     <div class="stat"><div class="stat-val">25%</div><div class="stat-lbl">Bid conversion lift</div></div>
     <div class="stat"><div class="stat-val">20%</div><div class="stat-lbl">SLA breach reduction</div></div>
   </div>
@@ -37,7 +37,8 @@ description: "Technical Program Manager & Presales Lead with 12+ years of enterp
   <div class="container about-inner">
     <div class="about-text">
       <h2>About me</h2>
-      <p>I sit at the intersection of delivery leadership, presales strategy, and AI-augmented practice. I've spent 12+ years turning complex enterprise chaos into measurable outcomes — for clients like Maruti Suzuki Smart Finance and T-Mobile, across SRE, DevOps, and AMS domains.</p>
+      <p>I sit at the intersection of delivery leadership, presales strategy, and AI-augmented practice. Over 12+ years I've built a 60-engineer SRE function from scratch, owned P1/P2 incident command for a Fortune 500 automotive client, and turned complex enterprise chaos into measurable outcomes — for clients like Maruti Suzuki Smart Finance and T-Mobile, across SRE, DevOps, and AMS domains.</p>
+      <p>I don't just govern what engineers build — I've identified AWS cost-optimization opportunities outside contracted scope that moved the needle directly on client P&L. That's the judgment call that matters at the program level, not the ticket level.</p>
       <p>I use LLMs daily — across presales, delivery, client communications, and engineering — not as a tool I've adopted but as a practice I've systematised. This site is my proof-of-work.</p>
       <p>When I'm not running programs, I'm planning two-up motorcycle adventure routes, chasing fitness goals, and building toward the BMW F900 GSA and the Swiss Alps.</p>
       <div class="about-links">
@@ -96,7 +97,7 @@ description: "Technical Program Manager & Presales Lead with 12+ years of enterp
     <a class="domain-card" href="/delivery-governance/">
       <div class="domain-icon">📋</div>
       <div class="domain-title">Delivery Governance</div>
-      <div class="domain-desc">CMMI L5 workflow design, governance cadence model, and escalation framework that sustained CSAT 9+.</div>
+      <div class="domain-desc">CMMI L5 workflow design, governance cadence model, and escalation framework behind a CSAT 9+ sustained average, peaking at 10.</div>
       <div class="domain-arrow">Explore →</div>
     </a>
     <a class="domain-card" href="/case-studies/">

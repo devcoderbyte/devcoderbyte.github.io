@@ -20,7 +20,7 @@ Still at Concentrix Catalyst, leading delivery and presales for enterprise clien
 - Running active presales on two significant RFQs — applying the bid strategy framework documented on this site in real time
 - Deepening the AI enablement practice across the delivery team — moving from individual LLM usage to documented, team-wide workflows that stick
 - Managing SLO governance for a high-volume platform — the error budget framework on this site is running live on this engagement
-- Exploring senior delivery leadership opportunities — Delivery Manager, Implementation Manager, and Technical Program Manager roles at product-led and enterprise orgs
+- Exploring senior delivery leadership opportunities — Senior Program Manager and Director-level roles at product-led and enterprise orgs
 
 ---
 

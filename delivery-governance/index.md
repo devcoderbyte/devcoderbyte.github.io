@@ -2,10 +2,10 @@
 layout: page
 title: Delivery Governance
 permalink: /delivery-governance/
-description: "Delivery governance frameworks — cadence model, CMMI L5 workflow, escalation framework that sustained CSAT 9+."
+description: "Delivery governance frameworks — cadence model, CMMI L5 workflow, escalation framework behind CSAT 9+ sustained, peaking at 10."
 ---
 
-<p style="color:var(--muted);font-size:15px;margin-bottom:2rem">The systems that keep enterprise programs on track — cadence model, CMMI L5 workflow design, and escalation framework that sustained CSAT 9+ for 18 consecutive months.</p>
+<p style="color:var(--muted);font-size:15px;margin-bottom:2rem">The systems that keep enterprise programs on track — cadence model, CMMI L5 workflow design, and escalation framework behind CSAT 9+ sustained, peaking at 10.</p>
 
 <div class="domain-grid">
   <a class="domain-card" href="/delivery-governance/cadence-model/">
