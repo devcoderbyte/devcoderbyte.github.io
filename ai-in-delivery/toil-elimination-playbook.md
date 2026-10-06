@@ -57,14 +57,13 @@ LOAD                  |                    LOAD
 1. **Runbooks** for high-frequency, low-cognitive toil — convert tribal knowledge to documented process
 2. **Jira and alerting automation** for repetitive routing and classification
 3. **LLM-assisted workflows** for high-cognitive, predictably structured tasks
-4. **Splunk AI** for proactive observability — alert before humans notice
 
 ---
 
 ## Results from Production
 
 - **35% reduction** in debugging time through internal tooling
-- **20% reduction** in SLA breaches through Splunk AI anomaly detection
+- **15% → 75%** alert accuracy using Temperstack scans and AI-generated runbooks
 - **2+ hours saved weekly** per delivery lead through LLM-assisted reporting
 - **18% productivity improvement** over two quarters
 

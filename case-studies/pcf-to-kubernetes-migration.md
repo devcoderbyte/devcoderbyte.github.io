@@ -22,9 +22,11 @@ description: "Case study: Leading the offshore delivery of a 200+ microservice m
 
 ## The Situation
 
-I took over the DevOps team on a large telecom account. The first thing I was asked to deliver was cloud modernization: move the supply-chain platform's microservices off Pivotal Cloud Foundry (PCF) and onto Kubernetes (TKE).
+I took over the offshore team on a large telecom account during a leadership handover; the outgoing lead helped with the transition before moving on. The first big thing I was asked to deliver was cloud modernization: move the supply-chain platform's microservices off Pivotal Cloud Foundry (PCF) and onto Kubernetes (TKE).
 
 There were more than 200 services, owned by four different onshore development verticals. Each vertical had its own release schedule and its own idea of what "done" looked like. My team owned the offshore side of the migration, which meant onboarding each service, moving it, proving it was stable, and only then retiring the PCF version.
+
+Once the project was confirmed, we onboarded five engineers by mid-March, each with a defined ramp-up path so they could contribute to migrations quickly.
 
 ---
 
@@ -37,6 +39,7 @@ PCF hides a lot from developers: you push code and the platform handles the rest
 - **Secrets.** Credentials moved into HashiCorp Vault instead of living in platform environment variables.
 - **Availability during maintenance.** Pod disruption budgets were set so node drains and upgrades couldn't take out every replica of a service at once.
 - **Traffic.** Services were integrated with the client's in-house API gateway (MEG), so consumers didn't have to change how they called them.
+- **Compliance.** Every supply-chain vertical was in SOX scope. Access was limited to the engineers assigned to each piece of work, so each of them had to be able to answer for it in an audit.
 - **Data layer.** Services sat on PostgreSQL, MySQL and Redis. Schema and query performance were checked in design reviews before cutover, not after.
 
 ---

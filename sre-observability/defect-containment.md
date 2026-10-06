@@ -28,9 +28,8 @@ Three-layer containment built on one principle: a defect found in production cos
 
 ---
 
-## Layer 3 — AI-Assisted Pre-Production Detection
+## Layer 3 — Pre-Production Detection
 
-- **Splunk AI anomaly detection:** Flags statistical deviations from production baseline in pre-prod before go-live
 - **Synthetic monitoring:** Simulated user journeys run every 15 minutes against staging
 - **Release readiness checklist:** 12-point checklist before every deployment — rollback plan, monitoring configured, stakeholders notified
 

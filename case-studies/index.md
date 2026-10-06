@@ -16,9 +16,9 @@ description: "Enterprise delivery case studies — what I tried, what failed fir
   </a>
   <a class="domain-card" href="/case-studies/sla-breach-reduction/">
     <div class="domain-icon">📉</div>
-    <div class="domain-title">20% SLA Breach Reduction</div>
-    <div class="domain-desc">Why adding more Splunk alerts made things worse, the decision to suppress 90% of them, and the Jira automation and review cadence that followed.</div>
-    <div class="domain-arrow" style="color:var(--accent2)">Telecom · SRE · Automation →</div>
+    <div class="domain-title">Taking Over an Account: CSAT 8.5 → 10</div>
+    <div class="domain-desc">Took over support from the incumbent vendor. Made SLAs measurable in Zendesk and raised alert accuracy from 15% to 75% with Temperstack and AI-generated runbooks.</div>
+    <div class="domain-arrow" style="color:var(--accent2)">Automotive finance · SRE · ITSM →</div>
   </a>
   <a class="domain-card" href="/case-studies/bid-conversion-lift/">
     <div class="domain-icon">📈</div>

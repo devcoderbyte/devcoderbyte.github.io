@@ -43,7 +43,7 @@ Every KPI should show current value AND the 28-day trend. A CSAT of 8.9 looks fi
 
 If a human is looking at a dashboard to spot problems, the dashboard has failed. The dashboard should spot the problem — the human should only need to act.
 
-Splunk AI anomaly detection rules for every tier-1 metric. Alert before the client notices. Always.
+Alerts on every tier-1 metric, so the team hears about a problem before the client does.
 
 ---
 

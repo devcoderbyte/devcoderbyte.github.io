@@ -24,7 +24,6 @@ An honest assessment of where I actually am with each tool. Three categories bas
 | Large Language Models (LLMs) | **Daily Use** | RFQ drafting, exec reporting, RCA write-ups, retro analysis, documentation |
 | Prompt engineering | **Daily Use** | Structured prompts with context, constraints, output format, and explicit prohibitions |
 | Jira AI | **Daily Use** | Ticket triage, pattern detection, auto-classification, sprint summarisation |
-| Splunk AI | **Regular Use** | Anomaly detection rules, proactive alerting, log pattern analysis |
 | AI-assisted workflow design | **Daily Use** | Mapping toil to automation to LLM-assist opportunities across delivery teams |
 
 ---
@@ -33,7 +32,8 @@ An honest assessment of where I actually am with each tool. Three categories bas
 
 | Tool | Proficiency | How I use it |
 |---|---|---|
-| Splunk | **Daily Use** | Dashboard design, alerting, log analysis, SLA tracking, anomaly detection |
+| Splunk | **Working Knowledge** | Built Splunk dashboards for client programmes; drove alert reviews with dev teams; log analysis |
+| Power BI | **Working Knowledge** | Built an ops ticket dashboard: incidents, problems, changes and service requests by priority, with date-range filters |
 | Grafana | **Regular Use** | KPI dashboards, time-series visualisation, delivery health monitoring |
 | AppDynamics | **Regular Use** | Application performance monitoring, transaction tracing, baseline alerting |
 | Dynatrace | **Regular Use** | Infrastructure monitoring, synthetic monitoring, incident detection |

@@ -35,7 +35,7 @@ delivery-pulse/
 │   └── escalation-framework.md      # Escalation decision tree
 └── case-studies/
     ├── index.md
-    ├── sla-breach-reduction.md       # 20% SLA breach reduction
+    ├── sla-breach-reduction.md       # Account takeover: SLAs, alerts, CSAT 8.5 → 10
     ├── bid-conversion-lift.md        # 25% bid conversion lift
     ├── devops-upskilling.md          # DevOps capability platform
     ├── game-server-sre-experiment.md # Chaos test on a self-hosted game server

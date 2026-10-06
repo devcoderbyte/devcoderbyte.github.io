@@ -17,13 +17,19 @@ description: "Delivery governance frameworks — cadence model, CMMI L5 workflow
   <a class="domain-card" href="/delivery-governance/cmmi-workflow/">
     <div class="domain-icon">⚙️</div>
     <div class="domain-title">CMMI L5 Workflow Design</div>
-    <div class="domain-desc">How I applied CMMI Level 5 to redesign L3 ticket workflows — standardising triage, embedding AI checks, reducing SLA breaches 20% in 90 days.</div>
+    <div class="domain-desc">How I redesigned L3 ticket workflows for CMMI Level 5: moving from Jira with no SLA tracking to per-priority SLAs in Zendesk, ready for audit.</div>
     <div class="domain-arrow">Explore →</div>
   </a>
   <a class="domain-card" href="/delivery-governance/escalation-framework/">
     <div class="domain-icon">🚨</div>
     <div class="domain-title">Escalation Framework</div>
     <div class="domain-desc">When to escalate, what to escalate, and how to frame it. Decision tree built from 12+ years of managing high-stakes client relationships.</div>
+    <div class="domain-arrow">Explore →</div>
+  </a>
+  <a class="domain-card" href="/delivery-governance/team-leadership/">
+    <div class="domain-icon">🤝</div>
+    <div class="domain-title">How I Lead Teams</div>
+    <div class="domain-desc">Growth conversations, wellbeing check-ins, onboarding freshers, ranked automation backlogs, and direct client relationships in every area.</div>
     <div class="domain-arrow">Explore →</div>
   </a>
 </div>
