@@ -56,7 +56,6 @@ My answer: "We're already missing everything. A team that ignores all alerts mis
 
 **Week 3–4: Redesign**
 - Rebuilt Splunk alerting around the three signal categories — all others suppressed or routed to a low-priority digest reviewed weekly, not in real time
-<!-- TODO (Rajendra): name the exact Splunk feature used (e.g. ITSI adaptive thresholds, or the Machine Learning Toolkit) so this line survives a technical follow-up. -->
 - Implemented Splunk AI anomaly detection on tier-1 metrics — system flags statistical deviations before they cross human-defined thresholds
 - Documented runbooks for the top five toil tasks the on-call team performed manually every day
 
@@ -73,8 +72,6 @@ My answer: "We're already missing everything. A team that ignores all alerts mis
 ---
 
 ## The Outcome
-
-<!-- TODO (Rajendra): replace "Baseline" in the SLA breach row with real numbers, e.g. "~N breaches/month → ~M/month", and say how it was measured (breached tickets per month in Jira over the quarter before vs. the quarter after). An interviewer's first question will be "20% of what?" -->
 
 | Metric | Before | After | Change |
 |---|---|---|---|

@@ -25,8 +25,6 @@ I took over the DevOps team on a large telecom account. The first thing I was as
 
 There were more than 200 services, owned by four different onshore development verticals. Each vertical had its own release schedule and its own idea of what "done" looked like. My team owned the offshore side of the migration, which meant onboarding each service, moving it, proving it was stable, and only then retiring the PCF version.
 
-<!-- TODO (Rajendra): add 1–2 lines on WHY the move was happening (PCF licence cost / end of support / standardising on K8s?) and what the business risk was if it slipped. -->
-
 ---
 
 ## What Had to Change Under the Hood
@@ -39,8 +37,6 @@ PCF hides a lot from developers: you push code and the platform handles the rest
 - **Availability during maintenance.** Pod disruption budgets were set so node drains and upgrades couldn't take out every replica of a service at once.
 - **Traffic.** Services were integrated with the client's in-house API gateway (MEG), so consumers didn't have to change how they called them.
 - **Data layer.** Services sat on PostgreSQL, MySQL and Redis. Schema and query performance were checked in design reviews before cutover, not after.
-
-<!-- TODO (Rajendra): if you remember it, name the K8s distribution/version, the CI tool, and how many services shared a common Helm chart/template vs. needed custom work. Specifics like this are what an interviewer will probe. -->
 
 ---
 
@@ -56,18 +52,9 @@ Every service went through the same lifecycle. With 200+ services, a repeatable 
 
 The last step is the one teams often skip. Leaving old PCF services running "just in case" keeps the cost and the confusion. Decommissioning was part of the definition of done.
 
-<!-- TODO (Rajendra): what was the "stable" criterion before decommission? (e.g. N days with no P1/P2, error rate under X). Add it here. -->
-
 ---
 
 ## Problems Along the Way
-<!-- TODO (Rajendra): once you've written your 'what I tried first' paragraph below, rename this heading to "What I Tried First — and What I Changed". -->
-
-<!-- TODO (Rajendra): this section is the most valuable part of the page and only you can write it. Answer in 3–5 plain sentences:
-     - What was your first plan (e.g. big-bang per vertical, or migrate the easiest services first)?
-     - What went wrong or got stuck (a failed cutover, a vertical that wouldn't commit to dates, config drift, secrets issues)?
-     - What did you decide to change, and why did it work?
-     Keep it honest. A real misstep reads far more credibly than a perfect plan. -->
 
 During the migration, many services ran on PCF and TKE at the same time, at different versions. Working out what was actually deployed where became a real drag on debugging. The team built an internal version-tracking tool to answer that question in one place. It cut debugging time by about 35% and was later adopted as the standard across the organisation.
 
@@ -86,20 +73,11 @@ The same period doubled as the team's DevOps upskilling. Application-operations 
 | Debugging | ~35% less debugging time from the version-tracking tool |
 | Compliance | Access management and SOX controls maintained; evidence provided for external audit |
 
-<!-- TODO (Rajendra): add absolute numbers if you have them: services migrated per month at peak, number of cutovers rolled back, P1/P2 incidents caused by the migration, team size. Even one or two of these makes the table much stronger. -->
-
 ---
 
 ## My Part vs. the Team's
 
 I owned the offshore delivery plan, sequencing with the four verticals, release and cutover coordination, and status and risk reporting to client leadership. The engineers on my team did the containerisation, pipelines and configuration work. My job was to make sure 200 services moved in a predictable way without breaking the supply chain they ran.
-
----
-
-<!-- TODO (Rajendra): un-comment and fill this section when ready (left hidden so the live page doesn't show an empty heading).
-## What I'd Do Differently
-One honest paragraph. For example: lock the decommission criteria with every vertical on day one, or build the version-tracking tool in month one instead of when the pain showed up.
--->
 
 ---
 
