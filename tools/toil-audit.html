@@ -80,9 +80,9 @@ function showResults(){
   document.getElementById('results-area').style.display='block';
   document.getElementById('results-area').innerHTML=
     '<div class="score-hero"><div class="score-big" style="color:'+color+'">'+toil+'%</div><div class="score-label">Toil index</div><div class="score-verdict">'+verdict+'</div></div>'+
-    '<div style="font-size:13px;font-weight:500;margin-bottom:.75rem;font-family:\'Syne\',sans-serif">Score by dimension</div>'+
+    '<div style="font-size:13px;font-weight:500;margin-bottom:.75rem;font-family:var(--font-display)">Score by dimension</div>'+
     '<div class="dim-grid">'+dimHTML+'</div>'+
-    '<div style="font-size:13px;font-weight:500;margin:.5rem 0 .75rem;font-family:\'Syne\',sans-serif">Prioritised actions</div>'+
+    '<div style="font-size:13px;font-weight:500;margin:.5rem 0 .75rem;font-family:var(--font-display)">Prioritised actions</div>'+
     actionHTML+
     '<div style="margin-top:1.5rem;display:flex;gap:.75rem;flex-wrap:wrap"><button class="btn btn-ghost" onclick="restartAudit()">Start over</button><a href="/ai-in-delivery/toil-elimination-playbook/" class="btn btn-primary">Read the full playbook →</a></div>';
 }

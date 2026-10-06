@@ -6,16 +6,17 @@ description: "Case study: How an internal DevOps upskilling platform converted A
 ---
 
 <div style="background:linear-gradient(135deg,rgba(217,119,6,.08) 0%,rgba(37,99,235,.06) 100%);border:1px solid #d9770640;border-radius:12px;padding:1.5rem;margin-bottom:2rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;text-align:center">
-  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#d97706">-35%</div><div style="font-size:12px;color:#64748b;margin-top:4px">Debugging time reduction</div></div>
-  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#d97706">Zero</div><div style="font-size:12px;color:#64748b;margin-top:4px">External hires needed</div></div>
-  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#d97706">1 tool</div><div style="font-size:12px;color:#64748b;margin-top:4px">Shipped to production during training</div></div>
+  <div><div style="font-family:var(--font-display);font-size:2rem;font-weight:600;color:#d97706">-35%</div><div style="font-size:12px;color:#64748b;margin-top:4px">Debugging time reduction</div></div>
+  <div><div style="font-family:var(--font-display);font-size:2rem;font-weight:600;color:#d97706">Zero</div><div style="font-size:12px;color:#64748b;margin-top:4px">External hires needed</div></div>
+  <div><div style="font-family:var(--font-display);font-size:2rem;font-weight:600;color:#d97706">1 tool</div><div style="font-size:12px;color:#64748b;margin-top:4px">Shipped to production during training</div></div>
 </div>
 
 # Case Study 03 — DevOps Upskilling Platform
 
-**Domain:** Team capability · DevOps transformation · Leadership
-**Timeline:** One quarter design and delivery, ongoing
+**Domain:** Team capability · DevOps transformation · Leadership<br>
+**Timeline:** One quarter design and delivery, ongoing<br>
 **Role:** Senior Technical Lead — platform design, curriculum, delivery
+{: .case-meta}
 
 ---
 

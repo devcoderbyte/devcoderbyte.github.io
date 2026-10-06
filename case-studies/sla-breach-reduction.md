@@ -6,16 +6,17 @@ description: "Case study: How AI-assisted observability and workflow redesign re
 ---
 
 <div style="background:linear-gradient(135deg,rgba(13,148,136,.08) 0%,rgba(37,99,235,.06) 100%);border:1px solid #0d948840;border-radius:12px;padding:1.5rem;margin-bottom:2rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;text-align:center">
-  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#0d9488">-20%</div><div style="font-size:12px;color:#64748b;margin-top:4px">SLA breach reduction</div></div>
-  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#0d9488">90 days</div><div style="font-size:12px;color:#64748b;margin-top:4px">Time to stable outcome</div></div>
-  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#0d9488">9+</div><div style="font-size:12px;color:#64748b;margin-top:4px">CSAT sustained</div></div>
+  <div><div style="font-family:var(--font-display);font-size:2rem;font-weight:600;color:#0d9488">-20%</div><div style="font-size:12px;color:#64748b;margin-top:4px">SLA breach reduction</div></div>
+  <div><div style="font-family:var(--font-display);font-size:2rem;font-weight:600;color:#0d9488">90 days</div><div style="font-size:12px;color:#64748b;margin-top:4px">Time to stable outcome</div></div>
+  <div><div style="font-family:var(--font-display);font-size:2rem;font-weight:600;color:#0d9488">9+</div><div style="font-size:12px;color:#64748b;margin-top:4px">CSAT sustained</div></div>
 </div>
 
 # Case Study 01 — 20% SLA Breach Reduction
 
-**Domain:** Telecom · SRE · AI-assisted Observability
-**Timeline:** 90 days from audit to stable outcome
+**Domain:** Telecom · SRE · AI-assisted Observability<br>
+**Timeline:** 90 days from audit to stable outcome<br>
 **Role:** Program Manager — full delivery accountability
+{: .case-meta}
 
 ---
 

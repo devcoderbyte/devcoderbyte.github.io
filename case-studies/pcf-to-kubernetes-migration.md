@@ -6,16 +6,17 @@ description: "Case study: Leading the offshore delivery of a 200+ microservice m
 ---
 
 <div style="background:linear-gradient(135deg,rgba(13,148,136,.08) 0%,rgba(37,99,235,.06) 100%);border:1px solid #0d948840;border-radius:12px;padding:1.5rem;margin-bottom:2rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;text-align:center">
-  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#0d9488">200+</div><div style="font-size:12px;color:#64748b;margin-top:4px">Microservices migrated</div></div>
-  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#0d9488">12 mo</div><div style="font-size:12px;color:#64748b;margin-top:4px">Onboarding to PCF decommission</div></div>
-  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#0d9488">35%</div><div style="font-size:12px;color:#64748b;margin-top:4px">Less debugging time (version-tracking tool)</div></div>
+  <div><div style="font-family:var(--font-display);font-size:2rem;font-weight:600;color:#0d9488">200+</div><div style="font-size:12px;color:#64748b;margin-top:4px">Microservices migrated</div></div>
+  <div><div style="font-family:var(--font-display);font-size:2rem;font-weight:600;color:#0d9488">12 mo</div><div style="font-size:12px;color:#64748b;margin-top:4px">Onboarding to PCF decommission</div></div>
+  <div><div style="font-family:var(--font-display);font-size:2rem;font-weight:600;color:#0d9488">35%</div><div style="font-size:12px;color:#64748b;margin-top:4px">Less debugging time (version-tracking tool)</div></div>
 </div>
 
 # Case Study 05 — 200+ Microservices, PCF to Kubernetes
 
-**Domain:** Telecom · Supply chain · Cloud migration · DevOps
-**Timeline:** 12 months
+**Domain:** Telecom · Supply chain · Cloud migration · DevOps<br>
+**Timeline:** 12 months<br>
 **Role:** Senior Technical Lead (acting TPM): offshore delivery owner, working with 4 onshore development verticals
+{: .case-meta}
 
 ---
 

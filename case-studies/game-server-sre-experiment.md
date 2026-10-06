@@ -6,16 +6,17 @@ description: "Case study: What a self-hosted game server chaos test revealed abo
 ---
 
 <div style="background:linear-gradient(135deg,rgba(13,148,136,.08) 0%,rgba(37,99,235,.06) 100%);border:1px solid #0d948840;border-radius:12px;padding:1.5rem;margin-bottom:2rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;text-align:center">
-  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#0d9488">10x</div><div style="font-size:12px;color:#64748b;margin-top:4px">Gap between shallow and true MTTR</div></div>
-  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#0d9488">3s → 32s</div><div style="font-size:12px;color:#64748b;margin-top:4px">Reported vs. real recovery time</div></div>
-  <div><div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#0d9488">0</div><div style="font-size:12px;color:#64748b;margin-top:4px">Production incidents — this was deliberate</div></div>
+  <div><div style="font-family:var(--font-display);font-size:2rem;font-weight:600;color:#0d9488">10x</div><div style="font-size:12px;color:#64748b;margin-top:4px">Gap between shallow and true MTTR</div></div>
+  <div><div style="font-family:var(--font-display);font-size:2rem;font-weight:600;color:#0d9488">3s → 32s</div><div style="font-size:12px;color:#64748b;margin-top:4px">Reported vs. real recovery time</div></div>
+  <div><div style="font-family:var(--font-display);font-size:2rem;font-weight:600;color:#0d9488">0</div><div style="font-size:12px;color:#64748b;margin-top:4px">Production incidents — this was deliberate</div></div>
 </div>
 
 # Case Study 04 — Running a Game Server Like Production
 
-**Domain:** Personal project · SRE · Chaos Engineering
-**Timeline:** One weekend
+**Domain:** Personal project · SRE · Chaos Engineering<br>
+**Timeline:** One weekend<br>
 **Role:** Sole builder — provisioning through postmortem
+{: .case-meta}
 
 ---
 
