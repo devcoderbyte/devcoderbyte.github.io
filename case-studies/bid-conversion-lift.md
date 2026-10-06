@@ -68,6 +68,7 @@ No proposal entered drafting without all five answered and reviewed.
 
 ## The Outcome
 
+<!-- TODO (Rajendra): replace "Baseline" with the real win rate, e.g. "X of Y bids won → A of B", and the period it covers. -->
 | Metric | Before | After |
 |---|---|---|
 | Global bid conversion rate | Baseline | +25% over 12 months |

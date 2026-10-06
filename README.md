@@ -1,6 +1,6 @@
 # Delivery Pulse — Rajendra Birudaraju
 
-> Enterprise delivery, minus the toil — AI-native frameworks from the frontlines
+> Enterprise delivery, minus the toil. SRE, cloud migration, delivery and presales case studies.
 
 This is my professional portfolio site, built on GitHub Pages with Jekyll. It documents the frameworks I've designed, the AI workflows I've built, and the delivery systems I've run in production across 12+ years of enterprise program management.
 
@@ -37,7 +37,9 @@ delivery-pulse/
     ├── index.md
     ├── sla-breach-reduction.md       # 20% SLA breach reduction
     ├── bid-conversion-lift.md        # 25% bid conversion lift
-    └── devops-upskilling.md          # DevOps capability platform
+    ├── devops-upskilling.md          # DevOps capability platform
+    ├── game-server-sre-experiment.md # Chaos test on a self-hosted game server
+    └── pcf-to-kubernetes-migration.md # 200+ microservices PCF → TKE
 ```
 
 ---

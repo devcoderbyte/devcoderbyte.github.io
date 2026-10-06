@@ -28,4 +28,10 @@ description: "SRE and observability frameworks — SLO/SLI integration, dashboar
   </a>
 </div>
 
+<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin:1.5rem 0">
+  <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-family:'JetBrains Mono',monospace;margin-bottom:.5rem">From production · T-Mobile</div>
+  <p style="margin:0"><strong>Splunk alert noise cleanup, ~80,000 alerts.</strong> We reviewed roughly 80,000 application and infrastructure alerts, filtered out the noise, and kept only the alerts that mattered at the middleware level.</p>
+  <!-- TODO (Rajendra): add how many alerts you kept, what "mattered at middleware level" meant (e.g. queue depth, connection pools, gateway errors), how you decided what to cut, and what changed afterwards (pages per on-call shift, MTTD). -->
+</div>
+
 > Good observability is invisible when it's working. The moment a client asks "what's the status?" — observability has already failed.
