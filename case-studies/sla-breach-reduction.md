@@ -34,7 +34,7 @@ Client CSAT was 8.5.
 
 ## Making SLAs Measurable
 
-We moved support from Jira to Zendesk and used its built-in SLA calculations. For each resolution priority we defined the SLA formula, the target percentage, and what counts as a breach.
+We moved support from Jira to Zendesk and used its built-in SLA calculations. I led the Zendesk implementation. For each priority we defined the SLA formula, the target, and what counts as a breach: resolution within 2 hours for P1, 4 hours for P2, 24 hours for P3 and 48 hours for P4. Other vendors on the account had their own contractual SLAs, so each got its own SLA policy in Zendesk. Once ticketing moved over, SLAs were being met.
 
 That gave the client and us the same numbers to look at, every week, per priority. It also became one of our controls for CMMI Level 5 audit readiness, and the audit went well.
 
