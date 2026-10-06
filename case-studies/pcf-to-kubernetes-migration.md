@@ -81,6 +81,12 @@ I owned the offshore delivery plan, sequencing with the four verticals, release 
 
 ---
 
+## What I'd Do Differently
+
+Lock the decommission criteria with every vertical on day one, and build the version-tracking tool in month one instead of when the pain showed up.
+
+---
+
 ## Related Work on the Same Account
 
 On the same account I also worked on a multi-site disaster-recovery design with automated failover across data centres, and on consolidating internal, third-party and B2B API traffic from on-prem and SaaS gateways onto one enterprise gateway.
