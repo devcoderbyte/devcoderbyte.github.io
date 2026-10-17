@@ -26,6 +26,12 @@ description: "Delivery governance frameworks — cadence model, CMMI L5 workflow
     <div class="domain-desc">When to escalate, what to escalate, and how to frame it. Decision tree built from 12+ years of managing high-stakes client relationships.</div>
     <div class="domain-arrow">Explore →</div>
   </a>
+  <a class="domain-card" href="/delivery-governance/account-takeover-playbook/">
+    <div class="domain-icon">🧭</div>
+    <div class="domain-title">How I Take Over an Account</div>
+    <div class="domain-desc">Build the client's problem list, track every action, make SLAs measurable, review bi-weekly until trust is earned, then shift left.</div>
+    <div class="domain-arrow">Explore →</div>
+  </a>
   <a class="domain-card" href="/delivery-governance/team-leadership/">
     <div class="domain-icon">🤝</div>
     <div class="domain-title">How I Lead Teams</div>

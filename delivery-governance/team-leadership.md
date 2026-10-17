@@ -13,6 +13,7 @@ I grew an offshore team from 10 to 60+ engineers over two years. These are the h
 
 ## People
 
+- **Their careers matter as much as mine.** I take each engineer's career progression as seriously as my own, and at times put it ahead of mine. That starts with identifying talent early and then nurturing it.
 - **Monthly growth conversations.** Every month I pick the top 3–5 engineers in each area and talk with them about where they want to grow next.
 - **Regular wellbeing check-ins.** Health, work-life balance, whether the work is technically satisfying, and how the team is getting on with each other.
 - **Freshers get a defined path.** New joiners get a clear ramp-up plan. When one isn't working out, for example slow to acknowledge or hard to reach, I talk to them directly and help them fix it before it becomes a performance problem.
