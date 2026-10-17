@@ -96,7 +96,7 @@ description: "Senior Program Manager · SRE & AI-Augmented Delivery. 12+ years a
     <a class="domain-card" href="/case-studies/">
       <div class="domain-icon">🏆</div>
       <div class="domain-title">Case Studies</div>
-      <div class="domain-desc">Five case studies, including the PCF → Kubernetes migration. Each covers what I tried first, the call that changed the outcome, and what I'd do differently.</div>
+      <div class="domain-desc">Six case studies, including the PCF → Kubernetes migration. Each covers what I tried first, the call that changed the outcome, and what I'd do differently.</div>
       <div class="domain-arrow">Explore →</div>
     </a>
     <a class="domain-card" href="/tools/slo-calculator/">

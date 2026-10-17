@@ -5,7 +5,7 @@ permalink: /case-studies/
 description: "Enterprise delivery case studies — what I tried, what failed first, the judgment calls that changed outcomes, and the tools behind each result."
 ---
 
-<p style="color:var(--muted);font-size:15px;margin-bottom:2rem">Five case studies. Each one covers how the result was achieved: the tools, what I tried first that didn't work, the call that changed the outcome, and what I'd do differently. Client-confidential details are removed. The outcomes are real.</p>
+<p style="color:var(--muted);font-size:15px;margin-bottom:2rem">Six case studies. Each one covers how the result was achieved: the tools, what I tried first that didn't work, the call that changed the outcome, and what I'd do differently. Client-confidential details are removed. The outcomes are real.</p>
 
 <div class="domain-grid">
   <a class="domain-card" href="/case-studies/pcf-to-kubernetes-migration/">
@@ -13,6 +13,12 @@ description: "Enterprise delivery case studies — what I tried, what failed fir
     <div class="domain-title">200+ Microservices, PCF → Kubernetes</div>
     <div class="domain-desc">Moving a supply-chain platform off Pivotal Cloud Foundry in 12 months: Docker, GitOps on GitLab, Vault, pod disruption budgets, and a decommission-or-it's-not-done rule.</div>
     <div class="domain-arrow" style="color:var(--accent2)">Cloud Migration · DevOps →</div>
+  </a>
+  <a class="domain-card" href="/case-studies/alert-noise-diagnostic/">
+    <div class="domain-icon">🔕</div>
+    <div class="domain-title">80,000 → 5,000: An Alert Noise Diagnostic</div>
+    <div class="domain-desc">A diagnostic memo: why a middleware ops team couldn't cut its own alerts, and how dev-team sign-off on every alert removed about 94% of the noise.</div>
+    <div class="domain-arrow" style="color:var(--accent2)">Telecom · SRE · Observability →</div>
   </a>
   <a class="domain-card" href="/case-studies/sla-breach-reduction/">
     <div class="domain-icon">📉</div>

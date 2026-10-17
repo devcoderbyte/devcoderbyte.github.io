@@ -30,7 +30,7 @@ description: "SRE and observability frameworks — SLO/SLI integration, dashboar
 
 <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin:1.5rem 0">
   <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-family:'JetBrains Mono',monospace;margin-bottom:.5rem">From production · T-Mobile</div>
-  <p style="margin:0"><strong>Splunk alert noise cleanup: ~80,000 → ~5,000 alerts.</strong> As the middleware operations team, we couldn't delete an alert on our own judgment. Every alert went to the owning dev team for sign-off: was this check on a metric, response time or 4xx/5xx rate still needed, or had a recent release replaced it? We drove the review and pushed the dev teams for quick decisions, then executed them. About 5,000 alerts survived, a cut of around 94%.</p>
+  <p style="margin:0"><strong>Splunk alert noise cleanup: ~80,000 → ~5,000 alerts.</strong> As the middleware operations team, we couldn't delete an alert on our own judgment. Every alert went to the owning dev team for sign-off: was this check on a metric, response time or 4xx/5xx rate still needed, or had a recent release replaced it? We drove the review and pushed the dev teams for quick decisions, then executed them. About 5,000 alerts survived, a cut of around 94%. <a href="/case-studies/alert-noise-diagnostic/">Read the diagnostic memo →</a></p>
 </div>
 
 > Good observability is invisible when it's working. The moment a client asks "what's the status?" — observability has already failed.

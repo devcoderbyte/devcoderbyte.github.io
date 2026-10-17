@@ -39,7 +39,8 @@ delivery-pulse/
     ├── bid-conversion-lift.md        # 25% bid conversion lift
     ├── devops-upskilling.md          # DevOps capability platform
     ├── game-server-sre-experiment.md # Chaos test on a self-hosted game server
-    └── pcf-to-kubernetes-migration.md # 200+ microservices PCF → TKE
+    ├── pcf-to-kubernetes-migration.md # 200+ microservices PCF → TKE
+    └── alert-noise-diagnostic.md     # 80,000 → 5,000 alerts diagnostic memo
 ```
 
 ---
