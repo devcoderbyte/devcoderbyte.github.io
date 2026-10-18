@@ -26,6 +26,12 @@ description: "Interactive delivery tools — SLO calculator, toil audit scorecar
     <div class="domain-desc">Input your RFQ parameters. Get complexity score, effort estimate, engagement-type-aware risk flags, and bid strategy recommendation.</div>
     <div class="domain-arrow" style="color:var(--accent2)">Score your RFQ →</div>
   </a>
+  <a class="domain-card" href="/tools/ai-roi-calculator/">
+    <div class="domain-icon">🤖</div>
+    <div class="domain-title">AI Usage & ROI Calculator</div>
+    <div class="domain-desc">Pick a model, cloud API or self-hosted, and your usage. See cost per user against a budget cap, the value created and the effect on gross margin. A second tab tests mixes of engineers and AI agents for an offering.</div>
+    <div class="domain-arrow" style="color:var(--accent2)">Open calculator →</div>
+  </a>
 </div>
 
 <p style="font-size:13px;color:var(--muted);margin-top:.5rem">No signup, no data collected. All logic runs in your browser.</p>

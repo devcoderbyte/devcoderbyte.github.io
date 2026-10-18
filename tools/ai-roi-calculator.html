@@ -1,0 +1,385 @@
+---
+layout: default
+title: AI Usage & ROI Calculator
+description: "Estimate what AI costs per user against a per-employee budget cap, the value it creates, how it lands on a services P&L, and whether a mix of engineers and AI agents can deliver a project profitably."
+permalink: /tools/ai-roi-calculator/
+---
+<style>
+.roi-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:.5rem .75rem;font-size:14px;color:var(--text);font-family:var(--font-body);outline:none;transition:border-color .15s}
+.roi-input:focus,.roi-input:hover{border-color:var(--accent)}
+.roi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.roi-grid.two{grid-template-columns:repeat(2,1fr)}
+.roi-field label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-family:var(--font-mono);display:block;margin-bottom:.4rem}
+.roi-hint{font-size:12px;color:var(--muted);margin-top:.35rem;line-height:1.5}
+.roi-note{font-size:13px;color:var(--muted);line-height:1.6;margin-top:.75rem}
+.roi-bar{height:12px;background:var(--surface2);border-radius:6px;overflow:hidden;position:relative;margin:.6rem 0 .4rem}
+.roi-bar-fill{height:100%;border-radius:6px;transition:width .3s,background .3s}
+.roi-bar-cap{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--text)}
+.roi-pl{width:100%;border-collapse:collapse;font-size:14px}
+.roi-pl th{text-align:left;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;padding:.5rem .6rem;border-bottom:1px solid var(--border);font-weight:600}
+.roi-pl td{padding:.55rem .6rem;border-bottom:1px solid var(--border);color:var(--light);font-variant-numeric:tabular-nums}
+.roi-pl td:first-child{color:var(--text);font-weight:500}
+.roi-pl tr:last-child td{border-bottom:none}
+.roi-pl td.num{text-align:right}
+.roi-pl th.num{text-align:right}
+.hidden{display:none!important}
+@media(max-width:760px){.roi-grid,.roi-grid.two{grid-template-columns:1fr}.roi-pl{font-size:13px}.roi-pl td,.roi-pl th{padding:.5rem .35rem}}
+</style>
+<div class="page-wrap">
+  <div class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="/">Home</a> <span>→</span> <a href="/tools/">Tools</a> <span>→</span> AI ROI Calculator</div>
+      <h1 class="page-title">AI Usage & ROI Calculator</h1>
+      <p style="color:var(--muted);font-size:15px;margin-top:.75rem;max-width:640px">What does AI cost per person, does it fit inside a per-employee budget cap, what value does it create, and where does it land on the P&amp;L? The second tab tests a delivery team that mixes engineers and AI agents. Change any input and the numbers update.</p>
+    </div>
+  </div>
+  <div class="page-content"><div class="container"><div class="tool-wrap" style="max-width:808px">
+
+    <div class="btn-group" style="margin-bottom:1.25rem;flex-wrap:wrap" id="tabs">
+      <button data-tab="usage" class="active">Usage &amp; ROI</button>
+      <button data-tab="team">Team mix: engineers + AI agents</button>
+    </div>
+
+    <div id="tab-usage">
+
+    <div class="tool-section">
+      <div class="tool-section-title">1 · Model and deployment</div>
+      <div class="roi-grid two">
+        <div class="roi-field">
+          <label for="deploy">Deployment</label>
+          <select id="deploy" class="tool-select">
+            <option value="api">Cloud API (pay per token)</option>
+            <option value="self">Self-hosted open model (your GPUs)</option>
+          </select>
+        </div>
+        <div class="roi-field">
+          <label for="model" id="model-label">Model</label>
+          <select id="model" class="tool-select">
+            <option value="10|50">Claude Fable 5.1 · $10 / $50</option>
+            <option value="4|20" selected>Claude Opus 5.5 · $4 / $20</option>
+            <option value="2|10">Claude Sonnet 5.5 · $2 / $10</option>
+            <option value="0.1|0.5">Claude Haiku 5.5 · $0.10 / $0.50</option>
+            <option value="custom">Custom (enter prices)</option>
+          </select>
+          <div class="roi-hint">Prices are USD per million input / output tokens.</div>
+        </div>
+      </div>
+      <div class="roi-grid two hidden" id="custom-prices" style="margin-top:1rem">
+        <div class="roi-field"><label for="pin">Input $ / 1M tokens</label><input id="pin" class="roi-input" type="number" min="0" step="0.01" value="3"></div>
+        <div class="roi-field"><label for="pout">Output $ / 1M tokens</label><input id="pout" class="roi-input" type="number" min="0" step="0.01" value="15"></div>
+      </div>
+      <div class="roi-grid hidden" id="self-fields" style="margin-top:1rem">
+        <div class="roi-field"><label for="gpuRate">GPU $ / hour</label><input id="gpuRate" class="roi-input" type="number" min="0" step="0.1" value="2.5"></div>
+        <div class="roi-field"><label for="gpus">Number of GPUs</label><input id="gpus" class="roi-input" type="number" min="1" step="1" value="4"></div>
+        <div class="roi-field"><label for="gpuHours">GPU hours / month</label><input id="gpuHours" class="roi-input" type="number" min="1" step="1" value="730"><div class="roi-hint">730 = always on</div></div>
+        <div class="roi-field"><label for="tps">Tokens / sec per GPU</label><input id="tps" class="roi-input" type="number" min="1" step="10" value="1500"><div class="roi-hint">Throughput you measure for your model</div></div>
+        <div class="roi-field"><label for="opsCost">Ops & MLOps $ / month</label><input id="opsCost" class="roi-input" type="number" min="0" step="100" value="3000"><div class="roi-hint">Engineer time to run it</div></div>
+      </div>
+      <p class="roi-note" id="model-note">Claude prices are Anthropic's list prices (October 2026). Bedrock, Vertex AI and other models are priced differently; use Custom.</p>
+    </div>
+
+    <div class="tool-section">
+      <div class="tool-section-title">2 · Usage</div>
+      <div class="btn-group" style="margin-bottom:1rem;flex-wrap:wrap" id="presets">
+        <button data-p="chat">Chat assistant</button>
+        <button data-p="ops" class="active">Ops / ticket triage</button>
+        <button data-p="code">Coding agent</button>
+      </div>
+      <div class="roi-grid">
+        <div class="roi-field"><label for="users">Licensed users</label><input id="users" class="roi-input" type="number" min="1" step="1" value="60"></div>
+        <div class="roi-field"><label for="active">Active users %</label><input id="active" class="roi-input" type="number" min="0" max="100" step="5" value="70"></div>
+        <div class="roi-field"><label for="days">Working days / month</label><input id="days" class="roi-input" type="number" min="1" max="31" step="1" value="21"></div>
+        <div class="roi-field"><label for="reqs">Requests / user / day</label><input id="reqs" class="roi-input" type="number" min="0" step="1" value="40"></div>
+        <div class="roi-field"><label for="tin">Input tokens / request</label><input id="tin" class="roi-input" type="number" min="0" step="100" value="4000"></div>
+        <div class="roi-field"><label for="tout">Output tokens / request</label><input id="tout" class="roi-input" type="number" min="0" step="100" value="800"></div>
+      </div>
+    </div>
+
+    <div class="tool-section">
+      <div class="tool-section-title">3 · Budget cap</div>
+      <div class="roi-grid two">
+        <div class="roi-field"><label for="cap">Central budget $ / user / month</label><input id="cap" class="roi-input" type="number" min="0" step="1" value="29"></div>
+        <div class="roi-field">
+          <label for="payer">Who pays above the cap?</label>
+          <select id="payer" class="tool-select">
+            <option value="project">The project / account budget</option>
+            <option value="all">Everything is charged to the project</option>
+            <option value="central">The central budget covers it all</option>
+          </select>
+        </div>
+      </div>
+      <p class="roi-note">Default $29: Accenture reportedly centrally funds $29 per employee per month for Claude since 1 October 2026; usage above that needs a project budget (<a href="https://404media.co/accenture-tells-employees-they-can-now-spend-only-29-on-claude-per-month" target="_blank" rel="noopener">404 Media</a>).</p>
+    </div>
+
+    <div class="tool-section">
+      <div class="tool-section-title">4 · Value and commercial model</div>
+      <div class="roi-grid">
+        <div class="roi-field">
+          <label for="vmode">Time saved assumption</label>
+          <select id="vmode" class="tool-select">
+            <option value="research">Independent research: ~3% of hours</option>
+            <option value="vendor">Vendor-reported: 40–60 min / day</option>
+            <option value="custom">Custom</option>
+          </select>
+        </div>
+        <div class="roi-field"><label for="hours">Hours saved / active user / week</label><input id="hours" class="roi-input" type="number" min="0" step="0.1" value="1.2"></div>
+        <div class="roi-field"><label for="rate">Loaded cost $ / hour</label><input id="rate" class="roi-input" type="number" min="0" step="1" value="25"><div class="roi-hint">Salary + overheads per hour</div></div>
+        <div class="roi-field"><label for="real">Realization %</label><input id="real" class="roi-input" type="number" min="0" max="100" step="5" value="50"><div class="roi-hint">Share of saved time that turns into money</div></div>
+        <div class="roi-field">
+          <label for="comm">Commercial model</label>
+          <select id="comm" class="tool-select">
+            <option value="fixed">Fixed price / managed service</option>
+            <option value="tm">Time & materials</option>
+            <option value="internal">Internal team (cost centre)</option>
+          </select>
+        </div>
+        <div class="roi-field pl-only"><label for="rev">Account revenue $ / month</label><input id="rev" class="roi-input" type="number" min="0" step="1000" value="175000"></div>
+        <div class="roi-field pl-only"><label for="gm">Current gross margin %</label><input id="gm" class="roi-input" type="number" min="-100" max="100" step="1" value="25"></div>
+        <div class="roi-field tm-only hidden"><label for="bill">Bill rate $ / hour</label><input id="bill" class="roi-input" type="number" min="0" step="1" value="35"></div>
+        <div class="roi-field tm-only hidden">
+          <label for="redeploy">Freed hours</label>
+          <select id="redeploy" class="tool-select">
+            <option value="no">Not billed (client pays less)</option>
+            <option value="yes">Redeployed to other billable work</option>
+          </select>
+        </div>
+      </div>
+      <p class="roi-note" id="vnote"></p>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-card"><div class="metric-label">AI cost / month</div><div class="metric-val" id="m-cost">–</div></div>
+      <div class="metric-card"><div class="metric-label">Per active user</div><div class="metric-val" id="m-user">–</div></div>
+      <div class="metric-card"><div class="metric-label">Value / month</div><div class="metric-val" id="m-value">–</div></div>
+      <div class="metric-card"><div class="metric-label">ROI</div><div class="metric-val accent" id="m-roi">–</div></div>
+    </div>
+
+    <div class="tool-section">
+      <div class="tool-section-title">Per-user cost against the cap</div>
+      <div class="roi-bar"><div class="roi-bar-fill" id="cap-fill"></div><div class="roi-bar-cap" id="cap-line"></div></div>
+      <div class="status-msg" id="cap-msg"></div>
+      <div class="status-msg status-warn hidden" id="cap-msg-2" style="margin-top:.5rem"></div>
+    </div>
+
+    <div class="tool-section" id="self-section">
+      <div class="tool-section-title">Self-hosted capacity</div>
+      <div class="status-msg" id="self-msg"></div>
+    </div>
+
+    <div class="tool-section">
+      <div class="tool-section-title">P&amp;L impact (monthly)</div>
+      <table class="roi-pl">
+        <thead><tr><th></th><th class="num">Before AI</th><th class="num">With AI</th><th class="num">Change</th></tr></thead>
+        <tbody id="pl-body"></tbody>
+      </table>
+      <p class="roi-note" id="pl-note"></p>
+    </div>
+
+    </div>
+
+    <div id="tab-team" class="hidden">
+      <div class="tool-section">
+        <div class="tool-section-title">1 · What the project needs today</div>
+        <div class="roi-grid">
+          <div class="roi-field"><label for="t-req">Engineers required</label><input id="t-req" class="roi-input" type="number" min="1" step="1" value="10"></div>
+          <div class="roi-field"><label for="t-cost">Engineer cost $ / month</label><input id="t-cost" class="roi-input" type="number" min="0" step="100" value="4000"><div class="roi-hint">Loaded: salary + overheads</div></div>
+          <div class="roi-field"><label for="t-price">Price to client $ / engineer / month</label><input id="t-price" class="roi-input" type="number" min="0" step="100" value="5600"></div>
+        </div>
+      </div>
+
+      <div class="tool-section">
+        <div class="tool-section-title">2 · The new mix</div>
+        <div class="roi-grid">
+          <div class="roi-field"><label for="t-humans">Engineers</label><input id="t-humans" class="roi-input" type="number" min="0" step="1" value="5"></div>
+          <div class="roi-field"><label for="t-agents">AI agents</label><input id="t-agents" class="roi-input" type="number" min="0" step="1" value="2"></div>
+          <div class="roi-field"><label for="t-uplift">Engineer productivity uplift %</label><input id="t-uplift" class="roi-input" type="number" min="0" step="1" value="3"><div class="roi-hint">From using AI themselves. Research: ~3%</div></div>
+          <div class="roi-field"><label for="t-agentfte">Output per agent (engineer-equivalents)</label><input id="t-agentfte" class="roi-input" type="number" min="0" step="0.1" value="1"><div class="roi-hint">How much of one engineer's work an agent really covers</div></div>
+          <div class="roi-field"><label for="t-agentcost">AI cost $ / agent / month</label><input id="t-agentcost" class="roi-input" type="number" min="0" step="50" value="1500"><div class="roi-hint">Tokens or licence; estimate it on the Usage tab</div></div>
+          <div class="roi-field"><label for="t-oversight">Oversight hours / agent / week</label><input id="t-oversight" class="roi-input" type="number" min="0" step="1" value="8"><div class="roi-hint">Engineer time spent reviewing agent output</div></div>
+          <div class="roi-field"><label for="t-setup">One-off setup $</label><input id="t-setup" class="roi-input" type="number" min="0" step="1000" value="15000"><div class="roi-hint">Integration, guardrails, runbooks</div></div>
+          <div class="roi-field"><label for="t-months">Contract length (months)</label><input id="t-months" class="roi-input" type="number" min="1" step="1" value="12"></div>
+          <div class="roi-field"><label for="t-disc">Client discount for AI-led delivery %</label><input id="t-disc" class="roi-input" type="number" min="0" max="100" step="1" value="10"></div>
+        </div>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="metric-card"><div class="metric-label">Capacity covered</div><div class="metric-val" id="t-m-cov">–</div></div>
+        <div class="metric-card"><div class="metric-label">Cost / month</div><div class="metric-val" id="t-m-cost">–</div></div>
+        <div class="metric-card"><div class="metric-label">Gross margin</div><div class="metric-val accent" id="t-m-gm">–</div></div>
+        <div class="metric-card"><div class="metric-label">Setup payback</div><div class="metric-val" id="t-m-pay">–</div></div>
+      </div>
+
+      <div class="tool-section">
+        <div class="tool-section-title">Can the new mix do the work?</div>
+        <div class="roi-bar"><div class="roi-bar-fill" id="t-cov-fill"></div><div class="roi-bar-cap" id="t-cov-line" style="left:100%"></div></div>
+        <div class="status-msg" id="t-cov-msg"></div>
+      </div>
+
+      <div class="tool-section">
+        <div class="tool-section-title">Offering P&amp;L (monthly)</div>
+        <table class="roi-pl">
+          <thead><tr><th></th><th class="num">All engineers</th><th class="num">New mix</th><th class="num">Change</th></tr></thead>
+          <tbody id="t-pl"></tbody>
+        </table>
+        <p class="roi-note" id="t-note"></p>
+      </div>
+    </div>
+
+    <p style="font-size:13px;color:var(--muted)">Estimates only. All logic runs in your browser; nothing is stored or sent.</p>
+  </div></div></div>
+</div>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var num=function(id){var v=parseFloat($(id).value);return isNaN(v)?0:v};
+  var usd=function(v,dp){var neg=v<0;v=Math.abs(v);var s='$'+v.toLocaleString('en-US',{minimumFractionDigits:dp||0,maximumFractionDigits:dp||0});return neg?'−'+s:s};
+  var pct=function(v){return (isFinite(v)?v.toFixed(1):'–')+'%'};
+  var presets={chat:{reqs:20,tin:2000,tout:500},ops:{reqs:40,tin:4000,tout:800},code:{reqs:150,tin:20000,tout:1500}};
+  document.querySelectorAll('#presets button').forEach(function(b){b.addEventListener('click',function(){
+    var p=presets[b.dataset.p];Object.keys(p).forEach(function(k){$(k).value=p[k]});
+    document.querySelectorAll('#presets button').forEach(function(x){x.classList.toggle('active',x===b)});calc();});});
+  document.querySelectorAll('#tabs button').forEach(function(b){b.addEventListener('click',function(){
+    document.querySelectorAll('#tabs button').forEach(function(x){x.classList.toggle('active',x===b)});
+    $('tab-usage').classList.toggle('hidden',b.dataset.tab!=='usage');
+    $('tab-team').classList.toggle('hidden',b.dataset.tab!=='team');});});
+  document.querySelectorAll('input,select').forEach(function(el){el.addEventListener('input',calc);el.addEventListener('change',calc)});
+  var vnotes={
+    research:'~3% of a 40-hour week ≈ 1.2 hours. From an NBER study of about 25,000 Danish workers, which also found no significant change in earnings or hours worked (<a href="https://www.computing.co.uk/news/2025/ai/ai-chatbots-yet-to-prove-their-worth" target="_blank" rel="noopener">Computing</a>, <a href="https://the-decoder.com/chatbots-like-chatgpt-have-not-led-to-significant-changes-in-wages-or-working-hours-study-finds/" target="_blank" rel="noopener">The Decoder</a>).',
+    vendor:'40–60 minutes per active workday ≈ 4.2 hours a week. From OpenAI\'s enterprise report, which is vendor-reported (<a href="https://the-decoder.com/openai-claims-generative-ai-saves-knowledge-workers-40-to-80-minutes-a-day/" target="_blank" rel="noopener">The Decoder</a>).',
+    custom:'Enter your own measured number. Measured beats assumed.'};
+
+  function calc(){
+    var deploy=$('deploy').value, model=$('model').value, comm=$('comm').value;
+    $('custom-prices').classList.toggle('hidden',model!=='custom');
+    $('self-fields').classList.toggle('hidden',deploy!=='self');
+    $('self-section').classList.toggle('hidden',deploy!=='self');
+    $('model-label').textContent=deploy==='self'?'Compare against API model':'Model';
+    document.querySelectorAll('.tm-only').forEach(function(e){e.classList.toggle('hidden',comm!=='tm')});
+    var vm=$('vmode').value;if(vm==='research')$('hours').value=1.2;if(vm==='vendor')$('hours').value=4.2;$('hours').disabled=vm!=='custom';$('vnote').innerHTML=vnotes[vm];
+    document.querySelectorAll('.pl-only').forEach(function(e){e.classList.toggle('hidden',comm==='internal')});
+
+    var pin,pout;
+    if(model==='custom'){pin=num('pin');pout=num('pout')}else{var p=model.split('|');pin=+p[0];pout=+p[1]}
+    var active=Math.round(num('users')*num('active')/100);
+    var reqMonth=active*num('days')*num('reqs');
+    var tinM=reqMonth*num('tin'), toutM=reqMonth*num('tout');
+    var apiCost=tinM/1e6*pin+toutM/1e6*pout;
+
+    var cost=apiCost;
+    if(deploy==='self'){
+      var gpuCost=num('gpuRate')*num('gpus')*num('gpuHours');
+      cost=gpuCost+num('opsCost');
+      var capacity=num('tps')*num('gpus')*3600*num('gpuHours');
+      var demand=tinM+toutM, util=capacity>0?demand/capacity*100:Infinity;
+      var cls=util>100?'status-crit':util>70?'status-warn':'status-ok';
+      $('self-msg').className='status-msg '+cls;
+      $('self-msg').innerHTML=(util>100?'<strong>Not enough capacity.</strong> ':'')+
+        'Demand is '+(demand/1e6).toFixed(1)+'M tokens/month against '+(capacity/1e6).toFixed(0)+'M of GPU capacity ('+pct(util)+' utilised). '+
+        'The same tokens on the API model would cost '+usd(apiCost)+'/month, against '+usd(cost)+' self-hosted. '+
+        (cost<apiCost?'Self-hosting is cheaper at this volume.':'The API is cheaper at this volume; self-hosting pays off only at higher, steady usage.');
+    }
+    var perUser=active>0?cost/active:0;
+    var cap=num('cap');
+
+    // cap view
+    var maxV=Math.max(perUser,cap)*1.15||1;
+    $('cap-fill').style.width=Math.min(perUser/maxV*100,100)+'%';
+    $('cap-fill').style.background=perUser>cap?'#ef4444':'var(--accent2)';
+    $('cap-line').style.left=(cap/maxV*100)+'%';
+    var over=Math.max(0,perUser-cap)*active;
+    var central=Math.min(perUser,cap)*active;
+    if(perUser<=cap){$('cap-msg').className='status-msg status-ok';$('cap-msg').textContent=usd(perUser,2)+' per active user fits inside the '+usd(cap)+' cap, with '+usd(cap-perUser,2)+' to spare per person.';}
+    else{$('cap-msg').className='status-msg status-crit';$('cap-msg').textContent=usd(perUser,2)+' per active user is '+(perUser/(cap||1)).toFixed(1)+'× the '+usd(cap)+' cap. Overage: '+usd(over)+' per month across '+active+' active users.';}
+    var payer=$('payer').value, projectAI=payer==='all'?cost:payer==='central'?0:over;
+    var m2=$('cap-msg-2');
+    if(deploy==='self'){m2.classList.remove('hidden');m2.textContent='Self-hosted cost is shared infrastructure; the per-user figure is that cost divided by active users.'}else{m2.classList.add('hidden')}
+
+    // value
+    var hoursSaved=num('hours')*52/12*active;
+    var realizedHours=hoursSaved*num('real')/100;
+    var value=realizedHours*num('rate');
+    var net=value-cost, roi=cost>0?net/cost*100:Infinity;
+    $('m-cost').textContent=usd(cost);
+    $('m-user').textContent=usd(perUser,2);
+    $('m-value').textContent=usd(value);
+    $('m-roi').textContent=isFinite(roi)?Math.round(roi)+'%':'–';
+    $('m-roi').style.color=net<0?'#ef4444':'';
+
+    // P&L
+    var rows=[],note='';
+    if(comm==='internal'){
+      rows=[['Time freed (realized)','—',Math.round(realizedHours).toLocaleString()+' h',''],
+            ['Value of time freed','—',usd(value),'+'+usd(value)],
+            ['AI cost','—',usd(cost),'−'+usd(cost)],
+            ['Net benefit','—',usd(net),(net>=0?'+':'')+usd(net)]];
+      note='For an internal team there is no client revenue. The question is whether the freed time is used on work that matters; that is what the realization % stands for.';
+    } else {
+      var R=num('rev'), gm=num('gm')/100, C=R*(1-gm);
+      var R2=R, C2=C;
+      var lostRev=0;
+      if(comm==='fixed'){
+        C2=C-value+projectAI;
+        note='Fixed price: the client pays the same, so every hour AI saves is margin. This is why services firms prefer fixed-price and outcome-based deals for AI-heavy work. Any AI spend charged to the project comes straight out of that margin.';
+      } else {
+        var bill=num('bill');
+        if($('redeploy').value==='yes'){
+          C2=C+projectAI;
+          note='Time & materials, hours redeployed: this account bills the same, so its margin only carries the AI cost. The gain shows up elsewhere: '+Math.round(realizedHours).toLocaleString()+' extra billable hours (about '+usd(realizedHours*bill)+'/month) on other work, if you can sell them.';
+        } else {
+          lostRev=realizedHours*bill;
+          R2=R-lostRev; C2=C-value+projectAI;
+          note='Time & materials, hours not redeployed: the client is billed for fewer hours, so revenue falls by '+usd(lostRev)+'. Efficiency cuts the top line, which is why T&M accounts need to redeploy freed hours or move to fixed price.';
+        }
+      }
+      var GP=R-C, GP2=R2-C2, gm2=R2>0?GP2/R2*100:0;
+      var d=function(a,b){var x=b-a;return (x>=0?'+':'')+usd(x)};
+      rows=[['Revenue',usd(R),usd(R2),d(R,R2)],
+            ['Delivery cost',usd(C),usd(C2),d(C,C2)],
+            ['incl. AI on project','—',usd(projectAI),''],
+            ['Gross profit',usd(GP),usd(GP2),d(GP,GP2)],
+            ['Gross margin',pct(gm*100),pct(gm2),((gm2-gm*100)>=0?'+':'−')+Math.abs(gm2-gm*100).toFixed(1)+' pts']];
+      if(payer==='project'&&over===0&&deploy==='api')note+=' Usage fits inside the central cap, so the project carries no AI cost; it sits in corporate overhead instead.';
+    }
+    $('pl-body').innerHTML=rows.map(function(r){return '<tr><td>'+r[0]+'</td><td class="num">'+r[1]+'</td><td class="num">'+r[2]+'</td><td class="num">'+r[3]+'</td></tr>'}).join('');
+    $('pl-note').textContent=note;
+    team();
+  }
+
+  function team(){
+    var req=num('t-req'),cost=num('t-cost'),price=num('t-price'),H=num('t-humans'),A=num('t-agents');
+    var uplift=num('t-uplift')/100,afte=num('t-agentfte'),acost=num('t-agentcost'),ov=num('t-oversight');
+    var setup=num('t-setup'),months=Math.max(1,num('t-months')),disc=num('t-disc')/100;
+    var oversightFTE=A*ov/40;
+    var humanCap=Math.max(0,H*(1+uplift)-oversightFTE);
+    var cap=humanCap+A*afte, cov=req>0?cap/req*100:0;
+    var R1=req*price, C1=req*cost;
+    var R2=R1*(1-disc), C2=H*cost+A*acost+setup/months;
+    var GP1=R1-C1, GP2=R2-C2, gm1=R1>0?GP1/R1*100:0, gm2=R2>0?GP2/R2*100:0;
+    var monthlyGain=(R2-(H*cost+A*acost))-GP1;
+    $('t-m-cov').textContent=Math.round(cov)+'%';
+    $('t-m-cov').style.color=cov<100?'#ef4444':'';
+    $('t-m-cost').textContent=usd(C2);
+    $('t-m-gm').textContent=pct(gm2);
+    $('t-m-gm').style.color=gm2<gm1?'#ef4444':'';
+    $('t-m-pay').textContent=setup<=0?'None':monthlyGain>0?(setup/monthlyGain).toFixed(1)+' mo':'Never';
+    $('t-cov-fill').style.width=Math.min(cov/Math.max(cov,100)*100,100)+'%';
+    $('t-cov-line').style.left=(100/Math.max(cov,100)*100)+'%';
+    $('t-cov-fill').style.background=cov<100?'#ef4444':'var(--accent2)';
+    var gap=req-cap, needAgent=A>0?(req-humanCap)/A:Infinity;
+    var msg=$('t-cov-msg');
+    if(cov>=100){msg.className='status-msg status-ok';msg.textContent=H+' engineers + '+A+' agents cover '+cap.toFixed(1)+' of the '+req+' engineers\' worth of work. Oversight takes '+oversightFTE.toFixed(1)+' engineers\' time.';}
+    else{msg.className='status-msg status-crit';msg.textContent='Short by '+gap.toFixed(1)+' engineers\' worth of work. Oversight takes '+oversightFTE.toFixed(1)+' engineers\' time. '+(A>0&&isFinite(needAgent)?'To close the gap, each agent would need to deliver '+needAgent.toFixed(1)+' engineers\' output.':'Add engineers or agents.');}
+    var d=function(a,b){var x=b-a;return (x>=0?'+':'')+usd(x)};
+    var rows=[['Revenue',usd(R1),usd(R2),d(R1,R2)],
+      ['Engineers',usd(C1),usd(H*cost),d(C1,H*cost)],
+      ['AI agents','—',usd(A*acost),'+'+usd(A*acost)],
+      ['Setup, spread over contract','—',usd(setup/months),'+'+usd(setup/months)],
+      ['Gross profit',usd(GP1),usd(GP2),d(GP1,GP2)],
+      ['Gross margin',pct(gm1),pct(gm2),((gm2-gm1)>=0?'+':'−')+Math.abs(gm2-gm1).toFixed(1)+' pts']];
+    $('t-pl').innerHTML=rows.map(function(r){return '<tr><td>'+r[0]+'</td><td class="num">'+r[1]+'</td><td class="num">'+r[2]+'</td><td class="num">'+r[3]+'</td></tr>'}).join('');
+    $('t-note').textContent=(cov<100?'The margin looks better only because less work is being delivered. Fix capacity first. ':'')+
+      'You can\'t bill an AI agent by the hour, so a mix like this needs fixed-price or outcome-based pricing. The discount is what the client gets for accepting AI-led delivery; the rest of the saving is your margin.';
+  }
+  calc();
+})();
+</script>
