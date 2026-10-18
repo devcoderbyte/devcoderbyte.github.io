@@ -450,9 +450,10 @@ permalink: /tools/ai-roi-calculator/
       ['Setup, spread over contract','—',usd(setup/months),'+'+usd(setup/months)],
       ['Gross profit',usd(GP1),usd(GP2),d(GP1,GP2)],
       ['Gross margin',pct(gm1),pct(gm2),isFinite(gm1)&&isFinite(gm2)?((gm2-gm1)>=0?'+':'−')+Math.abs(gm2-gm1).toFixed(1)+' pts':'–']];
+    if(!viable)rows=rows.map(function(r){return [r[0],r[1],'—','—']});
     $('t-pl').style.opacity=viable?'':'.45';
     $('t-pl').innerHTML=rows.map(function(r){return '<tr><td>'+r[0]+'</td><td class="num">'+r[1]+'</td><td class="num">'+r[2]+'</td><td class="num">'+r[3]+'</td></tr>'}).join('');
-    var note=!viable?'This mix can\'t deliver the work, so these margin figures aren\'t real: the client would not pay full price for '+Math.round(cov)+'% of the work. Fix capacity first. ':'';
+    var note=!viable?'This mix can\'t deliver the work, so there is no real P&L to show: the client would not pay full price for '+Math.round(cov)+'% of the work. Fix capacity first. ':'';
     if(viable&&usesAI&&gm2<gm1)note+='This mix is less profitable than an all-engineer team. ';
     note+=R1<=0?'Enter a client price to see margins.':usesAI?'You can\'t bill an AI agent by the hour, so a mix like this needs fixed-price or outcome-based pricing. The discount is what the client gets for accepting AI-led delivery; the rest of the saving is your margin.':'With no agents, there is no AI setup cost or discount.';
     $('t-note').textContent=note;
