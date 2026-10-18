@@ -139,12 +139,14 @@ permalink: /tools/ai-roi-calculator/
         <div class="roi-field tm-only hidden">
           <label for="redeploy">Freed hours</label>
           <select id="redeploy" class="tool-select">
-            <option value="no">Not billed (client pays less)</option>
+            <option value="no">Not billed; fewer people on the account</option>
+            <option value="bench">Not billed; people stay (bench)</option>
             <option value="yes">Redeployed to other billable work</option>
           </select>
         </div>
       </div>
       <p class="roi-note" id="vnote"></p>
+      <div class="status-msg status-warn hidden" id="u-warn" style="margin-top:.75rem"></div>
     </div>
 
     <div class="metrics-grid">
@@ -213,6 +215,7 @@ permalink: /tools/ai-roi-calculator/
         <div class="tool-section-title">Can the new mix do the work?</div>
         <div class="roi-bar"><div class="roi-bar-fill" id="t-cov-fill"></div><div class="roi-bar-cap" id="t-cov-line" style="left:100%"></div></div>
         <div class="status-msg" id="t-cov-msg"></div>
+        <div class="status-msg status-warn hidden" id="t-warn" style="margin-top:.5rem"></div>
       </div>
 
       <div class="tool-section">
@@ -231,9 +234,14 @@ permalink: /tools/ai-roi-calculator/
 <script>
 (function(){
   var $=function(id){return document.getElementById(id)};
-  var num=function(id){var v=parseFloat($(id).value);return isNaN(v)?0:v};
+  var LIM={users:[0,1e7,1],active:[0,100],days:[0,31],reqs:[0,1e5],tin:[0,2e6],tout:[0,2e6],pin:[0,1e4],pout:[0,1e4],
+    gpuRate:[0,1e4],gpus:[0,1e5,1],gpuHours:[0,744],tps:[0,1e7],opsCost:[0,1e8],cap:[0,1e6],hours:[0,60],rate:[0,1e5],real:[0,100],
+    rev:[0,1e10],gm:[-100,99],bill:[0,1e5],'t-req':[0,1e5],'t-cost':[0,1e7],'t-price':[0,1e7],'t-humans':[0,1e5],'t-agents':[0,1e5,1],
+    't-uplift':[-50,300],'t-agentfte':[0,20],'t-agentcost':[0,1e7],'t-oversight':[0,168],'t-setup':[0,1e9],'t-months':[1,120],'t-disc':[0,100]};
+  var num=function(id){var v=parseFloat($(id).value);if(isNaN(v))v=0;var l=LIM[id];if(l){v=Math.min(l[1],Math.max(l[0],v));if(l[2])v=Math.round(v);}return v};
+  var plural=function(n,w){return n+' '+w+(n===1?'':'s')};
   var usd=function(v,dp){var neg=v<0;v=Math.abs(v);var s='$'+v.toLocaleString('en-US',{minimumFractionDigits:dp||0,maximumFractionDigits:dp||0});return neg?'−'+s:s};
-  var pct=function(v){return (isFinite(v)?v.toFixed(1):'–')+'%'};
+  var pct=function(v){return isFinite(v)?(v<0?'−':'')+Math.abs(v).toFixed(1)+'%':'–'};
   var presets={chat:{reqs:20,tin:2000,tout:500},ops:{reqs:40,tin:4000,tout:800},code:{reqs:150,tin:20000,tout:1500}};
   document.querySelectorAll('#presets button').forEach(function(b){b.addEventListener('click',function(){
     var p=presets[b.dataset.p];Object.keys(p).forEach(function(k){$(k).value=p[k]});
@@ -265,18 +273,24 @@ permalink: /tools/ai-roi-calculator/
     var tinM=reqMonth*num('tin'), toutM=reqMonth*num('tout');
     var apiCost=tinM/1e6*pin+toutM/1e6*pout;
 
-    var cost=apiCost;
+    var cost=apiCost, uw=[];
     if(deploy==='self'){
-      var gpuCost=num('gpuRate')*num('gpus')*num('gpuHours');
-      cost=gpuCost+num('opsCost');
-      var capacity=num('tps')*num('gpus')*3600*num('gpuHours');
-      var demand=tinM+toutM, util=capacity>0?demand/capacity*100:Infinity;
-      var cls=util>100?'status-crit':util>70?'status-warn':'status-ok';
-      $('self-msg').className='status-msg '+cls;
-      $('self-msg').innerHTML=(util>100?'<strong>Not enough capacity.</strong> ':'')+
-        'Demand is '+(demand/1e6).toFixed(1)+'M tokens/month against '+(capacity/1e6).toFixed(0)+'M of GPU capacity ('+pct(util)+' utilised). '+
-        'The same tokens on the API model would cost '+usd(apiCost)+'/month, against '+usd(cost)+' self-hosted. '+
-        (cost<apiCost?'Self-hosting is cheaper at this volume.':'The API is cheaper at this volume; self-hosting pays off only at higher, steady usage.');
+      var gpus=num('gpus'), hrs=num('gpuHours'), perGpu=num('tps')*3600*hrs, demand=tinM+toutM;
+      var needGpus=perGpu>0?Math.ceil(demand/perGpu):Infinity, sm=$('self-msg');
+      if(perGpu<=0){
+        cost=num('opsCost');
+        sm.className='status-msg status-crit';
+        sm.textContent='Enter GPU hours and throughput to size the cluster.';
+      } else {
+        var used=Math.max(gpus,needGpus), short=needGpus>gpus;
+        cost=num('gpuRate')*used*hrs+num('opsCost');
+        var util=used>0?demand/(perGpu*used)*100:0;
+        sm.className='status-msg '+(short?'status-crit':util<30?'status-warn':'status-ok');
+        sm.textContent=(short?'You need '+plural(needGpus,'GPU')+', not '+gpus+', to serve '+(demand/1e6).toFixed(1)+'M tokens a month; costs below use '+needGpus+'. ':
+          'Demand is '+(demand/1e6).toFixed(1)+'M tokens a month, '+pct(util)+' of your GPU capacity. '+(util<30?'Most of what you pay for sits idle. ':''))+
+          'The same tokens on the API model would cost '+usd(apiCost)+' a month, against '+usd(cost)+' self-hosted. '+
+          (cost<apiCost?'Self-hosting is cheaper at this volume.':'The API is cheaper at this volume; self-hosting pays off only with high, steady usage.');
+      }
     }
     var perUser=active>0?cost/active:0;
     var cap=num('cap');
@@ -288,13 +302,17 @@ permalink: /tools/ai-roi-calculator/
     $('cap-line').style.left=(cap/maxV*100)+'%';
     var over=Math.max(0,perUser-cap)*active;
     var central=Math.min(perUser,cap)*active;
-    if(perUser<=cap){$('cap-msg').className='status-msg status-ok';$('cap-msg').textContent=usd(perUser,2)+' per active user fits inside the '+usd(cap)+' cap, with '+usd(cap-perUser,2)+' to spare per person.';}
+    if(active===0){$('cap-msg').className='status-msg status-warn';$('cap-msg').textContent='No active users. Check licensed users and active %.';}
+    else if(cap===0){$('cap-msg').className='status-msg status-warn';$('cap-msg').textContent='No central budget: the full '+usd(perUser,2)+' per active user ('+usd(cost)+' a month) is charged to the project or team.';}
+    else if(perUser<=cap){$('cap-msg').className='status-msg status-ok';$('cap-msg').textContent=usd(perUser,2)+' per active user fits inside the '+usd(cap)+' cap, with '+usd(cap-perUser,2)+' to spare per person.';}
     else{$('cap-msg').className='status-msg status-crit';$('cap-msg').textContent=usd(perUser,2)+' per active user is '+(perUser/(cap||1)).toFixed(1)+'× the '+usd(cap)+' cap. Overage: '+usd(over)+' per month across '+active+' active users.';}
     var payer=$('payer').value, projectAI=payer==='all'?cost:payer==='central'?0:over;
     var m2=$('cap-msg-2');
     if(deploy==='self'){m2.classList.remove('hidden');m2.textContent='Self-hosted cost is shared infrastructure; the per-user figure is that cost divided by active users.'}else{m2.classList.add('hidden')}
 
     // value
+    if(num('hours')>10)uw.push(num('hours')+' hours a week is '+Math.round(num('hours')/40*100)+'% of a 40-hour week, above even vendor claims (about 10%). Measure it before you quote it.');
+    if(num('real')>80)uw.push('Over 80% realization assumes nearly every saved minute turns into money. The research found no change in earnings or hours worked.');
     var hoursSaved=num('hours')*52/12*active;
     var realizedHours=hoursSaved*num('real')/100;
     var value=realizedHours*num('rate');
@@ -302,7 +320,7 @@ permalink: /tools/ai-roi-calculator/
     $('m-cost').textContent=usd(cost);
     $('m-user').textContent=usd(perUser,2);
     $('m-value').textContent=usd(value);
-    $('m-roi').textContent=isFinite(roi)?Math.round(roi)+'%':'–';
+    $('m-roi').textContent=active===0?'–':cost<=0?(value>0?'No cost':'–'):Math.round(roi)+'%';
     $('m-roi').style.color=net<0?'#ef4444':'';
 
     // P&L
@@ -317,69 +335,130 @@ permalink: /tools/ai-roi-calculator/
       var R=num('rev'), gm=num('gm')/100, C=R*(1-gm);
       var R2=R, C2=C;
       var lostRev=0;
+      var saving=Math.min(value,C);
+      if(value>C&&C>0)uw.push('The value of time saved is more than the whole delivery cost; savings are capped at the delivery cost. Check hours saved and users.');
       if(comm==='fixed'){
-        C2=C-value+projectAI;
+        C2=C-saving+projectAI;
         note='Fixed price: the client pays the same, so every hour AI saves is margin. This is why services firms prefer fixed-price and outcome-based deals for AI-heavy work. Any AI spend charged to the project comes straight out of that margin.';
       } else {
         var bill=num('bill');
-        if($('redeploy').value==='yes'){
+        var rd=$('redeploy').value;
+        if(rd==='bench'){
+          lostRev=Math.min(realizedHours*bill,R);
+          R2=R-lostRev; C2=C+projectAI;
+          note='Time & materials, people kept on the bench: the client is billed '+usd(lostRev)+' less, but you still pay the same people. This is the worst case: AI efficiency becomes pure margin loss unless you sell the freed time.';
+        } else if(rd==='yes'){
           C2=C+projectAI;
           note='Time & materials, hours redeployed: this account bills the same, so its margin only carries the AI cost. The gain shows up elsewhere: '+Math.round(realizedHours).toLocaleString()+' extra billable hours (about '+usd(realizedHours*bill)+'/month) on other work, if you can sell them.';
         } else {
-          lostRev=realizedHours*bill;
-          R2=R-lostRev; C2=C-value+projectAI;
+          lostRev=Math.min(realizedHours*bill,R);
+          R2=R-lostRev; C2=C-saving+projectAI;
           note='Time & materials, hours not redeployed: the client is billed for fewer hours, so revenue falls by '+usd(lostRev)+'. Efficiency cuts the top line, which is why T&M accounts need to redeploy freed hours or move to fixed price.';
         }
       }
-      var GP=R-C, GP2=R2-C2, gm2=R2>0?GP2/R2*100:0;
+      var GP=R-C, GP2=R2-C2, gm2=R2>0?GP2/R2*100:NaN;
+      if(R<=0)note='Enter the account revenue to see the P&L impact.';
       var d=function(a,b){var x=b-a;return (x>=0?'+':'')+usd(x)};
       rows=[['Revenue',usd(R),usd(R2),d(R,R2)],
             ['Delivery cost',usd(C),usd(C2),d(C,C2)],
             ['incl. AI on project','—',usd(projectAI),''],
             ['Gross profit',usd(GP),usd(GP2),d(GP,GP2)],
-            ['Gross margin',pct(gm*100),pct(gm2),((gm2-gm*100)>=0?'+':'−')+Math.abs(gm2-gm*100).toFixed(1)+' pts']];
-      if(payer==='project'&&over===0&&deploy==='api')note+=' Usage fits inside the central cap, so the project carries no AI cost; it sits in corporate overhead instead.';
+            ['Gross margin',R>0?pct(gm*100):'–',pct(gm2),isFinite(gm2)&&R>0?((gm2-gm*100)>=0?'+':'−')+Math.abs(gm2-gm*100).toFixed(1)+' pts':'–']];
+      if(active===0)note='No active users, so there is nothing to model yet.';
+      else if(payer==='project'&&over===0&&deploy==='api')note+=' Usage fits inside the central cap, so the project carries no AI cost; it sits in corporate overhead instead.';
     }
     $('pl-body').innerHTML=rows.map(function(r){return '<tr><td>'+r[0]+'</td><td class="num">'+r[1]+'</td><td class="num">'+r[2]+'</td><td class="num">'+r[3]+'</td></tr>'}).join('');
     $('pl-note').textContent=note;
+    $('u-warn').classList.toggle('hidden',!uw.length);$('u-warn').textContent=uw.join(' ');
     team();
   }
 
   function team(){
     var req=num('t-req'),cost=num('t-cost'),price=num('t-price'),H=num('t-humans'),A=num('t-agents');
     var uplift=num('t-uplift')/100,afte=num('t-agentfte'),acost=num('t-agentcost'),ov=num('t-oversight');
-    var setup=num('t-setup'),months=Math.max(1,num('t-months')),disc=num('t-disc')/100;
-    var oversightFTE=A*ov/40;
-    var humanCap=Math.max(0,H*(1+uplift)-oversightFTE);
-    var cap=humanCap+A*afte, cov=req>0?cap/req*100:0;
+    var usesAI=A>0;
+    var setup=usesAI?num('t-setup'):0,months=num('t-months'),disc=usesAI?num('t-disc')/100:0;
+    var msg=$('t-cov-msg'), parts=[], warns=[];
+    if(req<=0){
+      ['t-m-cov','t-m-cost','t-m-gm','t-m-pay'].forEach(function(id){$(id).textContent='–';$(id).style.color='';});
+      $('t-cov-fill').style.width='0%';
+      msg.className='status-msg status-warn';msg.textContent='Enter how many engineers the project needs today.';
+      $('t-warn').classList.add('hidden');$('t-pl').innerHTML='';$('t-note').textContent='';return;
+    }
+    // agents only count when an engineer is accountable for them and their work is reviewed
+    var needHrs=A*ov, haveHrs=H*40;
+    var reviewShare=!usesAI||H===0?0:needHrs>0?Math.min(1,haveHrs/needHrs):1;
+    var oversightFTE=Math.min(needHrs,haveHrs)/40;
+    var humanCap=Math.max(0,H-oversightFTE)*(1+uplift);
+    var agentCap=A*afte*reviewShare;
+    var cap=humanCap+agentCap, cov=cap/req*100, viable=cov>=90, tight=viable&&cov<100;
+    var minEng=usesAI?Math.max(1,Math.ceil(needHrs/40)):0;
     var R1=req*price, C1=req*cost;
     var R2=R1*(1-disc), C2=H*cost+A*acost+setup/months;
-    var GP1=R1-C1, GP2=R2-C2, gm1=R1>0?GP1/R1*100:0, gm2=R2>0?GP2/R2*100:0;
-    var monthlyGain=(R2-(H*cost+A*acost))-GP1;
+    var GP1=R1-C1, GP2=R2-C2, gm1=R1>0?GP1/R1*100:NaN, gm2=R2>0?GP2/R2*100:NaN;
+    var monthlyGain=(R2-(H*cost+A*acost))-GP1, payback=monthlyGain>0?setup/monthlyGain:Infinity;
     $('t-m-cov').textContent=Math.round(cov)+'%';
-    $('t-m-cov').style.color=cov<100?'#ef4444':'';
+    $('t-m-cov').style.color=!viable?'#ef4444':tight?'var(--accent3)':'';
     $('t-m-cost').textContent=usd(C2);
-    $('t-m-gm').textContent=pct(gm2);
-    $('t-m-gm').style.color=gm2<gm1?'#ef4444':'';
-    $('t-m-pay').textContent=setup<=0?'None':monthlyGain>0?(setup/monthlyGain).toFixed(1)+' mo':'Never';
+    $('t-m-gm').textContent=!viable?'Not viable':pct(gm2);
+    $('t-m-gm').style.color=!viable||!(gm2>=gm1)?'#ef4444':'';
+    $('t-m-pay').textContent=!viable||R1<=0?'—':setup<=0?'None':isFinite(payback)?payback.toFixed(1)+' mo':'Never';
     $('t-cov-fill').style.width=Math.min(cov/Math.max(cov,100)*100,100)+'%';
     $('t-cov-line').style.left=(100/Math.max(cov,100)*100)+'%';
-    $('t-cov-fill').style.background=cov<100?'#ef4444':'var(--accent2)';
-    var gap=req-cap, needAgent=A>0?(req-humanCap)/A:Infinity;
-    var msg=$('t-cov-msg');
-    if(cov>=100){msg.className='status-msg status-ok';msg.textContent=H+' engineers + '+A+' agents cover '+cap.toFixed(1)+' of the '+req+' engineers\' worth of work. Oversight takes '+oversightFTE.toFixed(1)+' engineers\' time.';}
-    else{msg.className='status-msg status-crit';msg.textContent='Short by '+gap.toFixed(1)+' engineers\' worth of work. Oversight takes '+oversightFTE.toFixed(1)+' engineers\' time. '+(A>0&&isFinite(needAgent)?'To close the gap, each agent would need to deliver '+needAgent.toFixed(1)+' engineers\' output.':'Add engineers or agents.');}
+    $('t-cov-fill').style.background=!viable?'#ef4444':tight?'var(--accent3)':'var(--accent2)';
+    var Hs=(+H.toFixed(2))+' engineer'+(H===1?'':'s'), As=plural(A,'agent');
+    if(usesAI&&H===0){
+      parts.push('No engineers means nobody is accountable for the agents or reviews their work, so their output can\'t be counted. You need at least '+plural(minEng,'engineer')+' to oversee '+As+'.');
+    } else if(usesAI&&reviewShare<1){
+      parts.push(As+' need '+needHrs+' review hours a week, but '+Hs+' only '+(H===1?'has ':'have ')+haveHrs+'. Only '+Math.round(reviewShare*100)+'% of agent output can be reviewed and counted, and the engineers have no time left for their own work. You need at least '+plural(minEng,'engineer')+'.');
+    } else if(usesAI&&oversightFTE/H>=0.5){
+      parts.push('Engineers spend '+Math.round(oversightFTE/H*100)+'% of their time reviewing agent output.');
+    }
+    if(viable){
+      parts.unshift(Hs+' + '+As+' cover '+cap.toFixed(1)+' of the '+req+' engineers\' worth of work'+(usesAI?'; review takes '+oversightFTE.toFixed(1)+' engineers\' time.':'.'));
+      if(tight)parts.push('That\'s tight: no buffer for leave, attrition or a bad week for the agents.');
+      if(cov>=130)parts.push('That\'s '+(cap-req).toFixed(1)+' engineers of spare capacity you\'re paying for.');
+      msg.className='status-msg '+(tight?'status-warn':'status-ok');
+    } else {
+      parts.unshift('Short by '+(req-cap).toFixed(1)+' engineers\' worth of work.');
+      if(usesAI&&H>0&&reviewShare>=1&&afte>0){
+        var needAgent=(req-humanCap)/A;
+        parts.push('To close the gap, each agent would need to deliver '+needAgent.toFixed(1)+' engineers\' output, or add engineers.');
+      }
+      if(!usesAI||afte===0)parts.push('Add engineers'+(usesAI?'.':' or agents.'));
+      msg.className='status-msg status-crit';
+    }
+    msg.textContent=parts.join(' ');
+    // reality checks
+    if(uplift>0.3)warns.push(Math.round(uplift*100)+'% uplift means each engineer does '+(1+uplift).toFixed(1)+'× the work. Independent research found about 3%; even vendor claims are around 10%.');
+    if(uplift<0)warns.push('Negative uplift means AI slows engineers down. Some studies have found that for experienced developers; it\'s a fair stress test.');
+    if(usesAI&&afte>1.5)warns.push('An agent covering more than 1.5 engineers end to end is unproven. Pilot it before pricing an offering on it.');
+    if(usesAI&&ov<2)warns.push('Under 2 review hours per agent a week is very little. Unreviewed agent output is a delivery and accountability risk.');
+    if(usesAI&&ov/40>=afte)warns.push('Each agent takes '+(ov/40).toFixed(2)+' engineers of review time but delivers '+afte+': it uses up capacity instead of adding it.');
+    if(usesAI&&afte>0){
+      var effCost=(acost+ov/40*cost)/afte;
+      if(effCost>=cost)warns.push('Counting review time, each engineer-equivalent of agent work costs '+usd(effCost)+' a month, more than the '+usd(cost)+' engineer it replaces.');
+    }
+    if(usesAI&&viable&&setup>0&&payback>months)warns.push('The setup cost doesn\'t pay back within the '+months+'-month contract.');
+    if(disc>=1)warns.push('A 100% discount means the client pays nothing.');
+    $('t-warn').classList.toggle('hidden',!warns.length);
+    $('t-warn').textContent=warns.join(' ');
     var d=function(a,b){var x=b-a;return (x>=0?'+':'')+usd(x)};
     var rows=[['Revenue',usd(R1),usd(R2),d(R1,R2)],
       ['Engineers',usd(C1),usd(H*cost),d(C1,H*cost)],
       ['AI agents','—',usd(A*acost),'+'+usd(A*acost)],
       ['Setup, spread over contract','—',usd(setup/months),'+'+usd(setup/months)],
       ['Gross profit',usd(GP1),usd(GP2),d(GP1,GP2)],
-      ['Gross margin',pct(gm1),pct(gm2),((gm2-gm1)>=0?'+':'−')+Math.abs(gm2-gm1).toFixed(1)+' pts']];
+      ['Gross margin',pct(gm1),pct(gm2),isFinite(gm1)&&isFinite(gm2)?((gm2-gm1)>=0?'+':'−')+Math.abs(gm2-gm1).toFixed(1)+' pts':'–']];
+    $('t-pl').style.opacity=viable?'':'.45';
     $('t-pl').innerHTML=rows.map(function(r){return '<tr><td>'+r[0]+'</td><td class="num">'+r[1]+'</td><td class="num">'+r[2]+'</td><td class="num">'+r[3]+'</td></tr>'}).join('');
-    $('t-note').textContent=(cov<100?'The margin looks better only because less work is being delivered. Fix capacity first. ':'')+
-      'You can\'t bill an AI agent by the hour, so a mix like this needs fixed-price or outcome-based pricing. The discount is what the client gets for accepting AI-led delivery; the rest of the saving is your margin.';
+    var note=!viable?'This mix can\'t deliver the work, so these margin figures aren\'t real: the client would not pay full price for '+Math.round(cov)+'% of the work. Fix capacity first. ':'';
+    if(viable&&usesAI&&gm2<gm1)note+='This mix is less profitable than an all-engineer team. ';
+    note+=R1<=0?'Enter a client price to see margins.':usesAI?'You can\'t bill an AI agent by the hour, so a mix like this needs fixed-price or outcome-based pricing. The discount is what the client gets for accepting AI-led delivery; the rest of the saving is your margin.':'With no agents, there is no AI setup cost or discount.';
+    $('t-note').textContent=note;
   }
+
+
   calc();
 })();
 </script>
