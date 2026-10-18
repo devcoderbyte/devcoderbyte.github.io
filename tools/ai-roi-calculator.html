@@ -20,10 +20,18 @@ permalink: /tools/ai-roi-calculator/
 .roi-pl td{padding:.55rem .6rem;border-bottom:1px solid var(--border);color:var(--light);font-variant-numeric:tabular-nums}
 .roi-pl td:first-child{color:var(--text);font-weight:500}
 .roi-pl tr:last-child td{border-bottom:none}
-.roi-pl td.num{text-align:right}
+.roi-pl td.num{text-align:right;white-space:nowrap}
 .roi-pl th.num{text-align:right}
 .hidden{display:none!important}
-@media(max-width:760px){.roi-grid,.roi-grid.two{grid-template-columns:1fr}.roi-pl{font-size:13px}.roi-pl td,.roi-pl th{padding:.5rem .35rem}}
+.wf-up{fill:#0d9488}.wf-down{fill:#dc2626}.wf-total{fill:var(--muted)}
+[data-theme="dark"] .wf-down{fill:#ef4444}
+.wf-txt{fill:var(--light);font-size:11px;font-family:var(--font-body)}
+.wf-lbl{fill:var(--muted);font-size:11px;font-family:var(--font-body)}
+.wf-axis{stroke:var(--border2);stroke-width:1}
+.wf-bar:hover{opacity:.8}
+.wf-key{display:flex;gap:1rem;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:.5rem}
+.wf-key span::before{content:'';display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px;background:var(--sw)}
+@media(max-width:760px){.hide-sm{display:none}.roi-grid,.roi-grid.two{grid-template-columns:1fr}.roi-pl{font-size:13px}.roi-pl td,.roi-pl th{padding:.5rem .35rem}}
 </style>
 <div class="page-wrap">
   <div class="page-header">
@@ -180,6 +188,10 @@ permalink: /tools/ai-roi-calculator/
     </div>
 
     <div id="tab-team" class="hidden">
+      <div class="tool-section" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+        <div style="font-size:14px;color:var(--light);line-height:1.5"><strong style="color:var(--text)">Worked example:</strong> a 10-engineer managed service moving to 7 engineers + 2 agents at a 15% client discount.</div>
+        <button type="button" class="btn btn-ghost" id="t-example" style="font-size:13.5px;padding:.5rem 1rem">Load example</button>
+      </div>
       <div class="tool-section">
         <div class="tool-section-title">1 · What the project needs today</div>
         <div class="roi-grid">
@@ -201,6 +213,16 @@ permalink: /tools/ai-roi-calculator/
           <div class="roi-field"><label for="t-setup">One-off setup $</label><input id="t-setup" class="roi-input" type="number" min="0" step="1000" value="15000"><div class="roi-hint">Integration, guardrails, runbooks</div></div>
           <div class="roi-field"><label for="t-months">Contract length (months)</label><input id="t-months" class="roi-input" type="number" min="1" step="1" value="12"></div>
           <div class="roi-field"><label for="t-disc">Client discount for AI-led delivery %</label><input id="t-disc" class="roi-input" type="number" min="0" max="100" step="1" value="10"></div>
+          <div class="roi-field"><label for="t-ramp">Months to full benefit</label><input id="t-ramp" class="roi-input" type="number" min="1" step="1" value="6"><div class="roi-hint">Agents start at 20% and ramp up</div></div>
+          <div class="roi-field"><label for="t-haircut">Rework &amp; quality loss %</label><input id="t-haircut" class="roi-input" type="number" min="0" max="100" step="5" value="15"><div class="roi-hint">Agent output redone or thrown away</div></div>
+          <div class="roi-field"><label for="t-risk">Risk buffer % of delivery cost</label><input id="t-risk" class="roi-input" type="number" min="0" max="100" step="1" value="5"><div class="roi-hint">Incidents and defects from AI output</div></div>
+          <div class="roi-field">
+            <label for="t-pass">AI cost billed to client?</label>
+            <select id="t-pass" class="tool-select">
+              <option value="no">No, we absorb it</option>
+              <option value="yes">Yes, as a pass-through line</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -226,6 +248,22 @@ permalink: /tools/ai-roi-calculator/
         </table>
         <p class="roi-note" id="t-note"></p>
       </div>
+
+      <div class="tool-section" id="t-disc-sec">
+        <div class="tool-section-title">How much discount can you give?</div>
+        <div class="status-msg status-ok" id="t-disc-msg"></div>
+        <table class="roi-pl" style="margin-top:.75rem">
+          <thead><tr><th>Discount</th><th class="num hide-sm">Revenue</th><th class="num">Profit / month</th><th class="num">Margin</th><th class="num">vs today</th></tr></thead>
+          <tbody id="t-disc-tbl"></tbody>
+        </table>
+      </div>
+
+      <div class="tool-section" id="t-wf-sec">
+        <div class="tool-section-title">Where the profit goes (monthly, once ramped up)</div>
+        <svg id="t-wf" viewBox="0 0 640 260" width="100%" style="display:block" role="img" aria-label="Profit waterfall from today's profit to profit with AI"></svg>
+        <div class="wf-key"><span style="--sw:#0d9488">Adds profit</span><span style="--sw:#dc2626">Costs profit</span><span style="--sw:var(--muted)">Total</span></div>
+        <p class="roi-note" id="t-ramp-msg"></p>
+      </div>
     </div>
 
     <p style="font-size:13px;color:var(--muted)">Estimates only. All logic runs in your browser; nothing is stored or sent.</p>
@@ -237,7 +275,7 @@ permalink: /tools/ai-roi-calculator/
   var LIM={users:[0,1e7,1],active:[0,100],days:[0,31],reqs:[0,1e5],tin:[0,2e6],tout:[0,2e6],pin:[0,1e4],pout:[0,1e4],
     gpuRate:[0,1e4],gpus:[0,1e5,1],gpuHours:[0,744],tps:[0,1e7],opsCost:[0,1e8],cap:[0,1e6],hours:[0,60],rate:[0,1e5],real:[0,100],
     rev:[0,1e10],gm:[-100,99],bill:[0,1e5],'t-req':[0,1e5],'t-cost':[0,1e7],'t-price':[0,1e7],'t-humans':[0,1e5],'t-agents':[0,1e5,1],
-    't-uplift':[-50,300],'t-agentfte':[0,20],'t-agentcost':[0,1e7],'t-oversight':[0,168],'t-setup':[0,1e9],'t-months':[1,120],'t-disc':[0,100]};
+    't-uplift':[-50,300],'t-agentfte':[0,20],'t-agentcost':[0,1e7],'t-oversight':[0,168],'t-setup':[0,1e9],'t-months':[1,120],'t-disc':[0,100],'t-ramp':[1,36,1],'t-haircut':[0,100],'t-risk':[0,100]};
   var num=function(id){var v=parseFloat($(id).value);if(isNaN(v))v=0;var l=LIM[id];if(l){v=Math.min(l[1],Math.max(l[0],v));if(l[2])v=Math.round(v);}return v};
   var plural=function(n,w){return n+' '+w+(n===1?'':'s')};
   var usd=function(v,dp){var neg=v<0;v=Math.abs(v);var s='$'+v.toLocaleString('en-US',{minimumFractionDigits:dp||0,maximumFractionDigits:dp||0});return neg?'−'+s:s};
@@ -249,8 +287,12 @@ permalink: /tools/ai-roi-calculator/
   document.querySelectorAll('#tabs button').forEach(function(b){b.addEventListener('click',function(){
     document.querySelectorAll('#tabs button').forEach(function(x){x.classList.toggle('active',x===b)});
     $('tab-usage').classList.toggle('hidden',b.dataset.tab!=='usage');
-    $('tab-team').classList.toggle('hidden',b.dataset.tab!=='team');});});
+    $('tab-team').classList.toggle('hidden',b.dataset.tab!=='team');calc();});});
   document.querySelectorAll('input,select').forEach(function(el){el.addEventListener('input',calc);el.addEventListener('change',calc)});
+  var rz;window.addEventListener('resize',function(){clearTimeout(rz);rz=setTimeout(calc,150)});
+  $('t-example').addEventListener('click',function(){
+    var ex={'t-req':10,'t-cost':4000,'t-price':5600,'t-humans':7,'t-agents':2,'t-uplift':3,'t-agentfte':1.5,'t-agentcost':1500,'t-oversight':8,'t-setup':15000,'t-months':12,'t-disc':15,'t-ramp':6,'t-haircut':15,'t-risk':5};
+    Object.keys(ex).forEach(function(k){$(k).value=ex[k]});$('t-pass').value='no';calc();});
   var vnotes={
     research:'~3% of a 40-hour week ≈ 1.2 hours. From an NBER study of about 25,000 Danish workers, which also found no significant change in earnings or hours worked (<a href="https://www.computing.co.uk/news/2025/ai/ai-chatbots-yet-to-prove-their-worth" target="_blank" rel="noopener">Computing</a>, <a href="https://the-decoder.com/chatbots-like-chatgpt-have-not-led-to-significant-changes-in-wages-or-working-hours-study-finds/" target="_blank" rel="noopener">The Decoder</a>).',
     vendor:'40–60 minutes per active workday ≈ 4.2 hours a week. From OpenAI\'s enterprise report, which is vendor-reported (<a href="https://the-decoder.com/openai-claims-generative-ai-saves-knowledge-workers-40-to-80-minutes-a-day/" target="_blank" rel="noopener">The Decoder</a>).',
@@ -378,31 +420,43 @@ permalink: /tools/ai-roi-calculator/
     var uplift=num('t-uplift')/100,afte=num('t-agentfte'),acost=num('t-agentcost'),ov=num('t-oversight');
     var usesAI=A>0;
     var setup=usesAI?num('t-setup'):0,months=num('t-months'),disc=usesAI?num('t-disc')/100:0;
+    var ramp=num('t-ramp'),haircut=num('t-haircut')/100,riskPct=usesAI?num('t-risk')/100:0,pass=usesAI&&$('t-pass').value==='yes';
     var msg=$('t-cov-msg'), parts=[], warns=[];
     if(req<=0){
       ['t-m-cov','t-m-cost','t-m-gm','t-m-pay'].forEach(function(id){$(id).textContent='–';$(id).style.color='';});
       $('t-cov-fill').style.width='0%';
       msg.className='status-msg status-warn';msg.textContent='Enter how many engineers the project needs today.';
-      $('t-warn').classList.add('hidden');$('t-pl').innerHTML='';$('t-note').textContent='';return;
+      $('t-warn').classList.add('hidden');$('t-pl').innerHTML='';$('t-note').textContent='';
+      $('t-disc-sec').classList.add('hidden');$('t-wf-sec').classList.add('hidden');return;
     }
     // agents only count when an engineer is accountable for them and their work is reviewed
     var needHrs=A*ov, haveHrs=H*40;
     var reviewShare=!usesAI||H===0?0:needHrs>0?Math.min(1,haveHrs/needHrs):1;
     var oversightFTE=Math.min(needHrs,haveHrs)/40;
     var humanCap=Math.max(0,H-oversightFTE)*(1+uplift);
-    var agentCap=A*afte*reviewShare;
+    var agentCap=A*afte*reviewShare*(1-haircut);
     var cap=humanCap+agentCap, cov=cap/req*100, viable=cov>=90, tight=viable&&cov<100;
     var minEng=usesAI?Math.max(1,Math.ceil(needHrs/40)):0;
     var R1=req*price, C1=req*cost;
-    var R2=R1*(1-disc), C2=H*cost+A*acost+setup/months;
+    var passRev=pass?A*acost:0, riskCost=riskPct*(H*cost+A*acost);
+    var R2=R1*(1-disc)+passRev, C2=H*cost+A*acost+setup/months+riskCost;
     var GP1=R1-C1, GP2=R2-C2, gm1=R1>0?GP1/R1*100:NaN, gm2=R2>0?GP2/R2*100:NaN;
-    var monthlyGain=(R2-(H*cost+A*acost))-GP1, payback=monthlyGain>0?setup/monthlyGain:Infinity;
+    // ramp-up: agents start at 20% of their benefit and reach 100% in month `ramp`;
+    // until then you keep enough of the old team to cover the gap
+    var bridge=Math.max(0,C1-H*cost), steady=GP2+setup/months-GP1, cum=-setup, payback=Infinity, totalNew=0;
+    for(var m=1;m<=months;m++){
+      var fr=ramp<=1?1:Math.min(1,0.2+0.8*(m-1)/(ramp-1));
+      var pm=GP2-(1-fr)*bridge; totalNew+=pm;
+      cum+=steady-(1-fr)*bridge;
+      if(cum>=0&&!isFinite(payback))payback=m;
+    }
+    if(!isFinite(payback)&&steady>0){var extra=Math.ceil(-cum/steady);if(extra<=120)payback=months+extra;}
     $('t-m-cov').textContent=Math.round(cov)+'%';
     $('t-m-cov').style.color=!viable?'#ef4444':tight?'var(--accent3)':'';
     $('t-m-cost').textContent=usd(C2);
     $('t-m-gm').textContent=!viable?'Not viable':pct(gm2);
-    $('t-m-gm').style.color=!viable||!(gm2>=gm1)?'#ef4444':'';
-    $('t-m-pay').textContent=!viable||R1<=0?'—':setup<=0?'None':isFinite(payback)?payback.toFixed(1)+' mo':'Never';
+    $('t-m-gm').style.color=!viable||!(gm2>=gm1)||GP2<GP1?'#ef4444':'';
+    $('t-m-pay').textContent=!viable||R1<=0?'—':setup<=0&&ramp<=1?'None':isFinite(payback)?'Month '+payback:'Never';
     $('t-cov-fill').style.width=Math.min(cov/Math.max(cov,100)*100,100)+'%';
     $('t-cov-line').style.left=(100/Math.max(cov,100)*100)+'%';
     $('t-cov-fill').style.background=!viable?'#ef4444':tight?'var(--accent3)':'var(--accent2)';
@@ -439,24 +493,63 @@ permalink: /tools/ai-roi-calculator/
       var effCost=(acost+ov/40*cost)/afte;
       if(effCost>=cost)warns.push('Counting review time, each engineer-equivalent of agent work costs '+usd(effCost)+' a month, more than the '+usd(cost)+' engineer it replaces.');
     }
-    if(usesAI&&viable&&setup>0&&payback>months)warns.push('The setup cost doesn\'t pay back within the '+months+'-month contract.');
+    if(usesAI&&haircut>=0.5)warns.push('Throwing away '+Math.round(haircut*100)+'% of agent output means the agents mostly create rework.');
+    if(usesAI&&viable&&(setup>0||ramp>1)&&payback>months)warns.push('The setup cost doesn\'t pay back within the '+months+'-month contract.');
     if(disc>=1)warns.push('A 100% discount means the client pays nothing.');
     $('t-warn').classList.toggle('hidden',!warns.length);
     $('t-warn').textContent=warns.join(' ');
     var d=function(a,b){var x=b-a;return (x>=0?'+':'')+usd(x)};
     var rows=[['Revenue',usd(R1),usd(R2),d(R1,R2)],
+      ['incl. AI billed to client','—',usd(passRev),passRev?'+'+usd(passRev):''],
       ['Engineers',usd(C1),usd(H*cost),d(C1,H*cost)],
       ['AI agents','—',usd(A*acost),'+'+usd(A*acost)],
       ['Setup, spread over contract','—',usd(setup/months),'+'+usd(setup/months)],
+      ['Risk buffer','—',usd(riskCost),riskCost?'+'+usd(riskCost):''],
       ['Gross profit',usd(GP1),usd(GP2),d(GP1,GP2)],
       ['Gross margin',pct(gm1),pct(gm2),isFinite(gm1)&&isFinite(gm2)?((gm2-gm1)>=0?'+':'−')+Math.abs(gm2-gm1).toFixed(1)+' pts':'–']];
+    if(!passRev)rows=rows.filter(function(r){return r[0]!=='incl. AI billed to client'});
+    if(!riskCost)rows=rows.filter(function(r){return r[0]!=='Risk buffer'});
     if(!viable)rows=rows.map(function(r){return [r[0],r[1],'—','—']});
     $('t-pl').style.opacity=viable?'':'.45';
     $('t-pl').innerHTML=rows.map(function(r){return '<tr><td>'+r[0]+'</td><td class="num">'+r[1]+'</td><td class="num">'+r[2]+'</td><td class="num">'+r[3]+'</td></tr>'}).join('');
     var note=!viable?'This mix can\'t deliver the work, so there is no real P&L to show: the client would not pay full price for '+Math.round(cov)+'% of the work. Fix capacity first. ':'';
     if(viable&&usesAI&&gm2<gm1)note+='This mix is less profitable than an all-engineer team. ';
+    else if(viable&&usesAI&&GP2<GP1)note+='Careful: margin % goes up, but profit goes down by '+usd(GP1-GP2)+' a month. A higher margin on smaller revenue can still mean fewer dollars. ';
     note+=R1<=0?'Enter a client price to see margins.':usesAI?'You can\'t bill an AI agent by the hour, so a mix like this needs fixed-price or outcome-based pricing. The discount is what the client gets for accepting AI-led delivery; the rest of the saving is your margin.':'With no agents, there is no AI setup cost or discount.';
     $('t-note').textContent=note;
+    var showMore=viable&&usesAI&&R1>0;
+    $('t-disc-sec').classList.toggle('hidden',!showMore);
+    $('t-wf-sec').classList.toggle('hidden',!showMore);
+    if(!showMore)return;
+    // discount headroom
+    var g=gm1/100, base=GP2+R1*disc; // profit at 0% discount
+    var dProfit=(base-GP1)/R1, dMargin=1-(C2/(1-g)-passRev)/R1;
+    var cl=function(x){return Math.max(0,Math.min(1,x))};
+    var dm=$('t-disc-msg');
+    if(dProfit<=0){dm.className='status-msg status-crit';dm.textContent='No room for a discount: even at 0% this mix earns '+usd(base)+' a month, less than the '+usd(GP1)+' you make today.';}
+    else{dm.className='status-msg status-ok';dm.textContent='You can give up to '+(cl(dProfit)*100).toFixed(1)+'% before monthly profit falls below today\'s '+usd(GP1)+'.'+(isFinite(g)&&dMargin>0?' To keep today\'s '+pct(gm1)+' margin as well, stay under '+(cl(dMargin)*100).toFixed(1)+'%.':'');}
+    var ds=[0,0.1,0.2,0.3]; if(ds.indexOf(Math.round(disc*100)/100)<0)ds.push(disc); ds.sort(function(a,b){return a-b});
+    $('t-disc-tbl').innerHTML=ds.map(function(x){var rv=R1*(1-x)+passRev, pr=rv-C2, mg=rv>0?pr/rv*100:NaN;
+      return '<tr'+(Math.abs(x-disc)<1e-9?' style="background:var(--surface2)"':'')+'><td>'+Math.round(x*100)+'%'+(Math.abs(x-disc)<1e-9?' ✓':'')+'</td><td class="num hide-sm">'+usd(rv)+'</td><td class="num">'+usd(pr)+'</td><td class="num">'+pct(mg)+'</td><td class="num">'+(pr-GP1>=0?'+':'')+usd(pr-GP1)+'</td></tr>';}).join('');
+    // waterfall
+    var steps=[{l:['Profit','today'],s:'Now',v:GP1,t:1},{l:C1-H*cost>=0?['Fewer','engineers']:['More','engineers'],s:'Team',v:C1-H*cost},{l:['AI','agents'],s:'Agents',v:-A*acost}];
+    if(passRev)steps.push({l:['AI billed','to client'],s:'Billed',v:passRev});
+    steps.push({l:['Setup'],s:'Setup',v:-setup/months},{l:['Risk','buffer'],s:'Risk',v:-riskCost},{l:['Client','discount'],s:'Discount',v:-R1*disc},{l:['Profit','with AI'],s:'New',v:GP2,t:1});
+    steps=steps.filter(function(st){return st.t||Math.abs(st.v)>=0.5});
+    var run=0,lo=0,hi=0;steps.forEach(function(st){if(st.t){st.a=0;st.b=st.v;run=st.v}else{st.a=run;run+=st.v;st.b=run}lo=Math.min(lo,st.a,st.b);hi=Math.max(hi,st.a,st.b)});
+    var W=Math.max(300,Math.min(760,Math.round($('t-wf').getBoundingClientRect().width)||640)),Hh=260,small=W<520,fmt=function(v){var a=Math.abs(v);return small&&a>=1000?'$'+(a/1000).toFixed(a>=10000?0:1)+'K':usd(a)};
+    $('t-wf').setAttribute('viewBox','0 0 '+W+' '+Hh);
+    var top=24,bot=48,left=8,n=steps.length,slot=(W-left*2)/n,bw=Math.min(40,slot*0.6),sc=(Hh-top-bot)/((hi-lo)||1),y=function(v){return top+(hi-v)*sc};
+    var svg='<line class="wf-axis" x1="'+left+'" x2="'+(W-left)+'" y1="'+y(0)+'" y2="'+y(0)+'"/>';
+    steps.forEach(function(st,i){var x=left+slot*i+(slot-bw)/2, y1=y(Math.max(st.a,st.b)), h=Math.max(1,Math.abs(y(st.a)-y(st.b)));
+      var cls=st.t?'wf-total':st.v>=0?'wf-up':'wf-down', val=(st.t?(st.v<0?'−':''):st.v>=0?'+':'−')+fmt(st.v);
+      svg+='<g class="wf-bar"><title>'+st.l.join(' ')+': '+val+'</title><rect class="'+cls+'" x="'+x+'" y="'+y1+'" width="'+bw+'" height="'+h+'" rx="3"/>';
+      var ty=(st.v>=0||st.t)?y1-6:y1+h+13;
+      svg+='<text class="wf-txt" x="'+(x+bw/2)+'" y="'+ty+'" text-anchor="middle">'+val+'</text></g>';
+      (small?[st.s]:st.l).forEach(function(w,j){svg+='<text class="wf-lbl"'+(small?' style="font-size:9.5px"':'')+' x="'+(x+bw/2)+'" y="'+(Hh-bot+18+j*13)+'" text-anchor="middle">'+w+'</text>'});
+    });
+    $('t-wf').innerHTML=svg;
+    $('t-ramp-msg').textContent=ramp>1?'Agents ramp from 20% to full benefit by month '+ramp+'; until then you keep enough of the old team to cover the gap. Over the '+months+'-month contract that means '+usd(totalNew)+' profit with AI against '+usd(GP1*months)+' with an all-engineer team.':'No ramp-up: full benefit from month 1. Over the '+months+'-month contract: '+usd(totalNew)+' profit with AI against '+usd(GP1*months)+' with an all-engineer team.';
   }
 
 
