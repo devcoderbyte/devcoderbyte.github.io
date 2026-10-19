@@ -21,6 +21,7 @@ permalink: /tools/ai-roi-calculator/
 .roi-pl td:first-child{color:var(--text);font-weight:500}
 .roi-pl tr:last-child td{border-bottom:none}
 .roi-pl td.num{text-align:right;white-space:nowrap}
+.roi-pl td.wrap{white-space:normal;min-width:7.5em}
 .roi-pl th.num{text-align:right}
 .hidden{display:none!important}
 .wf-up{fill:#0d9488}.wf-down{fill:#dc2626}.wf-total{fill:var(--muted)}
@@ -163,6 +164,7 @@ permalink: /tools/ai-roi-calculator/
       <div class="metric-card"><div class="metric-label">Value / month</div><div class="metric-val" id="m-value">–</div></div>
       <div class="metric-card"><div class="metric-label">ROI</div><div class="metric-val accent" id="m-roi">–</div></div>
     </div>
+    <div class="status-msg" id="u-be" style="margin:-.5rem 0 1rem"></div>
 
     <div class="tool-section">
       <div class="tool-section-title">Per-user cost against the cap</div>
@@ -281,6 +283,16 @@ permalink: /tools/ai-roi-calculator/
         </table>
       </div>
 
+      <div class="tool-section" id="t-be-sec">
+        <div class="tool-section-title">Break-even: how far can each assumption move?</div>
+        <div class="status-msg" id="t-be-msg"></div>
+        <table class="roi-pl" style="margin-top:.75rem">
+          <thead><tr><th>Assumption</th><th class="num">Yours</th><th class="num">Break-even</th><th class="num">Room</th></tr></thead>
+          <tbody id="t-be-tbl"></tbody>
+        </table>
+        <p class="roi-note">Each line moves one assumption and holds the rest. For money lines, break-even means monthly profit equals today's (once ramped up). For delivery lines, it means the mix covers 100% of the work.</p>
+      </div>
+
       <div class="tool-section" id="t-wf-sec">
         <div class="tool-section-title">Where the profit goes (monthly, once ramped up)</div>
         <svg id="t-wf" viewBox="0 0 640 260" width="100%" style="display:block" role="img" aria-label="Profit waterfall from today's profit to profit with AI"></svg>
@@ -387,6 +399,12 @@ permalink: /tools/ai-roi-calculator/
     $('m-value').textContent=usd(value);
     $('m-roi').textContent=active===0?'–':cost<=0?(value>0?'No cost':'–'):Math.round(roi)+'%';
     $('m-roi').style.color=net<0?'#ef4444':'';
+    var ube=$('u-be'), perHour=52/12*active*num('real')/100*num('rate');
+    if(active===0||cost<=0){ube.className='status-msg hidden';}
+    else if(perHour<=0){ube.className='status-msg status-crit';ube.textContent='Break-even: with 0% realization or a $0 hourly cost, no amount of time saved pays for the AI.';}
+    else{var minH=cost/perHour, maxU=value/active;
+      ube.className='status-msg '+(value>=cost?'status-ok':'status-crit');
+      ube.textContent='Break-even: AI pays for itself if each active user saves at least '+(minH<10?minH.toFixed(2):minH.toFixed(1))+' hours a week (you assume '+num('hours')+')'+(minH>40?', which is more than a full working week':'')+', or if AI costs no more than '+usd(maxU,2)+' per active user a month (you\'re at '+usd(perUser,2)+').';}
 
     // P&L
     var rows=[],note='';
@@ -458,7 +476,7 @@ permalink: /tools/ai-roi-calculator/
       $('t-cov-fill').style.width='0%';
       msg.className='status-msg status-warn';msg.textContent='Enter how many engineers the project needs today.';
       $('t-warn').classList.add('hidden');$('t-pl').innerHTML='';$('t-note').textContent='';
-      $('t-disc-sec').classList.add('hidden');$('t-wf-sec').classList.add('hidden');$('t-qc-msg').className='status-msg hidden';return;
+      $('t-disc-sec').classList.add('hidden');$('t-wf-sec').classList.add('hidden');$('t-be-sec').classList.add('hidden');$('t-qc-msg').className='status-msg hidden';return;
     }
     // agents only count when an engineer is accountable for them and their work is reviewed
     var needHrs=A*ov, haveHrs=H*40;
@@ -574,6 +592,49 @@ permalink: /tools/ai-roi-calculator/
     else if(viable&&usesAI&&GP2<GP1)note+='Careful: margin % goes up, but profit goes down by '+usd(GP1-GP2)+' a month. A higher margin on smaller revenue can still mean fewer dollars. ';
     note+=R1<=0?'Enter a client price to see margins.':usesAI?'You can\'t bill an AI agent by the hour, so a mix like this needs fixed-price or outcome-based pricing. The discount is what the client gets for accepting AI-led delivery; the rest of the saving is your margin.':'With no agents, there is no AI setup cost or discount.';
     $('t-note').textContent=note;
+    // break-even panel
+    var beOn=usesAI&&R1>0, beSec=$('t-be-sec');
+    beSec.classList.toggle('hidden',!beOn);
+    if(beOn){
+      var D=GP2-GP1, rowsBE=[], tight=[], past=[], short=[];
+      var fmtPct=function(x){return (Math.round(x*1000)/10)+'%'};
+      var mk=function(name,yours,be,room,ok,rel){rowsBE.push('<tr><td>'+name+'</td><td class="num">'+yours+'</td><td class="num">'+be+'</td><td class="num wrap">'+(ok?'✓ ':'✗ ')+room+'</td></tr>');var lo=name.charAt(1)===name.charAt(1).toUpperCase()?name:name.charAt(0).toLowerCase()+name.slice(1);if(/delivery/.test(name)){if(!ok)short.push(lo)}else{if(!ok)past.push(lo);else if(rel!==null)tight.push({n:lo,r:rel});}};
+      // discount
+      var dMax=disc+D/R1;
+      if(dMax<0)mk('Client discount',fmtPct(disc),'none','loses money even at 0%',false,-1);
+      else mk('Client discount',fmtPct(disc),'max '+fmtPct(Math.min(1,dMax)),(dMax>=disc?'':'over by ')+(Math.abs(dMax-disc)*100).toFixed(1)+' pts',dMax>=disc,disc>0?(dMax-disc)/disc:null);
+      // AI cost per agent
+      var sA=A*(1+(qc?num('t-guard')/100:0))-(pass?A:0);
+      if(sA<=0)mk('AI cost per agent',usd(acost),'no limit','billed to client',true,null);
+      else{var aMax=acost+D/sA; if(aMax<0)mk('AI cost per agent',usd(acost),'none','loses money even at $0',false,-1);
+        else mk('AI cost per agent',usd(acost),'max '+usd(aMax),(aMax>=acost?'':'over by ')+usd(Math.abs(aMax-acost)),aMax>=acost,acost>0?(aMax-acost)/acost:null);}
+      // error rate and cost per error
+      var cr=(qc?catchQc:catchRev), sE=tasks*(1-cr)*errCost;
+      if(tasks<=0||sE<=0)mk('Agent error rate',fmtPct(errRate),'no limit',tasks<=0?'no tasks entered':errCost<=0?'errors cost nothing at your inputs':'nothing reaches the client',true,null);
+      else{var eMax=errRate+D/sE; if(eMax<0)mk('Agent error rate',fmtPct(errRate),'none','loses money even at 0%',false,-1);
+        else mk('Agent error rate',fmtPct(errRate),eMax>=1?'any':'max '+fmtPct(eMax),eMax>=1?'even 100% breaks even':(eMax>=errRate?'':'over by ')+(Math.abs(eMax-errRate)*100).toFixed(1)+' pts',eMax>=errRate,errRate>0?(eMax-errRate)/errRate:null);}
+      if(escaped>0){var cMax=errCost+D/escaped; if(cMax<0)mk('Cost per escaped error',usd(errCost),'none','loses money even at $0',false,-1);
+        else mk('Cost per escaped error',usd(errCost),'max '+usd(cMax),(cMax>=errCost?'':'over by ')+usd(Math.abs(cMax-errCost)),cMax>=errCost,errCost>0?(cMax-errCost)/errCost:null);}
+      // engineers: profit ceiling and capacity floor
+      if(cost>0){var hMax=Math.floor((H+D/cost)*10+1e-9)/10;
+        mk('Engineers kept (profit)',String(+H.toFixed(2)),hMax<0?'none':'max '+hMax,hMax<0?'loses money with 0 engineers':(hMax>=H?'':'over by ')+Math.abs(hMax-H).toFixed(1),hMax>=H,H>0?(hMax-H)/H:null);}
+      var capAt=function(h){var hv=h*40,rs=h<=0?0:needHrs>0?Math.min(1,hv/needHrs):1,ov2=Math.min(needHrs,hv)/40;return Math.max(0,h-ov2)*(1+uplift)+A*afte*rs*(1-haircut)*(1-fblock);};
+      var hMin=null; for(var hh=0;hh<=Math.max(req*3,H+10);hh+=0.1){if(capAt(hh)>=req-1e-9){hMin=Math.round(hh*10)/10;break;}}
+      mk('Engineers needed (delivery)',String(+H.toFixed(2)),hMin===null?'n/a':'min '+hMin,hMin===null?'can\'t reach 100%':(H>=hMin?'':'short by ')+Math.abs(H-hMin).toFixed(1),hMin!==null&&H>=hMin-1e-9,null);
+      // agent output for capacity
+      var perAgent=A*reviewShare*(1-haircut)*(1-fblock);
+      if(perAgent>0){var fMin=(req-humanCap)/perAgent;
+        mk('Output per agent (delivery)',String(afte),fMin<=0?'any':'min '+fMin.toFixed(2),fMin<=0?'engineers cover it all':(afte>=fMin?'':'short by ')+Math.abs(afte-fMin).toFixed(2),afte>=fMin,null);}
+      else mk('Output per agent (delivery)',String(afte),'n/a',H===0?'no engineer to review agents':'agent output can\'t count',false,null);
+      $('t-be-tbl').innerHTML=rowsBE.join('');
+      var bm=$('t-be-msg'), okRows=tight.sort(function(a,b){return a.r-b.r}), txt, cls;
+      if(!viable){cls='status-crit';txt='Fix delivery first: this mix covers '+Math.round(cov)+'% of the work, so the money lines don\'t mean much yet.';}
+      else if(D<0){cls='status-crit';txt='This mix earns '+usd(-D)+' a month less than today. To break even, change at least one of: '+(past.length?past.join(', '):'the inputs')+'.';}
+      else if(okRows.length){var t0=okRows[0];cls=t0.r<0.2?'status-warn':'status-ok';txt='You have '+usd(D)+' a month of headroom. The thinnest margin is '+t0.n+': it can move only '+Math.round(t0.r*100)+'% before profit drops below today\'s.';}
+      else{cls='status-ok';txt='You have '+usd(D)+' a month of headroom over today.';}
+      if(viable&&short.length){txt+=' Delivery is below 100% ('+Math.round(cov)+'%), so there\'s no buffer: see '+short.join(' and ')+'.';if(cls==='status-ok')cls='status-warn';}
+      bm.className='status-msg '+cls;bm.textContent=txt;
+    }
     var showMore=viable&&usesAI&&R1>0;
     $('t-disc-sec').classList.toggle('hidden',!showMore);
     $('t-wf-sec').classList.toggle('hidden',!showMore);
