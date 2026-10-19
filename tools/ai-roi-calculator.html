@@ -210,12 +210,11 @@ permalink: /tools/ai-roi-calculator/
           <div class="roi-field"><label for="t-agentfte">Output per agent (engineer-equivalents)</label><input id="t-agentfte" class="roi-input" type="number" min="0" step="0.1" value="1"><div class="roi-hint">How much of one engineer's work an agent really covers</div></div>
           <div class="roi-field"><label for="t-agentcost">AI cost $ / agent / month</label><input id="t-agentcost" class="roi-input" type="number" min="0" step="50" value="1500"><div class="roi-hint">Tokens or licence; estimate it on the Usage tab</div></div>
           <div class="roi-field"><label for="t-oversight">Oversight hours / agent / week</label><input id="t-oversight" class="roi-input" type="number" min="0" step="1" value="8"><div class="roi-hint">Engineer time spent reviewing agent output</div></div>
-          <div class="roi-field"><label for="t-setup">One-off setup $</label><input id="t-setup" class="roi-input" type="number" min="0" step="1000" value="15000"><div class="roi-hint">Integration, guardrails, runbooks</div></div>
+          <div class="roi-field"><label for="t-setup">One-off setup $</label><input id="t-setup" class="roi-input" type="number" min="0" step="1000" value="15000"><div class="roi-hint">Integration, access, runbooks</div></div>
           <div class="roi-field"><label for="t-months">Contract length (months)</label><input id="t-months" class="roi-input" type="number" min="1" step="1" value="12"></div>
           <div class="roi-field"><label for="t-disc">Client discount for AI-led delivery %</label><input id="t-disc" class="roi-input" type="number" min="0" max="100" step="1" value="10"></div>
           <div class="roi-field"><label for="t-ramp">Months to full benefit</label><input id="t-ramp" class="roi-input" type="number" min="1" step="1" value="6"><div class="roi-hint">Agents start at 20% and ramp up</div></div>
           <div class="roi-field"><label for="t-haircut">Rework &amp; quality loss %</label><input id="t-haircut" class="roi-input" type="number" min="0" max="100" step="5" value="15"><div class="roi-hint">Agent output redone or thrown away</div></div>
-          <div class="roi-field"><label for="t-risk">Risk buffer % of delivery cost</label><input id="t-risk" class="roi-input" type="number" min="0" max="100" step="1" value="5"><div class="roi-hint">Incidents and defects from AI output</div></div>
           <div class="roi-field">
             <label for="t-pass">AI cost billed to client?</label>
             <select id="t-pass" class="tool-select">
@@ -224,6 +223,30 @@ permalink: /tools/ai-roi-calculator/
             </select>
           </div>
         </div>
+      </div>
+
+      <div class="tool-section">
+        <div class="tool-section-title">3 · Quality controls: evals &amp; guardrails</div>
+        <div class="roi-grid">
+          <div class="roi-field">
+            <label for="t-qc">Evals &amp; guardrails</label>
+            <select id="t-qc" class="tool-select">
+              <option value="on">In place</option>
+              <option value="off">None: human review only</option>
+            </select>
+          </div>
+          <div class="roi-field"><label for="t-tasks">Tasks / agent / month</label><input id="t-tasks" class="roi-input" type="number" min="0" step="50" value="400"><div class="roi-hint">Tickets, changes or PRs an agent handles</div></div>
+          <div class="roi-field"><label for="t-err">Agent error rate %</label><input id="t-err" class="roi-input" type="number" min="0" max="100" step="1" value="5"><div class="roi-hint">Share of agent outputs that are wrong</div></div>
+          <div class="roi-field"><label for="t-catch-rev">Caught by human review alone %</label><input id="t-catch-rev" class="roi-input" type="number" min="0" max="100" step="5" value="50"></div>
+          <div class="roi-field qc-on"><label for="t-catch-qc">Caught with evals + guardrails + review %</label><input id="t-catch-qc" class="roi-input" type="number" min="0" max="100" step="5" value="90"></div>
+          <div class="roi-field"><label for="t-errcost">Cost per error that reaches the client $</label><input id="t-errcost" class="roi-input" type="number" min="0" step="100" value="500"><div class="roi-hint">Reopened ticket, rework, credits. A real incident costs far more</div></div>
+          <div class="roi-field qc-on"><label for="t-evalbuild">Eval suite build (one-off) $</label><input id="t-evalbuild" class="roi-input" type="number" min="0" step="1000" value="8000"><div class="roi-hint">Golden test cases, scoring, pipeline</div></div>
+          <div class="roi-field qc-on"><label for="t-evalrun">Eval runs &amp; monitoring $ / month</label><input id="t-evalrun" class="roi-input" type="number" min="0" step="50" value="400"><div class="roi-hint">Runs per release, judge-model tokens, upkeep</div></div>
+          <div class="roi-field qc-on"><label for="t-guard">Guardrail overhead % of AI cost</label><input id="t-guard" class="roi-input" type="number" min="0" step="5" value="15"><div class="roi-hint">Extra checks on every input and output</div></div>
+          <div class="roi-field qc-on"><label for="t-fblock">Good outputs wrongly blocked %</label><input id="t-fblock" class="roi-input" type="number" min="0" max="100" step="1" value="3"><div class="roi-hint">Guardrail false positives</div></div>
+        </div>
+        <div class="status-msg" id="t-qc-msg" style="margin-top:1rem"></div>
+        <p class="roi-note">Caught errors are covered by the rework % above. Errors that get past every check reach the client and cost money.</p>
       </div>
 
       <div class="metrics-grid">
@@ -275,7 +298,7 @@ permalink: /tools/ai-roi-calculator/
   var LIM={users:[0,1e7,1],active:[0,100],days:[0,31],reqs:[0,1e5],tin:[0,2e6],tout:[0,2e6],pin:[0,1e4],pout:[0,1e4],
     gpuRate:[0,1e4],gpus:[0,1e5,1],gpuHours:[0,744],tps:[0,1e7],opsCost:[0,1e8],cap:[0,1e6],hours:[0,60],rate:[0,1e5],real:[0,100],
     rev:[0,1e10],gm:[-100,99],bill:[0,1e5],'t-req':[0,1e5],'t-cost':[0,1e7],'t-price':[0,1e7],'t-humans':[0,1e5],'t-agents':[0,1e5,1],
-    't-uplift':[-50,300],'t-agentfte':[0,20],'t-agentcost':[0,1e7],'t-oversight':[0,168],'t-setup':[0,1e9],'t-months':[1,120],'t-disc':[0,100],'t-ramp':[1,36,1],'t-haircut':[0,100],'t-risk':[0,100]};
+    't-uplift':[-50,300],'t-agentfte':[0,20],'t-agentcost':[0,1e7],'t-oversight':[0,168],'t-setup':[0,1e9],'t-months':[1,120],'t-disc':[0,100],'t-ramp':[1,36,1],'t-haircut':[0,100],'t-tasks':[0,1e6],'t-err':[0,100],'t-catch-rev':[0,100],'t-catch-qc':[0,100],'t-errcost':[0,1e8],'t-evalbuild':[0,1e8],'t-evalrun':[0,1e8],'t-guard':[0,500],'t-fblock':[0,100]};
   var num=function(id){var v=parseFloat($(id).value);if(isNaN(v))v=0;var l=LIM[id];if(l){v=Math.min(l[1],Math.max(l[0],v));if(l[2])v=Math.round(v);}return v};
   var plural=function(n,w){return n+' '+w+(n===1?'':'s')};
   var usd=function(v,dp){var neg=v<0;v=Math.abs(v);var s='$'+v.toLocaleString('en-US',{minimumFractionDigits:dp||0,maximumFractionDigits:dp||0});return neg?'−'+s:s};
@@ -291,8 +314,8 @@ permalink: /tools/ai-roi-calculator/
   document.querySelectorAll('input,select').forEach(function(el){el.addEventListener('input',calc);el.addEventListener('change',calc)});
   var rz;window.addEventListener('resize',function(){clearTimeout(rz);rz=setTimeout(calc,150)});
   $('t-example').addEventListener('click',function(){
-    var ex={'t-req':10,'t-cost':4000,'t-price':5600,'t-humans':7,'t-agents':2,'t-uplift':3,'t-agentfte':1.5,'t-agentcost':1500,'t-oversight':8,'t-setup':15000,'t-months':12,'t-disc':15,'t-ramp':6,'t-haircut':15,'t-risk':5};
-    Object.keys(ex).forEach(function(k){$(k).value=ex[k]});$('t-pass').value='no';calc();});
+    var ex={'t-req':10,'t-cost':4000,'t-price':5600,'t-humans':7,'t-agents':2,'t-uplift':3,'t-agentfte':1.5,'t-agentcost':1500,'t-oversight':8,'t-setup':15000,'t-months':12,'t-disc':15,'t-ramp':6,'t-haircut':15,'t-tasks':400,'t-err':5,'t-catch-rev':50,'t-catch-qc':90,'t-errcost':500,'t-evalbuild':8000,'t-evalrun':400,'t-guard':15,'t-fblock':3};
+    Object.keys(ex).forEach(function(k){$(k).value=ex[k]});$('t-pass').value='no';$('t-qc').value='on';calc();});
   var vnotes={
     research:'~3% of a 40-hour week ≈ 1.2 hours. From an NBER study of about 25,000 Danish workers, which also found no significant change in earnings or hours worked (<a href="https://www.computing.co.uk/news/2025/ai/ai-chatbots-yet-to-prove-their-worth" target="_blank" rel="noopener">Computing</a>, <a href="https://the-decoder.com/chatbots-like-chatgpt-have-not-led-to-significant-changes-in-wages-or-working-hours-study-finds/" target="_blank" rel="noopener">The Decoder</a>).',
     vendor:'40–60 minutes per active workday ≈ 4.2 hours a week. From OpenAI\'s enterprise report, which is vendor-reported (<a href="https://the-decoder.com/openai-claims-generative-ai-saves-knowledge-workers-40-to-80-minutes-a-day/" target="_blank" rel="noopener">The Decoder</a>).',
@@ -420,30 +443,38 @@ permalink: /tools/ai-roi-calculator/
     var uplift=num('t-uplift')/100,afte=num('t-agentfte'),acost=num('t-agentcost'),ov=num('t-oversight');
     var usesAI=A>0;
     var setup=usesAI?num('t-setup'):0,months=num('t-months'),disc=usesAI?num('t-disc')/100:0;
-    var ramp=num('t-ramp'),haircut=num('t-haircut')/100,riskPct=usesAI?num('t-risk')/100:0,pass=usesAI&&$('t-pass').value==='yes';
+    var ramp=num('t-ramp'),haircut=num('t-haircut')/100,pass=usesAI&&$('t-pass').value==='yes';
+    var qcOn=$('t-qc').value==='on', qc=usesAI&&qcOn;
+    document.querySelectorAll('.qc-on').forEach(function(e){e.classList.toggle('hidden',!qcOn)});
+    var errRate=num('t-err')/100, catchRev=num('t-catch-rev')/100, catchQcRaw=num('t-catch-qc')/100, catchQc=Math.max(catchQcRaw,catchRev);
+    var tasks=usesAI?A*num('t-tasks'):0, errCost=num('t-errcost'), fblock=qc?num('t-fblock')/100:0;
+    var errors=tasks*errRate, escaped=errors*(1-(qc?catchQc:catchRev)), escapedAlt=errors*(1-(qc?catchRev:catchQc));
+    var escCost=escaped*errCost, escCostAlt=escapedAlt*errCost;
+    var guardCost=num('t-guard')/100*A*acost, qcMonthly=qc?num('t-evalrun')+guardCost:0, qcMonthlyAlt=usesAI?num('t-evalrun')+guardCost:0;
+    var evalBuild=qc?num('t-evalbuild'):0, setupAll=setup+evalBuild;
     var msg=$('t-cov-msg'), parts=[], warns=[];
     if(req<=0){
       ['t-m-cov','t-m-cost','t-m-gm','t-m-pay'].forEach(function(id){$(id).textContent='–';$(id).style.color='';});
       $('t-cov-fill').style.width='0%';
       msg.className='status-msg status-warn';msg.textContent='Enter how many engineers the project needs today.';
       $('t-warn').classList.add('hidden');$('t-pl').innerHTML='';$('t-note').textContent='';
-      $('t-disc-sec').classList.add('hidden');$('t-wf-sec').classList.add('hidden');return;
+      $('t-disc-sec').classList.add('hidden');$('t-wf-sec').classList.add('hidden');$('t-qc-msg').className='status-msg hidden';return;
     }
     // agents only count when an engineer is accountable for them and their work is reviewed
     var needHrs=A*ov, haveHrs=H*40;
     var reviewShare=!usesAI||H===0?0:needHrs>0?Math.min(1,haveHrs/needHrs):1;
     var oversightFTE=Math.min(needHrs,haveHrs)/40;
     var humanCap=Math.max(0,H-oversightFTE)*(1+uplift);
-    var agentCap=A*afte*reviewShare*(1-haircut);
+    var agentCap=A*afte*reviewShare*(1-haircut)*(1-fblock);
     var cap=humanCap+agentCap, cov=cap/req*100, viable=cov>=90, tight=viable&&cov<100;
     var minEng=usesAI?Math.max(1,Math.ceil(needHrs/40)):0;
     var R1=req*price, C1=req*cost;
-    var passRev=pass?A*acost:0, riskCost=riskPct*(H*cost+A*acost);
-    var R2=R1*(1-disc)+passRev, C2=H*cost+A*acost+setup/months+riskCost;
+    var passRev=pass?A*acost:0;
+    var R2=R1*(1-disc)+passRev, C2=H*cost+A*acost+setupAll/months+qcMonthly+escCost;
     var GP1=R1-C1, GP2=R2-C2, gm1=R1>0?GP1/R1*100:NaN, gm2=R2>0?GP2/R2*100:NaN;
     // ramp-up: agents start at 20% of their benefit and reach 100% in month `ramp`;
     // until then you keep enough of the old team to cover the gap
-    var bridge=Math.max(0,C1-H*cost), steady=GP2+setup/months-GP1, cum=-setup, payback=Infinity, totalNew=0;
+    var bridge=Math.max(0,C1-H*cost), steady=GP2+setupAll/months-GP1, cum=-setupAll, payback=Infinity, totalNew=0;
     for(var m=1;m<=months;m++){
       var fr=ramp<=1?1:Math.min(1,0.2+0.8*(m-1)/(ramp-1));
       var pm=GP2-(1-fr)*bridge; totalNew+=pm;
@@ -456,7 +487,7 @@ permalink: /tools/ai-roi-calculator/
     $('t-m-cost').textContent=usd(C2);
     $('t-m-gm').textContent=!viable?'Not viable':pct(gm2);
     $('t-m-gm').style.color=!viable||!(gm2>=gm1)||GP2<GP1?'#ef4444':'';
-    $('t-m-pay').textContent=!viable||R1<=0?'—':setup<=0&&ramp<=1?'None':isFinite(payback)?'Month '+payback:'Never';
+    $('t-m-pay').textContent=!viable||R1<=0?'—':!usesAI||(setupAll<=0&&ramp<=1)?'None':isFinite(payback)?(payback>months?'After contract':'Month '+payback):'Never';
     $('t-cov-fill').style.width=Math.min(cov/Math.max(cov,100)*100,100)+'%';
     $('t-cov-line').style.left=(100/Math.max(cov,100)*100)+'%';
     $('t-cov-fill').style.background=!viable?'#ef4444':tight?'var(--accent3)':'var(--accent2)';
@@ -494,8 +525,32 @@ permalink: /tools/ai-roi-calculator/
       if(effCost>=cost)warns.push('Counting review time, each engineer-equivalent of agent work costs '+usd(effCost)+' a month, more than the '+usd(cost)+' engineer it replaces.');
     }
     if(usesAI&&haircut>=0.5)warns.push('Throwing away '+Math.round(haircut*100)+'% of agent output means the agents mostly create rework.');
-    if(usesAI&&viable&&(setup>0||ramp>1)&&payback>months)warns.push('The setup cost doesn\'t pay back within the '+months+'-month contract.');
+    if(usesAI&&viable&&(setupAll>0||ramp>1)&&payback>months)warns.push('The setup cost doesn\'t pay back within the '+months+'-month contract.');
     if(disc>=1)warns.push('A 100% discount means the client pays nothing.');
+    // quality controls
+    var qm=$('t-qc-msg'), wdays=21;
+    if(!usesAI){qm.className='status-msg hidden';}
+    else{
+      var every=escaped>0?wdays/escaped:Infinity;
+      var freq=escaped<=0?'none':escaped>=wdays?'about '+(escaped/wdays).toFixed(escaped/wdays>=10?0:1)+' a working day':'about one every '+(every>=10?Math.round(every):every.toFixed(1))+' working days';
+      var line=Math.round(escaped).toLocaleString()+' of '+Math.round(errors).toLocaleString()+' agent errors a month reach the client ('+freq+'), costing '+usd(escCost)+'. ';
+      var saved=qc?escCostAlt-escCost:escCost-(errors*(1-catchQc)*errCost);
+      var spend=qcMonthlyAlt+ (qc?evalBuild:num('t-evalbuild'))/months;
+      if(tasks<=0){line='Enter tasks per agent per month to see how many errors reach the client.';}
+      else if(errors<=0){line='With a 0% error rate nothing reaches the client, which no real agent achieves. ';}
+      else if(qc){line+=saved>spend?'Evals & guardrails cost '+usd(spend)+' a month (build cost included) and stop '+usd(saved)+' of errors: they pay for themselves.':'Evals & guardrails cost '+usd(spend)+' a month but only stop '+usd(saved)+' of errors at these inputs; the case for them is risk, not savings.';}
+      else{line+='Evals & guardrails would cut that to '+Math.round(errors*(1-catchQc)).toLocaleString()+' a month, saving '+usd(saved)+' for about '+usd(spend)+' a month.';}
+      qm.className='status-msg '+(escaped>=wdays?'status-crit':escaped>=wdays/5?'status-warn':'status-ok');
+      qm.textContent=line;
+      if(qcOn&&catchQcRaw<catchRev)warns.push('Evals and guardrails can\'t catch fewer errors than review alone; using '+Math.round(catchRev*100)+'% for both.');
+      if(errRate>=0.3)warns.push('An agent that is wrong '+Math.round(errRate*100)+'% of the time is not ready for client work, whatever the controls.');
+      if(escaped>=wdays)warns.push('More than one error a working day reaches the client. That is an SLA and reputation problem, not just a cost line.');
+      if((qc?catchQc:catchRev)>=1&&errors>0)warns.push('Catching 100% of errors is optimistic. Even good evals miss things.');
+      if(qc&&fblock>=0.2)warns.push('Guardrails blocking '+Math.round(fblock*100)+'% of good output will strangle throughput. Tune them.');
+      if(qc&&num('t-guard')>100)warns.push('Guardrails costing more than the AI they guard ('+num('t-guard')+'% overhead) is worth a second look.');
+      if(errors>0&&errCost===0)warns.push('Assuming errors that reach the client cost nothing is optimistic.');
+      if(!qc&&errors>0)warns.push('No evals or guardrails: nothing tells you when a model or prompt change makes the agents worse.');
+    }
     $('t-warn').classList.toggle('hidden',!warns.length);
     $('t-warn').textContent=warns.join(' ');
     var d=function(a,b){var x=b-a;return (x>=0?'+':'')+usd(x)};
@@ -503,12 +558,14 @@ permalink: /tools/ai-roi-calculator/
       ['incl. AI billed to client','—',usd(passRev),passRev?'+'+usd(passRev):''],
       ['Engineers',usd(C1),usd(H*cost),d(C1,H*cost)],
       ['AI agents','—',usd(A*acost),'+'+usd(A*acost)],
-      ['Setup, spread over contract','—',usd(setup/months),'+'+usd(setup/months)],
-      ['Risk buffer','—',usd(riskCost),riskCost?'+'+usd(riskCost):''],
+      ['Setup, spread over contract','—',usd(setupAll/months),'+'+usd(setupAll/months)],
+      ['Evals & guardrails','—',usd(qcMonthly),qcMonthly?'+'+usd(qcMonthly):''],
+      ['Errors reaching client','—',usd(escCost),escCost?'+'+usd(escCost):''],
       ['Gross profit',usd(GP1),usd(GP2),d(GP1,GP2)],
       ['Gross margin',pct(gm1),pct(gm2),isFinite(gm1)&&isFinite(gm2)?((gm2-gm1)>=0?'+':'−')+Math.abs(gm2-gm1).toFixed(1)+' pts':'–']];
     if(!passRev)rows=rows.filter(function(r){return r[0]!=='incl. AI billed to client'});
-    if(!riskCost)rows=rows.filter(function(r){return r[0]!=='Risk buffer'});
+    if(!qcMonthly)rows=rows.filter(function(r){return r[0]!=='Evals & guardrails'});
+    if(!escCost)rows=rows.filter(function(r){return r[0]!=='Errors reaching client'});
     if(!viable)rows=rows.map(function(r){return [r[0],r[1],'—','—']});
     $('t-pl').style.opacity=viable?'':'.45';
     $('t-pl').innerHTML=rows.map(function(r){return '<tr><td>'+r[0]+'</td><td class="num">'+r[1]+'</td><td class="num">'+r[2]+'</td><td class="num">'+r[3]+'</td></tr>'}).join('');
@@ -534,7 +591,7 @@ permalink: /tools/ai-roi-calculator/
     // waterfall
     var steps=[{l:['Profit','today'],s:'Now',v:GP1,t:1},{l:C1-H*cost>=0?['Fewer','engineers']:['More','engineers'],s:'Team',v:C1-H*cost},{l:['AI','agents'],s:'Agents',v:-A*acost}];
     if(passRev)steps.push({l:['AI billed','to client'],s:'Billed',v:passRev});
-    steps.push({l:['Setup'],s:'Setup',v:-setup/months},{l:['Risk','buffer'],s:'Risk',v:-riskCost},{l:['Client','discount'],s:'Discount',v:-R1*disc},{l:['Profit','with AI'],s:'New',v:GP2,t:1});
+    steps.push({l:['Setup'],s:'Setup',v:-setupAll/months},{l:['Evals &','guardrails'],s:'Evals',v:-qcMonthly},{l:['Errors to','client'],s:'Errors',v:-escCost},{l:['Client','discount'],s:'Discount',v:-R1*disc},{l:['Profit','with AI'],s:'New',v:GP2,t:1});
     steps=steps.filter(function(st){return st.t||Math.abs(st.v)>=0.5});
     var run=0,lo=0,hi=0;steps.forEach(function(st){if(st.t){st.a=0;st.b=st.v;run=st.v}else{st.a=run;run+=st.v;st.b=run}lo=Math.min(lo,st.a,st.b);hi=Math.max(hi,st.a,st.b)});
     var W=Math.max(300,Math.min(760,Math.round($('t-wf').getBoundingClientRect().width)||640)),Hh=260,small=W<520,fmt=function(v){var a=Math.abs(v);return small&&a>=1000?'$'+(a/1000).toFixed(a>=10000?0:1)+'K':usd(a)};
