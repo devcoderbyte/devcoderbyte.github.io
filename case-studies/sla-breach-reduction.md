@@ -26,9 +26,9 @@ We took over application support for a large automotive finance platform from th
 
 **SLAs couldn't be measured.** Tickets lived in Jira with no SLA tracking. Nobody could say how many tickets had breached, at which priority, or why.
 
-**Alerts weren't trusted.** Only about 15% of alerts pointed to a real problem, so the team had learned to treat them as noise.
+**Alerts weren't trusted.** Only about 15% of alerts pointed to a real problem; the rest were false positives, so the team had learned to treat them as noise.
 
-Client CSAT was 8.5.
+Client CSAT was 8.5 out of 10. The client runs this survey once a year.
 
 ---
 
@@ -36,7 +36,7 @@ Client CSAT was 8.5.
 
 We moved support from Jira to Zendesk and used its built-in SLA calculations. I led the Zendesk implementation. For each priority we defined the SLA formula, the target, and what counts as a breach: resolution within 2 hours for P1, 4 hours for P2, 24 hours for P3 and 48 hours for P4. Other vendors on the account had their own contractual SLAs, so each got its own SLA policy in Zendesk. Once ticketing moved over, SLAs were being met.
 
-That gave the client and us the same numbers to look at, every week, per priority. It also became one of our controls for the CMMI Level 3 audit, and the audit went well ([how the audit ran](#cmmi-audit)).
+That gave the client and us the same numbers to look at, every week, per priority. It also became one of our controls for the CMMI Level 3 appraisal of our support for the client, which we passed ([how the audit ran](#cmmi-audit)).
 
 ---
 
@@ -96,7 +96,7 @@ Process documents only go so far. An auditor wants to see that the workflow on p
 
 **Questions answered on the spot,** so the auditor understood how the controls worked in practice.
 
-The audit went well.
+We passed: our support for the client was formally appraised at CMMI Level 3.
 
 Afterwards, a senior manager on the client side wrote a note of appreciation for the leadership shown through the whole initiative. (Available on request; not reproduced because it is the client's internal correspondence.)
 
@@ -107,9 +107,9 @@ Afterwards, a senior manager on the client side wrote a note of appreciation for
 | Area | Before | After |
 |---|---|---|
 | SLA tracking | None (Jira) | Per priority, built into Zendesk |
-| Alert accuracy | ~15% | ~75% |
+| Alert accuracy (alerts that were real problems, after false positives were removed) | ~15% | ~75% |
 | Alerts with a runbook (platforms Temperstack scanned) | — | Each proposed alert came with an AI-generated runbook |
-| CMMI Level 3 audit | — | Zendesk SLA set-up used as a control; audit went well |
+| CMMI Level 3 appraisal | — | Passed; the Zendesk SLA set-up was one of the controls |
 | Ticket categories with a runbook (share of all categories) | 0% | 85% |
 | Engineer onboarding | — | Faster: new engineers learn from runbooks through Amazon Q |
-| Client CSAT | 8.5 | 9, then 10 |
+| Client CSAT (annual survey, out of 10) | 8.5 | 9 the next year, then 10 |

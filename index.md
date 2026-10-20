@@ -33,7 +33,7 @@ description: "Senior Program Manager · SRE, DevOps & Service Delivery. SRE Mana
   <div class="stats-row">
     <div class="stat"><a href="/case-studies/sla-breach-reduction/"><div class="stat-val">8.5→10</div><div class="stat-lbl">Client CSAT after taking over an account</div><div class="stat-how">SLAs made measurable; 9+ for 24 consecutive months</div></a></div>
     <div class="stat"><a href="/case-studies/pcf-to-kubernetes-migration/"><div class="stat-val">200+</div><div class="stat-lbl">Microservices moved PCF → Kubernetes</div><div class="stat-how">Led the offshore side · 12 months · 4 dev verticals</div></a></div>
-    <div class="stat"><a href="/case-studies/alert-noise-diagnostic/"><div class="stat-val">80k→5k</div><div class="stat-lbl">Splunk alerts, after dev sign-off on each</div><div class="stat-how">About 94% of the noise removed</div></a></div>
+    <div class="stat"><a href="/case-studies/alert-noise-diagnostic/"><div class="stat-val">80k→5k</div><div class="stat-lbl">Splunk alerts a month, after dev sign-off on each</div><div class="stat-how">About 94% of the noise removed</div></a></div>
     <div class="stat"><a href="/delivery-governance/team-leadership/"><div class="stat-val">10→60+</div><div class="stat-lbl">Engineers in the offshore team</div><div class="stat-how">Grown over two years, replacing an incumbent vendor</div></a></div>
   </div>
 </div>
@@ -49,7 +49,7 @@ description: "Senior Program Manager · SRE, DevOps & Service Delivery. SRE Mana
       <thead><tr><th>The role asks for</th><th>Where it's shown</th><th>Evidence</th></tr></thead>
       <tbody>
         <tr><td>Take over a service and stabilise it</td><td><a href="/case-studies/sla-breach-reduction/">Case Study 01</a>: SLAs made measurable in Zendesk, alert accuracy ~15% → ~75%, CSAT 8.5 → 10, and the CMMI Level 3 audit walkthrough I led.</td><td><span class="ev-kind">My account</span> <span class="ev-kind third">Client note, on request</span></td></tr>
-        <tr><td>Incident management and service reliability</td><td><a href="/case-studies/alert-noise-diagnostic/">Case Study 06</a>: 80,000 → 5,000 alerts. <a href="/sre-observability/">Reliability practice</a>: SLOs, dashboards, defect containment. I run P1/P2 incident command.</td><td><span class="ev-kind">My account</span></td></tr>
+        <tr><td>Incident management and service reliability</td><td><a href="/case-studies/alert-noise-diagnostic/">Case Study 06</a>: 80,000 → 5,000 alerts a month. <a href="/sre-observability/">Reliability practice</a>: SLOs, dashboards, defect containment. I run P1/P2 incident command.</td><td><span class="ev-kind">My account</span></td></tr>
         <tr><td>Large production change, delivered across teams</td><td><a href="/case-studies/pcf-to-kubernetes-migration/">Case Study 05</a>: 200+ microservices, four onshore verticals, GitOps, Vault, SOX scope.</td><td><span class="ev-kind">My account</span></td></tr>
         <tr><td>Lead and grow teams; develop leaders</td><td><a href="/delivery-governance/team-leadership/">How I lead teams</a>: 10 → 60+ engineers, monthly growth conversations, and an upskilling programme that replaced two planned hires.</td><td><span class="ev-kind">My account</span> <span class="ev-kind third">Annual reviews, on request</span></td></tr>
         <tr><td>Delivery governance; status and risk to executives</td><td><a href="/delivery-governance/">Operating model</a>: the takeover sequence, a four-layer review cadence, and a one-page escalation format.</td><td><span class="ev-kind">Method</span></td></tr>

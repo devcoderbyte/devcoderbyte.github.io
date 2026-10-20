@@ -9,7 +9,7 @@ description: "How I run reliability for client platforms: SLOs written in the cl
 
 <div class="callout">
   <div class="callout-label">From production · US telecom carrier</div>
-  <p><strong>Splunk alert noise cleanup: ~80,000 → ~5,000 alerts.</strong> As the middleware operations team, we couldn't delete an alert on our own judgment. Every alert went to the owning dev team for sign-off: was this check on a metric, response time or 4xx/5xx rate still needed, or had a recent release replaced it? We drove the review and pushed the dev teams for quick decisions, then executed them. About 5,000 alerts survived, a cut of around 94%. <a href="/case-studies/alert-noise-diagnostic/">Read the diagnostic memo →</a></p>
+  <p><strong>Splunk alert noise cleanup: ~80,000 → ~5,000 alerts a month.</strong> As the middleware operations team, we couldn't delete an alert on our own judgment. Every alert went to the owning dev team for sign-off: was this check on a metric, response time or 4xx/5xx rate still needed, or had a recent release replaced it? We drove the review and pushed the dev teams for quick decisions, then executed them. About 5,000 alerts survived, a cut of around 94%. <a href="/case-studies/alert-noise-diagnostic/">Read the diagnostic memo →</a></p>
 </div>
 
 <nav class="toc" aria-label="On this page"><div class="toc-label">On this page</div>

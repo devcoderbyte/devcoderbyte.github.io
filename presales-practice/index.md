@@ -17,7 +17,7 @@ description: "How I win and shape work: a five-question bid gate, an AI-assisted
 
 ## Bid strategy: five questions first {#bid-strategy}
 
-Five questions I answer before writing a single word. This framework drove a 25% improvement in conversion rate across global proposals over 12 months.
+Five questions I answer before writing a single word. This framework drove a 25% improvement in conversion rate over 12 months, on one client's RFPs.
 
 ---
 
@@ -188,7 +188,7 @@ This was Case Study 02.
 
 ### The Situation
 
-Our global bid conversion rate was inconsistent — some proposals won comfortably, others lost to competitors we knew we outperformed on actual delivery. The gap was in the proposal, not the capability.
+Our bid conversion rate was inconsistent — some proposals won comfortably, others lost to competitors we knew we outperformed on actual delivery. The gap was in the proposal, not the capability.
 
 I asked for 30 minutes with five recently lost bids and five recently won ones. That 30-minute read changed how I approached every proposal we submitted after it.
 
@@ -237,10 +237,12 @@ No proposal entered drafting without all five answered and reviewed.
 
 | Metric | Before | After |
 |---|---|---|
-| Global bid conversion rate | Baseline | +25% over 12 months |
+| Bid conversion on the client's RFPs | Baseline | +25% over 12 months |
 | Average RFQ turnaround | Days | Hours |
 | Proposal consistency | Variable by author | Standardised structure |
 | Hook clarity (internal rating) | 3/10 average | 8/10 average |
+
+*How it was measured: the share of RFPs we won among all the RFPs the automotive-finance client issued to us in a year, some of which also went to other vendors. Bid counts are the client's and stay confidential.*
 
 ---
 
