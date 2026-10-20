@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} — moved</title>
+  <meta name="robots" content="noindex">
+  {%- assign parts = page.redirect_to | split: '#' -%}
+  {%- assign hash = '' -%}{%- if parts.size > 1 -%}{%- assign hash = parts | last | prepend: '#' -%}{%- endif %}
+  <link rel="canonical" href="{{ parts | first | prepend: site.url }}">
+  <meta http-equiv="refresh" content="0; url={{ page.redirect_to }}">
+  <script>location.replace({{ parts | first | jsonify }} + location.search + {{ hash | jsonify }});</script>
+  <style>body{font-family:system-ui,sans-serif;background:#fbfbfa;color:#111418;padding:2rem}@media(prefers-color-scheme:dark){body{background:#0d0f12;color:#eceef1}a{color:#7aa2ff}}</style>
+</head>
+<body>
+  <p>“{{ page.title }}” is now part of a longer page: <a href="{{ page.redirect_to }}">{{ page.redirect_to }}</a>.</p>
+</body>
+</html>

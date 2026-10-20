@@ -2,25 +2,25 @@
 layout: page
 title: Now
 permalink: /now/
-description: "What Rajendra Birudaraju is working on, learning, and thinking about right now — April 2026."
+description: "What Rajendra Birudaraju is working on, learning, and thinking about right now — October 2026."
 ---
 
 # What I'm Doing Now
 
 *A snapshot of what's occupying my time and thinking — updated regularly. Inspired by [nownownow.com](https://nownownow.com)*
 
-*Last updated: April 2026 · Hyderabad, India*
+*Last updated: October 2026 · Hyderabad, India*
 
 ---
 
 ## Work
 
-Still at Concentrix Catalyst, leading delivery and presales for enterprise clients across automotive and telecom. Current focus areas:
+SRE Manager at Concentrix since July 2025, leading delivery and presales for two enterprise accounts, in automotive finance and telecom. Current focus areas:
 
-- Running active presales on two significant RFQs — applying the bid strategy framework documented on this site in real time
+- Running presales alongside delivery — applying the bid strategy framework documented on this site on live RFQs
 - Deepening the AI enablement practice across the delivery team — moving from individual LLM usage to documented, team-wide workflows that stick
 - Managing SLO governance for a high-volume platform — the error budget framework on this site is running live on this engagement
-- Exploring senior delivery leadership opportunities — Senior Program Manager and Director-level roles at product-led and enterprise orgs
+- Looking for my next role: Delivery Manager, Senior Service Engineering Manager or SRE Manager, in Hyderabad
 
 ---
 
@@ -28,18 +28,16 @@ Still at Concentrix Catalyst, leading delivery and presales for enterprise clien
 
 This portfolio — `devcoderbyte.github.io` — is a live project, not a static resume. Recent additions:
 
-- Built and shipped the [SLO & Error Budget Calculator](/tools/slo-calculator/) — an interactive tool built from the framework I run in production
-- Added [Toil Audit Scorecard](/tools/toil-audit/) and [RFQ Complexity Scorer](/tools/rfq-scorer/) — both fully live
-- Rewrote the case studies to include what failed first, the judgment calls that mattered, and what I'd do differently
-- Added full v1→v4 iteration history to the LLM Workflow Library — because showing how thinking evolved is more useful than showing only what works
+- Restructured the site around evidence for the roles I'm targeting: three flagship case studies, one page per practice, and every number traceable to a source
+- Built the [AI Usage & ROI Calculator](/tools/ai-roi-calculator/) — what AI-assisted delivery does to margin under fixed-price, T&M and cost-centre contracts
+- Added [Case Study 06](/case-studies/alert-noise-diagnostic/), the 80,000 → 5,000 alert-noise diagnostic
+- Earlier: the [SLO & Error Budget Calculator](/tools/slo-calculator/), [Toil Audit Scorecard](/tools/toil-audit/) and [RFQ Complexity Scorer](/tools/rfq-scorer/)
 
 The goal: when a hiring panel opens this before an interview, they arrive already convinced.
 
 ---
 
 ## Learning
-
-**Salesforce Administrator certification** — actively prepping, targeting Q2 2026. Complements the presales and delivery profile given how embedded Salesforce is in enterprise client stacks.
 
 **AI in enterprise operations** — specifically how organisations are moving from individual AI usage to team-level capability programs. Collecting real implementation patterns, not vendor marketing.
 

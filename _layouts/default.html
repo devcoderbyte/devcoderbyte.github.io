@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% if page.title %}{{ page.title }} — Rajendra Birudaraju{% else %}Rajendra Birudaraju — Senior Program Manager · SRE & AI-Augmented Delivery{% endif %}</title>
+  <title>{% if page.title %}{{ page.title }} — Rajendra Birudaraju{% else %}Rajendra Birudaraju — Senior Program Manager · SRE, DevOps & Service Delivery{% endif %}</title>
   <meta name="description" content="{% if page.description %}{{ page.description }}{% elsif page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
   <meta name="author" content="{{ site.author }}">
   <meta name="robots" content="index, follow">
@@ -19,10 +19,12 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}Rajendra Birudaraju{% endif %}">
   <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"{{ site.url }}/#person","name":"Rajendra Birudaraju","jobTitle":"Senior Program Manager · SRE & AI-Augmented Delivery","description":"Senior Program Manager and SRE Manager with 12+ years across SRE, DevOps and application operations.","url":"{{ site.url }}","email":"birudarajurajendra@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Hyderabad","addressCountry":"IN"},"sameAs":["https://linkedin.com/in/rajendrabirudaraju","https://github.com/devcoderbyte"],"knowsAbout":["Program Management","Presales","SRE","DevOps","Kubernetes","Cloud Migration","Splunk","AWS","AI in Enterprise Delivery","Delivery Governance"]},{"@type":"WebSite","@id":"{{ site.url }}/#website","url":"{{ site.url }}","name":"Rajendra Birudaraju","description":"{{ site.description }}","author":{"@id":"{{ site.url }}/#person"}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"{{ site.url }}/#person","name":"Rajendra Birudaraju","jobTitle":"SRE Manager","description":"Senior Program Manager · SRE, DevOps & Service Delivery. SRE Manager with 12+ years across SRE, DevOps and service delivery.","url":"{{ site.url }}","email":"birudarajurajendra@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Hyderabad","addressCountry":"IN"},"sameAs":["https://linkedin.com/in/rajendrabirudaraju","https://github.com/devcoderbyte"],"knowsAbout":["Program Management","Presales","SRE","DevOps","Kubernetes","Cloud Migration","Splunk","AWS","AI in Enterprise Delivery","Delivery Governance"]},{"@type":"WebSite","@id":"{{ site.url }}/#website","url":"{{ site.url }}","name":"Rajendra Birudaraju","description":"{{ site.description }}","author":{"@id":"{{ site.url }}/#person"}}]}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
   <script>(function(){var t=null;try{t=localStorage.getItem('dp-theme')}catch(e){}if(!t)t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);})();</script>
 <style>
 :root,[data-theme="light"]{--bg:#fbfbfa;--surface:#fff;--surface2:#f4f4f2;--border:#e7e6e3;--border2:#d6d4cf;--accent:#1d4ed8;--accent-soft:rgba(29,78,216,.08);--accent2:#0f766e;--accent3:#b45309;--text:#111418;--muted:#6b7079;--light:#3d434c;--nav-bg:rgba(251,251,250,.85);--card-hover:#fff;--code-bg:#f2f2ef;--code-text:#9d174d;--pre-bg:#16191f;--pre-text:#a7f3d0;--bq-bg:#f4f4f2;--table-head:#f7f7f5;--row-hover:#fafaf8;--shadow:0 1px 2px rgba(17,20,24,.04),0 4px 16px rgba(17,20,24,.05);--shadow-lg:0 2px 4px rgba(17,20,24,.04),0 12px 32px rgba(17,20,24,.08)}
@@ -51,7 +53,8 @@ img{max-width:100%;display:block}
 .theme-toggle svg{width:16px;height:16px}
 .icon-sun{display:none}.icon-moon{display:block}
 [data-theme="dark"] .icon-sun{display:block}[data-theme="dark"] .icon-moon{display:none}
-.nav-toggle{display:none}.nav-hamburger{display:none}
+.nav-toggle{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}.nav-hamburger{display:none}
+.nav-toggle:focus-visible+.nav-hamburger{outline:2px solid var(--accent);outline-offset:2px}
 .site-main{flex:1}
 /* buttons */
 .btn{display:inline-flex;align-items:center;gap:8px;padding:.7rem 1.25rem;border-radius:10px;font-size:14.5px;font-weight:500;text-decoration:none;transition:background .15s,border-color .15s,color .15s,transform .15s;border:1px solid transparent;cursor:pointer;font-family:var(--font-body);line-height:1.2}
@@ -69,7 +72,7 @@ img{max-width:100%;display:block}
 .hero-sub{font-size:18px;color:var(--light);max-width:540px;margin-bottom:2.25rem;line-height:1.65}
 .hero-links{display:flex;gap:.75rem;flex-wrap:wrap}
 .hero-visual{position:relative}
-.hero-photo{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:62% center;border-radius:20px;box-shadow:var(--shadow-lg)}
+.hero-photo{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:62% center;border-radius:20px;box-shadow:var(--shadow-lg)}
 .hero-id{position:absolute;left:-1.5rem;bottom:1.5rem;display:flex;align-items:center;gap:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.6rem 1rem .6rem .6rem;box-shadow:var(--shadow-lg)}
 .hero-id img{width:44px;height:44px;border-radius:10px;object-fit:cover}
 .hero-id strong{display:block;font-size:14px;font-weight:600;line-height:1.3}
@@ -161,7 +164,7 @@ img{max-width:100%;display:block}
 .prose .case-meta br{display:none}
 .prose .case-meta strong{font-family:var(--font-mono);font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding-top:2px}
 .tool-wrap{max-width:720px}
-.tool-controls{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem}
+.tool-controls{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem}.tool-controls>*{min-width:0}
 .control-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-family:'JetBrains Mono',monospace;display:block;margin-bottom:.5rem}
 .slider-row{display:flex;align-items:center;gap:10px}
 .slider-row input[type=range]{flex:1;accent-color:var(--accent)}
@@ -171,7 +174,7 @@ img{max-width:100%;display:block}
 .btn-group button{background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:.4rem .85rem;border-radius:7px;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
 .btn-group button.active,.btn-group button:hover{border-color:var(--accent);color:var(--accent);background:var(--surface)}
 .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.5rem}
-.metric-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem}
+.metric-card{min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem}
 .metric-label{font-size:11px;color:var(--muted);margin-bottom:4px;font-family:'JetBrains Mono',monospace;letter-spacing:.03em}
 .metric-val{font-size:1.4rem;font-weight:700;font-family:var(--font-display)}
 .metric-val.accent{color:var(--accent)}
@@ -186,7 +189,7 @@ img{max-width:100%;display:block}
 [data-theme="dark"] .burn-warn{background:rgba(245,200,66,.06)}
 [data-theme="dark"] .burn-crit{background:rgba(255,107,107,.06)}
 .burn-status{font-size:11px;font-weight:500;margin-bottom:4px}
-.burn-safe .burn-status{color:var(--accent2)}.burn-warn .burn-status{color:var(--accent3)}.burn-crit .burn-status{color:#ef4444}
+.burn-safe .burn-status{color:var(--accent2)}.burn-warn .burn-status{color:var(--accent3)}.burn-crit .burn-status{color:#b91c1c}[data-theme="dark"] .burn-crit .burn-status{color:#f87171}
 .burn-rate{font-size:15px;font-weight:700;font-family:var(--font-display);margin-bottom:4px}
 .burn-note{font-size:11px;color:var(--muted);line-height:1.5}
 .gauge-bg{height:10px;background:var(--surface2);border-radius:5px;overflow:hidden;margin-bottom:.75rem}
@@ -246,6 +249,26 @@ img{max-width:100%;display:block}
 .score-verdict{font-size:16px;font-weight:500;max-width:480px;margin:0 auto;line-height:1.6}
 .action-card{background:var(--surface);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin-bottom:.75rem;font-size:14px;color:var(--light);line-height:1.7}
 .action-card strong{color:var(--text);display:block;margin-bottom:3px}
+/* evidence-site components */
+.lede{font-size:18px!important;color:var(--text)!important;line-height:1.65!important;margin-bottom:1.5rem!important}
+.toc{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem;margin:0 0 2rem}
+.toc-label{font-family:var(--font-mono);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem}
+.toc ol{margin:0;padding-left:1.25rem}.toc li{margin:.15rem 0;font-size:15px}
+.callout{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin:1.5rem 0}
+.callout-label{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-family:var(--font-mono);margin-bottom:.5rem}
+.callout p{margin:0!important}
+.prose pre:focus-visible,.prose table:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ev-table{width:100%;border-collapse:collapse;font-size:15px}
+.ev-table th{text-align:left;font-family:var(--font-mono);font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding:.6rem .75rem;border-bottom:1px solid var(--border2)}
+.ev-table td{padding:.85rem .75rem;border-bottom:1px solid var(--border);vertical-align:top;color:var(--light);line-height:1.55}
+.ev-table td:first-child{color:var(--text);font-weight:500;width:34%}
+.ev-table a{color:var(--accent)}
+.ev-kind{display:inline-block;font-size:12px;font-family:var(--font-mono);padding:2px 8px;border-radius:999px;border:1px solid var(--border2);color:var(--muted);white-space:nowrap}
+.ev-kind.third{border-color:var(--accent2);color:var(--accent2)}
+.recog{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.recog li{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;font-size:15px;color:var(--light);line-height:1.6}
+.recog strong{display:block;color:var(--text);font-family:var(--font-display);font-size:16px;margin-bottom:.35rem}
+.stat a{color:inherit;text-decoration:none}.stat a:hover .stat-lbl{color:var(--accent)}
 .site-footer{border-top:1px solid var(--border);padding:2.5rem 0;margin-top:2rem}
 .site-footer .container{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
 .footer-left{display:flex;flex-direction:column;gap:2px}
@@ -284,6 +307,11 @@ img{max-width:100%;display:block}
   .tier-head,.tier-row{grid-template-columns:1fr 1fr}
   .dim-grid{grid-template-columns:1fr 1fr}
   .site-footer .container{flex-direction:column;align-items:flex-start}
+  .recog{grid-template-columns:1fr}
+  .ev-table,.ev-table tbody,.ev-table tr,.ev-table td{display:block;width:100%!important}
+  .ev-table thead{display:none}
+  .ev-table tr{border-bottom:1px solid var(--border);padding:.5rem 0}
+  .ev-table td{border:0;padding:.25rem 0}
 }
 @media(max-width:360px){.stats-row{grid-template-columns:1fr}}
 </style>
@@ -295,17 +323,17 @@ img{max-width:100%;display:block}
       <div class="logo-mark">RB</div>
       <span class="logo-text">Rajendra Birudaraju</span>
     </a>
-    <input type="checkbox" id="nav-toggle" class="nav-toggle">
-    <label for="nav-toggle" class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></label>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Menu">
+    <label for="nav-toggle" class="nav-hamburger"><span></span><span></span><span></span></label>
     <nav class="site-nav">
-      <a href="{{ '/now/' | relative_url }}" {% if page.url contains 'now' %}class="active"{% endif %}>Now</a>
+      <a href="{{ '/case-studies/' | relative_url }}" {% if page.url contains 'case-studies' %}class="active"{% endif %}>Case Studies</a>
+      <a href="{{ '/delivery-governance/' | relative_url }}" {% if page.url == '/delivery-governance/' %}class="active"{% endif %}>Operating Model</a>
+      <a href="{{ '/delivery-governance/team-leadership/' | relative_url }}" {% if page.url contains 'team-leadership' %}class="active"{% endif %}>Leadership</a>
+      <a href="{{ '/sre-observability/' | relative_url }}" {% if page.url contains 'sre-observability' %}class="active"{% endif %}>Reliability</a>
       <a href="{{ '/ai-in-delivery/' | relative_url }}" {% if page.url contains 'ai-in-delivery' %}class="active"{% endif %}>AI in Delivery</a>
       <a href="{{ '/presales-practice/' | relative_url }}" {% if page.url contains 'presales' %}class="active"{% endif %}>Presales</a>
-      <a href="{{ '/sre-observability/' | relative_url }}" {% if page.url contains 'sre' %}class="active"{% endif %}>SRE & Ops</a>
-      <a href="{{ '/delivery-governance/' | relative_url }}" {% if page.url contains 'governance' %}class="active"{% endif %}>Governance</a>
-      <a href="{{ '/case-studies/' | relative_url }}" {% if page.url contains 'case-studies' %}class="active"{% endif %}>Case Studies</a>
       <a href="{{ '/tools/' | relative_url }}" {% if page.url contains '/tools/' %}class="active"{% endif %}>Tools</a>
-      <a href="{{ '/tool-proficiency/' | relative_url }}" {% if page.url contains 'tool-proficiency' %}class="active"{% endif %}>Skills</a>
+      <a href="{{ '/now/' | relative_url }}" {% if page.url contains '/now/' %}class="active"{% endif %}>Now</a>
     </nav>
     <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light/dark mode">
       <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
@@ -333,15 +361,18 @@ img{max-width:100%;display:block}
   <div class="container">
     <div class="footer-left">
       <span class="footer-name">Rajendra Birudaraju</span>
-      <span class="footer-role">Senior Program Manager · SRE & AI-Augmented Delivery · Hyderabad, India</span>
+      <span class="footer-role">Senior Program Manager · SRE, DevOps & Service Delivery · Hyderabad, India</span>
     </div>
     <div class="footer-right">
-      <a href="https://linkedin.com/in/rajendrabirudaraju" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="mailto:birudarajurajendra@gmail.com">Email</a>
-      <a href="https://github.com/devcoderbyte" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/rajendrabirudaraju" target="_blank" rel="noopener" data-goatcounter-click="contact-linkedin-footer">LinkedIn</a>
+      <a href="mailto:birudarajurajendra@gmail.com" data-goatcounter-click="contact-email-footer">Email</a>
+      <a href="https://github.com/devcoderbyte" target="_blank" rel="noopener" data-goatcounter-click="contact-github-footer">GitHub</a>
+      <a href="{{ '/tool-proficiency/' | relative_url }}">Skills</a>
     </div>
   </div>
 </footer>
+<script>document.querySelectorAll('.prose pre,.prose table').forEach(function(p){if(p.scrollWidth>p.clientWidth){p.tabIndex=0;if(p.tagName==='PRE')p.setAttribute('aria-label','Code sample (scrollable)')}});</script>
+{% if site.goatcounter and site.goatcounter != "" %}<script data-goatcounter="https://{{ site.goatcounter }}.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>{% endif %}
 <script>function toggleTheme(){var h=document.documentElement;var n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);try{localStorage.setItem('dp-theme',n)}catch(e){}}</script>
 </body>
 </html>

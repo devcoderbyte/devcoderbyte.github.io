@@ -9,19 +9,19 @@ permalink: /tools/slo-calculator/
     <div class="container">
       <div class="breadcrumb"><a href="/">Home</a> <span>→</span> <a href="/tools/">Tools</a> <span>→</span> SLO Calculator</div>
       <h1 class="page-title">SLO & Error Budget Calculator</h1>
-      <p style="color:var(--muted);font-size:15px;margin-top:.75rem;max-width:600px">Set your SLO target and time window — get allowable downtime, burn rate thresholds, and budget consumption in real time. Built on the <a href="/sre-observability/slo-sli-framework/">SLO/SLI Framework</a>.</p>
+      <p style="color:var(--muted);font-size:15px;margin-top:.75rem;max-width:600px">Set your SLO target and time window — get allowable downtime, burn rate thresholds, and budget consumption in real time. Built on the <a href="/sre-observability/#slo">SLO/SLI Framework</a>.</p>
     </div>
   </div>
   <div class="page-content"><div class="container"><div class="tool-wrap">
     <div class="tool-controls">
       <div>
-        <label class="control-label">SLO target</label>
+        <label class="control-label" for="slo">SLO target</label>
         <div class="slider-row"><input type="range" id="slo" min="90" max="99.99" step="0.01" value="99.5" onchange="calc()"><span id="slo-val" class="slider-val">99.50%</span></div>
         <div class="slider-ticks"><span>90%</span><span>95%</span><span>99%</span><span>99.9%</span><span>99.99%</span></div>
       </div>
       <div>
-        <label class="control-label">Time window</label>
-        <div class="btn-group">
+        <div class="control-label" id="lbl-time-window">Time window</div>
+        <div class="btn-group" role="group" aria-labelledby="lbl-time-window">
           <button id="w7" onclick="setWindow(7,this)">7 days</button>
           <button id="w30" onclick="setWindow(30,this)" class="active">30 days</button>
           <button id="w90" onclick="setWindow(90,this)">90 days</button>
@@ -44,7 +44,7 @@ permalink: /tools/slo-calculator/
     </div>
     <div class="tool-section">
       <div class="tool-section-title">Current budget consumption</div>
-      <div class="slider-row" style="margin-bottom:.75rem"><input type="range" id="consumed" min="0" max="100" step="1" value="30" onchange="updateGauge()"><span id="consumed-val" class="slider-val">30%</span></div>
+      <div class="slider-row" style="margin-bottom:.75rem"><input type="range" id="consumed" aria-label="Error budget consumed so far (%)" min="0" max="100" step="1" value="30" onchange="updateGauge()"><span id="consumed-val" class="slider-val">30%</span></div>
       <div class="gauge-bg"><div id="gauge-bar" class="gauge-fill" style="width:30%;background:var(--accent2)"></div></div>
       <div id="status-msg" class="status-msg status-ok" style="margin-top:.75rem">Budget in good shape — 70% remaining. Feature work can proceed at full velocity.</div>
     </div>
@@ -56,7 +56,7 @@ permalink: /tools/slo-calculator/
       </div>
     </div>
     <div style="margin-top:1rem;display:flex;gap:.75rem;flex-wrap:wrap">
-      <a href="/sre-observability/slo-sli-framework/" class="btn btn-primary">Read the SLO/SLI framework →</a>
+      <a href="/sre-observability/#slo" class="btn btn-primary">Read the SLO/SLI framework →</a>
       <a href="/case-studies/sla-breach-reduction/" class="btn btn-ghost">See the case study →</a>
     </div>
   </div></div></div>

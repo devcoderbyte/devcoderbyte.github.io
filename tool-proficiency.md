@@ -68,7 +68,7 @@ An honest assessment of where I actually am with each tool. Three categories bas
 
 | Tool | Proficiency | How I use it |
 |---|---|---|
-| SOW design & negotiation | **Daily Use** | End-to-end — from discovery through signature across $2.1M+ annual portfolio |
+| SOW design & negotiation | **Daily Use** | End-to-end — from discovery through signature across a $3M+ annual portfolio |
 | RFQ / bid response | **Daily Use** | Strategy, drafting, review — AI-assisted workflow, human judgment on commercial decisions |
 | Cost estimation & modelling | **Regular Use** | T&M modelling, headcount scenario planning, budget optimisation |
 | Stakeholder management | **Daily Use** | C-suite to engineering — written, verbal, exec-ready artifacts |
@@ -79,11 +79,21 @@ An honest assessment of where I actually am with each tool. Three categories bas
 
 | Framework | Proficiency | Context |
 |---|---|---|
-| ITIL | **Daily Use** | Certified. Incident, Problem, Change Management — applied across every engagement |
-| Agile / Scrum | **Daily Use** | Sprint planning, retrospectives, backlog management — CSPO-trained |
-| CMMI Level 5 | **Regular Use** | Process optimisation, L3 workflow design, continuous improvement |
+| ITIL | **Daily Use** | Incident, Problem, Change Management — applied across every engagement. Courses listed below |
+| Agile / Scrum | **Daily Use** | Sprint planning, retrospectives, backlog management |
+| CMMI | **Regular Use** | Audit readiness, L3 ticket workflow design, continuous improvement ([the audit](/case-studies/sla-breach-reduction/#cmmi-audit)) |
 | SRE / SLO-SLI | **Regular Use** | Designed and run SLO programs as client trust frameworks |
 | SAFe | **Working Knowledge** | Program increment planning, PI ceremonies, ART coordination |
+
+---
+
+## Certifications and Courses
+
+| Course | What it covered |
+|---|---|
+| Putting ITIL® into Practice: Applying ITIL® Foundation Concepts | Service lifecycle, incident and change practice |
+| Putting ITIL® into Practice: Problem Management Techniques | Root cause and problem records |
+| Microsoft Cognitive Services for Developers: Vision | Applied computer-vision APIs |
 
 ---
 
@@ -91,12 +101,11 @@ An honest assessment of where I actually am with each tool. Three categories bas
 
 | Area | Current state | What I'm doing about it |
 |---|---|---|
-| SQL / data querying | Working knowledge — Netxcell-era MySQL, not current | Refreshing via practice problems — targeting fluency by Q3 2026 |
-| Salesforce platform | Awareness level | Pursuing Admin certification — Q2 2026 target |
+| SQL / data querying | Working knowledge — Netxcell-era MySQL, not current | Refreshing via practice problems |
 | Python / scripting | Can read, can't write fluently | Not a priority — I work at the delivery layer, not the engineering layer |
 
 ---
 
-*Last updated: April 2026*
+*Last updated: October 2026*
 
 *The "Honest Gaps" section is intentional. A tool matrix with no gaps isn't honest — it's marketing.*

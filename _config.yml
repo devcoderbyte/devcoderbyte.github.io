@@ -1,7 +1,10 @@
 title: Rajendra Birudaraju
-description: "Senior Program Manager · SRE & AI-Augmented Delivery — SRE, cloud migration, delivery and presales case studies from 12+ years of enterprise practice"
+description: "Senior Program Manager · SRE, DevOps & Service Delivery — evidence for delivery and SRE manager roles from 12+ years of enterprise practice"
 author: Rajendra Birudaraju
 email: birudarajurajendra@gmail.com
+# GoatCounter site code (privacy-friendly analytics, no cookies). Empty = analytics off.
+# Create a free account at goatcounter.com, then put the code here, e.g. "devcoderbyte".
+goatcounter: ""
 url: "https://devcoderbyte.github.io"
 baseurl: ""
 markdown: kramdown

@@ -13,9 +13,9 @@ permalink: /tools/rfq-scorer/
     </div>
   </div>
   <div class="page-content"><div class="container"><div class="tool-wrap">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
+    <div class="tool-controls">
       <div>
-        <label class="control-label">Engagement type</label>
+        <label class="control-label" for="eng-type">Engagement type</label>
         <select id="eng-type" class="tool-select" onchange="calc()">
           <option value="ams">AMS / Managed Support</option>
           <option value="sre">SRE / DevOps</option>
@@ -27,7 +27,7 @@ permalink: /tools/rfq-scorer/
         <div id="eng-desc" style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5;font-style:italic"></div>
       </div>
       <div>
-        <label class="control-label">Domain</label>
+        <label class="control-label" for="domain">Domain</label>
         <select id="domain" class="tool-select" onchange="calc()">
           <option value="telecom">Telecom</option>
           <option value="auto">Automotive / Manufacturing</option>
@@ -39,23 +39,23 @@ permalink: /tools/rfq-scorer/
         </select>
       </div>
       <div>
-        <label class="control-label">Number of vendors involved</label>
+        <label class="control-label" for="vendors">Number of vendors involved</label>
         <div class="slider-row"><input type="range" id="vendors" min="1" max="10" step="1" value="2" onchange="calc()"><span id="vendors-val" class="slider-val">2</span></div>
       </div>
       <div>
-        <label class="control-label">Number of integration points</label>
+        <label class="control-label" for="integrations">Number of integration points</label>
         <div class="slider-row"><input type="range" id="integrations" min="0" max="20" step="1" value="4" onchange="calc()"><span id="integrations-val" class="slider-val">4</span></div>
       </div>
       <div>
-        <label class="control-label">Timeline pressure</label>
-        <div class="btn-group">
+        <div class="control-label" id="lbl-timeline-pressure">Timeline pressure</div>
+        <div class="btn-group" role="group" aria-labelledby="lbl-timeline-pressure">
           <button id="t-relaxed" onclick="setTimeline('relaxed',this)">Relaxed</button>
           <button id="t-normal" onclick="setTimeline('normal',this)" class="active">Normal</button>
           <button id="t-aggressive" onclick="setTimeline('aggressive',this)">Aggressive</button>
         </div>
       </div>
       <div>
-        <label class="control-label">Incumbent situation</label>
+        <label class="control-label" for="incumbent">Incumbent situation</label>
         <select id="incumbent" class="tool-select" onchange="calc()">
           <option value="green">Greenfield — no incumbent</option>
           <option value="augment">Incumbent staying — we augment</option>
@@ -64,7 +64,7 @@ permalink: /tools/rfq-scorer/
         </select>
       </div>
       <div>
-        <label class="control-label">Client stakeholder clarity</label>
+        <label class="control-label" for="clarity">Client stakeholder clarity</label>
         <select id="clarity" class="tool-select" onchange="calc()">
           <option value="clear">Clear — single DM, defined requirements</option>
           <option value="committee">Moderate — committee decision, some ambiguity</option>
@@ -73,7 +73,7 @@ permalink: /tools/rfq-scorer/
         </select>
       </div>
       <div>
-        <label class="control-label">Deal size</label>
+        <label class="control-label" for="deal-size">Deal size</label>
         <select id="deal-size" class="tool-select" onchange="calc()">
           <option value="s">Under $500K</option>
           <option value="m">$500K – $2M</option>
@@ -82,7 +82,7 @@ permalink: /tools/rfq-scorer/
         </select>
       </div>
     </div>
-    <div class="metrics-grid" style="grid-template-columns:repeat(4,1fr)">
+    <div class="metrics-grid">
       <div class="metric-card"><div class="metric-label">Complexity</div><div id="m-complexity" class="metric-val accent">—</div></div>
       <div class="metric-card"><div class="metric-label">Effort estimate</div><div id="m-effort" class="metric-val">—</div></div>
       <div class="metric-card"><div class="metric-label">Win probability</div><div id="m-win" class="metric-val">—</div></div>
@@ -106,8 +106,8 @@ permalink: /tools/rfq-scorer/
       <div id="strategy-rec" style="font-size:14px;color:var(--light);line-height:1.85"></div>
     </div>
     <div style="margin-top:1rem;display:flex;gap:.75rem;flex-wrap:wrap">
-      <a href="/presales-practice/bid-strategy-methodology/" class="btn btn-primary">Full bid strategy →</a>
-      <a href="/presales-practice/rfq-workflow/" class="btn btn-ghost">AI-assisted RFQ workflow →</a>
+      <a href="/presales-practice/#bid-strategy" class="btn btn-primary">Full bid strategy →</a>
+      <a href="/presales-practice/#rfq" class="btn btn-ghost">AI-assisted RFQ workflow →</a>
     </div>
   </div></div></div>
 </div>

@@ -9,7 +9,7 @@ permalink: /tools/toil-audit/
     <div class="container">
       <div class="breadcrumb"><a href="/">Home</a> <span>→</span> <a href="/tools/">Tools</a> <span>→</span> Toil Audit</div>
       <h1 class="page-title">Toil Audit Scorecard</h1>
-      <p style="color:var(--muted);font-size:15px;margin-top:.75rem;max-width:600px">Answer 12 questions about your team's manual work. Get a toil score, dimension breakdown, and prioritised automation roadmap. Built on the <a href="/ai-in-delivery/toil-elimination-playbook/">Toil Elimination Playbook</a>.</p>
+      <p style="color:var(--muted);font-size:15px;margin-top:.75rem;max-width:600px">Answer 12 questions about your team's manual work. Get a toil score, dimension breakdown, and prioritised automation roadmap. Built on the <a href="/ai-in-delivery/#toil">Toil Elimination Playbook</a>.</p>
     </div>
   </div>
   <div class="page-content"><div class="container"><div class="tool-wrap">
@@ -84,7 +84,7 @@ function showResults(){
     '<div class="dim-grid">'+dimHTML+'</div>'+
     '<div style="font-size:13px;font-weight:500;margin:.5rem 0 .75rem;font-family:var(--font-display)">Prioritised actions</div>'+
     actionHTML+
-    '<div style="margin-top:1.5rem;display:flex;gap:.75rem;flex-wrap:wrap"><button class="btn btn-ghost" onclick="restartAudit()">Start over</button><a href="/ai-in-delivery/toil-elimination-playbook/" class="btn btn-primary">Read the full playbook →</a></div>';
+    '<div style="margin-top:1.5rem;display:flex;gap:.75rem;flex-wrap:wrap"><button class="btn btn-ghost" onclick="restartAudit()">Start over</button><a href="/ai-in-delivery/#toil" class="btn btn-primary">Read the full playbook →</a></div>';
 }
 function restartAudit(){answers={};current=0;document.getElementById('question-area').style.display='block';document.getElementById('progress-wrap').style.display='block';document.getElementById('results-area').style.display='none';renderQuestion();}
 renderQuestion();
