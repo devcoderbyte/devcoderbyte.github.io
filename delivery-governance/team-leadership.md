@@ -81,11 +81,11 @@ This changed everything about the design. Modules were built around real problem
 
 ### The Unexpected Outcome
 
-During Module 4 (microservices version tracking), one engineer built an internal tool to automate a process the team was doing manually every morning. He built it as a module exercise. It was good enough to ship.
+During Module 4 (microservices version tracking), I brought in scripts I had written to automate a check the team was doing manually every morning. One engineer took them on as his module exercise and made them usable by the whole team. The result was good enough to ship.
 
 We reviewed it, tested it, and deployed it to production during the training program. That was the version-tracking tool from the PCF migration ([Case Study 05](/case-studies/pcf-to-kubernetes-migration/)). It cut debugging time by about 35% — not a training outcome, a delivery outcome that emerged from designing the learning to solve real problems.
 
-**I didn't plan for this.** But it happened because the module design principle — produce something useful, not something assessed — created the conditions for it.
+**I didn't plan for it to ship.** But it did because the module design principle — produce something useful, not something assessed — created the conditions for it.
 
 ---
 
@@ -96,7 +96,7 @@ We reviewed it, tested it, and deployed it to production during the training pro
 | Engineers converted AppOps → full DevOps | Full team coverage within one quarter |
 | External hiring required | Zero — leadership dropped the hire |
 | Training budget required | Zero — built on existing Confluence and tooling |
-| Debugging time reduction | About 35%, from the version-tracking tool built during training (same tool as Case Study 05) |
+| Debugging time reduction | About 35%, from the version-tracking tool finished during training (same tool as Case Study 05) |
 | Cultural change | Engineers started voluntarily sharing skills — peer teaching became normal |
 
 ---

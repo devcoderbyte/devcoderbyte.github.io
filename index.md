@@ -48,7 +48,7 @@ description: "Senior Program Manager · SRE, DevOps & Service Delivery. SRE Mana
     <table class="ev-table">
       <thead><tr><th>The role asks for</th><th>Where it's shown</th><th>Evidence</th></tr></thead>
       <tbody>
-        <tr><td>Take over a service and stabilise it</td><td><a href="/case-studies/sla-breach-reduction/">Case Study 01</a>: SLAs made measurable in Zendesk, alert accuracy ~15% → ~75%, CSAT 8.5 → 10, and the CMMI audit walkthrough I led.</td><td><span class="ev-kind">My account</span> <span class="ev-kind third">Client note, on request</span></td></tr>
+        <tr><td>Take over a service and stabilise it</td><td><a href="/case-studies/sla-breach-reduction/">Case Study 01</a>: SLAs made measurable in Zendesk, alert accuracy ~15% → ~75%, CSAT 8.5 → 10, and the CMMI Level 3 audit walkthrough I led.</td><td><span class="ev-kind">My account</span> <span class="ev-kind third">Client note, on request</span></td></tr>
         <tr><td>Incident management and service reliability</td><td><a href="/case-studies/alert-noise-diagnostic/">Case Study 06</a>: 80,000 → 5,000 alerts. <a href="/sre-observability/">Reliability practice</a>: SLOs, dashboards, defect containment. I run P1/P2 incident command.</td><td><span class="ev-kind">My account</span></td></tr>
         <tr><td>Large production change, delivered across teams</td><td><a href="/case-studies/pcf-to-kubernetes-migration/">Case Study 05</a>: 200+ microservices, four onshore verticals, GitOps, Vault, SOX scope.</td><td><span class="ev-kind">My account</span></td></tr>
         <tr><td>Lead and grow teams; develop leaders</td><td><a href="/delivery-governance/team-leadership/">How I lead teams</a>: 10 → 60+ engineers, monthly growth conversations, and an upskilling programme that replaced two planned hires.</td><td><span class="ev-kind">My account</span> <span class="ev-kind third">Annual reviews, on request</span></td></tr>
@@ -67,7 +67,7 @@ description: "Senior Program Manager · SRE, DevOps & Service Delivery. SRE Mana
       <h2>Recognition I can back up</h2>
     </div>
     <ul class="recog">
-      <li><strong>Client note after the CMMI audit</strong>In July 2025 a senior manager on the client side wrote to recognise the leadership I showed through the audit initiative. Available on request.</li>
+      <li><strong>Client note after the CMMI Level 3 audit</strong>In July 2025 a senior manager on the client side wrote to recognise the leadership I showed through the audit initiative. Available on request.</li>
       <li><strong>Exceeds Expectations</strong>My rating in each of my last two annual performance reviews.</li>
       <li><strong>Awards</strong>Above and Beyond awards (several) and an Outstanding Commitment award for a client project.</li>
     </ul>
@@ -85,7 +85,7 @@ description: "Senior Program Manager · SRE, DevOps & Service Delivery. SRE Mana
       <a class="domain-card" href="/case-studies/sla-breach-reduction/">
         <div class="domain-icon">🧭</div>
         <div class="domain-title">Taking over an account: CSAT 8.5 → 10</div>
-        <div class="domain-desc">Took over support from the incumbent vendor, made SLAs measurable, raised alert accuracy from about 15% to 75%, and led the CMMI audit walkthrough.</div>
+        <div class="domain-desc">Took over support from the incumbent vendor, made SLAs measurable, raised alert accuracy from about 15% to 75%, and led the CMMI Level 3 audit walkthrough.</div>
         <div class="domain-arrow">Read →</div>
       </a>
       <a class="domain-card" href="/case-studies/pcf-to-kubernetes-migration/">

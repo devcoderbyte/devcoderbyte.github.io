@@ -11,7 +11,7 @@ description: "Three flagship case studies: taking over an account, a 200+ servic
   <a class="domain-card" href="/case-studies/sla-breach-reduction/">
     <div class="domain-icon">🧭</div>
     <div class="domain-title">01 · Taking over an account: CSAT 8.5 → 10</div>
-    <div class="domain-desc">Took over support from the incumbent vendor. Made SLAs measurable in Zendesk, raised alert accuracy from about 15% to 75% with Temperstack and AI-generated runbooks, and led the CMMI audit walkthrough.</div>
+    <div class="domain-desc">Took over support from the incumbent vendor. Made SLAs measurable in Zendesk, raised alert accuracy from about 15% to 75% with Temperstack and AI-generated runbooks, and led the CMMI Level 3 audit walkthrough.</div>
     <div class="domain-arrow" style="color:var(--accent2)">Automotive finance · SRE · ITSM →</div>
   </a>
   <a class="domain-card" href="/case-studies/pcf-to-kubernetes-migration/">

@@ -60,7 +60,7 @@ The last step is the one teams often skip. Leaving old PCF services running "jus
 
 ## Problems Along the Way
 
-During the migration, many services ran on PCF and TKE at the same time, at different versions. Working out what was actually deployed where became a real drag on debugging. The team built an internal version-tracking tool to answer that question in one place. It cut debugging time by about 35% and was later adopted as the standard across the organisation.
+During the migration, many services ran on PCF and TKE at the same time, at different versions. Working out what was actually deployed where became a real drag on debugging. I drove an internal version-tracking tool: I wrote the first scripts, and an engineer on the team finished it so everyone could use it. It answered that question in one place. It cut debugging time by about 35% and was later adopted as the standard across the organisation.
 
 The same period doubled as the team's DevOps upskilling. Application-operations engineers learned Kubernetes and GitOps by migrating real services, not in a sandbox. That story is in [Case Study 03](/delivery-governance/team-leadership/#upskilling).
 

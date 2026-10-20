@@ -81,7 +81,7 @@ An honest assessment of where I actually am with each tool. Three categories bas
 |---|---|---|
 | ITIL | **Daily Use** | Incident, Problem, Change Management — applied across every engagement. Courses listed below |
 | Agile / Scrum | **Daily Use** | Sprint planning, retrospectives, backlog management |
-| CMMI | **Regular Use** | Audit readiness, L3 ticket workflow design, continuous improvement ([the audit](/case-studies/sla-breach-reduction/#cmmi-audit)) |
+| CMMI (Level 3) | **Regular Use** | Appraisal readiness, support ticket workflow design, continuous improvement ([the audit](/case-studies/sla-breach-reduction/#cmmi-audit)) |
 | SRE / SLO-SLI | **Regular Use** | Designed and run SLO programs as client trust frameworks |
 | SAFe | **Working Knowledge** | Program increment planning, PI ceremonies, ART coordination |
 

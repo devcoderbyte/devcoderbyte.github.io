@@ -8,7 +8,7 @@ description: "Case study: Taking over application support from an incumbent vend
 <div style="background:linear-gradient(135deg,rgba(13,148,136,.08) 0%,rgba(37,99,235,.06) 100%);border:1px solid #0d948840;border-radius:12px;padding:1.5rem;margin-bottom:2rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;text-align:center">
   <div><div style="font-family:var(--font-display);font-size:clamp(1.25rem,5vw,2rem);font-weight:600;color:#0d9488;white-space:nowrap">15→75%</div><div style="font-size:12px;color:#64748b;margin-top:4px">Alert accuracy</div></div>
   <div><div style="font-family:var(--font-display);font-size:clamp(1.25rem,5vw,2rem);font-weight:600;color:#0d9488;white-space:nowrap">8.5→10</div><div style="font-size:12px;color:#64748b;margin-top:4px">Client CSAT</div></div>
-  <div><div style="font-family:var(--font-display);font-size:clamp(1.25rem,5vw,2rem);font-weight:600;color:#0d9488;white-space:nowrap">CMMI</div><div style="font-size:12px;color:#64748b;margin-top:4px">SLA tracking used as an audit control</div></div>
+  <div><div style="font-family:var(--font-display);font-size:clamp(1.25rem,5vw,2rem);font-weight:600;color:#0d9488;white-space:nowrap">CMMI L3</div><div style="font-size:12px;color:#64748b;margin-top:4px">SLA tracking used as an audit control</div></div>
 </div>
 
 # Case Study 01 — Taking Over an Account: SLAs, Alerts and CSAT 8.5 → 10
@@ -36,7 +36,7 @@ Client CSAT was 8.5.
 
 We moved support from Jira to Zendesk and used its built-in SLA calculations. I led the Zendesk implementation. For each priority we defined the SLA formula, the target, and what counts as a breach: resolution within 2 hours for P1, 4 hours for P2, 24 hours for P3 and 48 hours for P4. Other vendors on the account had their own contractual SLAs, so each got its own SLA policy in Zendesk. Once ticketing moved over, SLAs were being met.
 
-That gave the client and us the same numbers to look at, every week, per priority. It also became one of our controls for the CMMI audit, and the audit went well ([how the audit ran](#cmmi-audit)).
+That gave the client and us the same numbers to look at, every week, per priority. It also became one of our controls for the CMMI Level 3 audit, and the audit went well ([how the audit ran](#cmmi-audit)).
 
 ---
 
@@ -48,9 +48,9 @@ We brought in Temperstack as a service offering. We gave it read-only access to 
 
 ---
 
-## The CMMI Audit {#cmmi-audit}
+## The CMMI Level 3 Audit {#cmmi-audit}
 
-I championed our CMMI readiness for the L3 ticket workflows across 10+ enterprise applications, and I was the subject-matter expert for the Zendesk set-up that became one of the audit's controls.
+I championed our CMMI Level 3 readiness for the third-line (L3) support ticket workflows across 10+ enterprise applications, and I was the subject-matter expert for the Zendesk set-up that became one of the audit's controls.
 
 ### Process definition
 
@@ -109,7 +109,7 @@ Afterwards, a senior manager on the client side wrote a note of appreciation for
 | SLA tracking | None (Jira) | Per priority, built into Zendesk |
 | Alert accuracy | ~15% | ~75% |
 | Runbooks | — | AI-generated runbook for each alert |
-| CMMI audit | — | Zendesk SLA set-up used as a control; audit went well |
+| CMMI Level 3 audit | — | Zendesk SLA set-up used as a control; audit went well |
 | Ticket categories with runbooks | 0% | 85% |
 | Engineer onboarding | — | Faster: new engineers learn from runbooks through Amazon Q |
 | Client CSAT | 8.5 | 9, then 10 |
