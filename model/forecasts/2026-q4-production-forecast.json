@@ -1,0 +1,40 @@
+{
+ "kind": "pre-registered forecast",
+ "created_at": "2026-10-19T20:25:26.350Z",
+ "scope": "Production rollout of access_request, alert_triage, data_fix, std_change for the 3 months after the calibration period. Totals over the 3 months.",
+ "calibration_sha256": "c517ab24f89d06bfa0488c38c73fc8e42782adc709921630d8a00b391884d1ab",
+ "model_sha256": "bf8be28b2a865f47ad8a6c9935201c618376dfa2dc29bcb473ba8663b2a12aa2",
+ "simulations": 4000,
+ "forecast": {
+  "agent_tickets": {
+   "p10": 1431.3,
+   "p50": 1606.9,
+   "p90": 1743.1
+  },
+  "errors_caught": {
+   "p10": 100.1,
+   "p50": 124.5,
+   "p90": 154.4
+  },
+  "escaped_errors": {
+   "p10": 11.2,
+   "p50": 14.8,
+   "p90": 19.4
+  },
+  "review_hours": {
+   "p10": 149.4,
+   "p50": 179.2,
+   "p90": 215.2
+  },
+  "token_cost_usd": {
+   "p10": 120.9,
+   "p50": 146.6,
+   "p90": 179.7
+  },
+  "human_ticket_hours": {
+   "p10": 2586.3,
+   "p50": 2693.9,
+   "p90": 2813.4
+  }
+ }
+}

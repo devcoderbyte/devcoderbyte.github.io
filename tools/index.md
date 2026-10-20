@@ -29,7 +29,7 @@ description: "Interactive delivery tools — SLO calculator, toil audit scorecar
   <a class="domain-card" href="/tools/ai-roi-calculator/">
     <div class="domain-icon">🤖</div>
     <div class="domain-title">AI Usage & ROI Calculator</div>
-    <div class="domain-desc">Pick a model, cloud API or self-hosted, and your usage. See cost per user against a budget cap, the value created and the effect on gross margin. A second tab tests mixes of engineers and AI agents for an offering.</div>
+    <div class="domain-desc">Pick a model, cloud API or self-hosted, and your usage. See cost per user against a budget cap, the value created and the effect on gross margin. A second tab tests mixes of engineers and AI agents, with an Advanced mode calibrated on ticket data and run as 2,000 simulations.</div>
     <div class="domain-arrow" style="color:var(--accent2)">Open calculator →</div>
   </a>
 </div>

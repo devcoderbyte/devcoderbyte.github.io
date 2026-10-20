@@ -190,6 +190,11 @@ permalink: /tools/ai-roi-calculator/
     </div>
 
     <div id="tab-team" class="hidden">
+      <div class="btn-group" style="margin-bottom:1rem;flex-wrap:wrap" id="t-mode">
+        <button data-mode="simple" class="active">Simple</button>
+        <button data-mode="adv">Advanced: calibrated &amp; simulated</button>
+      </div>
+      <div id="team-simple">
       <div class="tool-section" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
         <div style="font-size:14px;color:var(--light);line-height:1.5"><strong style="color:var(--text)">Worked example:</strong> a 10-engineer managed service moving to 7 engineers + 2 agents at a 15% client discount.</div>
         <button type="button" class="btn btn-ghost" id="t-example" style="font-size:13.5px;padding:.5rem 1rem">Load example</button>
@@ -299,11 +304,72 @@ permalink: /tools/ai-roi-calculator/
         <div class="wf-key"><span style="--sw:#0d9488">Adds profit</span><span style="--sw:#dc2626">Costs profit</span><span style="--sw:var(--muted)">Total</span></div>
         <p class="roi-note" id="t-ramp-msg"></p>
       </div>
+      </div>
+
+      <div id="team-adv" class="hidden">
+        <div class="status-msg status-warn" id="a-banner" style="margin-bottom:1rem"></div>
+
+        <div class="tool-section">
+          <div class="tool-section-title">1 · What the data says today (fitted, not assumed)</div>
+          <div style="overflow-x:auto" tabindex="0" role="region" aria-label="Fitted baselines per task type (scrollable)"><table class="roi-pl" id="a-fit"></table></div>
+          <p class="roi-note">Fitted from ticket-level history: monthly volume, first-attempt handle time, reopen rate, share of hours done by juniors, and SLA breach rate.</p>
+          <div style="overflow-x:auto" tabindex="0" role="region" aria-label="AI pilot results (scrollable)"><table class="roi-pl" id="a-pilot" style="margin-top:1rem"></table></div>
+          <p class="roi-note">Fitted from AI pilot logs, shown as low / likely / high. Only task types with pilot data can be automated here: no data, no automation.</p>
+        </div>
+
+        <div class="tool-section">
+          <div class="tool-section-title">2 · Your decisions</div>
+          <div id="a-types" style="display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;margin-bottom:1rem;font-size:14px"></div>
+          <div class="roi-grid">
+            <div class="roi-field"><label for="a-disc">Client discount %</label><input id="a-disc" class="roi-input" type="number" min="0" max="50" step="1" value="10"></div>
+            <div class="roi-field"><label for="a-ramp">Months to full automation</label><input id="a-ramp" class="roi-input" type="number" min="1" max="24" step="1" value="6"></div>
+            <div class="roi-field"><label for="a-term">Contract length (months)</label><input id="a-term" class="roi-input" type="number" min="12" max="60" step="12" value="36"></div>
+            <div class="roi-field"><label for="a-dr">Discount rate for NPV % / year</label><input id="a-dr" class="roi-input" type="number" min="0" max="30" step="1" value="10"></div>
+            <div class="roi-field"><label for="a-setup">One-off setup $ (integration + evals)</label><input id="a-setup" class="roi-input" type="number" min="0" step="1000" value="23000"></div>
+            <div class="roi-field"><label for="a-srs">Agent output reviewed by seniors %</label><input id="a-srs" class="roi-input" type="number" min="0" max="100" step="10" value="60"></div>
+          </div>
+        </div>
+
+        <div class="tool-section">
+          <div class="tool-section-title">3 · Assumptions the data can't tell you (edit the ranges)</div>
+          <div style="overflow-x:auto" tabindex="0" role="region" aria-label="Editable assumptions (scrollable)"><table class="roi-pl" id="a-assume"></table></div>
+          <p class="roi-note">Each uncertain input is a low / likely / high range. The simulation draws from all of them at once, 2,000 times.</p>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card"><div class="metric-label">Chance of beating today</div><div class="metric-val" id="a-prob">–</div></div>
+          <div class="metric-card"><div class="metric-label">NPV vs today, likely (P50)</div><div class="metric-val" id="a-p50">–</div></div>
+          <div class="metric-card"><div class="metric-label">Worst plausible (P10)</div><div class="metric-val" id="a-p10">–</div></div>
+          <div class="metric-card"><div class="metric-label">Best plausible (P90)</div><div class="metric-val" id="a-p90">–</div></div>
+        </div>
+
+        <div class="tool-section">
+          <div class="tool-section-title">What happens across 2,000 simulated contracts</div>
+          <div class="status-msg" id="a-verdict"></div>
+          <svg id="a-hist" viewBox="0 0 640 200" width="100%" style="display:block;margin-top:.75rem" role="img" aria-label="Distribution of NPV versus today"></svg>
+          <div class="wf-key"><span style="--sw:#dc2626">Worse than today</span><span style="--sw:#0d9488">Better than today</span></div>
+          <div style="overflow-x:auto" tabindex="0" role="region" aria-label="Steady-state month (scrollable)"><table class="roi-pl" id="a-steady" style="margin-top:1rem"></table></div>
+        </div>
+
+        <div class="tool-section">
+          <div class="tool-section-title">What moves the answer most</div>
+          <svg id="a-tornado" viewBox="0 0 640 300" width="100%" style="display:block" role="img" aria-label="Tornado chart of NPV sensitivity"></svg>
+          <p class="roi-note" id="a-tornado-note"></p>
+        </div>
+
+        <div class="tool-section">
+          <div class="tool-section-title">Proof it's right (not anyone's opinion)</div>
+          <div id="a-proof" style="font-size:14px;color:var(--light);line-height:1.7"></div>
+        </div>
+      </div>
     </div>
 
     <p style="font-size:13px;color:var(--muted)">Estimates only. All logic runs in your browser; nothing is stored or sent.</p>
   </div></div></div>
 </div>
+<script src="/tools/ai-roi-model.js"></script>
+<script src="/tools/ai-roi-calibration.js"></script>
+<script src="/tools/ai-roi-advanced.js" defer></script>
 <script>
 (function(){
   var $=function(id){return document.getElementById(id)};
