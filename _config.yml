@@ -4,7 +4,7 @@ author: Rajendra Birudaraju
 email: birudarajurajendra@gmail.com
 # GoatCounter site code (privacy-friendly analytics, no cookies). Empty = analytics off.
 # Create a free account at goatcounter.com, then put the code here, e.g. "devcoderbyte".
-goatcounter: ""
+goatcounter: "devcoderbyte"
 url: "https://devcoderbyte.github.io"
 baseurl: ""
 markdown: kramdown
