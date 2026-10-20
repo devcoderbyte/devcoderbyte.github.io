@@ -119,13 +119,13 @@ description: "Senior Program Manager · SRE, DevOps & Service Delivery. SRE Mana
       <ul class="facts">
         <li><span class="k">Role</span><span class="v">SRE Manager, Concentrix (since Jul 2025)</span></li>
         <li><span class="k">Account now</span><span class="v">Automotive finance on AWS, $3M+ a year</span></li>
-        <li><span class="k">Before</span><span class="v">US telecom supply-chain account ($15M), 2020 to mid-2023</span></li>
+        <li><span class="k">Before</span><span class="v">US telecom supply-chain account ($15M a year), 2020 to mid-2023</span></li>
         <li><span class="k">Team</span><span class="v">60+ engineers, grown from 10</span></li>
         <li><span class="k">Experience</span><span class="v">12+ years · SRE, DevOps, service delivery</span></li>
       </ul>
     </div>
     <div class="about-text">
-      <p>I'm an SRE Manager at Concentrix in Hyderabad. I run SRE, DevOps and application support delivery, and the presales behind it, for an automotive-finance platform on AWS: a $3M+ annual account. Before that, from 2020 to mid-2023, I led the offshore team on a US telecom carrier's $15M supply-chain account.</p>
+      <p>I'm an SRE Manager at Concentrix in Hyderabad. I run SRE, DevOps and application support delivery, and the presales behind it, for an automotive-finance platform on AWS: a $3M+ annual account. Before that, from 2020 to mid-2023, I led the offshore team on a US telecom carrier's $15M-a-year supply-chain account.</p>
       <p>I started hands-on and that still shapes how I manage. I did on-call and root-cause work in Splunk and ELK, built CI/CD pipelines, and wrote Java and REST integrations. On the telecom account I led the offshore side of moving 200+ supply-chain microservices from Pivotal Cloud Foundry to Kubernetes (TKE). That meant Docker images, GitOps deployments on GitLab, secrets in HashiCorp Vault, pod disruption budgets, and wiring services into the carrier's API gateway.</p>
       <p>On the delivery side I grew the offshore team from 10 to 60+ engineers over two years. I run P1/P2 incident command and manage SOWs and SLAs with vendor partners. On the telecom account, my team drove a review of roughly 80,000 Splunk alerts with the dev teams, getting sign-off on each one, and cut them to about 5,000. On one account I found compute that was billed at full capacity but running below 1% utilization. It was outside our contracted scope, but I raised it and drove the fix.</p>
       <p>I use LLMs every day for RFQ drafting, ticket triage and reporting. The pages here show where that helped and where it didn't.</p>
