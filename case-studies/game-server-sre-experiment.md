@@ -74,6 +74,3 @@ The restart-policy gap and the health-check depth gap were both things I would h
 
 I'd build the deep health check in from the start instead of retrofitting it after noticing the shallow one lied to me. I'd also test the restart-policy assumption before the chaos test, not during it — that's a config review question, not a live-fire discovery. And a few of the dashboard metrics (tick rate, join latency, player count) are currently synthetic placeholders rather than real measurements; wiring those up properly is the natural next iteration.
 
----
-
-*Repo: [github.com/devcoderbyte/game-server-sre](https://github.com/devcoderbyte/game-server-sre)*

@@ -108,8 +108,8 @@ Afterwards, a senior manager on the client side wrote a note of appreciation for
 |---|---|---|
 | SLA tracking | None (Jira) | Per priority, built into Zendesk |
 | Alert accuracy | ~15% | ~75% |
-| Runbooks | — | AI-generated runbook for each alert |
+| Alerts with a runbook (platforms Temperstack scanned) | — | Each proposed alert came with an AI-generated runbook |
 | CMMI Level 3 audit | — | Zendesk SLA set-up used as a control; audit went well |
-| Ticket categories with runbooks | 0% | 85% |
+| Ticket categories with a runbook (share of all categories) | 0% | 85% |
 | Engineer onboarding | — | Faster: new engineers learn from runbooks through Amazon Q |
 | Client CSAT | 8.5 | 9, then 10 |

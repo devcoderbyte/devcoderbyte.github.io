@@ -138,6 +138,8 @@ Clients buy confidence. Show what Monday morning looks like — who does what, h
 
 ### 4. SLA & KPI Framework
 
+*Illustrative template values. Each engagement sets its own targets; the actual targets on the account in [Case Study 01](/case-studies/sla-breach-reduction/) were P1 2h, P2 4h, P3 24h, P4 48h resolution.*
+
 | Metric | Target | Measurement | Review |
 |---|---|---|---|
 | P1 response | < 15 minutes | Jira timestamp | Weekly |
