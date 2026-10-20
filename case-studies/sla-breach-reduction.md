@@ -14,7 +14,7 @@ description: "Case study: Taking over application support from an incumbent vend
 # Case Study 01 — Taking Over an Account: SLAs, Alerts and CSAT 8.5 → 10
 
 **Domain:** Automotive finance · Application support · SRE<br>
-**Context:** Took over support from the incumbent vendor<br>
+**Context:** Took over support from the incumbent vendor in September 2023, starting with a 10-person team. The account reached $2.1M a year by September 2024 and is $3M+ today<br>
 **Role:** Offshore owner; counterpart to the onsite delivery directors
 {: .case-meta}
 
