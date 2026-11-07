@@ -83,6 +83,7 @@ permalink: /tools/ai-roi-calculator/
         <div class="roi-field"><label for="gpuHours">GPU hours / month</label><input id="gpuHours" class="roi-input" type="number" min="1" step="1" value="730"><div class="roi-hint">730 = always on</div></div>
         <div class="roi-field"><label for="tps">Tokens / sec per GPU</label><input id="tps" class="roi-input" type="number" min="1" step="10" value="1500"><div class="roi-hint">Throughput you measure for your model</div></div>
         <div class="roi-field"><label for="opsCost">Ops & MLOps $ / month</label><input id="opsCost" class="roi-input" type="number" min="0" step="100" value="3000"><div class="roi-hint">Engineer time to run it</div></div>
+        <div class="roi-field"><label for="gpuUtil">Target GPU utilization %</label><input id="gpuUtil" class="roi-input" type="number" min="1" max="100" step="5" value="70"><div class="roi-hint">Share of peak throughput you can plan on (assumed)</div></div>
       </div>
       <p class="roi-note" id="model-note">Claude prices are Anthropic's list prices (October 2026). Bedrock, Vertex AI and other models are priced differently; use Custom.</p>
     </div>
@@ -176,6 +177,18 @@ permalink: /tools/ai-roi-calculator/
     <div class="tool-section" id="self-section">
       <div class="tool-section-title">Self-hosted capacity</div>
       <div class="status-msg" id="self-msg"></div>
+    </div>
+
+    <div class="tool-section" id="shbe-section">
+      <div class="tool-section-title">Self-hosted vs API break-even</div>
+      <div class="status-msg" id="shbe-msg"></div>
+      <div style="overflow-x:auto;margin-top:1rem" tabindex="0" role="region" aria-label="Self-hosted vs API break-even (scrollable)">
+        <table class="roi-pl">
+          <thead><tr><th>Monthly</th><th class="num">Value</th><th>How it's worked out</th></tr></thead>
+          <tbody id="shbe-body"></tbody>
+        </table>
+      </div>
+      <p class="roi-note">Sourced: Revolut reports cutting AI coding costs about 90% by self-hosting GLM on 56 Nvidia B200 GPUs for about 2,000 engineers, at a blended $0.30 per million tokens (<a href="https://www.theregister.com/a/5307345" target="_blank" rel="noopener">The Register</a>). A saving like that exists only well above break-even. Assumed: the target utilization; real traffic has peaks, so plan below 100%. The API price is this page's list price weighted by your input/output mix; it has no prompt-caching, negotiated-discount or gateway adjustments, so if yours are lower, break-even is higher.</p>
     </div>
 
     <div class="tool-section">
@@ -374,7 +387,7 @@ permalink: /tools/ai-roi-calculator/
 (function(){
   var $=function(id){return document.getElementById(id)};
   var LIM={users:[0,1e7,1],active:[0,100],days:[0,31],reqs:[0,1e5],tin:[0,2e6],tout:[0,2e6],pin:[0,1e4],pout:[0,1e4],
-    gpuRate:[0,1e4],gpus:[0,1e5,1],gpuHours:[0,744],tps:[0,1e7],opsCost:[0,1e8],cap:[0,1e6],hours:[0,60],rate:[0,1e5],real:[0,100],
+    gpuRate:[0,1e4],gpus:[0,1e5,1],gpuHours:[0,744],tps:[0,1e7],opsCost:[0,1e8],gpuUtil:[1,100],cap:[0,1e6],hours:[0,60],rate:[0,1e5],real:[0,100],
     rev:[0,1e10],gm:[-100,99],bill:[0,1e5],'t-req':[0,1e5],'t-cost':[0,1e7],'t-price':[0,1e7],'t-humans':[0,1e5],'t-agents':[0,1e5,1],
     't-uplift':[-50,300],'t-agentfte':[0,20],'t-agentcost':[0,1e7],'t-oversight':[0,168],'t-setup':[0,1e9],'t-months':[1,120],'t-disc':[0,100],'t-ramp':[1,36,1],'t-haircut':[0,100],'t-tasks':[0,1e6],'t-err':[0,100],'t-catch-rev':[0,100],'t-catch-qc':[0,100],'t-errcost':[0,1e8],'t-evalbuild':[0,1e8],'t-evalrun':[0,1e8],'t-guard':[0,500],'t-fblock':[0,100]};
   var num=function(id){var v=parseFloat($(id).value);if(isNaN(v))v=0;var l=LIM[id];if(l){v=Math.min(l[1],Math.max(l[0],v));if(l[2])v=Math.round(v);}return v};
@@ -399,11 +412,47 @@ permalink: /tools/ai-roi-calculator/
     vendor:'40–60 minutes per active workday ≈ 4.2 hours a week. From OpenAI\'s enterprise report, which is vendor-reported (<a href="https://the-decoder.com/openai-claims-generative-ai-saves-knowledge-workers-40-to-80-minutes-a-day/" target="_blank" rel="noopener">The Decoder</a>).',
     custom:'Enter your own measured number. Measured beats assumed.'};
 
+  // self-hosted vs API break-even: new output only, reads the same inputs
+  var tok=function(t){return !isFinite(t)?'–':t>=1e9?(t/1e9).toFixed(t>=1e10?0:1)+'B':t>=1e6?(t/1e6).toFixed(t>=1e8?0:1)+'M':Math.round(t/1e3).toLocaleString()+'K'};
+  function shbe(tinM,toutM,apiCost,active){
+    var gpus=num('gpus'), hrs=num('gpuHours'), rate=num('gpuRate'), ops=num('opsCost'), u=num('gpuUtil')/100;
+    var fixed=gpus*rate*hrs+ops, demand=tinM+toutM;
+    var perReq=num('tin')+num('tout'), tpu=num('days')*num('reqs')*perReq;           // tokens per active user per month
+    var apiPerTok,pin,pout,model=$('model').value;
+    if(model==='custom'){pin=num('pin');pout=num('pout')}else{var p=model.split('|');pin=+p[0];pout=+p[1]}
+    apiPerTok=perReq>0?(num('tin')*pin+num('tout')*pout)/perReq/1e6:null;          // same blend as the API cost above
+    var capGpu=num('tps')*3600*hrs*u, capacity=gpus*capGpu;                         // usable tokens per GPU and per cluster
+    var be=apiPerTok>0?fixed/apiPerTok:Infinity, beUsers=tpu>0&&isFinite(be)?Math.ceil(be/tpu):Infinity;
+    var m=$('shbe-msg'), rows=[];
+    var per1M=function(v){return isFinite(v)?usd(v*1e6,2)+' / 1M':'–'};
+    rows.push(['Fixed self-hosted cost',usd(fixed),plural(gpus,'GPU')+' × '+usd(rate,2)+'/h × '+hrs+' h + '+usd(ops)+' ops']);
+    rows.push(['Blended API price',apiPerTok===null?'–':per1M(apiPerTok),'Input and output list prices, weighted by your tokens per request']);
+    rows.push(['Break-even volume',isFinite(be)?tok(be)+' tokens':'–','Fixed cost ÷ API price per token']);
+    rows.push(['Tokens per active user',tpu>0?tok(tpu):'–',num('reqs')+' requests × '+num('days')+' days × '+perReq.toLocaleString()+' tokens']);
+    rows.push(['Break-even active users',isFinite(beUsers)?beUsers.toLocaleString():'–','You have '+active.toLocaleString()]);
+    rows.push(['Usable capacity',capacity>0?tok(capacity)+' tokens':'–',plural(gpus,'GPU')+' × '+num('tps').toLocaleString()+' tokens/s × '+hrs+' h × '+Math.round(u*100)+'%']);
+    rows.push(['Your demand',tok(demand)+' tokens',demand>0&&capacity>0?Math.round(demand/capacity*100)+'% of usable capacity':'']);
+    $('shbe-body').innerHTML=rows.map(function(r){return '<tr><td>'+r[0]+'</td><td class="num">'+r[1]+'</td><td class="wrap">'+r[2]+'</td></tr>'}).join('');
+    var say=function(cls,t){m.className='status-msg '+cls;m.textContent=t};
+    if(perReq<=0)return say('status-warn','Enter input and output tokens per request to compare self-hosting with the API.');
+    if(!(apiPerTok>0))return say('status-warn','At $0 API prices the API is free, so self-hosting never breaks even.');
+    if(capGpu<=0)return say('status-crit','Enter GPU hours and throughput to see break-even.');
+    var gpuPerTok=rate/(num('tps')*3600*u);                                            // GPU cost per usable token, before ops
+    if(gpuPerTok>=apiPerTok)return say('status-crit','Self-hosting never beats the API at these prices: GPU time alone costs '+per1M(gpuPerTok)+' tokens at '+Math.round(u*100)+'% utilization, against '+per1M(apiPerTok)+' on the API, before any ops cost. More GPUs or more users won\'t change that; a cheaper GPU rate, higher throughput or a pricier API model would.');
+    if(be>capacity){var nMin=Math.max(gpus+1,Math.ceil(ops/(apiPerTok*capGpu-rate*hrs))), tMin=(nMin*rate*hrs+ops)/apiPerTok;   // smallest cluster that can win, and its break-even
+      return say('status-warn','This cluster can\'t reach break-even: it needs '+tok(be)+' tokens a month but can serve '+tok(capacity)+' at '+Math.round(u*100)+'% utilization. Self-hosting first beats the API with '+plural(nMin,'GPU')+' serving more than '+tok(tMin)+' tokens a month'+(tpu>0?', roughly '+Math.ceil(tMin/tpu).toLocaleString()+' active users at your usage':'')+' (you have '+active.toLocaleString()+').');}
+    if(demand>capacity){var need=Math.ceil(demand/capGpu);
+      return say('status-crit','Your '+tok(demand)+' tokens a month are above break-even ('+tok(be)+') but beyond this cluster\'s usable capacity of '+tok(capacity)+'. Serving it at '+Math.round(u*100)+'% utilization needs '+plural(need,'GPU')+', not '+gpus+'.');}
+    if(demand<be)return say('status-warn','The API is cheaper at your scale. Self-hosting breaks even at '+tok(be)+' tokens a month'+(isFinite(beUsers)?', about '+beUsers.toLocaleString()+' active users at your usage':'')+'. You have '+active.toLocaleString()+' using '+tok(demand)+'.');
+    say('status-ok','Self-hosting is cheaper at your scale: '+tok(demand)+' tokens a month is '+(demand/be).toFixed(1)+'× the '+tok(be)+' break-even. The API would cost '+usd(apiCost)+' a month against '+usd(fixed)+' fixed, saving '+usd(apiCost-fixed)+'.');
+  }
+
   function calc(){
     var deploy=$('deploy').value, model=$('model').value, comm=$('comm').value;
     $('custom-prices').classList.toggle('hidden',model!=='custom');
     $('self-fields').classList.toggle('hidden',deploy!=='self');
     $('self-section').classList.toggle('hidden',deploy!=='self');
+    $('shbe-section').classList.toggle('hidden',deploy!=='self');
     $('model-label').textContent=deploy==='self'?'Compare against API model':'Model';
     document.querySelectorAll('.tm-only').forEach(function(e){e.classList.toggle('hidden',comm!=='tm')});
     var vm=$('vmode').value;if(vm==='research')$('hours').value=1.2;if(vm==='vendor')$('hours').value=4.2;$('hours').disabled=vm!=='custom';$('vnote').innerHTML=vnotes[vm];
@@ -435,6 +484,7 @@ permalink: /tools/ai-roi-calculator/
           (cost<apiCost?'Self-hosting is cheaper at this volume.':'The API is cheaper at this volume; self-hosting pays off only with high, steady usage.');
       }
     }
+    if(deploy==='self')shbe(tinM,toutM,apiCost,active);
     var perUser=active>0?cost/active:0;
     var cap=num('cap');
 
