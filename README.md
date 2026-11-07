@@ -70,7 +70,8 @@ Open [http://localhost:4000/delivery-pulse](http://localhost:4000/delivery-pulse
 ## Contact
 
 **Rajendra Birudaraju**  
-Senior Program Manager · SRE & AI-Augmented Delivery  
+Site Reliability Engineering Manager, Concentrix  
+Delivery lead for a $3M managed-services portfolio (SRE, DevOps, AMS)  
 Hyderabad, India  
 [linkedin.com/in/rajendrabirudaraju](https://linkedin.com/in/rajendrabirudaraju)  
 birudarajurajendra@gmail.com

@@ -15,7 +15,7 @@ description: "What Rajendra Birudaraju is working on, learning, and thinking abo
 
 ## Work
 
-SRE Manager at Concentrix since July 2025, leading delivery and presales for an automotive-finance account worth $3M+ a year. Current focus areas:
+Site Reliability Engineering Manager at Concentrix since July 2025, leading delivery and presales for an automotive-finance account worth $3M+ a year. Current focus areas:
 
 - Running presales alongside delivery — applying the bid strategy framework documented on this site on live RFQs
 - Deepening the AI enablement practice across the delivery team — moving from individual LLM usage to documented, team-wide workflows that stick
