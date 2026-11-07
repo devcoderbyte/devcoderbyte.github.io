@@ -85,7 +85,7 @@ permalink: /tools/ai-roi-calculator/
         <div class="roi-field"><label for="opsCost">Ops & MLOps $ / month</label><input id="opsCost" class="roi-input" type="number" min="0" step="100" value="3000"><div class="roi-hint">Engineer time to run it</div></div>
         <div class="roi-field"><label for="gpuUtil">Target GPU utilization %</label><input id="gpuUtil" class="roi-input" type="number" min="1" max="100" step="5" value="70"><div class="roi-hint">Share of peak throughput you can plan on (assumed)</div></div>
       </div>
-      <p class="roi-note" id="model-note">Claude prices are Anthropic's list prices (October 2026). Bedrock, Vertex AI and other models are priced differently; use Custom.</p>
+      <p class="roi-note" id="model-note">Source: <a href="https://claude.com/pricing" target="_blank" rel="noopener">Anthropic pricing page</a>, checked 7 November 2026. Haiku 5.5 prices are for prompts up to 100K tokens ($0.50 / $2.50 above that). Bedrock, Vertex AI and other models are priced differently; use Custom.</p>
     </div>
 
     <div class="tool-section">
@@ -118,7 +118,7 @@ permalink: /tools/ai-roi-calculator/
           </select>
         </div>
       </div>
-      <p class="roi-note">Default $29: Accenture reportedly centrally funds $29 per employee per month for Claude since 1 October 2026; usage above that needs a project budget (<a href="https://404media.co/accenture-tells-employees-they-can-now-spend-only-29-on-claude-per-month" target="_blank" rel="noopener">404 Media</a>).</p>
+      <p class="roi-note">Default $29: Accenture reportedly centrally funds $29 per employee per month for Claude from 1 October 2026, with usage above that charged to a project budget. This comes from an internal memo as reported by <a href="https://404media.co/accenture-tells-employees-they-can-now-spend-only-29-on-claude-per-month" target="_blank" rel="noopener">404 Media (15 October 2026)</a>; it is press reporting, not a policy Accenture has published. Use your own organisation's figure.</p>
     </div>
 
     <div class="tool-section">
