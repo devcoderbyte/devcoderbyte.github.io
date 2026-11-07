@@ -67,6 +67,29 @@ const has = (name, text, part) => { if (text.includes(part)) { pass++; console.l
   has('cap ratio', await text('cap-msg'), usd(e.perUser, 2) + ' per active user is ' + (e.perUser / 29).toFixed(1) + '× the $29 cap');
   has('overage', await text('cap-msg'), 'Overage: ' + usd((e.perUser - 29) * e.active) + ' per month across ' + e.active + ' active users');
 
+  console.log('Self-hosted break-even by cache-hit rate (Opus, ops preset, 4 GPUs)');
+  await preset('ops'); await set({ deploy: 'self', model: '4|20', users: 60, active: 70, gpus: 4, gpuRate: 2.5, gpuHours: 730, tps: 1500, opsCost: 3000, gpuUtil: 70 });
+  {
+    const tin = 4000, tout = 800, per = tin + tout, pin = 4, pout = 20, read = 0.2, fixed = 4 * 2.5 * 730 + 3000;
+    const tpu = 21 * 40 * per, demand = Math.round(60 * 0.7) * tpu;
+    const fmt = t => t >= 1e9 ? (t / 1e9).toFixed(t >= 1e10 ? 0 : 1) + 'B' : t >= 1e6 ? (t / 1e6).toFixed(t >= 1e8 ? 0 : 1) + 'M' : Math.round(t / 1e3).toLocaleString() + 'K';
+    const rows = await page.evaluate(() => [...document.querySelectorAll('#shbe-cache tr')].map(r => [...r.cells].map(c => c.innerText.replace(/\n/g, ' '))));
+    eq('three rows', rows.length, 3);
+    [0, 0.5, 0.9].forEach((h, i) => {
+      const price = (tin * (h * read + (1 - h) * pin) + tout * pout) / per / 1e6, be = fixed / price;
+      eq(Math.round(h * 100) + '% API price', rows[i][1], usd(price * 1e6, 2));
+      eq(Math.round(h * 100) + '% break-even', rows[i][2], fmt(be) + ' tokens ' + Math.ceil(be / tpu).toLocaleString() + ' users');
+      eq(Math.round(h * 100) + '% verdict', rows[i][3], 'API cheaper by ' + usd(fixed - demand * price) + '/mo');
+    });
+    const msg = await text('shbe-msg'), be0 = fixed / ((tin * pin + tout * pout) / per / 1e6);
+    has('verdict message still uses the 0% (page) price', msg, 'Self-hosting breaks even at ' + fmt(be0) + ' tokens a month');
+    has('verdict message adds the 90% case', msg, 'With 90% cache hits the API drops to');
+    await set({ model: 'custom', pin: 3, pout: 15 });
+    const crow = await page.evaluate(() => [...document.querySelectorAll('#shbe-cache tr')].map(r => r.cells[3].innerText));
+    eq('custom model: 50% and 90% rows have no cache price', crow.slice(1).join(' | '), 'No cache price | No cache price');
+    await set({ deploy: 'api', model: '4|20' });
+  }
+
   // Team mix tab, from the formulas in "Show the maths"
   const team = (x) => {
     const A = x.agents, H = x.humans, usesAI = A > 0, disc = usesAI ? x.disc : 0, qc = usesAI && x.qc;
