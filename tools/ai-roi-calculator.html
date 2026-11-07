@@ -85,7 +85,7 @@ permalink: /tools/ai-roi-calculator/
         <div class="roi-field"><label for="opsCost">Ops & MLOps $ / month</label><input id="opsCost" class="roi-input" type="number" min="0" step="100" value="3000"><div class="roi-hint">Engineer time to run it</div></div>
         <div class="roi-field"><label for="gpuUtil">Target GPU utilization %</label><input id="gpuUtil" class="roi-input" type="number" min="1" max="100" step="5" value="70"><div class="roi-hint">Share of peak throughput you can plan on (assumed)</div></div>
       </div>
-      <p class="roi-note" id="model-note">Claude prices are Anthropic's list prices (October 2026). Bedrock, Vertex AI and other models are priced differently; use Custom.</p>
+      <p class="roi-note" id="model-note">Source: <a href="https://claude.com/pricing" target="_blank" rel="noopener">Anthropic pricing page</a>, checked 7 November 2026. Haiku 5.5 prices are for prompts up to 100K tokens ($0.50 / $2.50 above that). Bedrock, Vertex AI and other models are priced differently; use Custom.</p>
     </div>
 
     <div class="tool-section">
@@ -118,7 +118,7 @@ permalink: /tools/ai-roi-calculator/
           </select>
         </div>
       </div>
-      <p class="roi-note">Default $29: Accenture reportedly centrally funds $29 per employee per month for Claude since 1 October 2026; usage above that needs a project budget (<a href="https://404media.co/accenture-tells-employees-they-can-now-spend-only-29-on-claude-per-month" target="_blank" rel="noopener">404 Media</a>).</p>
+      <p class="roi-note">Default $29: Accenture reportedly centrally funds $29 per employee per month for Claude from 1 October 2026, with usage above that charged to a project budget. This comes from an internal memo as reported by <a href="https://404media.co/accenture-tells-employees-they-can-now-spend-only-29-on-claude-per-month" target="_blank" rel="noopener">404 Media (15 October 2026)</a>; it is press reporting, not a policy Accenture has published. Use your own organisation's figure.</p>
     </div>
 
     <div class="tool-section">
@@ -127,10 +127,11 @@ permalink: /tools/ai-roi-calculator/
         <div class="roi-field">
           <label for="vmode">Time saved assumption</label>
           <select id="vmode" class="tool-select">
-            <option value="research">Independent research: ~3% of hours</option>
-            <option value="vendor">Vendor-reported: 40–60 min / day</option>
+            <option value="research" selected>Research: ~3% of an 8-hour day</option>
+            <option value="vendor">Vendor: 40–60 min/day (8–12.5%)</option>
             <option value="custom">Custom</option>
           </select>
+          <div class="roi-hint">Independent research: ~3% of an 8-hour day (~14 min). Vendor-reported: 40–60 min a day, 8–12.5% of an 8-hour day. Vendor figures are 3-4x higher than independent studies; the default uses the conservative figure so the business case survives it.</div>
         </div>
         <div class="roi-field"><label for="hours">Hours saved / active user / week</label><input id="hours" class="roi-input" type="number" min="0" step="0.1" value="1.2"></div>
         <div class="roi-field"><label for="rate">Loaded cost $ / hour</label><input id="rate" class="roi-input" type="number" min="0" step="1" value="25"><div class="roi-hint">Salary + overheads per hour</div></div>
@@ -226,7 +227,7 @@ permalink: /tools/ai-roi-calculator/
         <div class="roi-grid">
           <div class="roi-field"><label for="t-humans">Engineers</label><input id="t-humans" class="roi-input" type="number" min="0" step="1" value="5"></div>
           <div class="roi-field"><label for="t-agents">AI agents</label><input id="t-agents" class="roi-input" type="number" min="0" step="1" value="2"></div>
-          <div class="roi-field"><label for="t-uplift">Engineer productivity uplift %</label><input id="t-uplift" class="roi-input" type="number" min="0" step="1" value="3"><div class="roi-hint">From using AI themselves. Research: ~3%</div></div>
+          <div class="roi-field"><label for="t-uplift">Engineer productivity uplift %</label><input id="t-uplift" class="roi-input" type="number" min="0" step="1" value="3"><div class="roi-hint">From using AI themselves. Default 3% = independent research (~3% of an 8-hour day, <a href="https://www.computing.co.uk/news/2025/ai/ai-chatbots-yet-to-prove-their-worth" target="_blank" rel="noopener">Computing</a>); vendor claims are 8–12.5% (<a href="https://openai.com/index/the-state-of-enterprise-ai-2025-report/" target="_blank" rel="noopener">OpenAI</a>).</div></div>
           <div class="roi-field"><label for="t-agentfte">Output per agent (engineer-equivalents)</label><input id="t-agentfte" class="roi-input" type="number" min="0" step="0.1" value="1"><div class="roi-hint">How much of one engineer's work an agent really covers</div></div>
           <div class="roi-field"><label for="t-agentcost">AI cost $ / agent / month</label><input id="t-agentcost" class="roi-input" type="number" min="0" step="50" value="1500"><div class="roi-hint">Tokens or licence; estimate it on the Usage tab</div></div>
           <div class="roi-field"><label for="t-oversight">Oversight hours / agent / week</label><input id="t-oversight" class="roi-input" type="number" min="0" step="1" value="8"><div class="roi-hint">Engineer time spent reviewing agent output</div></div>
@@ -372,8 +373,43 @@ permalink: /tools/ai-roi-calculator/
 
         <div class="tool-section">
           <div class="tool-section-title">Proof it's right (not anyone's opinion)</div>
-          <div id="a-proof" style="font-size:14px;color:var(--light);line-height:1.7"></div>
+          <div id="a-proof" style="font-size:14px;color:var(--light);line-height:1.7"><p>The backtest, reference-case and forecast results load here when JavaScript is on. The formulas for every number on this page are written out below, in <a href="#maths">Show the maths</a>.</p></div>
         </div>
+      </div>
+    </div>
+
+    <div class="tool-section" id="maths">
+      <div class="tool-section-title">Proof it's right: show the maths</div>
+      <div style="font-size:14px;color:var(--light);line-height:1.7">
+        <p>These are the formulas the page runs, in plain words. Every input is yours; nothing is hidden.</p>
+        <p style="margin-top:.75rem"><strong style="color:var(--text)">Usage &amp; ROI tab</strong></p>
+        <ul style="margin:.25rem 0 0 1.2rem">
+          <li><strong>Active users</strong> = licensed users × active %, rounded to a whole person.</li>
+          <li><strong>Requests a month</strong> = active users × working days × requests per user per day.</li>
+          <li><strong>API cost a month</strong> = requests × (input tokens × input price + output tokens × output price) ÷ 1,000,000.</li>
+          <li><strong>Self-hosted cost a month</strong> = GPU $ per hour × GPUs × GPU hours + ops cost. If your token demand needs more GPUs than you entered (demand ÷ (tokens per second × 3,600 × GPU hours), rounded up), the larger number is used.</li>
+          <li><strong>Cost per active user</strong> = AI cost a month ÷ active users.</li>
+          <li><strong>Value a month</strong> = hours saved per active user per week × 52 ÷ 12 × active users × realization % × loaded cost per hour.</li>
+          <li><strong>ROI</strong> = (value − AI cost) ÷ AI cost.</li>
+          <li><strong>Break-even hours</strong> = AI cost ÷ (52 ÷ 12 × active users × realization % × loaded cost per hour): the hours each active user must save a week for value to equal cost.</li>
+          <li><strong>Cost charged to the project</strong> depends on who pays above the cap: (cost per user − cap) × active users when the project pays the overage, all of it, or none.</li>
+          <li><strong>Gross margin</strong> = (revenue − delivery cost) ÷ revenue. Today's delivery cost = revenue × (1 − current margin). With AI on a fixed-price account, delivery cost falls by the value of time saved (never below zero) and rises by the AI cost charged to the project. On time &amp; materials, revenue falls by realized hours × bill rate unless the freed hours are redeployed, and delivery cost falls only if people leave the account (not if they sit on the bench).</li>
+          <li><strong>Self-hosted break-even</strong> = fixed self-hosted cost ÷ blended API price per token, where the blended price = (input tokens × input price + output tokens × output price) ÷ (input + output tokens) per request.</li>
+        </ul>
+        <p style="margin-top:.75rem"><strong style="color:var(--text)">Team mix tab (Simple)</strong></p>
+        <ul style="margin:.25rem 0 0 1.2rem">
+          <li><strong>Review hours needed</strong> = agents × oversight hours per agent a week. <strong>Review hours available</strong> = engineers × 40.</li>
+          <li><strong>Review share</strong> = available ÷ needed, capped at 100% (0% with no engineers). Engineer time spent reviewing = the smaller of the two ÷ 40, in engineers.</li>
+          <li><strong>Engineer capacity</strong> = (engineers − engineers' time spent reviewing) × (1 + productivity uplift %).</li>
+          <li><strong>Agent capacity</strong> = agents × output per agent × review share × (1 − rework %) × (1 − good outputs wrongly blocked %).</li>
+          <li><strong>Capacity covered</strong> = (engineer capacity + agent capacity) ÷ engineers required. Below 90% the mix is marked not viable.</li>
+          <li><strong>Revenue</strong>: today = engineers required × price per engineer; new mix = today × (1 − client discount) + AI cost billed to the client, if you pass it through.</li>
+          <li><strong>Cost a month</strong> = engineers × engineer cost + agents × AI cost per agent + (setup + eval build) ÷ contract months + eval runs + guardrail overhead (% of AI cost) + cost of errors that reach the client.</li>
+          <li><strong>Errors reaching the client</strong> = agents × tasks per agent × error rate × (1 − catch rate), where the catch rate is review alone or evals + guardrails + review.</li>
+          <li><strong>Gross margin</strong> = (revenue − cost) ÷ revenue.</li>
+          <li><strong>Setup payback</strong>: the first month in which cumulative extra profit over today, after paying the setup, turns positive. Agents start at 20% of their benefit and reach 100% by the ramp month; until then the shortfall is paid for by keeping part of the old team.</li>
+        </ul>
+        <p style="margin-top:.75rem"><strong style="color:var(--text)">How "output per agent" becomes capacity.</strong> "Output per agent (engineer-equivalents)" is how much of one engineer's monthly work an agent really covers: 1 means a full engineer, 0.5 half. It is not counted at face value. Each agent's output is multiplied by the share of it an engineer has time to review, then reduced by the rework and blocked-output percentages, and only then added to what the remaining engineers deliver. Example: 7 engineers and 2 agents at 1.5 engineer-equivalents each, with 8 review hours per agent a week, 15% rework and 3% blocked. Review takes 16 of the 280 available hours (0.4 engineers), so engineers deliver (7 − 0.4) × 1.03 = 6.8 and agents deliver 2 × 1.5 × 100% × 0.85 × 0.97 = 2.47, a total of 9.27 engineers of work against 10 required: 93% covered.</p>
       </div>
     </div>
 
@@ -409,7 +445,7 @@ permalink: /tools/ai-roi-calculator/
     Object.keys(ex).forEach(function(k){$(k).value=ex[k]});$('t-pass').value='no';$('t-qc').value='on';calc();});
   var vnotes={
     research:'~3% of a 40-hour week ≈ 1.2 hours. From an NBER study of about 25,000 Danish workers, which also found no significant change in earnings or hours worked (<a href="https://www.computing.co.uk/news/2025/ai/ai-chatbots-yet-to-prove-their-worth" target="_blank" rel="noopener">Computing</a>, <a href="https://the-decoder.com/chatbots-like-chatgpt-have-not-led-to-significant-changes-in-wages-or-working-hours-study-finds/" target="_blank" rel="noopener">The Decoder</a>).',
-    vendor:'40–60 minutes per active workday ≈ 4.2 hours a week. From OpenAI\'s enterprise report, which is vendor-reported (<a href="https://the-decoder.com/openai-claims-generative-ai-saves-knowledge-workers-40-to-80-minutes-a-day/" target="_blank" rel="noopener">The Decoder</a>).',
+    vendor:'40–60 minutes per active workday ≈ 4.2 hours a week. From OpenAI\'s State of Enterprise AI report (December 2025), a survey of its own customers\' workers, so vendor- and self-reported (<a href="https://openai.com/index/the-state-of-enterprise-ai-2025-report/" target="_blank" rel="noopener">OpenAI</a>; coverage: <a href="https://the-decoder.com/openai-claims-generative-ai-saves-knowledge-workers-40-to-80-minutes-a-day/" target="_blank" rel="noopener">The Decoder</a>).',
     custom:'Enter your own measured number. Measured beats assumed.'};
 
   // self-hosted vs API break-even: new output only, reads the same inputs

@@ -1,16 +1,16 @@
 ---
 layout: home
-title: Senior Program Manager Portfolio
-description: "Senior Program Manager · SRE, DevOps & Service Delivery. SRE Manager in Hyderabad with 12+ years. Evidence for delivery and SRE manager roles: account takeovers, a 200+ service migration, alert-noise cleanup, and a 10 → 60+ engineer team."
+title: "Site Reliability Engineering Manager, Concentrix"
+description: "Site Reliability Engineering Manager, Concentrix. Delivery lead for a $3M managed-services portfolio (SRE, DevOps, AMS). 12+ years, Hyderabad. Evidence for delivery and SRE manager roles: account takeovers, a 200+ service migration, alert-noise cleanup, and a 10 → 60+ engineer team."
 ---
 
 <section class="hero">
   <div class="container hero-grid">
     <div class="hero-text">
       <div class="hero-status">Open to Delivery Manager and SRE Manager roles · Hyderabad</div>
-      <div class="hero-eyebrow">Senior Program Manager · SRE, DevOps & Service Delivery</div>
+      <div class="hero-eyebrow">Site Reliability Engineering Manager, Concentrix<br>Delivery lead for a $3M managed-services portfolio (SRE, DevOps, AMS)</div>
       <h1>Service delivery,<br><em>made measurable.</em></h1>
-      <p class="hero-sub">I take over service delivery, make it measurable, and keep it reliable at scale. 12+ years, from on-call engineer to SRE Manager running a $3M+ a year SRE and support account with a 60+ engineer offshore team. Client CSAT 9+ for 24 consecutive months, peak 10.</p>
+      <p class="hero-sub">I take over service delivery, make it measurable, and keep it reliable at scale. 12+ years, from on-call engineer to Site Reliability Engineering Manager running a $3M+ a year SRE and support account with a 60+ engineer offshore team. Client CSAT 9+ for 24 consecutive months, peak 10.</p>
       <div class="hero-links">
         <a href="#evidence" class="btn btn-primary">See the evidence →</a>
         <a href="/case-studies/" class="btn-ghost">Case studies</a>
@@ -23,7 +23,7 @@ description: "Senior Program Manager · SRE, DevOps & Service Delivery. SRE Mana
       </picture>
       <div class="hero-id">
         <img src="/assets/img/rajendra-88.jpg" alt="Rajendra Birudaraju" width="44" height="44">
-        <div><strong>Rajendra Birudaraju</strong><span>SRE Manager · Hyderabad, India</span></div>
+        <div><strong>Rajendra Birudaraju</strong><span>Site Reliability Engineering Manager, Concentrix</span></div>
       </div>
     </div>
   </div>
@@ -117,7 +117,8 @@ description: "Senior Program Manager · SRE, DevOps & Service Delivery. SRE Mana
       <div class="section-label">About</div>
       <h2>Hands-on first, then running delivery.</h2>
       <ul class="facts">
-        <li><span class="k">Role</span><span class="v">SRE Manager, Concentrix (since Jul 2025)</span></li>
+        <li><span class="k">Role</span><span class="v">Site Reliability Engineering Manager, Concentrix (since Jul 2025)</span></li>
+        <li><span class="k">Scope</span><span class="v">Delivery lead for a $3M managed-services portfolio (SRE, DevOps, AMS)</span></li>
         <li><span class="k">Account now</span><span class="v">Automotive finance on AWS, $3M+ a year</span></li>
         <li><span class="k">Before</span><span class="v">US telecom supply-chain account ($15M a year), 2020 to mid-2023</span></li>
         <li><span class="k">Team</span><span class="v">60+ engineers, grown from 10</span></li>
@@ -125,7 +126,7 @@ description: "Senior Program Manager · SRE, DevOps & Service Delivery. SRE Mana
       </ul>
     </div>
     <div class="about-text">
-      <p>I'm an SRE Manager at Concentrix in Hyderabad. I run SRE, DevOps and application support delivery, and the presales behind it, for an automotive-finance platform on AWS: a $3M+ annual account. Before that, from 2020 to mid-2023, I led the offshore team on a US telecom carrier's $15M-a-year supply-chain account.</p>
+      <p>I'm a Site Reliability Engineering Manager at Concentrix in Hyderabad. I run SRE, DevOps and application support delivery, and the presales behind it, for an automotive-finance platform on AWS: a $3M+ annual account. Before that, from 2020 to mid-2023, I led the offshore team on a US telecom carrier's $15M-a-year supply-chain account.</p>
       <p>I started hands-on and that still shapes how I manage. I did on-call and root-cause work in Splunk and ELK, built CI/CD pipelines, and wrote Java and REST integrations. On the telecom account I led the offshore side of moving 200+ supply-chain microservices from Pivotal Cloud Foundry to Kubernetes (TKE). That meant Docker images, GitOps deployments on GitLab, secrets in HashiCorp Vault, pod disruption budgets, and wiring services into the carrier's API gateway.</p>
       <p>On the delivery side I grew the offshore team from 10 to 60+ engineers over two years. I run P1/P2 incident command and manage SOWs and SLAs with vendor partners. On the telecom account, my team drove a review of roughly 80,000 Splunk alerts with the dev teams, getting sign-off on each one, and cut them to about 5,000. On one account I found compute that was billed at full capacity but running below 1% utilization. It was outside our contracted scope, but I raised it and drove the fix.</p>
       <p>I use LLMs every day for RFQ drafting, ticket triage and reporting. The pages here show where that helped and where it didn't.</p>
