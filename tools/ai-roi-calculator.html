@@ -373,8 +373,43 @@ permalink: /tools/ai-roi-calculator/
 
         <div class="tool-section">
           <div class="tool-section-title">Proof it's right (not anyone's opinion)</div>
-          <div id="a-proof" style="font-size:14px;color:var(--light);line-height:1.7"></div>
+          <div id="a-proof" style="font-size:14px;color:var(--light);line-height:1.7"><p>The backtest, reference-case and forecast results load here when JavaScript is on. The formulas for every number on this page are written out below, in <a href="#maths">Show the maths</a>.</p></div>
         </div>
+      </div>
+    </div>
+
+    <div class="tool-section" id="maths">
+      <div class="tool-section-title">Proof it's right: show the maths</div>
+      <div style="font-size:14px;color:var(--light);line-height:1.7">
+        <p>These are the formulas the page runs, in plain words. Every input is yours; nothing is hidden.</p>
+        <p style="margin-top:.75rem"><strong style="color:var(--text)">Usage &amp; ROI tab</strong></p>
+        <ul style="margin:.25rem 0 0 1.2rem">
+          <li><strong>Active users</strong> = licensed users × active %, rounded to a whole person.</li>
+          <li><strong>Requests a month</strong> = active users × working days × requests per user per day.</li>
+          <li><strong>API cost a month</strong> = requests × (input tokens × input price + output tokens × output price) ÷ 1,000,000.</li>
+          <li><strong>Self-hosted cost a month</strong> = GPU $ per hour × GPUs × GPU hours + ops cost. If your token demand needs more GPUs than you entered (demand ÷ (tokens per second × 3,600 × GPU hours), rounded up), the larger number is used.</li>
+          <li><strong>Cost per active user</strong> = AI cost a month ÷ active users.</li>
+          <li><strong>Value a month</strong> = hours saved per active user per week × 52 ÷ 12 × active users × realization % × loaded cost per hour.</li>
+          <li><strong>ROI</strong> = (value − AI cost) ÷ AI cost.</li>
+          <li><strong>Break-even hours</strong> = AI cost ÷ (52 ÷ 12 × active users × realization % × loaded cost per hour): the hours each active user must save a week for value to equal cost.</li>
+          <li><strong>Cost charged to the project</strong> depends on who pays above the cap: (cost per user − cap) × active users when the project pays the overage, all of it, or none.</li>
+          <li><strong>Gross margin</strong> = (revenue − delivery cost) ÷ revenue. Today's delivery cost = revenue × (1 − current margin). With AI on a fixed-price account, delivery cost falls by the value of time saved (never below zero) and rises by the AI cost charged to the project. On time &amp; materials, revenue falls by realized hours × bill rate unless the freed hours are redeployed, and delivery cost falls only if people leave the account (not if they sit on the bench).</li>
+          <li><strong>Self-hosted break-even</strong> = fixed self-hosted cost ÷ blended API price per token, where the blended price = (input tokens × input price + output tokens × output price) ÷ (input + output tokens) per request.</li>
+        </ul>
+        <p style="margin-top:.75rem"><strong style="color:var(--text)">Team mix tab (Simple)</strong></p>
+        <ul style="margin:.25rem 0 0 1.2rem">
+          <li><strong>Review hours needed</strong> = agents × oversight hours per agent a week. <strong>Review hours available</strong> = engineers × 40.</li>
+          <li><strong>Review share</strong> = available ÷ needed, capped at 100% (0% with no engineers). Engineer time spent reviewing = the smaller of the two ÷ 40, in engineers.</li>
+          <li><strong>Engineer capacity</strong> = (engineers − engineers' time spent reviewing) × (1 + productivity uplift %).</li>
+          <li><strong>Agent capacity</strong> = agents × output per agent × review share × (1 − rework %) × (1 − good outputs wrongly blocked %).</li>
+          <li><strong>Capacity covered</strong> = (engineer capacity + agent capacity) ÷ engineers required. Below 90% the mix is marked not viable.</li>
+          <li><strong>Revenue</strong>: today = engineers required × price per engineer; new mix = today × (1 − client discount) + AI cost billed to the client, if you pass it through.</li>
+          <li><strong>Cost a month</strong> = engineers × engineer cost + agents × AI cost per agent + (setup + eval build) ÷ contract months + eval runs + guardrail overhead (% of AI cost) + cost of errors that reach the client.</li>
+          <li><strong>Errors reaching the client</strong> = agents × tasks per agent × error rate × (1 − catch rate), where the catch rate is review alone or evals + guardrails + review.</li>
+          <li><strong>Gross margin</strong> = (revenue − cost) ÷ revenue.</li>
+          <li><strong>Setup payback</strong>: the first month in which cumulative extra profit over today, after paying the setup, turns positive. Agents start at 20% of their benefit and reach 100% by the ramp month; until then the shortfall is paid for by keeping part of the old team.</li>
+        </ul>
+        <p style="margin-top:.75rem"><strong style="color:var(--text)">How "output per agent" becomes capacity.</strong> "Output per agent (engineer-equivalents)" is how much of one engineer's monthly work an agent really covers: 1 means a full engineer, 0.5 half. It is not counted at face value. Each agent's output is multiplied by the share of it an engineer has time to review, then reduced by the rework and blocked-output percentages, and only then added to what the remaining engineers deliver. Example: 7 engineers and 2 agents at 1.5 engineer-equivalents each, with 8 review hours per agent a week, 15% rework and 3% blocked. Review takes 16 of the 280 available hours (0.4 engineers), so engineers deliver (7 − 0.4) × 1.03 = 6.8 and agents deliver 2 × 1.5 × 100% × 0.85 × 0.97 = 2.47, a total of 9.27 engineers of work against 10 required: 93% covered.</p>
       </div>
     </div>
 
